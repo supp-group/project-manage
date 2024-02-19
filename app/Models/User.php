@@ -25,6 +25,8 @@ class User extends Authenticatable
         'Role',
         'City',
         'Branch',
+
+
     ];
 
     /**
@@ -51,4 +53,5 @@ class User extends Authenticatable
     {
         return $this->hasMany(Member::class,'user_id');
     }
+
 }
