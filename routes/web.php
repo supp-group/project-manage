@@ -1,9 +1,11 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CityController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -51,6 +53,19 @@ Route::middleware(['auth', 'verified', 'admin'])-> prefix('admin')->group(functi
         Route::delete('delete/{id}', [MemberController::class, 'destroy'])->name('member.delete');
     });
 
+
+   //   /city
+   Route:: prefix('city')->group(function () {
+
+    Route::get('show', [CityController::class, 'index']);
+    Route::get('add', [CityController::class, 'create']);
+    Route::post('save', [CityController::class, 'store'])->name('city.save');
+
+    Route::get('edit/{id}', [CityController::class, 'edit'])->name('city.edit');
+    Route::post('update/{id}', [CityController::class, 'update'])->name('city.update');
+
+    Route::delete('delete/{id}', [CityController::class, 'destroy'])->name('city.delete');
+});
 
 });
 
