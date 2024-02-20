@@ -128,7 +128,6 @@ class MemberController extends Controller
     // 'City' => $user->city->name,
     // 'City' => $user->city->name,
     'IDNumber' => $request->IDNumber,
-    // 0 for male ..1 for female
     'Gender' => $request->Gender == 'male' ? 'male' : 'female',
     'Qualification' =>$request->Name ,
     'Occupation' => $request->Occupation,
