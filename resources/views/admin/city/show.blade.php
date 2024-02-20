@@ -56,27 +56,26 @@
 											<tr>
 												<th class="wd-15p border-bottom-0">#</th>
 												<th class="wd-15p border-bottom-0">المحافظة</th>
-												<th class="wd-15p border-bottom-0">البريد الإلكتروني للمدير</th>
 												<th class="wd-15p border-bottom-0">العمليات</th>
 											</tr>
 										</thead>
-										{{-- <tbody>
-											<!-- ?php $i = 1 ?> -->
-											@foreach($members as $member)
+										<tbody>
+											<?php $i = 1 ?>
+											@foreach($cities as $city)
 											<tr>
 												<td>{{$i++}}</td>
-												<td>{{$member->name}}</td>
-
+												<td>{{$city->Name}}</td>
+												
 												<td>
-													<a class="btn btn-sm btn-info" href="{{ route('user.edit', $user->id) }}" title="تعديل"><i class="las la-pen"></i></a>
+													<a class="btn btn-sm btn-info" href="{{ route('city.edit', $city->id) }}" title="تعديل"><i class="las la-pen"></i></a>
 
 													<a class="modal-effect btn btn-sm btn-danger" data-effect="effect-scale"
-                                                	data-id="{{ $user->id }}" data-title="{{ $user->name }}" data-toggle="modal"
+                                                	data-id="{{ $city->id }}" data-title="{{ $city->Name }}" data-toggle="modal"
                                                 	href="#modaldemo9" title="حذف"><i class="las la-trash"></i></a>
 												</td>
 											</tr>
 											@endforeach
-										</tbody> --}}
+										</tbody>
 									</table>
 								</div>
 							</div>
