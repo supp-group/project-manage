@@ -34,9 +34,18 @@ return new class extends Migration
             $table->dateTime('DateOfJoin')->nullable();
             $table->string('Specialization')->nullable();
             $table->string('Image')->nullable();  
+            
             //users_table
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
+
+             //qualifications_table
+             $table->unsignedBigInteger('qualification_id');
+             $table->foreign('qualification_id')->references('id')->on('qualifications');
+
+              //occupations_table
+            $table->unsignedBigInteger('occupation_id');
+            $table->foreign('occupation_id')->references('id')->on('occupations');
             $table->timestamps();
         });
     }

@@ -94,7 +94,7 @@ class MemberController extends Controller
             'FullName' => 'required',
             'MotherName' => 'required',
             'PlaceOfBirth' => 'required',
-            'BirthDate' => 'required',
+            'BirthDate' => 'required|date|before_or_equal:today',
             'Constraint' => 'required',
             'City' => 'required',
             'IDNumber' => 'required|unique:members|min:11|max:11',
@@ -106,27 +106,31 @@ class MemberController extends Controller
             'WorkAddress' => 'required',
             'HomePhone' => 'required|max:10',
             'WorkPhone' => 'required|max:10',
-            'DateOfJoin' => 'required|<date.now',
+            'DateOfJoin' => 'required|date|before_or_equal:today',
             'Specialization' => 'required',
             'Image' =>'required',
+            'qualification_id'=>'required',
+            'occupation_id'=>'required'
         ]);
         
-      
-        $member= Member::create([
+        // $user = auth()->user()->load('city');
+        // $user = auth()->user()->load('city_id')->first();
+     $member= Member::create([
 
     'NotPad'=>$request->NotPad,
-    'branch'=>auth()->branch,
+    'branch'=>$request->branch,
     'IDTeam' => $request->IDTeam,
     'FullName' => $request->FullName,
     'MotherName' => $request->MotherName,
     'PlaceOfBirth' => $request->PlaceOfBirth,
     'BirthDate' => $request->BirthDate,
     'Constraint' => $request->Constraint,
-    'City'=>auth()->City,
+    'City'=>auth()->city_id->Name,
+    // 'City' => $user->city->name,
+    // 'City' => $user->city->name,
     'IDNumber' => $request->IDNumber,
-    // 0 for male ..1 for female
     'Gender' => $request->Gender == 'male' ? 'male' : 'female',
-    'Qualification' => $request->Qualification ,
+    'Qualification' =>$request->Name ,
     'Occupation' => $request->Occupation,
     'MobilePhone' => $request->MobilePhone ,
     'HomeAddress' => $request->HomeAddress ,
@@ -198,6 +202,7 @@ session()->flash('Add', 'Added successfully.');
     //user
    'user_id'=>auth()->id()
       ]);
+      session()->flash('update', 'updated successfully.');
 
       if ( auth()->user()->Role == 'admin')
       {
@@ -213,6 +218,8 @@ session()->flash('Add', 'Added successfully.');
   public function destroy( $id)
     {
        Member::findOrFail($id)->delete();
+      session()->flash('delete', 'Deleted successfully.');
+
        if ( auth()->user()->Role == 'admin')
        {
           return redirect()->route('admin.member.show');

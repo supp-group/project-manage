@@ -19,7 +19,9 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('Role')->default('mamager')->nullable();
-            $table->string('City')->nullable();
+           //cities_table
+           $table->unsignedBigInteger('city_id');
+           $table->foreign('city_id')->references('id')->on('cities');
             $table->rememberToken();
             $table->timestamps();
         });
