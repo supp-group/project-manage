@@ -7,6 +7,8 @@ use App\Models\Member;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Response;
+
 class MemberController extends Controller
 {
    
@@ -299,6 +301,71 @@ session()->flash('Add', 'Added successfully.');
    {
     return view('manager.member.show',compact('member'));
    }
+    }
+
+
+
+    public function import(Request $request)
+    {
+    $file = $request->file('file');
+    $fileContents = file($file->getPathname());
+
+    foreach ($fileContents as $line) {
+        $data = str_getcsv($line);
+
+        Member::create([
+            'NotPad' => $data[0],
+            'branch' => $data[1],
+            'IDTeam' => $data[2],
+            'FullName' => $data[3],
+            'MotherName' => $data[4],
+            'PlaceOfBirth' => $data[5],
+            'BirthDate' => $data[6],
+            'Constraint' => $data[7],
+            'City' => $data[8],
+            'IDNumber' => $data[9],
+            'Gender' => $data[10],
+            'Qualification' => $data[11],
+            'Occupation' => $data[12],
+            'branch' => $data[13],
+            'branch' => $data[14],
+            'branch' => $data[15],
+            'branch' => $data[16],
+            'branch' => $data[17],
+            'branch' => $data[18],
+            'branch' => $data[19],
+            'branch' => $data[20],
+            'branch' => $data[21],
+
+            // Add more fields as needed
+        ]);
+    }
+
+    // return "ok";
+    return redirect()->back()->with('success', 'CSV file imported successfully.');
+    }
+
+
+
+    public function export()
+    {
+    $posts = Member::all();
+    $csvFileName = 'posts.csv';
+    $headers = [
+        'Content-Type' => 'text/csv',
+        'Content-Disposition' => 'attachment; filename="' . $csvFileName . '"',
+    ];
+
+    $handle = fopen('php://output', 'w');
+    fputcsv($handle, ['title', 'body']); // Add more headers as needed
+
+    foreach ($posts as $post) {
+        fputcsv($handle, [$post->title, $post->body]); // Add more fields as needed
+    }
+
+    fclose($handle);
+
+    return Response::make('', 200, $headers);
     }
 
 }

@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('Constraint')->nullable();
             $table->string('City')->nullable();
             $table->string('IDNumber')->unique()->nullable();
-            $table->boolean('Gender')->default(0)->nullable();
+            $table->string('Gender')->default('male')->nullable();
             $table->string('Qualification')->nullable();
             $table->string('Occupation')->nullable();
             $table->string('MobilePhone')->nullable();
