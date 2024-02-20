@@ -41,16 +41,16 @@
 								<span class="side-menu__label">المدراء</span>
 								<i class="angle fe fe-chevron-down"></i></a>
 						<ul class="slide-menu">
-							<li><a class="slide-item" href="{{ url('') }}">جميع المدراء</a></li>
-							<li><a class="slide-item" href="{{ url('') }}">إضافة مدير</a></li>
+							<li><a class="slide-item" href="{{ url('/admin/manager/show') }}">جميع المدراء</a></li>
+							<li><a class="slide-item" href="{{ url('/admin/manager/add') }}">إضافة مدير</a></li>
 						</ul>
 					</li>
 					
 					<li class="slide">
 						<a class="side-menu__item" data-toggle="slide" href="{{ url('/' . $page='#') }}"><svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M6.26 9L12 13.47 17.74 9 12 4.53z" opacity=".3"/><path d="M19.37 12.8l-7.38 5.74-7.37-5.73L3 14.07l9 7 9-7zM12 2L3 9l1.63 1.27L12 16l7.36-5.73L21 9l-9-7zm0 11.47L6.26 9 12 4.53 17.74 9 12 13.47z"/></svg><span class="side-menu__label">المحافظات</span><i class="angle fe fe-chevron-down"></i></a>
 						<ul class="slide-menu">
-							<li><a class="slide-item" href="{{ url('/cpanel/news/show') }}">جميع المحافظات</a></li>
-							<li><a class="slide-item" href="{{ url('/cpanel/news/add') }}">إضافة محافظة</a></li>
+							<li><a class="slide-item" href="{{ url('/admin/city/show') }}">جميع المحافظات</a></li>
+							<li><a class="slide-item" href="{{ url('/admin/city/add') }}">إضافة محافظة</a></li>
 						</ul>
 					</li>
  
@@ -59,8 +59,8 @@
 							<span class="side-menu__label">المؤهل العلمي</span>
 							<i class="angle fe fe-chevron-down"></i></a>
 						<ul class="slide-menu">
-							<li><a class="slide-item" href="{{ url('') }}">جميع المؤهلات العلمية</a></li>
-							<li><a class="slide-item" href="{{ url('') }}">إضافة مؤهل علمي</a></li>
+							<li><a class="slide-item" href="{{ url('/admin/qualification/show') }}">جميع المؤهلات العلمية</a></li>
+							<li><a class="slide-item" href="{{ url('/admin/qualification/add') }}">إضافة مؤهل علمي</a></li>
 						</ul>
 					</li>
 
@@ -72,8 +72,16 @@
 							<i class="angle fe fe-chevron-down"></i></a>
 						
 							<ul class="slide-menu">
-							<li><a class="slide-item" href="{{ url('') }}">جميع الاختصاصات</a></li>
-							<li><a class="slide-item" href="{{ url('') }}">إضافة اختصاص</a></li>
+								<li><a class="slide-item" href="{{ url('/admin/specialization/show') }}">جميع الاختصاصات</a></li>
+								<li><a class="slide-item" href="{{ url('/admin/specialization/add') }}">إضافة اختصاص</a></li>
+							</ul>
+					</li>
+
+					<li class="slide">
+						<a class="side-menu__item" data-toggle="slide" href="{{ url('/' . $page='#') }}"><svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24" ><path d="M0 0h24v24H0V0z" fill="none"/><path d="M5 9h14V5H5v4zm2-3.5c.83 0 1.5.67 1.5 1.5S7.83 8.5 7 8.5 5.5 7.83 5.5 7 6.17 5.5 7 5.5zM5 19h14v-4H5v4zm2-3.5c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5-1.5-.67-1.5-1.5.67-1.5 1.5-1.5z" opacity=".3"/><path d="M20 13H4c-.55 0-1 .45-1 1v6c0 .55.45 1 1 1h16c.55 0 1-.45 1-1v-6c0-.55-.45-1-1-1zm-1 6H5v-4h14v4zm-12-.5c.83 0 1.5-.67 1.5-1.5s-.67-1.5-1.5-1.5-1.5.67-1.5 1.5.67 1.5 1.5 1.5zM20 3H4c-.55 0-1 .45-1 1v6c0 .55.45 1 1 1h16c.55 0 1-.45 1-1V4c0-.55-.45-1-1-1zm-1 6H5V5h14v4zM7 8.5c.83 0 1.5-.67 1.5-1.5S7.83 5.5 7 5.5 5.5 6.17 5.5 7 6.17 8.5 7 8.5z"/></svg><span class="side-menu__label">المهن</span><i class="angle fe fe-chevron-down"></i></a>
+						<ul class="slide-menu">
+							<li><a class="slide-item" href="{{ url('/admin/occupation/show') }}">جميع المهن</a></li>
+							<li><a class="slide-item" href="{{ url('/admin/occupation/add') }}">إضافة مهنة</a></li>
 						</ul>
 					</li>
 

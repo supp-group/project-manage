@@ -1,6 +1,10 @@
 @extends('admin.layouts.master')
 @section('css')
 
+{{-- flatpicker --}}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
+
 <!--- Internal Select2 css-->
 <link href="{{URL::asset('assets/plugins/select2/css/select2.min.css')}}" rel="stylesheet">
 <!---Internal Fileupload css-->
@@ -41,30 +45,191 @@
 						<div class="card">
 							<div class="card-body">
 			
-								{{-- <form action="{{ route('user.save') }}" method="post" enctype="multipart/form-data" autocomplete="off">
+								<form action="{{ route('member.save') }}" method="post" enctype="multipart/form-data" autocomplete="off">
 									{{ csrf_field() }}
 			
 									<div class="row">
 										<div class="col">
-											<label for="inputName" class="control-label">اسم المستخدم</label>
-											<input type="text" class="form-control" id="inputName" name="name" required>
+											<label for="inputName" class="control-label">ملاحظات</label>
+											<input type="text" class="form-control" id="inputName" name="NotPad" required>
 										</div>
 									</div><br>
 			
-
 									<div class="row">
 										<div class="col">
-											<label for="inputName" class="control-label">كلمة المرور</label>
-											<input type="password" class="form-control" id="inputName" name="password" required>
+											<label for="inputName" class="control-label">الفرع</label>
+											<input type="text" class="form-control" id="inputName" name="branch" required>
 										</div>
 									</div><br>
 
+									<div class="row">
+										<div class="col">
+											<label for="inputName" class="control-label">الرقم الحزبي</label>
+											<input type="text" class="form-control" id="inputName" name="IDTeam" required>
+										</div>
+									</div><br>
 					
+									<div class="row">
+										<div class="col">
+											<label for="inputName" class="control-label">الاسم الثلاثي</label>
+											<input type="text" class="form-control" id="inputName" name="FullName" required>
+										</div>
+									</div><br>
+
+									<div class="row">
+										<div class="col">
+											<label for="inputName" class="control-label">اسم الأم</label>
+											<input type="text" class="form-control" id="inputName" name="MotherName" required>
+										</div>
+									</div><br>
+
+									<div class="row">
+										<div class="col">
+											<label for="inputName" class="control-label">محل الولادة</label>
+											<input type="text" class="form-control" id="inputName" name="PlaceOfBirth" required>
+										</div>
+									</div><br>
+
+									<div class="row">
+										<div class="col">
+											<div class="form-group">
+												<label>تاريخ الولادة</label>
+													<input type="datetime-local" class="form-control" name="BirthDate" required>
+											</div>
+										</div>
+									</div><br>
+
+									<div class="row">
+										<div class="col">
+											<label for="inputName" class="control-label">محل ورقم القيد</label>
+											<input type="text" class="form-control" id="inputName" name="Constraint" required>
+										</div>
+									</div><br>
+
+									<div class="form-group">
+										<label>المحافظة</label>
+										<select name="City" class="form-control select">
+											
+											{{-- @foreach($cities as $city)
+											<option value="{{$city->id}}">{{$city->city}}</option>
+											@endforeach  --}}
+
+										</select>
+									</div><br>
+
+									<div class="row">
+										<div class="col">
+											<label for="inputName" class="control-label">الرقم الوطني</label>
+											<input type="text" class="form-control" id="inputName" name="IDNumber" required>
+										</div>
+									</div><br>
+
+									<div class="form-group">
+										<label class="display-block">الجنس</label> <br>
+										<div class="form-check form-check-inline">
+											<input class="form-check-input" type="radio" name="Gender" id="status_active" value="male" checked>
+											<label class="form-check-label" for="status_active">
+												&nbsp; ذكر 
+											</label>
+										</div> 
+										<div class="form-check form-check-inline">
+											<input class="form-check-input" type="radio" name="Gender" id="status_inactive" value="female">
+											<label class="form-check-label" for="status_inactive">
+												&nbsp; أنثى
+											</label>
+										</div>
+									</div><br>
+
+									<div class="form-group">
+										<label>المؤهل العلمي</label>
+										<select name="Qualification" class="form-control select">
+											
+											{{-- @foreach($qualifications as $qualification)
+											<option value="{{$qualification->id}}">{{$qualification->name}}</option>
+											@endforeach  --}}
+
+										</select>
+									</div><br>
+
+									<div class="form-group">
+										<label>الاختصاص</label>
+										<select name="Specialization" class="form-control select">
+											
+											{{-- @foreach($specializations as $specialization)
+											<option value="{{$specialization->id}}">{{$specialization->name}}</option>
+											@endforeach  --}}
+
+										</select>
+									</div><br>
+
+									<div class="form-group">
+										<label>المهنة</label>
+										<select name="Occupation" class="form-control select">
+											
+											{{-- @foreach($occupations as $occupation)
+											<option value="{{$occupation->id}}">{{$occupation->name}}</option>
+											@endforeach  --}}
+
+										</select>
+									</div><br>
+
+									<div class="row">
+										<div class="col">
+											<label for="inputName" class="control-label">رقم الموبايل</label>
+											<input type="text" class="form-control" id="inputName" name="MobilePhone" required>
+										</div>
+									</div><br>
+
+									<div class="row">
+										<div class="col">
+											<label for="inputName" class="control-label">عنوان المنزل</label>
+											<input type="text" class="form-control" id="inputName" name="HomeAddress" required>
+										</div>
+									</div><br>
+
+									<div class="row">
+										<div class="col">
+											<label for="inputName" class="control-label">عنوان العمل</label>
+											<input type="text" class="form-control" id="inputName" name="WorkAddress" required>
+										</div>
+									</div><br>
+
+									<div class="row">
+										<div class="col">
+											<label for="inputName" class="control-label">هاتف المنزل</label>
+											<input type="text" class="form-control" id="inputName" name="HomePhone" required>
+										</div>
+									</div><br>
+
+									<div class="row">
+										<div class="col">
+											<label for="inputName" class="control-label">هاتف العمل</label>
+											<input type="text" class="form-control" id="inputName" name="WorkPhone" required>
+										</div>
+									</div><br>
+
+									<div class="row">
+										<div class="col">
+											<div class="form-group">
+												<label>تاريخ الانتساب</label>
+													<input type="datetime-local" class="form-control" name="DateOfJoin" required>
+											</div>
+										</div>
+									</div><br>
+
+									<div class="row">
+										<div class="col">
+											<label for="exampleTextarea">صورة العضو المنتسب</label>
+											<input type="file" name="Image" class="dropify" accept=".jpg, .png, image/jpeg, image/png"
+											data-height="70" />
+										</div>
+									</div><br>
+
 									<div class="d-flex justify-content-center">
 										<button type="submit" class="btn btn-primary">حفظ البيانات</button>
 									</div>
 			
-								</form> --}}
+								</form>
 							</div>
 						</div>
 					</div>
@@ -76,6 +241,20 @@
 		<!-- main-content closed -->
 @endsection
 @section('js')
+
+{{-- flatpicker --}}
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script>
+	config = {
+    	enableTime: true,
+    	dateFormat: "Y-m-d",
+		altInput: true,
+		altFormat: "F j, Y"
+	}
+
+	flatpickr("input[type=datetime-local]", config);
+</script>
+
 
 <!--Internal  Datepicker js -->
 <script src="{{URL::asset('assets/plugins/jquery-ui/ui/widgets/datepicker.js')}}"></script>

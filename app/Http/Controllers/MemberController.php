@@ -112,7 +112,7 @@ class MemberController extends Controller
         ]);
         
       
-        $member= Member::create([
+    $member= Member::create([
 
     'NotPad'=>$request->NotPad,
     'branch'=>$request->branch,
@@ -124,7 +124,7 @@ class MemberController extends Controller
     'Constraint' => $request->Constraint,
     'City'=>$request->City,
     'IDNumber' => $request->IDNumber,
-    // 0 for male ..1 for female
+    
     'Gender' => $request->Gender == 'male' ? 'male' : 'female',
     'Qualification' => $request->Qualification ,
     'Occupation' => $request->Occupation,
@@ -139,17 +139,18 @@ class MemberController extends Controller
     //user
    'user_id'=>auth()->id()
 ]);
-session()->flash('Add', 'Added successfully.');
-   
+
+    session()->flash('Add', 'تم إضافة العضو بنجاح');
+        return back();
     
-    if ( auth()->user()->Role == 'admin')
-    {
-        return redirect()->route('admin.member.add');
-    }
-   else if ( auth()->user()->Role == 'manager')
-    {
-        return redirect()->route('manager.member.add');
-    }
+//     if ( auth()->user()->Role == 'admin')
+//     {
+//         return redirect()->route('admin.member.add');
+//     }
+//    else if ( auth()->user()->Role == 'manager')
+//     {
+//         return redirect()->route('manager.member.add');
+//     }
   }
 
   
@@ -171,8 +172,8 @@ session()->flash('Add', 'Added successfully.');
   
   public function update(Request $request, $id)
   {
-      $member = Member::findOrFail($id);
-      $member->update([
+    $member = Member::findOrFail($id);
+    $member->update([
     'NotPad'=>$request->NotPad,
     'branch'=>$request->branch,
     'IDTeam' => $request->IDTeam,
@@ -183,7 +184,7 @@ session()->flash('Add', 'Added successfully.');
     'Constraint' => $request->Constraint,
     'City'=>$request->City,
     'IDNumber' => $request->IDNumber,
-    // 0 for male ..1 for female
+    
     'Gender' => $request->Gender == 'male' ? 'male' : 'female',
     'Qualification' => $request->Qualification ,
     'Occupation' => $request->Occupation,
@@ -197,30 +198,37 @@ session()->flash('Add', 'Added successfully.');
     'Image' => $request->Image ,
     //user
    'user_id'=>auth()->id()
-      ]);
+    ]);
 
-      if ( auth()->user()->Role == 'admin')
-      {
-         return redirect()->route('admin.member.show');
-      }
-     else if ( auth()->user()->Role == 'manager')
-      {
-         return redirect()->route('manager.member.show');
-      }
+    session()->flash('Edit', 'تم تعديل العضو بنجاح');
+    return back();
+
+    //   if ( auth()->user()->Role == 'admin')
+    //   {
+    //      return redirect()->route('admin.member.show');
+    //   }
+    //  else if ( auth()->user()->Role == 'manager')
+    //   {
+    //      return redirect()->route('manager.member.show');
+    //   }
      
   }
 
   public function destroy( $id)
     {
        Member::findOrFail($id)->delete();
-       if ( auth()->user()->Role == 'admin')
-       {
-          return redirect()->route('admin.member.show');
-       }
-      else if ( auth()->user()->Role == 'manager')
-       {
-          return redirect()->route('manager.member.show');
-       }
+
+        session()->flash('delete', 'تم حذف العضو بنجاح');
+        return back();
+
+    //    if ( auth()->user()->Role == 'admin')
+    //    {
+    //       return redirect()->route('admin.member.show');
+    //    }
+    //   else if ( auth()->user()->Role == 'manager')
+    //    {
+    //       return redirect()->route('manager.member.show');
+    //    }
     }
 
      public function searchByName($data)

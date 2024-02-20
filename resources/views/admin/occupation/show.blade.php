@@ -13,7 +13,7 @@
 				<div class="breadcrumb-header justify-content-between">
 					<div class="my-auto">
 						<div class="d-flex">
-							<h4 class="content-title mb-0 my-auto">المدراء</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ جميع المدراء</span>
+							<h4 class="content-title mb-0 my-auto">المهن</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ جميع المهن</span>
 						</div>
 					</div>
 				</div>
@@ -45,7 +45,7 @@
 						<div class="card">
 							<div class="card-header pb-0">
 								<div class="d-flex justify-content-between">
-									<h4 class="card-title mg-b-0">جميع المدراء</h4>
+									<h4 class="card-title mg-b-0">جميع المهن</h4>
 									<i class="mdi mdi-dots-horizontal text-gray"></i>
 								</div>
 							</div>
@@ -55,26 +55,22 @@
 										<thead>
 											<tr>
 												<th class="wd-15p border-bottom-0">#</th>
-												<th class="wd-15p border-bottom-0">البريد الإلكتروني</th>
-												<th class="wd-15p border-bottom-0">كلمة المرور</th>
-												<th class="wd-15p border-bottom-0">الدور</th>
-												<th class="wd-15p border-bottom-0">المحافظة</th>
-												<th class="wd-15p border-bottom-0">الفرع</th>
+												<th class="wd-15p border-bottom-0">اسم المهنة</th>
 												<th class="wd-15p border-bottom-0">العمليات</th>
 											</tr>
 										</thead>
 										{{-- <tbody>
 											<!-- ?php $i = 1 ?> -->
-											@foreach($members as $member)
+											@foreach($occupations as $occupation)
 											<tr>
 												<td>{{$i++}}</td>
-												<td>{{$member->name}}</td>
+												<td>{{$occupation->name}}</td>
 
 												<td>
-													<a class="btn btn-sm btn-info" href="{{ route('user.edit', $user->id) }}" title="تعديل"><i class="las la-pen"></i></a>
+													<a class="btn btn-sm btn-info" href="{{ route('occupation.edit', $occupation->id) }}" title="تعديل"><i class="las la-pen"></i></a>
 
 													<a class="modal-effect btn btn-sm btn-danger" data-effect="effect-scale"
-                                                	data-id="{{ $user->id }}" data-title="{{ $user->name }}" data-toggle="modal"
+                                                	data-id="{{ $occupation->id }}" data-title="{{ $occupation->name }}" data-toggle="modal"
                                                 	href="#modaldemo9" title="حذف"><i class="las la-trash"></i></a>
 												</td>
 											</tr>
