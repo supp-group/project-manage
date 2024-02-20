@@ -115,14 +115,14 @@ class MemberController extends Controller
         $member= Member::create([
 
     'NotPad'=>$request->NotPad,
-    'branch'=>$request->branch,
+    'branch'=>auth()->branch,
     'IDTeam' => $request->IDTeam,
     'FullName' => $request->FullName,
     'MotherName' => $request->MotherName,
     'PlaceOfBirth' => $request->PlaceOfBirth,
     'BirthDate' => $request->BirthDate,
     'Constraint' => $request->Constraint,
-    'City'=>$request->City,
+    'City'=>auth()->City,
     'IDNumber' => $request->IDNumber,
     // 0 for male ..1 for female
     'Gender' => $request->Gender == '1' ? 1 : 0,
@@ -225,7 +225,16 @@ session()->flash('Add', 'Added successfully.');
 
      public function searchByName($data)
     {
+        
    $members =  Member::contains('Name', $data);
+
+   if ($members->isEmpty()) {
+    session(['searchData' => null]);
+    return $this->export();
+      }
+
+     session(['searchData' => $data]);
+
    if ( auth()->user()->role == '1')
    {
     return view('admin.member.show',compact('member'));
@@ -240,6 +249,14 @@ session()->flash('Add', 'Added successfully.');
     public function searchByIDTeam($data)
     {
    $members =  Member::contains('IDTeam', $data);
+
+   if ($members->isEmpty()) {
+    session(['searchData' => null]);
+    return $this->export();
+      }
+
+     session(['searchData' => $data]);
+
    if ( auth()->user()->role == '1')
    {
     return view('admin.member.show',compact('member'));
@@ -253,6 +270,14 @@ session()->flash('Add', 'Added successfully.');
     public function searchByQualification($data)
     {
    $members =  Member::contains('Qualification', $data);
+
+   if ($members->isEmpty()) {
+    session(['searchData' => null]);
+    return $this->export();
+      }
+
+     session(['searchData' => $data]);
+
    if ( auth()->user()->role == '1')
    {
     return view('admin.member.show',compact('member'));
@@ -266,6 +291,14 @@ session()->flash('Add', 'Added successfully.');
     public function searchBySpecialization($data)
     {
    $members =  Member::contains('Specialization', $data);
+
+   if ($members->isEmpty()) {
+    session(['searchData' => null]);
+    return $this->export();
+      }
+
+     session(['searchData' => $data]);
+
    if ( auth()->user()->role == '1')
    {
     return view('admin.member.show',compact('member'));
@@ -279,6 +312,14 @@ session()->flash('Add', 'Added successfully.');
     public function searchByCity($data)
     {
    $members =  Member::contains('City', $data);
+
+   if ($members->isEmpty()) {
+    session(['searchData' => null]);
+    return $this->export();
+      }
+
+     session(['searchData' => $data]);
+
    if ( auth()->user()->role == '1')
    {
     return view('admin.member.show',compact('member'));
@@ -293,6 +334,14 @@ session()->flash('Add', 'Added successfully.');
     public function searchByOccupation($data)
     {
    $members =  Member::contains('Occupation', $data);
+
+   if ($members->isEmpty()) {
+    session(['searchData' => null]);
+    return $this->export();
+      }
+
+     session(['searchData' => $data]);
+
    if ( auth()->user()->role == '1')
    {
     return view('admin.member.show',compact('member'));
@@ -327,16 +376,14 @@ session()->flash('Add', 'Added successfully.');
             'Gender' => $data[10],
             'Qualification' => $data[11],
             'Occupation' => $data[12],
-            'branch' => $data[13],
-            'branch' => $data[14],
-            'branch' => $data[15],
-            'branch' => $data[16],
-            'branch' => $data[17],
-            'branch' => $data[18],
-            'branch' => $data[19],
-            'branch' => $data[20],
-            'branch' => $data[21],
-
+            'MobilePhone' => $data[13],
+            'HomeAddress' => $data[14],
+            'WorkAddress' => $data[15],
+            'HomePhone' => $data[16],
+            'WorkPhone' => $data[17],
+            'DateOfJoin' => $data[18],
+            'Specialization' => $data[19],
+            'Image' => $data[20],
             // Add more fields as needed
         ]);
     }
@@ -346,10 +393,17 @@ session()->flash('Add', 'Added successfully.');
     }
 
 
-
     public function export()
     {
-    $posts = Member::all();
+        $data = session('searchData');
+        if ($data) {
+            $members = Member::contains('Name', $data)||Member::contains('IDTeam', $data)||
+            Member::contains('Qualification', $data)||Member::contains('Specialization', $data)||
+            $members =  Member::contains('City', $data)||Member::contains('Occupation', $data) ->get(); // تغيير Name إلى الحقل المناسب
+        } else {
+            $members = Member::all();
+        }
+    
     $csvFileName = 'posts.csv';
     $headers = [
         'Content-Type' => 'text/csv',
@@ -357,15 +411,21 @@ session()->flash('Add', 'Added successfully.');
     ];
 
     $handle = fopen('php://output', 'w');
-    fputcsv($handle, ['title', 'body']); // Add more headers as needed
+    fputcsv($handle, ['NotPad', 'branch','IDTeam','FullName','MotherName','PlaceOfBirth','BirthDate','Constraint',
+            'City','IDNumber','Gender','Qualification','Occupation','MobilePhone','HomeAddress','WorkAddress',
+            'HomePhone','WorkPhone','DateOfJoin','Specialization','Image']); // Add more headers as needed
 
-    foreach ($posts as $post) {
-        fputcsv($handle, [$post->title, $post->body]); // Add more fields as needed
+    foreach ($members as $member) {
+        fputcsv($handle, [$member->NotPad, $member->branch,$member->IDTeam,$member->FullName,$member->MotherName,
+        $member->PlaceOfBirth, $member->BirthDate,$member->Constraint,$member->City,$member->IDNumber,
+        $member->Gender, $member->Qualification,$member->Occupation,$member->MobilePhone,$member->HomeAddress,
+        $member->WorkAddress, $member->HomePhone,$member->WorkPhone,$member->DateOfJoin,$member->Specialization,
+        $member->Image]); // Add more fields as needed
     }
 
     fclose($handle);
 
-    return Response::make('', 200, $headers);
+    return Response::make('CSV file exported successfully.', 200, $headers);
     }
 
 }
