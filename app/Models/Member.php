@@ -14,11 +14,23 @@ class Member extends Model
     protected  $fillable =['NotPad','branch','IDTeam','FullName',
     'MotherName','PlaceOfBirth','BirthDate','Constraint',
     'City','IDNumber','Gender','Qualification','Occupation','MobilePhone','HomeAddress',
-    'WorkAddress','HomePhone','WorkPhone','DateOfJoin','Specialization','Image','user_id'];
+    'WorkAddress','HomePhone','WorkPhone','DateOfJoin','Specialization','Image',
+    'user_id','qualification_id','occupation_id'];
 
 
-public function users(): BelongsTo
+public function user(): BelongsTo
 {
     return $this->belongsTo(User::class);
+}
+
+public function qualification(): BelongsTo
+{
+    return $this->belongsTo(Qualification::class);
+}
+
+
+public function occupation(): BelongsTo
+{
+    return $this->belongsTo(Occupation::class);
 }
 }
