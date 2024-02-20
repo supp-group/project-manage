@@ -35,6 +35,25 @@
 				<!-- breadcrumb -->
 @endsection
 @section('content')
+
+@if(session()->has('delete'))
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+	<strong>{{ session()->get('delete') }}</strong>
+	<button type="button" class="close" data_dismiss="alert" aria_lable="Close">
+		<span aria_hidden="true">&times;</span>
+	</button>
+</div>
+@endif
+
+@if(session()->has('Edit'))
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+	<strong>{{ session()->get('Edit') }}</strong>
+	<button type="button" class="close" data_dismiss="alert" aria_lable="Close">
+		<span aria_hidden="true">&times;</span>
+	</button>
+</div>
+@endif
+
 				<!-- row opened -->
 				<div class="row row-sm">
 					<div class="col-xl-12">
@@ -77,23 +96,44 @@
 												<th class="wd-15p border-bottom-0">العمليات</th>
 											</tr>
 										</thead>
-										{{-- <tbody>
-											<!-- ?php $i = 1 ?> -->
+										<tbody>
+											<?php $i = 1 ?>
 											@foreach($members as $member)
 											<tr>
 												<td>{{$i++}}</td>
-												<td>{{$member->name}}</td>
+												<td>{{$member->NotPad}}</td>
+												<td>{{$member->branch}}</td>
+												<td>{{$member->IDTeam}}</td>
+												<td>{{$member->FullName}}</td>
+												<td>{{$member->MotherName}}</td>
+												<td>{{$member->PlaceOfBirth}}</td>
+												<td>{{$member->BirthDate}}</td>
+												<td>{{$member->Constraint}}</td>
+												<td>{{$member->City}}</td>
+												<td>{{$member->IDNumber}}</td>
+												<td>{{$member->Gender}}</td>
+
+												<td>{{$member->Qualification}}</td>
+												<td>{{$member->Specialization}}</td>
+												<td>{{$member->Occupation}}</td>
+												<td>{{$member->MobilePhone}}</td>
+												<td>{{$member->HomeAddress}}</td>
+												<td>{{$member->WorkAddress}}</td>
+												<td>{{$member->HomePhone}}</td>
+												<td>{{$member->WorkPhone}}</td>
+												<td>{{$member->DateOfJoin}}</td>
+												<td>{{$member->Image}}</td>
 
 												<td>
-													<a class="btn btn-sm btn-info" href="{{ route('user.edit', $user->id) }}" title="تعديل"><i class="las la-pen"></i></a>
+													<a class="btn btn-sm btn-info" href="{{ route('member.edit', $member->id) }}" title="تعديل"><i class="las la-pen"></i></a>
 
 													<a class="modal-effect btn btn-sm btn-danger" data-effect="effect-scale"
-                                                	data-id="{{ $user->id }}" data-title="{{ $user->name }}" data-toggle="modal"
+                                                	data-id="{{ $member->id }}" data-title="{{ $member->FullName }}" data-toggle="modal"
                                                 	href="#modaldemo9" title="حذف"><i class="las la-trash"></i></a>
 												</td>
 											</tr>
 											@endforeach
-										</tbody> --}}
+										</tbody>
 									</table>
 								</div>
 							</div>
@@ -106,6 +146,34 @@
 			<!-- Container closed -->
 		</div>
 		<!-- main-content closed -->
+
+
+
+<!-- delete -->
+{{-- <div class="modal" id="modaldemo9">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal-content modal-content-demo">
+			<div class="modal-header">
+				<h6 class="modal-title">حذف العضو</h6><button aria-label="Close" class="close" data-dismiss="modal"
+					type="button"><span aria-hidden="true">&times;</span></button>
+			</div>
+			<form action={{ route('member.delete', $member->id) }} method="post">
+				{{method_field('delete')}}
+				{{csrf_field()}}
+				<div class="modal-body">
+					<p>هل أنت متأكد من عملية الحذف؟</p><br>
+					<input type="hidden" name="id" id="id">
+					<input class="form-control" name="FullName" id="FullName" type="text" readonly>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">إلغاء</button>
+					<button type="submit" class="btn btn-danger">تأكيد</button>
+				</div>
+		</div>
+		</form>
+	</div>
+</div>		 --}}
+
 @endsection
 @section('js')
 <!-- Internal Data tables -->

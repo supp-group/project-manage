@@ -15,12 +15,12 @@ class MemberController extends Controller
 
     public function index()
     { 
-     if (optional(auth()->user())->role == '1') 
+     if (optional(auth()->user())->Role == 'admin') 
      {
          $members = Member::orderBy('updated_at','desc')->get();
          return view('admin.member.show',compact('members'));
      }
-      elseif (optional(auth()->user())->role == '0')
+      elseif (optional(auth()->user())->Role == 'manager')
        {
          $members = Member::where('City',auth()->user()->City)->orderBy('updated_at','desc')->get();
          return view('manager.member.show',compact('members'));
@@ -30,12 +30,12 @@ class MemberController extends Controller
 
     public function orderBy_Name()
     { 
-        if (optional(auth()->user())->role == '1') 
+        if (optional(auth()->user())->Role == 'admin') 
         {
             $members = Member::orderBy('Name','desc')->get();
             return view('admin.member.show',compact('members'));
         }
-         elseif (optional(auth()->user())->role == '0')
+         elseif (optional(auth()->user())->Role == 'manager')
           {
             $members = Member::where('City',auth()->user()->City)->orderBy('Name','desc')->get();
             return view('manager.member.show',compact('members'));
@@ -44,12 +44,12 @@ class MemberController extends Controller
 
      public function orderBy_IDTeam()
     { 
-        if (optional(auth()->user())->role == '1') 
+        if (optional(auth()->user())->Role == 'admin') 
         {
             $members = Member::orderBy('IDTeam','desc')->get();
             return view('admin.member.show',compact('members'));
         }
-         elseif (optional(auth()->user())->role == '0')
+         elseif (optional(auth()->user())->Role == 'manager')
           {
             $members = Member::where('City',auth()->user()->City)->orderBy('IDTeam','desc')->get();
             return view('manager.member.show',compact('members'));
@@ -58,12 +58,12 @@ class MemberController extends Controller
      public function orderBy_DateOfJoin()
     { 
    
-    if (optional(auth()->user())->role == '1') 
+    if (optional(auth()->user())->Role == 'admin') 
     {
         $members = Member::orderBy('DateOfJoin','desc')->get();
         return view('admin.member.show',compact('members'));
     }
-     elseif (optional(auth()->user())->role == '0')
+     elseif (optional(auth()->user())->Role == 'manager')
       {
         $members = Member::where('City',auth()->user()->City)->orderBy('DateOfJoin','desc')->get();
         return view('manager.member.show',compact('members'));
@@ -73,13 +73,13 @@ class MemberController extends Controller
 
     public function create()
     {
-        if ( auth()->user()->role == '1')
+        if ( auth()->user()->Role == 'admin')
         {
-            return view('admin.member.create');
+            return view('admin.member.add');
         }
-       else if ( auth()->user()->role == '0')
+       else if ( auth()->user()->Role == 'manager')
         {
-            return view('manager.member.create');
+            return view('manager.member.add');
         }
     
     }
@@ -125,7 +125,7 @@ class MemberController extends Controller
     'City'=>$request->City,
     'IDNumber' => $request->IDNumber,
     // 0 for male ..1 for female
-    'Gender' => $request->Gender == '1' ? 1 : 0,
+    'Gender' => $request->Gender == 'male' ? 'male' : 'female',
     'Qualification' => $request->Qualification ,
     'Occupation' => $request->Occupation,
     'MobilePhone' => $request->MobilePhone ,
@@ -142,11 +142,11 @@ class MemberController extends Controller
 session()->flash('Add', 'Added successfully.');
    
     
-    if ( auth()->user()->role == '1')
+    if ( auth()->user()->Role == 'admin')
     {
         return redirect()->route('admin.member.add');
     }
-   else if ( auth()->user()->role == '0')
+   else if ( auth()->user()->Role == 'manager')
     {
         return redirect()->route('manager.member.add');
     }
@@ -157,11 +157,11 @@ session()->flash('Add', 'Added successfully.');
   {
      $member = Member::findOrFail($id);
 
-     if ( auth()->user()->role == '1')
+     if ( auth()->user()->Role == 'admin')
      {
       return view('admin.member.edit',compact('member'));
      }
-    else if ( auth()->user()->role == '0')
+    else if ( auth()->user()->Role == 'manager')
      {
       return view('manager.member.edit',compact('member'));
      }
@@ -184,7 +184,7 @@ session()->flash('Add', 'Added successfully.');
     'City'=>$request->City,
     'IDNumber' => $request->IDNumber,
     // 0 for male ..1 for female
-    'Gender' => $request->Gender == '1' ? 1 : 0,
+    'Gender' => $request->Gender == 'male' ? 'male' : 'female',
     'Qualification' => $request->Qualification ,
     'Occupation' => $request->Occupation,
     'MobilePhone' => $request->MobilePhone ,
@@ -199,11 +199,11 @@ session()->flash('Add', 'Added successfully.');
    'user_id'=>auth()->id()
       ]);
 
-      if ( auth()->user()->role == '1')
+      if ( auth()->user()->Role == 'admin')
       {
          return redirect()->route('admin.member.show');
       }
-     else if ( auth()->user()->role == '0')
+     else if ( auth()->user()->Role == 'manager')
       {
          return redirect()->route('manager.member.show');
       }
@@ -213,11 +213,11 @@ session()->flash('Add', 'Added successfully.');
   public function destroy( $id)
     {
        Member::findOrFail($id)->delete();
-       if ( auth()->user()->role == '1')
+       if ( auth()->user()->Role == 'admin')
        {
           return redirect()->route('admin.member.show');
        }
-      else if ( auth()->user()->role == '0')
+      else if ( auth()->user()->Role == 'manager')
        {
           return redirect()->route('manager.member.show');
        }
@@ -226,11 +226,11 @@ session()->flash('Add', 'Added successfully.');
      public function searchByName($data)
     {
    $members =  Member::contains('Name', $data);
-   if ( auth()->user()->role == '1')
+   if ( auth()->user()->Role == 'admin')
    {
     return view('admin.member.show',compact('member'));
    }
-  else if ( auth()->user()->role == '0')
+  else if ( auth()->user()->Role == 'manager')
    {
     return view('manager.member.show',compact('member'));
    }
@@ -240,11 +240,11 @@ session()->flash('Add', 'Added successfully.');
     public function searchByIDTeam($data)
     {
    $members =  Member::contains('IDTeam', $data);
-   if ( auth()->user()->role == '1')
+   if ( auth()->user()->Role == 'admin')
    {
     return view('admin.member.show',compact('member'));
    }
-  else if ( auth()->user()->role == '0')
+  else if ( auth()->user()->Role == 'manager')
    {
     return view('manager.member.show',compact('member'));
    }
@@ -253,11 +253,11 @@ session()->flash('Add', 'Added successfully.');
     public function searchByQualification($data)
     {
    $members =  Member::contains('Qualification', $data);
-   if ( auth()->user()->role == '1')
+   if ( auth()->user()->Role == 'admin')
    {
     return view('admin.member.show',compact('member'));
    }
-  else if ( auth()->user()->role == '0')
+  else if ( auth()->user()->Role == 'manager')
    {
     return view('manager.member.show',compact('member'));
    }
@@ -266,11 +266,11 @@ session()->flash('Add', 'Added successfully.');
     public function searchBySpecialization($data)
     {
    $members =  Member::contains('Specialization', $data);
-   if ( auth()->user()->role == '1')
+   if ( auth()->user()->Role == 'admin')
    {
     return view('admin.member.show',compact('member'));
    }
-  else if ( auth()->user()->role == '0')
+  else if ( auth()->user()->Role == 'manager')
    {
     return view('manager.member.show',compact('member'));
    }
@@ -279,11 +279,11 @@ session()->flash('Add', 'Added successfully.');
     public function searchByCity($data)
     {
    $members =  Member::contains('City', $data);
-   if ( auth()->user()->role == '1')
+   if ( auth()->user()->Role == 'admin')
    {
     return view('admin.member.show',compact('member'));
    }
-  else if ( auth()->user()->role == '0')
+  else if ( auth()->user()->Role == 'manager')
    {
     return view('manager.member.show',compact('member'));
    }
@@ -293,11 +293,11 @@ session()->flash('Add', 'Added successfully.');
     public function searchByOccupation($data)
     {
    $members =  Member::contains('Occupation', $data);
-   if ( auth()->user()->role == '1')
+   if ( auth()->user()->Role == 'admin')
    {
     return view('admin.member.show',compact('member'));
    }
-  else if ( auth()->user()->role == '0')
+  else if ( auth()->user()->Role == 'manager')
    {
     return view('manager.member.show',compact('member'));
    }
