@@ -23,7 +23,7 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
+      $validated = $request->validate([
             'email' => 'required|unique:users|max:255',
              'password'=>'required',
              'Role'=>'required',
@@ -51,7 +51,14 @@ class UserController extends Controller
  
    
   public function update(Request $request, $id)
-  {
+  {  
+    $validated = $request->validate([
+    'email' => 'required|unique:users|max:255',
+     'password'=>'required',
+     'Role'=>'required',
+     'city_id'=>'required',
+ 
+     ]);
       $user = User::findOrFail($id);
       $user->update([
         'email'=>$request->email,

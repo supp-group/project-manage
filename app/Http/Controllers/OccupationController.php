@@ -23,7 +23,7 @@ class OccupationController extends Controller
 
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
+        $validated = $request->validate([
             'Name' => 'required|unique:occupations|max:255',
         ]);
 
@@ -45,6 +45,10 @@ class OccupationController extends Controller
    
   public function update(Request $request, $id)
   {
+    $validated = $request->validate([
+        'Name' => 'required|unique:occupations|max:255',
+    ]);
+
       $occupation = Occupation::findOrFail($id);
       $occupation->update([
     'Name'=>$request->Name,
