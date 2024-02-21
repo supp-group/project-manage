@@ -10,7 +10,7 @@ class CityController extends Controller
 {
     public function index()
     { 
-         $cities = City::orderBy('Name','desc')->get();
+         $cities = City::orderBy('Name','Asc')->get();
          return view('admin.city.show',compact('cities'));
     }
 
@@ -22,7 +22,7 @@ class CityController extends Controller
 
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
+        $validated = $request->validate([
             'Name' => 'required|unique:cities|max:255',
         ]);
 
@@ -44,6 +44,9 @@ class CityController extends Controller
    
   public function update(Request $request, $id)
   {
+    $validated = $request->validate([
+        'Name' => 'required|unique:cities|max:255',
+    ]);
       $city = City::findOrFail($id);
 
       $city->update([
