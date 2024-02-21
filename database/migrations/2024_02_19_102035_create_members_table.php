@@ -34,19 +34,25 @@ return new class extends Migration
             $table->dateTime('DateOfJoin')->nullable();
             $table->string('Specialization')->nullable();
             $table->string('Image')->nullable();  
-            
+            $table->timestamps();
+
             //users_table
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreignId('user_id')->nullable();
+            // $table->unsignedBigInteger('user_id');
+            // $table->foreign('user_id')->references('id')->on('users');
 
              //qualifications_table
-             $table->unsignedBigInteger('qualification_id');
-             $table->foreign('qualification_id')->references('id')->on('qualifications');
+            $table->foreignId('qualification_id')->nullable();
+            //  $table->unsignedBigInteger('qualification_id');
+            //  $table->foreign('qualification_id')->references('id')->on('qualifications');
 
               //occupations_table
-            $table->unsignedBigInteger('occupation_id');
-            $table->foreign('occupation_id')->references('id')->on('occupations');
-            $table->timestamps();
+            $table->foreignId('occupation_id')->nullable();
+            // $table->unsignedBigInteger('occupation_id');
+            // $table->foreign('occupation_id')->references('id')->on('occupations');
+
+          
+          
         });
     }
 

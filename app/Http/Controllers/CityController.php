@@ -31,7 +31,7 @@ class CityController extends Controller
             'Name'=>$request->Name,
         ]);
         session()->flash('Add', 'Added successfully.');
-        return redirect()->route('admin.city.show');
+        return view('admin.city.show');
     }
 
     
