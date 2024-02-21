@@ -43,25 +43,53 @@
 					<div class="col-lg-12 col-md-12">
 						<div class="card">
 							<div class="card-body">
-								{{-- <form action="{{ route('member.update', $member->id) }}" method="post" autocomplete="off">
+								<form action="{{ route('user.update', $user->id) }}" method="post" autocomplete="off">
 									{{ csrf_field() }}
 
 									<div class="row">
 										<div class="col">
-											<label for="inputName" class="control-label">ملاحظات</label>
-											<input type="hidden" name="NotPad" value="{{ $member->NotPad }}">
-											<input type="text" class="form-control" id="inputName" name="NotPad"
-											value="{{ $member->NotPad }}" required>
+											<label for="inputName" class="control-label">البريد الإلكتروني</label>
+											<input type="hidden" name="email" value="{{ $user->email }}">
+											<input type="text" class="form-control" id="inputName" name="email"
+											value="{{ $user->email }}" required>
 										</div>
 									</div><br>
 
-									
+									<div class="row">
+										<div class="col">
+											<label for="inputName" class="control-label">كلمة المرور</label>
+											<input type="hidden" name="password" value="{{ $user->password }}">
+											<input type="text" class="form-control" id="inputName" name="password"
+											value="{{ $user->password }}" required>
+										</div>
+									</div><br>
+
+									<div class="row">
+										<div class="col">
+											<label for="inputName" class="control-label">الدور</label>
+											<input type="hidden" name="Role" value="{{ $user->Role }}">
+											<input type="text" class="form-control" id="inputName" name="Role"
+											value="{{ $user->Role }}" required>
+										</div>
+									</div><br>
+
+
+									<div class="form-group">
+										<label>المحافظة</label>
+										<select name="city_id" class="form-control select">
+											
+											@foreach($cities as $city)
+											<option value="{{$city->id}}">{{$city->Name}}</option>
+											@endforeach 
+
+										</select>
+									</div><br>
 
 									<div class="d-flex justify-content-center">
 										<button type="submit" class="btn btn-primary">حفظ البيانات</button>
 									</div>
 			
-								</form> --}}
+								</form>
 							</div>
 						</div>
 					</div>

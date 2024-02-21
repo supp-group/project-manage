@@ -39,8 +39,8 @@ class UserController extends Controller
             'password'=>$request->password,
             'Role'=>$request->Role,
             'city_id'=>$request->city_id,
-
         ]);
+
         session()->flash('Add', 'تم إضافة المدير بنجاح');
         return back();
     }
@@ -48,20 +48,23 @@ class UserController extends Controller
     
   public function edit( $id)
   {
-     $user = User::findOrFail($id);
-      return view('admin.user.edit',compact('user'));
+    $cities = City::orderBy('Name','asc')->get();
+    $user = User::findOrFail($id);
+    return view('admin.user.edit',compact('user', 'cities'));
   }
  
    
   public function update(Request $request, $id)
   {
       $user = User::findOrFail($id);
+      
       $user->update([
         'email'=>$request->email,
         'password'=>$request->password,
         'Role'=>$request->Role,
         'city_id'=>$request->city_id,
       ]);
+
       session()->flash('update', 'updated successfully.');
       return redirect()->route('admin.user.show');
     }
