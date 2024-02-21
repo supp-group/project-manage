@@ -41,8 +41,8 @@
 								<span class="side-menu__label">المدراء</span>
 								<i class="angle fe fe-chevron-down"></i></a>
 						<ul class="slide-menu">
-							<li><a class="slide-item" href="{{ url('/admin/manager/show') }}">جميع المدراء</a></li>
-							<li><a class="slide-item" href="{{ url('/admin/manager/add') }}">إضافة مدير</a></li>
+							<li><a class="slide-item" href="{{ url('/admin/user/show') }}">جميع المدراء</a></li>
+							<li><a class="slide-item" href="{{ url('/admin/user/add') }}">إضافة مدير</a></li>
 						</ul>
 					</li>
 					

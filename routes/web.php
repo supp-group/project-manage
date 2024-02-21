@@ -4,7 +4,9 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CityController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+
 
 
 /*
@@ -53,6 +55,18 @@ Route::middleware(['auth', 'verified', 'admin'])-> prefix('admin')->group(functi
         Route::delete('delete/{id}', [MemberController::class, 'destroy'])->name('member.delete');
     });
 
+       //   /user  ===>  manager
+   Route:: prefix('user')->group(function () {
+
+    Route::get('show', [UserController::class, 'index']);
+    Route::get('add', [UserController::class, 'create']);
+    Route::post('save', [UserController::class, 'store'])->name('user.save');
+
+    Route::get('edit/{id}', [UserController::class, 'edit'])->name('user.edit');
+    Route::post('update/{id}', [UserController::class, 'update'])->name('user.update');
+
+    Route::delete('delete/{id}', [UserController::class, 'destroy'])->name('user.delete');
+    });
 
    //   /city
    Route:: prefix('city')->group(function () {
@@ -65,7 +79,7 @@ Route::middleware(['auth', 'verified', 'admin'])-> prefix('admin')->group(functi
     Route::post('update/{id}', [CityController::class, 'update'])->name('city.update');
 
     Route::delete('delete/{id}', [CityController::class, 'destroy'])->name('city.delete');
-});
+    });
 
 });
 

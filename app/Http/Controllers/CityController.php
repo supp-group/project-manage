@@ -27,36 +27,38 @@ class CityController extends Controller
         ]);
 
         $city= City::create([
-
             'Name'=>$request->Name,
         ]);
-        session()->flash('Add', 'Added successfully.');
-        return view('admin.city.show');
+
+        session()->flash('Add', 'تم إضافة المحافظة بنجاح');
+        return back();
     }
 
     
   public function edit( $id)
   {
-     $cities = City::findOrFail($id);
-      return view('admin.city.edit',compact('cities'));
+    $city = City::findOrFail($id);
+    return view('admin.city.edit',compact('city'));
   }
  
    
   public function update(Request $request, $id)
   {
-      $cities = City::findOrFail($id);
-      $cities->update([
-    'Name'=>$request->Name,
+      $city = City::findOrFail($id);
+
+      $city->update([
+        'Name'=>$request->Name,
       ]);
-      session()->flash('update', 'updated successfully.');
-      return redirect()->route('admin.city.show');
+
+      session()->flash('update', 'تم تعديل المحافظة بنجاح');
+      return back();
     }
 
-    public function destroy( $id)
+    public function destroy($id)
     {
-       City::findOrFail($id)->delete();
-      session()->flash('delete', 'Deleted successfully.');
+        City::findOrFail($id)->delete();
 
-          return redirect()->route('admin.city.show');
-       }
+        session()->flash('delete', 'تم حذف المحافظة بنجاح');
+        return back();
+    }
 }
