@@ -140,6 +140,7 @@ class MemberController extends Controller
     'DateOfJoin' => $request->DateOfJoin ,
     'Specialization' => $request->Specialization ,
     'Image' => $request->Image ,
+    
     //user
    'user_id'=>auth()->id()
 ]);
