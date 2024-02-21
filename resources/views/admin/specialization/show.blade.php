@@ -67,7 +67,12 @@
 											<tr>
 												<td>{{$i++}}</td>
 												<td>{{$specialization->specialization}}</td>
-												<td>{{$specialization->parent_name}}</td>
+												{{-- <td>{{$specialization->parent_name}}</td> --}}
+
+												<td>{{ App\Models\Qualification::find($specialization->parentId)->Name }}</td>
+
+
+												
 
 												<td>
 													<a class="btn btn-sm btn-info" href="{{ route('specialization.edit', $specialization->id) }}" title="تعديل"><i class="las la-pen"></i></a>
