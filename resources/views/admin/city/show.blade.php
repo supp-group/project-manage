@@ -78,8 +78,7 @@
 														<button class="modal-effect btn btn-sm btn-danger" data-effect="effect-scale"
 														data-id="{{ $city->id }}" data-title="{{ $city->Name }}" data-toggle="modal"
 														href="#modaldemo9" title="حذف"><i class="las la-trash"></i></button>
-													</form>
-													
+													</form>	
 												</td>
 											</tr>
 											@endforeach

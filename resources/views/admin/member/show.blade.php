@@ -93,7 +93,8 @@
 												<th class="wd-15p border-bottom-0">هاتف العمل</th>
 												<th class="wd-15p border-bottom-0">تاريخ الانتساب</th>
 												<th class="wd-15p border-bottom-0">الصورة</th>
-												<th class="wd-15p border-bottom-0">العمليات</th>
+												<th class="wd-15p border-bottom-0">تعديل</th>
+												<th class="wd-15p border-bottom-0">حذف</th>
 											</tr>
 										</thead>
 										<tbody>
@@ -126,10 +127,15 @@
 
 												<td>
 													<a class="btn btn-sm btn-info" href="{{ route('member.edit', $member->id) }}" title="تعديل"><i class="las la-pen"></i></a>
-
-													<a class="modal-effect btn btn-sm btn-danger" data-effect="effect-scale"
-                                                	data-id="{{ $member->id }}" data-title="{{ $member->FullName }}" data-toggle="modal"
-                                                	href="#modaldemo9" title="حذف"><i class="las la-trash"></i></a>
+												</td>
+												<td>
+													<form action={{ route('member.delete', $member->id) }} method="post">
+														{{method_field('delete')}}
+														{{csrf_field()}}
+														<button class="modal-effect btn btn-sm btn-danger" data-effect="effect-scale"
+														data-id="{{ $member->id }}" data-title="{{ $member->FullName }}" data-toggle="modal"
+														href="#modaldemo9" title="حذف"><i class="las la-trash"></i></button>
+													</form>	
 												</td>
 											</tr>
 											@endforeach

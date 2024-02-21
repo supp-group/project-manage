@@ -8,6 +8,9 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
+use Illuminate\Support\Facades\Crypt;
+use Illuminate\Contracts\Encryption\DecryptException;
+
 class UserController extends Controller
 {
    
@@ -37,7 +40,8 @@ class UserController extends Controller
 
         User::create([
             'email'=>$request->email,
-            'password'=>$request->password,
+            // 'password'=>$request->password,
+            'password' => Crypt::decryptString($request->password),
             'Role'=>$request->Role,
             'city_id'=>$request->city_id,
         ]);
@@ -56,19 +60,16 @@ class UserController extends Controller
  
    
   public function update(Request $request, $id)
-  {
-    
+  { 
     $validated = $request->validate([
-
       'email' => 'required|unique:users|max:255',
        'password'=>'required',
        'Role'=>'required',
        'city_id'=>'required',
-
   ]);
 
       $user = User::findOrFail($id);
-      
+
       $user->update([
         'email'=>$request->email,
         'password'=>$request->password,
@@ -76,8 +77,8 @@ class UserController extends Controller
         'city_id'=>$request->city_id,
       ]);
 
-      session()->flash('update', 'updated successfully.');
-      return redirect()->route('admin.user.show');
+      session()->flash('update', 'تم تعديل المدير بنجاح');
+      return back();
     }
 
     public function destroy( $id)

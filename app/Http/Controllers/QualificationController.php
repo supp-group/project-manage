@@ -13,11 +13,21 @@ class QualificationController extends Controller
     public function indexQualification()
     { 
          $qualifications = Qualification::orderBy('Name','Asc')->get('Name');
-         return view('admin.occupation.show',compact('qualifications'));
+         return view('admin.qualification.show',compact('qualifications'));
     }
     public function indexSpecialization()
     { 
-         $specializations = Qualification::where('Name','Asc')->get('Specializations');
+         $specializations = Qualification::where('Name','Asc')->get('specialization');
+
+         foreach($specializations as  $specialization)
+         {
+             if($specialization->parentId>0)
+             {
+                 $parent = Qualification::find( $specialization->parentId);
+                 $specialization->parent_name = $parent->specialization;
+             }
+         }
+
          return view('admin.specialization.show',compact('specializations'));
     }
     
@@ -34,81 +44,79 @@ class QualificationController extends Controller
     public function storeQualification(Request $request)
     {
         $validated = $request->validate([
-
             'Name' => 'required|unique:qualifications|max:255',
         ]);
 
         Qualification::create([
-
             'Name'=>$request->Name,
         ]);
-        session()->flash('Add', 'Added successfully.');
-        return redirect()->route('admin.qualification.show');
+
+        session()->flash('Add', 'تم إضافة المؤهل العلمي بنجاح');
+        return back();
     }
 
     public function storeSpecialization(Request $request)
     {
         $validated = $request->validate([
-
             'parentId'=>'required',
             'Specialization' => 'required|unique:occupations|max:255',
         ]);
 
          Qualification::create([
-
             'parentId'=>$request->parentId,
             'Specialization'=>$request->Specialization
         ]);
-        session()->flash('Add', 'Added successfully.');
-        
-        return redirect()->route('admin.specialization.show');
+
+        session()->flash('Add', 'تم إضافة الاختصاص بنجاح');
+        return back();
     }
     
-  public function editQualification( $id)
+  public function editQualification($id)
   {
-     $qualification = Qualification::findOrFail($id);
-      return view('admin.qualification.edit',compact('qualification'));
+    $qualification = Qualification::findOrFail($id);
+    return view('admin.qualification.edit',compact('qualification'));
   }
  
-  public function editSpecialization( $id)
+  public function editSpecialization($id)
   {
-     $specialization = Qualification::findOrFail($id);
-      return view('admin.specialization.edit',compact('specialization'));
+    $specialization = Qualification::findOrFail($id);
+    return view('admin.specialization.edit',compact('specialization'));
   }
  
    
   public function updateQualification(Request $request, $id)
   {
     $validated = $request->validate([
-
         'Name' => 'required|unique:qualifications|max:255',
     ]);
-      $qualification = Qualification::findOrFail($id);
-      $qualification->update([
-      'Name'=>$request->Name,
-      ]);
-      session()->flash('update', 'updated successfully.');
 
-      return redirect()->route('admin.qualification.show');
+      $qualification = Qualification::findOrFail($id);
+
+      $qualification->update([
+        'Name'=>$request->Name,
+      ]);
+
+      session()->flash('update', 'تم تعديل المؤهل العلمي بنجاح');
+      return back();
     }
 
   
-       public function updateSpecialization(Request $request, $id)
+    public function updateSpecialization(Request $request, $id)
   {
     $validated = $request->validate([
-
         'parentId'=>'required',
         'Specialization' => 'required|unique:occupations|max:255',
     ]);
 
       $specialization = Qualification::findOrFail($id);
+
       $specialization->update([
         'parentId'=>$request->parentId,
         'Specialization'=>$request->Name,
       ]);
-      session()->flash('update', 'updated successfully.');
 
-      return redirect()->route('admin.specialization.show');
+      session()->flash('update', 'تم تعديل الاختصاص بنجاح');
+      return back();
     }
 
     public function destroyQualification($id)
@@ -123,17 +131,15 @@ class QualificationController extends Controller
     
         $qualification->delete();
     
-        session()->flash('delete', 'Deleted successfully.');
-    
-        return redirect()->route('admin.qualification.show');
+        session()->flash('delete', 'تم حذف المؤهل العلمي بنجاح');
+        return back();
     }
    
     public function destroySpecialization($id)
     {
         Qualification::findOrFail($id)->delete();
 
-       session()->flash('delete', 'Deleted successfully.');
-
-        return redirect()->route('admin.specialization.show');
-       }
+       session()->flash('delete', 'تم حذف الاختصاص بنجاح');
+       return back();
+    }
 }

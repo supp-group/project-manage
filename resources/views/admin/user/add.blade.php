@@ -64,6 +64,17 @@
 										</div>
 									</div><br>
 
+									{{-- <div class="form-group">
+										<label>الدور</label>
+										<select name="Role" class="form-control select">
+											
+											@foreach($cities as $city)
+											<option value="{{$city->id}}">{{$city->Name}}</option>
+											@endforeach 
+
+										</select>
+									</div><br> --}}
+
 									<div class="form-group">
 										<label>المحافظة</label>
 										<select name="city_id" class="form-control select">

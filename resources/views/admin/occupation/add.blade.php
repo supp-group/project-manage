@@ -41,23 +41,21 @@
 						<div class="card">
 							<div class="card-body">
 			
-								{{-- <form action="{{ route('member.save') }}" method="post" enctype="multipart/form-data" autocomplete="off">
+								<form action="{{ route('occupation.save') }}" method="post" enctype="multipart/form-data" autocomplete="off">
 									{{ csrf_field() }}
 			
 									<div class="row">
 										<div class="col">
-											<label for="inputName" class="control-label">ملاحظات</label>
-											<input type="text" class="form-control" id="inputName" name="NotPad" required>
+											<label for="inputName" class="control-label">المهنة</label>
+											<input type="text" class="form-control" id="inputName" name="Name" required>
 										</div>
 									</div><br>
 			
-								
-
 									<div class="d-flex justify-content-center">
 										<button type="submit" class="btn btn-primary">حفظ البيانات</button>
 									</div>
 			
-								</form> --}}
+								</form>
 							</div>
 						</div>
 					</div>

@@ -60,7 +60,8 @@
 												<th class="wd-15p border-bottom-0">الدور</th>
 												<th class="wd-15p border-bottom-0">المحافظة</th>
 												{{-- <th class="wd-15p border-bottom-0">الفرع</th> --}}
-												<th class="wd-15p border-bottom-0">العمليات</th>
+												<th class="wd-15p border-bottom-0">تعديل</th>
+												<th class="wd-15p border-bottom-0">حذف</th>
 											</tr>
 										</thead>
 										<tbody>
@@ -73,10 +74,10 @@
 												<td>{{$user->Role}}</td>
 												<td>{{$user->city_id}}</td>
 
-												
 												<td>
 													<a class="btn btn-sm btn-info" href="{{ route('user.edit', $user->id) }}" title="تعديل"><i class="las la-pen"></i></a>
-
+												</td>
+												<td>
 													<form action={{ route('user.delete', $user->id) }} method="post">
 														{{method_field('delete')}}
 														{{csrf_field()}}

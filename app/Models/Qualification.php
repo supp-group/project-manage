@@ -10,6 +10,9 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Qualification extends Model
 {
     use HasFactory;
+
+    protected $specializations = 'parent_name';
+
     protected  $fillable =['Name','parentId','specialization'];
 
     public function members(): HasMany

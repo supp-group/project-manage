@@ -56,26 +56,33 @@
 											<tr>
 												<th class="wd-15p border-bottom-0">#</th>
 												<th class="wd-15p border-bottom-0">المؤهل العلمي</th>
-												<th class="wd-15p border-bottom-0">العمليات</th>
+												<th class="wd-15p border-bottom-0">تعديل</th>
+												<th class="wd-15p border-bottom-0">حذف</th>
 											</tr>
 										</thead>
-										{{-- <tbody>
-											<!-- ?php $i = 1 ?> -->
-											@foreach($members as $member)
+										<tbody>
+											<?php $i = 1 ?>
+											@foreach($qualifications as $qualification)
 											<tr>
 												<td>{{$i++}}</td>
-												<td>{{$member->name}}</td>
+												<td>{{$qualification->Name}}</td>
 
 												<td>
-													<a class="btn btn-sm btn-info" href="{{ route('user.edit', $user->id) }}" title="تعديل"><i class="las la-pen"></i></a>
-
-													<a class="modal-effect btn btn-sm btn-danger" data-effect="effect-scale"
-                                                	data-id="{{ $user->id }}" data-title="{{ $user->name }}" data-toggle="modal"
-                                                	href="#modaldemo9" title="حذف"><i class="las la-trash"></i></a>
+													<a class="btn btn-sm btn-info" href="{{ route('qualification.edit', $qualification->id) }}" title="تعديل"><i class="las la-pen"></i></a>
+													
+												</td>
+												<td>
+													<form action={{ route('qualification.delete', $qualification->id) }} method="post">
+														{{method_field('delete')}}
+														{{csrf_field()}}
+														<button class="modal-effect btn btn-sm btn-danger" data-effect="effect-scale"
+														data-id="{{ $qualification->id }}" data-title="{{ $qualification->Name }}" data-toggle="modal"
+														href="#modaldemo9" title="حذف"><i class="las la-trash"></i></button>
+													</form>	
 												</td>
 											</tr>
 											@endforeach
-										</tbody> --}}
+										</tbody>
 									</table>
 								</div>
 							</div>
@@ -88,33 +95,6 @@
 			<!-- Container closed -->
 		</div>
 		<!-- main-content closed -->
-
-
-
-<!-- delete -->
-{{-- <div class="modal" id="modaldemo9">
-	<div class="modal-dialog modal-dialog-centered" role="document">
-		<div class="modal-content modal-content-demo">
-			<div class="modal-header">
-				<h6 class="modal-title">حذف العضو</h6><button aria-label="Close" class="close" data-dismiss="modal"
-					type="button"><span aria-hidden="true">&times;</span></button>
-			</div>
-			<form action={{ route('member.delete', $member->id) }} method="post">
-				{{method_field('delete')}}
-				{{csrf_field()}}
-				<div class="modal-body">
-					<p>هل أنت متأكد من عملية الحذف؟</p><br>
-					<input type="hidden" name="id" id="id">
-					<input class="form-control" name="FullName" id="FullName" type="text" readonly>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-dismiss="modal">إلغاء</button>
-					<button type="submit" class="btn btn-danger">تأكيد</button>
-				</div>
-		</div>
-		</form>
-	</div>
-</div>		 --}}
 
 @endsection
 @section('js')
