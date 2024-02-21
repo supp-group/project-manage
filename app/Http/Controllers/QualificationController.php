@@ -17,7 +17,7 @@ class QualificationController extends Controller
     }
     public function indexSpecialization()
     { 
-         $specializations = Qualification::where('Name','Asc')->get();
+         $specializations = Qualification::orderBy('Name','Asc')->get();
 
          foreach($specializations as  $specialization)
          {
