@@ -18,7 +18,8 @@
 				<div class="breadcrumb-header justify-content-between">
 					<div class="my-auto">
 						<div class="d-flex">
-							<h4 class="content-title mb-0 my-auto">الاختصاصات</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ إضافة اختصاص
+							<h4 class="content-title mb-0 my-auto">الاختصاصات</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ إضافة اختصاص</span>
+						</div>
 					</div>
 				</div>
 				<!-- breadcrumb -->
@@ -40,23 +41,32 @@
 						<div class="card">
 							<div class="card-body">
 			
-								{{-- <form action="{{ route('member.save') }}" method="post" enctype="multipart/form-data" autocomplete="off">
+								<form action="{{ route('specialization.save') }}" method="post" enctype="multipart/form-data" autocomplete="off">
 									{{ csrf_field() }}
 			
 									<div class="row">
 										<div class="col">
-											<label for="inputName" class="control-label">ملاحظات</label>
-											<input type="text" class="form-control" id="inputName" name="NotPad" required>
+											<label for="inputName" class="control-label">الاختصاص</label>
+											<input type="text" class="form-control" id="inputName" name="specialization" required>
 										</div>
 									</div><br>
-			
-								
+
+									<div class="form-group">
+										<label>المؤهل العلمي</label>
+										<select name="parentId" class="form-control select">
+											
+											@foreach($qualifications as $qualification)
+											<option value="{{$qualification->id}}">{{$qualification->Name}}</option>
+											@endforeach 
+
+										</select>
+									</div><br>
 
 									<div class="d-flex justify-content-center">
 										<button type="submit" class="btn btn-primary">حفظ البيانات</button>
 									</div>
 			
-								</form> --}}
+								</form>
 							</div>
 						</div>
 					</div>

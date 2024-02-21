@@ -69,7 +69,6 @@
 
 												<td>
 													<a class="btn btn-sm btn-info" href="{{ route('qualification.edit', $qualification->id) }}" title="تعديل"><i class="las la-pen"></i></a>
-													
 												</td>
 												<td>
 													<form action={{ route('qualification.delete', $qualification->id) }} method="post">

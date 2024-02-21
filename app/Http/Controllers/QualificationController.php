@@ -38,7 +38,8 @@ class QualificationController extends Controller
 
     public function createSpecialization()
     {
-       return view('admin.specialization.add');
+        $qualifications = Qualification::orderBy('Name','Asc')->get('Name');
+        return view('admin.specialization.add', compact('qualifications'));
     }
 
     public function storeQualification(Request $request)
@@ -57,14 +58,14 @@ class QualificationController extends Controller
 
     public function storeSpecialization(Request $request)
     {
-        $validated = $request->validate([
-            'parentId'=>'required',
-            'Specialization' => 'required|unique:occupations|max:255',
-        ]);
+        // $validated = $request->validate([
+        //     'parentId'=>'required',
+        //     'specialization' => 'required|unique:occupations|max:255',
+        // ]);
 
          Qualification::create([
             'parentId'=>$request->parentId,
-            'Specialization'=>$request->Specialization
+            'specialization'=>$request->specialization
         ]);
 
         session()->flash('Add', 'تم إضافة الاختصاص بنجاح');

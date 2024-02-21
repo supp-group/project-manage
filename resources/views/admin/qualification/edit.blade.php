@@ -43,25 +43,23 @@
 					<div class="col-lg-12 col-md-12">
 						<div class="card">
 							<div class="card-body">
-								{{-- <form action="{{ route('member.update', $member->id) }}" method="post" autocomplete="off">
+								<form action="{{ route('qualification.update', $qualification->id) }}" method="post" autocomplete="off">
 									{{ csrf_field() }}
 
 									<div class="row">
 										<div class="col">
 											<label for="inputName" class="control-label">ملاحظات</label>
-											<input type="hidden" name="NotPad" value="{{ $member->NotPad }}">
-											<input type="text" class="form-control" id="inputName" name="NotPad"
-											value="{{ $member->NotPad }}" required>
+											<input type="hidden" name="Name" value="{{ $qualification->Name }}">
+											<input type="text" class="form-control" id="inputName" name="Name"
+											value="{{ $qualification->Name }}" required>
 										</div>
 									</div><br>
-
-									
 
 									<div class="d-flex justify-content-center">
 										<button type="submit" class="btn btn-primary">حفظ البيانات</button>
 									</div>
 			
-								</form> --}}
+								</form>
 							</div>
 						</div>
 					</div>
