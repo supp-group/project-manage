@@ -32,12 +32,12 @@ class MemberController extends Controller
     { 
         if (optional(auth()->user())->Role == 'admin') 
         {
-            $members = Member::orderBy('Name','desc')->get();
+            $members = Member::orderBy('Name','Asc')->get();
             return view('admin.member.show',compact('members'));
         }
          elseif (optional(auth()->user())->Role == 'manager')
           {
-            $members = Member::where('City',auth()->user()->City)->orderBy('Name','desc')->get();
+            $members = Member::where('City',auth()->user()->City)->orderBy('Name','Asc')->get();
             return view('manager.member.show',compact('members'));
          }
     }
@@ -46,12 +46,12 @@ class MemberController extends Controller
     { 
         if (optional(auth()->user())->Role == 'admin') 
         {
-            $members = Member::orderBy('IDTeam','desc')->get();
+            $members = Member::orderBy('IDTeam','Asc')->get();
             return view('admin.member.show',compact('members'));
         }
          elseif (optional(auth()->user())->Role == 'manager')
           {
-            $members = Member::where('City',auth()->user()->City)->orderBy('IDTeam','desc')->get();
+            $members = Member::where('City',auth()->user()->City)->orderBy('IDTeam','Asc')->get();
             return view('manager.member.show',compact('members'));
          }
     }
@@ -60,12 +60,12 @@ class MemberController extends Controller
    
     if (optional(auth()->user())->Role == 'admin') 
     {
-        $members = Member::orderBy('DateOfJoin','desc')->get();
+        $members = Member::orderBy('DateOfJoin','Asc')->get();
         return view('admin.member.show',compact('members'));
     }
      elseif (optional(auth()->user())->Role == 'manager')
       {
-        $members = Member::where('City',auth()->user()->City)->orderBy('DateOfJoin','desc')->get();
+        $members = Member::where('City',auth()->user()->City)->orderBy('DateOfJoin','Asc')->get();
         return view('manager.member.show',compact('members'));
      }
 
@@ -87,7 +87,7 @@ class MemberController extends Controller
 
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
+        $validated = $request->validate([
             'NotPad' => 'required|max:255',
             'branch' => 'required',
             'IDTeam' => 'required|unique:members|max:255',
@@ -129,7 +129,7 @@ class MemberController extends Controller
     // 'City' => $user->city->name,
     'IDNumber' => $request->IDNumber,
     'Gender' => $request->Gender == 'male' ? 'male' : 'female',
-    'Qualification' =>$request->Name ,
+    'Qualification' =>$request->Qualification ,
     'Occupation' => $request->Occupation,
     'MobilePhone' => $request->MobilePhone ,
     'HomeAddress' => $request->HomeAddress ,
@@ -176,6 +176,34 @@ class MemberController extends Controller
   
   public function update(Request $request, $id)
   {
+    $validated = $request->validate([
+        'NotPad' => 'required|max:255',
+        'branch' => 'required',
+        'IDTeam' => 'required|unique:members|max:255',
+        'FullName' => 'required',
+        'MotherName' => 'required',
+        'PlaceOfBirth' => 'required',
+        'BirthDate' => 'required|date|before_or_equal:today',
+        'Constraint' => 'required',
+        'City' => 'required',
+        'IDNumber' => 'required|unique:members|min:11|max:11',
+        'Gender' => 'required',
+        'Qualification' =>'required',
+        'Occupation' => 'required',
+        'MobilePhone' => 'required|max:10',
+        'HomeAddress' => 'required',
+        'WorkAddress' => 'required',
+        'HomePhone' => 'required|max:10',
+        'WorkPhone' => 'required|max:10',
+        'DateOfJoin' => 'required|date|before_or_equal:today',
+        'Specialization' => 'required',
+        'Image' =>'required',
+        'qualification_id'=>'required',
+        'occupation_id'=>'required'
+    ]);
+    
+  
+
     $member = Member::findOrFail($id);
     $member->update([
     'NotPad'=>$request->NotPad,
