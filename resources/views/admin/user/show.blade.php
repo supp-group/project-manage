@@ -59,27 +59,35 @@
 												<th class="wd-15p border-bottom-0">كلمة المرور</th>
 												<th class="wd-15p border-bottom-0">الدور</th>
 												<th class="wd-15p border-bottom-0">المحافظة</th>
-												<th class="wd-15p border-bottom-0">الفرع</th>
+												{{-- <th class="wd-15p border-bottom-0">الفرع</th> --}}
 												<th class="wd-15p border-bottom-0">العمليات</th>
 											</tr>
 										</thead>
-										{{-- <tbody>
-											<!-- ?php $i = 1 ?> -->
-											@foreach($members as $member)
+										<tbody>
+											<?php $i = 1 ?> 
+											@foreach($users as $user)
 											<tr>
 												<td>{{$i++}}</td>
-												<td>{{$member->name}}</td>
+												<td>{{$user->email}}</td>
+												<td>{{$user->password}}</td>
+												<td>{{$user->Role}}</td>
+												<td>{{$user->city_id}}</td>
 
+												
 												<td>
 													<a class="btn btn-sm btn-info" href="{{ route('user.edit', $user->id) }}" title="تعديل"><i class="las la-pen"></i></a>
 
-													<a class="modal-effect btn btn-sm btn-danger" data-effect="effect-scale"
-                                                	data-id="{{ $user->id }}" data-title="{{ $user->name }}" data-toggle="modal"
-                                                	href="#modaldemo9" title="حذف"><i class="las la-trash"></i></a>
+													<form action={{ route('user.delete', $user->id) }} method="post">
+														{{method_field('delete')}}
+														{{csrf_field()}}
+														<button class="modal-effect btn btn-sm btn-danger" data-effect="effect-scale"
+														data-id="{{ $user->id }}" data-title="{{ $user->Name }}" data-toggle="modal"
+														href="#modaldemo9" title="حذف"><i class="las la-trash"></i></button>
+													</form>
 												</td>
 											</tr>
 											@endforeach
-										</tbody> --}}
+										</tbody>
 									</table>
 								</div>
 							</div>

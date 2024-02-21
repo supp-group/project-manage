@@ -40,28 +40,45 @@
 					<div class="col-lg-12 col-md-12">
 						<div class="card">
 							<div class="card-body">
-			
-								{{-- <form action="{{ route('member.save') }}" method="post" enctype="multipart/form-data" autocomplete="off">
+								<form action="{{ route('user.save') }}" method="post" enctype="multipart/form-data" autocomplete="off">
 									{{ csrf_field() }}
 			
 									<div class="row">
 										<div class="col">
-											<label for="inputName" class="control-label">ملاحظات</label>
-											<input type="text" class="form-control" id="inputName" name="NotPad" required>
+											<label for="inputName" class="control-label">البريد الإلكتروني</label>
+											<input type="email" class="form-control" id="inputName" name="email" required>
 										</div>
 									</div><br>
-			
-								
+		
+									<div class="row">
+										<div class="col">
+											<label for="inputName" class="control-label">كلمة المرور</label>
+											<input type="password" class="form-control" id="inputName" name="password" required>
+										</div>
+									</div><br>
 
-								
+									<div class="row">
+										<div class="col">
+											<label for="inputName" class="control-label">الدور</label>
+											<input type="text" class="form-control" id="inputName" name="Role" required>
+										</div>
+									</div><br>
 
-									
+									<div class="form-group">
+										<label>المحافظة</label>
+										<select name="city_id" class="form-control select">
+											
+											@foreach($cities as $city)
+											<option value="{{$city->id}}">{{$city->Name}}</option>
+											@endforeach 
+
+										</select>
+									</div><br>
 
 									<div class="d-flex justify-content-center">
 										<button type="submit" class="btn btn-primary">حفظ البيانات</button>
 									</div>
-			
-								</form> --}}
+								</form>
 							</div>
 						</div>
 					</div>

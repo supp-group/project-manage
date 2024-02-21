@@ -56,7 +56,8 @@
 											<tr>
 												<th class="wd-15p border-bottom-0">#</th>
 												<th class="wd-15p border-bottom-0">المحافظة</th>
-												<th class="wd-15p border-bottom-0">العمليات</th>
+												<th class="wd-15p border-bottom-0">تعديل</th>
+												<th class="wd-15p border-bottom-0">حذف</th>
 											</tr>
 										</thead>
 										<tbody>
@@ -68,10 +69,17 @@
 												
 												<td>
 													<a class="btn btn-sm btn-info" href="{{ route('city.edit', $city->id) }}" title="تعديل"><i class="las la-pen"></i></a>
+												</td>
 
-													<a class="modal-effect btn btn-sm btn-danger" data-effect="effect-scale"
-                                                	data-id="{{ $city->id }}" data-title="{{ $city->Name }}" data-toggle="modal"
-                                                	href="#modaldemo9" title="حذف"><i class="las la-trash"></i></a>
+												<td>
+													<form action={{ route('city.delete', $city->id) }} method="post">
+														{{method_field('delete')}}
+														{{csrf_field()}}
+														<button class="modal-effect btn btn-sm btn-danger" data-effect="effect-scale"
+														data-id="{{ $city->id }}" data-title="{{ $city->Name }}" data-toggle="modal"
+														href="#modaldemo9" title="حذف"><i class="las la-trash"></i></button>
+													</form>
+													
 												</td>
 											</tr>
 											@endforeach
@@ -96,16 +104,16 @@
 	<div class="modal-dialog modal-dialog-centered" role="document">
 		<div class="modal-content modal-content-demo">
 			<div class="modal-header">
-				<h6 class="modal-title">حذف العضو</h6><button aria-label="Close" class="close" data-dismiss="modal"
+				<h6 class="modal-title">حذف المحافظة</h6><button aria-label="Close" class="close" data-dismiss="modal"
 					type="button"><span aria-hidden="true">&times;</span></button>
 			</div>
-			<form action={{ route('member.delete', $member->id) }} method="post">
+			<form action={{ route('city.delete', $city->id) }} method="post">
 				{{method_field('delete')}}
 				{{csrf_field()}}
 				<div class="modal-body">
 					<p>هل أنت متأكد من عملية الحذف؟</p><br>
 					<input type="hidden" name="id" id="id">
-					<input class="form-control" name="FullName" id="FullName" type="text" readonly>
+					<input class="form-control" name="Name" id="Name" type="text" readonly>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-dismiss="modal">إلغاء</button>

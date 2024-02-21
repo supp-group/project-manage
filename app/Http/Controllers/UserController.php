@@ -3,27 +3,30 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Models\City;
 use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+
 class UserController extends Controller
 {
    
     public function index()
     { 
-         $users = User::orderBy('updated_at','desc')->get();
-         return view('admin.user.show',compact('users'));
+      $users = User::orderBy('updated_at','desc')->get();
+      return view('admin.user.show',compact('users'));
     }
 
     
     public function create()
     {
-       return view('admin.user.add');
+      $cities = City::orderBy('Name','asc')->get();
+       return view('admin.user.add', compact('cities'));
     }
 
     public function store(Request $request)
     {
-      $validated = $request->validate([
+        $validator = Validator::make($request->all(), [
             'email' => 'required|unique:users|max:255',
              'password'=>'required',
              'Role'=>'required',
@@ -38,8 +41,8 @@ class UserController extends Controller
             'city_id'=>$request->city_id,
 
         ]);
-        session()->flash('Add', 'Added successfully.');
-        return redirect()->route('admin.user.show');
+        session()->flash('Add', 'تم إضافة المدير بنجاح');
+        return back();
     }
 
     
@@ -51,14 +54,7 @@ class UserController extends Controller
  
    
   public function update(Request $request, $id)
-  {  
-    $validated = $request->validate([
-    'email' => 'required|unique:users|max:255',
-     'password'=>'required',
-     'Role'=>'required',
-     'city_id'=>'required',
- 
-     ]);
+  {
       $user = User::findOrFail($id);
       $user->update([
         'email'=>$request->email,

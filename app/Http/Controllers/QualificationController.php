@@ -12,12 +12,12 @@ class QualificationController extends Controller
   
     public function indexQualification()
     { 
-         $qualifications = Qualification::orderBy('Name','Asc')->get('Name');
+         $qualifications = Qualification::orderBy('Name','desc')->get('Name');
          return view('admin.occupation.show',compact('qualifications'));
     }
     public function indexSpecialization()
     { 
-         $specializations = Qualification::where('Name','Asc')->get('Specializations');
+         $specializations = Qualification::where('Name','desc')->get('Specializations');
          return view('admin.specialization.show',compact('specializations'));
     }
     
@@ -33,7 +33,7 @@ class QualificationController extends Controller
 
     public function storeQualification(Request $request)
     {
-        $validated = $request->validate([
+        $validator = Validator::make($request->all(), [
             'Name' => 'required|unique:qualifications|max:255',
         ]);
 
@@ -47,7 +47,7 @@ class QualificationController extends Controller
 
     public function storeSpecialization(Request $request)
     {
-        $validated = $request->validate([
+        $validator = Validator::make($request->all(), [
             'parentId'=>'required',
             'Specialization' => 'required|unique:occupations|max:255',
         ]);
@@ -76,11 +76,7 @@ class QualificationController extends Controller
  
    
   public function updateQualification(Request $request, $id)
-  { 
-     $validated = $request->validate([
-    'Name' => 'required|unique:qualifications|max:255',
-     ]);
-
+  {
       $qualification = Qualification::findOrFail($id);
       $qualification->update([
       'Name'=>$request->Name,
@@ -93,10 +89,6 @@ class QualificationController extends Controller
   
        public function updateSpecialization(Request $request, $id)
   {
-    $validated = $request->validate([
-        'parentId'=>'required',
-        'Specialization' => 'required|unique:occupations|max:255',
-    ]);
       $specialization = Qualification::findOrFail($id);
       $specialization->update([
         'parentId'=>$request->parentId,

@@ -32,7 +32,7 @@ class MemberController extends Controller
     { 
         if (optional(auth()->user())->Role == 'admin') 
         {
-            $members = Member::orderBy('Name','Asc')->get();
+            $members = Member::orderBy('Name','desc')->get();
             return view('admin.member.show',compact('members'));
         }
          elseif (optional(auth()->user())->Role == 'manager')
@@ -46,12 +46,12 @@ class MemberController extends Controller
     { 
         if (optional(auth()->user())->Role == 'admin') 
         {
-            $members = Member::orderBy('IDTeam','Asc')->get();
+            $members = Member::orderBy('IDTeam','desc')->get();
             return view('admin.member.show',compact('members'));
         }
          elseif (optional(auth()->user())->Role == 'manager')
           {
-            $members = Member::where('City',auth()->user()->City)->orderBy('IDTeam','Asc')->get();
+            $members = Member::where('City',auth()->user()->City)->orderBy('IDTeam','desc')->get();
             return view('manager.member.show',compact('members'));
          }
     }
@@ -60,12 +60,12 @@ class MemberController extends Controller
    
     if (optional(auth()->user())->Role == 'admin') 
     {
-        $members = Member::orderBy('DateOfJoin','Asc')->get();
+        $members = Member::orderBy('DateOfJoin','desc')->get();
         return view('admin.member.show',compact('members'));
     }
      elseif (optional(auth()->user())->Role == 'manager')
       {
-        $members = Member::where('City',auth()->user()->City)->orderBy('DateOfJoin','Asc')->get();
+        $members = Member::where('City',auth()->user()->City)->orderBy('DateOfJoin','desc')->get();
         return view('manager.member.show',compact('members'));
      }
 
@@ -87,7 +87,7 @@ class MemberController extends Controller
 
     public function store(Request $request)
     {
-        $validated = $request->validate([
+        $validator = Validator::make($request->all(), [
             'NotPad' => 'required|max:255',
             'branch' => 'required',
             'IDTeam' => 'required|unique:members|max:255',
@@ -127,10 +127,9 @@ class MemberController extends Controller
     'City'=>auth()->city_id->Name,
     // 'City' => $user->city->name,
     // 'City' => $user->city->name,
-    //'city'=>Auth::User()->gender()->name,
     'IDNumber' => $request->IDNumber,
     'Gender' => $request->Gender == 'male' ? 'male' : 'female',
-    'Qualification' =>$request->Qualification ,
+    'Qualification' =>$request->Name ,
     'Occupation' => $request->Occupation,
     'MobilePhone' => $request->MobilePhone ,
     'HomeAddress' => $request->HomeAddress ,
@@ -388,20 +387,5 @@ class MemberController extends Controller
 
     return Response::make('CSV file exported successfully.', 200, $headers);
     }
-
-    public function GetCityWithMemberCount($data)
-    {
-   $member =  Member::where('City', $data)->count();
-   
-    return view('admin.index',compact('member'));
-   }
-
-   public function GetCityWithMember($data)
-    {
-   $member =  Member::where('City', $data)->get();
-   
-    return view('admin.show-members',compact('member'));
-   }
- 
 
 }
