@@ -12,7 +12,7 @@ class QualificationController extends Controller
   
     public function indexQualification()
     { 
-         $qualifications = Qualification::orderBy('Name','Asc')->get();
+         $qualifications = Qualification::where('parentId',null)->orderBy('Name','Asc')->get();
          return view('admin.qualification.show',compact('qualifications'));
     }
     public function indexSpecialization()
