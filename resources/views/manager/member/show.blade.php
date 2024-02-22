@@ -33,6 +33,8 @@
 					</div> --}}
 				</div>
 
+
+				{{-- search --}}
 				<div class="row">
 					<div class="col-4">
 						<form action="" method="post">
@@ -44,8 +46,6 @@
 								</div>
 							</div>
 						</form>
-
-
 					</div>
 					<div class="col-4">
 						{{-- <div class="input-group">
@@ -55,7 +55,7 @@
 						  </div>
 						</div> --}}
 
-						<form action="{{ route('search') }}" method="post">
+						{{-- <form action="{{ route('search') }}" method="post">
 							@csrf
 							<div class="input-group">
 								<input class="form-control" placeholder="الاسم" type="search" name="searchTerm">
@@ -63,7 +63,7 @@
 									<button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
 								</div>
 							</div>
-						</form>
+						</form> --}}
  
 					</div>
 					<div class="col-4">

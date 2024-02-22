@@ -58,6 +58,27 @@ Route::middleware(['auth', 'verified', 'admin'])-> prefix('admin')->group(functi
         Route::post('update/{id}', [MemberController::class, 'update'])->name('member.update');
 
         Route::delete('delete/{id}', [MemberController::class, 'destroy'])->name('member.delete');
+
+
+        // search
+        Route::post('team', [MemberController::class, 'searchByIDTeam'])->name('search-team');
+        Route::post('name', [MemberController::class, 'searchByName'])->name('search-name');
+        Route::post('city', [MemberController::class, 'searchByCity'])->name('search-city');
+
+        Route::post('qualification', [MemberController::class, 'searchByQualification'])->name('search-qualification');
+        Route::post('specialization', [MemberController::class, 'searchBySpecialization'])->name('search-specialization');
+        Route::post('occupation', [MemberController::class, 'searchByOccupation'])->name('search-occupation');
+
+
+        //order
+        // Route::get('last', [MemberController::class, 'orderBy_Last'])->name('order-last');
+        Route::get('last', [MemberController::class, 'orderBy_Last'])->name('order-last');
+        Route::get('name', [MemberController::class, 'orderBy_Name'])->name('order-name');
+        Route::get('team', [MemberController::class, 'orderBy_IDTeam'])->name('order-team');
+        Route::get('join', [MemberController::class, 'orderBy_DateOfJoin'])->name('order-join');
+
+
+
     });
 
     //   /user  ===>  manager
@@ -149,7 +170,7 @@ Route::middleware(['auth', 'verified', 'manager'])-> prefix('manager')->group(fu
 
 
         //search
-        Route::post('name', [MemberController::class, 'searchByName'])->name('search');
+        // Route::post('name', [MemberController::class, 'searchByName'])->name('search');
 
 
     });

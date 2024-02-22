@@ -16,15 +16,40 @@
 							<h4 class="content-title mb-0 my-auto">الأعضاء</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ جميع الأعضاء</span>
 						</div>
 					</div>
-					<div class="form-group">
+
+					{{-- <div class="form-group">
 						<label>فرز حسب: </label>
 							<select class="form-control form-control-xl">
-								<option>الأحدث</option>
+
+								<option><a href="{{ route('order-last') }}">الأحدث</a></option>
+							
 								<option>الاسم</option>
 								<option>الرقم الحزبي</option>
 								<option>تاريخ الانتساب</option>
-							</select> 
+							</select> 							
+					</div> --}}
+
+
+					{{-- <div class="form-group">
+						<label>فرز حسب: </label>
+						<select class="form-control form-control-xl" onchange="window.location.href=this.value">
+							<option value="{{ route('order-last', ['order' => 'updated_at']) }}">الأحدث</option>
+							<option value="{{ route('order-last', ['order' => 'FullName']) }}">الاسم</option>
+							<option value="{{ route('order-last', ['order' => 'IDTeam ']) }}">الرقم الحزبي</option>
+							<option value="{{ route('order-last', ['order' => 'DateOfJoin']) }}">تاريخ الانتساب</option>
+						</select>               
+					</div> --}}
+					
+					<div class="form-group">
+						<select class="form-control form-control-xl" onchange="window.location.href=this.value">
+							<option>فرز حسب </option>
+							<option value="{{ route('order-last') }}">الأحدث</option>
+							<option value="{{ route('order-name') }}">الاسم</option>
+							<option value="{{ route('order-team') }}">الرقم الحزبي</option>
+							<option value="{{ route('order-join') }}">تاريخ الانتساب</option>
+						</select>               
 					</div>
+
 					<div class="d-flex my-xl-auto right-content">
 						<a href="" type="button" class="btn btn-primary" style="color: white">&nbsp; تصدير &nbsp;<i class="fas fa-file-upload"></i></a>
 					</div>
@@ -32,6 +57,82 @@
 						<a href="" type="button" class="btn btn-primary" style="color: white">&nbsp; استيراد &nbsp;<i class="fas fa-file-download"></i></a>
 					</div>
 				</div>
+
+
+				{{-- search --}}
+				<div class="row">
+					<div class="col-4">
+						<form action="{{ route('search-team') }}" method="post">
+							@csrf
+							<div class="input-group">
+								<input class="form-control" placeholder="الرقم الحزبي" type="search" name="searchTerm">
+								<div class="input-group-append">
+									<button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
+								</div>
+							</div>
+						</form>
+					</div>
+					<div class="col-4">
+						<form action="{{ route('search-name') }}" method="post">
+							@csrf
+							<div class="input-group">
+								<input class="form-control" placeholder="الاسم" type="search" name="searchTerm">
+								<div class="input-group-append">
+									<button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
+								</div>
+							</div>
+						</form>
+					</div>
+					<div class="col-4">
+						<form action="{{ route('search-city') }}" method="post">
+							@csrf
+							<div class="input-group">
+								<input class="form-control" placeholder="المحافظة" type="search" name="searchTerm">
+								<div class="input-group-append">
+									<button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+				<br>
+				<div class="row">
+					<div class="col-4">
+						<form action="{{ route('search-qualification') }}" method="post">
+							@csrf
+							<div class="input-group">
+								<input class="form-control" placeholder="المؤهل العلمي" type="search" name="searchTerm">
+								<div class="input-group-append">
+									<button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
+								</div>
+							</div>
+						</form>
+					</div>
+					<div class="col-4">
+						<form action="{{ route('search-specialization') }}" method="post">
+							@csrf
+							<div class="input-group">
+								<input class="form-control" placeholder="الاختصاص" type="search" name="searchTerm">
+								<div class="input-group-append">
+									<button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
+								</div>
+							</div>
+						</form>
+					</div>
+					<div class="col-4">
+						<form action="{{ route('search-occupation') }}" method="post">
+							@csrf
+							<div class="input-group">
+								<input class="form-control" placeholder="المهنة" type="search" name="searchTerm">
+								<div class="input-group-append">
+									<button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+				<br>
+
 				<!-- breadcrumb -->
 @endsection
 @section('content')
@@ -99,6 +200,8 @@
 										</thead>
 										<tbody>
 											<?php $i = 1 ?>
+
+											@if(isset($members) && !$members->isEmpty()) {
 											@foreach($members as $member)
 											<tr>
 												<td>{{$i++}}</td>
@@ -139,6 +242,12 @@
 												</td>
 											</tr>
 											@endforeach
+
+										} @else 
+										<tr>
+											<td colspan="20">لم يتم العثور على نتائج</td>
+										</tr>
+										@endif
 										</tbody>
 									</table>
 								</div>
