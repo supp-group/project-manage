@@ -4,11 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Member;
+use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Response;
-
+use Auth;
 class MemberController extends Controller
 {
    
@@ -22,7 +23,8 @@ class MemberController extends Controller
      }
       elseif (optional(auth()->user())->Role == 'manager')
        {
-         $members = Member::where('City',auth()->user()->city_id->Name)->orderBy('updated_at','desc')->get();
+        $city = User::find(auth()->user()->city_id);
+         $members = Member::where('City',$city->Name)->orderBy('updated_at','desc')->get();
          return view('manager.member.show',compact('members'));
       }
     
