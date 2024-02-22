@@ -23,8 +23,18 @@ class MemberController extends Controller
      }
       elseif (optional(auth()->user())->Role == 'manager')
        {
-        $city = User::find(auth()->user()->city_id);
-         $members = Member::where('City',$city->Name)->orderBy('updated_at','desc')->get();
+        $user = auth()->user();
+        $city = User::find($user->city_id);
+        
+        if ($city) {
+            $members = Member::where('City', $city->Name)->orderBy('updated_at', 'desc') ->get();
+        } else {
+           
+         $members = Member::orderBy('updated_at','desc')->get();
+         return view('admin.member.show',compact('members'));
+        }
+        // $city = User::find(auth()->user()->city_id);
+        //  $members = Member::where('City',$city->Name)->orderBy('updated_at','desc')->get();
          return view('manager.member.show',compact('members'));
       }
     
