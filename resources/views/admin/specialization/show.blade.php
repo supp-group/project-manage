@@ -65,7 +65,9 @@
 											<?php $i = 1 ?>
 											@foreach($specializations as $specialization)
 											<tr>
+												
 												<td>{{$i++}}</td>
+												
 												<td>{{$specialization->specialization}}</td>
 												{{-- <td>{{$specialization->parent_name}}</td> --}}
 

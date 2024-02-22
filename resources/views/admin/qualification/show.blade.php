@@ -65,8 +65,9 @@
 											@foreach($qualifications as $qualification)
 											<tr>
 												<td>{{$i++}}</td>
+												
 												<td>{{$qualification->Name}}</td>
-
+                                           
 												<td>
 													<a class="btn btn-sm btn-info" href="{{ route('qualification.edit', $qualification->id) }}" title="تعديل"><i class="las la-pen"></i></a>
 												</td>

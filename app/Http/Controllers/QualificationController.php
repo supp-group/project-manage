@@ -13,13 +13,13 @@ class QualificationController extends Controller
     public function indexQualification()
     { 
 
-         $qualifications = Qualification::whereNull('parentId')->orderBy('Name','Asc')->get();
+         $qualifications = Qualification::whereNotNull('Name')->orderBy('Name','Asc')->get();
          return view('admin.qualification.show',compact('qualifications'));
 
     }
     public function indexSpecialization()
     { 
-         $specializations = Qualification::orderBy('Name','Asc')->get();
+         $specializations = Qualification::whereNotNull('specialization')->orderBy('Name','Asc')->get();
 
          foreach($specializations as  $specialization)
          {
@@ -40,7 +40,7 @@ class QualificationController extends Controller
 
     public function createSpecialization()
     {
-      $qualifications = Qualification::whereNull('parentId')->orderBy('Name','asc')->get('Name');
+      $qualifications = Qualification::whereNotNull('Name')->orderBy('Name','asc')->get('Name');
         // $qualifications = Qualification::where('parentId','=','0')->orderBy('Name','Asc')->get('Name');
         return view('admin.specialization.add', compact('qualifications'));
     }
