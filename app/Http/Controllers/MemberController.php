@@ -22,7 +22,7 @@ class MemberController extends Controller
      }
       elseif (optional(auth()->user())->Role == 'manager')
        {
-         $members = Member::where('City',auth()->user()->City)->orderBy('updated_at','desc')->get();
+         $members = Member::where('City',auth()->user()->city_id->Name)->orderBy('updated_at','desc')->get();
          return view('manager.member.show',compact('members'));
       }
     
@@ -113,6 +113,12 @@ class MemberController extends Controller
             'occupation_id'=>'required'
         ]);
         
+             // store image
+             if($request->hasfile('Image')){
+                $img = $request->file('Image');
+                $img_name = $img->getClientOriginalName();
+                $img->move(public_path('images'), $img_name);
+            }
       
         $member= Member::create([
 
@@ -128,7 +134,7 @@ class MemberController extends Controller
     // 'City' => $user->city->name,
     // 'City' => $user->city->name,
     'IDNumber' => $request->IDNumber,
-    'Gender' => $request->Gender == 'male' ? 'male' : 'female',
+    'Gender' => $request->Gender == 'ذكر' ? 'ذكر' : 'أنثى',
     'Qualification' =>$request->Qualification ,
     'Occupation' => $request->Occupation,
     'MobilePhone' => $request->MobilePhone ,
@@ -138,8 +144,9 @@ class MemberController extends Controller
     'WorkPhone' => $request->MobilePhone ,
     'DateOfJoin' => $request->DateOfJoin ,
     'Specialization' => $request->Specialization ,
-    'Image' => $request->Image ,
-    
+    'Image' => $request->Image->getClientOriginalName(),
+    'qualification_id'=>$request->qualification_id,
+    'occupation_id'=>$request->occupation_id,
     //user
    'user_id'=>auth()->id()
 ]);
@@ -217,7 +224,7 @@ class MemberController extends Controller
     'City'=>$request->City,
     'IDNumber' => $request->IDNumber,
     
-    'Gender' => $request->Gender == 'male' ? 'male' : 'female',
+    'Gender' => $request->Gender == 'ذكر' ? 'ذكر' : 'أنثى',
     'Qualification' => $request->Qualification ,
     'Occupation' => $request->Occupation,
     'MobilePhone' => $request->MobilePhone ,
@@ -228,6 +235,8 @@ class MemberController extends Controller
     'DateOfJoin' => $request->DateOfJoin ,
     'Specialization' => $request->Specialization ,
     'Image' => $request->Image ,
+    'qualification_id'=>$request->qualification_id,
+    'occupation_id'=>$request->occupation_id,
     //user
    'user_id'=>auth()->id()
       ]);
