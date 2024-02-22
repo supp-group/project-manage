@@ -16,29 +16,6 @@
 							<h4 class="content-title mb-0 my-auto">الأعضاء</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ جميع الأعضاء</span>
 						</div>
 					</div>
-
-					{{-- <div class="form-group">
-						<label>فرز حسب: </label>
-							<select class="form-control form-control-xl">
-
-								<option><a href="{{ route('order-last') }}">الأحدث</a></option>
-							
-								<option>الاسم</option>
-								<option>الرقم الحزبي</option>
-								<option>تاريخ الانتساب</option>
-							</select> 							
-					</div> --}}
-
-
-					{{-- <div class="form-group">
-						<label>فرز حسب: </label>
-						<select class="form-control form-control-xl" onchange="window.location.href=this.value">
-							<option value="{{ route('order-last', ['order' => 'updated_at']) }}">الأحدث</option>
-							<option value="{{ route('order-last', ['order' => 'FullName']) }}">الاسم</option>
-							<option value="{{ route('order-last', ['order' => 'IDTeam ']) }}">الرقم الحزبي</option>
-							<option value="{{ route('order-last', ['order' => 'DateOfJoin']) }}">تاريخ الانتساب</option>
-						</select>               
-					</div> --}}
 					
 					<div class="form-group">
 						<select class="form-control form-control-xl" onchange="window.location.href=this.value">
@@ -51,11 +28,19 @@
 					</div>
 
 					<div class="d-flex my-xl-auto right-content">
-						<a href="" type="button" class="btn btn-primary" style="color: white">&nbsp; تصدير &nbsp;<i class="fas fa-file-upload"></i></a>
+						<a href="{{ route('export') }}" type="button" class="btn btn-primary" style="color: white">&nbsp; تصدير &nbsp;<i class="fas fa-file-upload"></i></a>
 					</div>
-                    <div class="d-flex my-xl-auto right-content">
-						<a href="" type="button" class="btn btn-primary" style="color: white">&nbsp; استيراد &nbsp;<i class="fas fa-file-download"></i></a>
-					</div>
+
+                    {{-- <div class="d-flex my-xl-auto right-content">
+						<a href="{{ route('import') }}" type="button" class="btn btn-primary" style="color: white">&nbsp; استيراد &nbsp;<i class="fas fa-file-download"></i></a>
+					</div> --}}
+
+					<form action="{{ route('import') }}" method="POST" enctype="multipart/form-data">
+						@csrf
+						<input type="file" name="file" accept=".csv">
+						<button type="submit" class="btn btn-primary" style="color: white">&nbsp; استيراد &nbsp;<i class="fas fa-file-download"></i></button>
+					</form>
+
 				</div>
 
 

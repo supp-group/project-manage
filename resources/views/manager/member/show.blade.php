@@ -16,17 +16,19 @@
 							<h4 class="content-title mb-0 my-auto">الأعضاء</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ جميع الأعضاء</span>
 						</div>
 					</div>
+				
 					<div class="form-group">
-						<label>فرز حسب: </label>
-							<select class="form-control form-control-xl">
-								<option>الأحدث</option>
-								<option>الاسم</option>
-								<option>الرقم الحزبي</option>
-								<option>تاريخ الانتساب</option>
-							</select> 
+						<select class="form-control form-control-xl" onchange="window.location.href=this.value">
+							<option>فرز حسب </option>
+							<option value="{{ route('order-m-last') }}">الأحدث</option>
+							<option value="{{ route('order-m-name') }}">الاسم</option>
+							<option value="{{ route('order-m-team') }}">الرقم الحزبي</option>
+							<option value="{{ route('order-m-join') }}">تاريخ الانتساب</option>
+						</select>               
 					</div>
+
 					<div class="d-flex my-xl-auto right-content">
-						<a href="" type="button" class="btn btn-primary" style="color: white">&nbsp; تصدير &nbsp;<i class="fas fa-file-upload"></i></a>
+						<a href="{{ route('exportm') }}" type="button" class="btn btn-primary" style="color: white">&nbsp; تصدير &nbsp;<i class="fas fa-file-upload"></i></a>
 					</div>
                     {{-- <div class="d-flex my-xl-auto right-content">
 						<a href="" type="button" class="btn btn-primary" style="color: white">&nbsp; استيراد &nbsp;<i class="fas fa-file-download"></i></a>
@@ -37,25 +39,18 @@
 				{{-- search --}}
 				<div class="row">
 					<div class="col-4">
-						<form action="" method="post">
+						<form action="{{ route('search-m-team') }}" method="post">
 							@csrf
 							<div class="input-group">
-								<input class="form-control" placeholder="الرقم الحزبي" type="search">
+								<input class="form-control" placeholder="الرقم الحزبي" type="search" name="searchTerm">
 								<div class="input-group-append">
-								  <span class="input-group-text"><i class="fas fa-search"></i></span>
+									<button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
 								</div>
 							</div>
 						</form>
 					</div>
 					<div class="col-4">
-						{{-- <div class="input-group">
-						  <input class="form-control" placeholder="الاسم" type="search">
-						  <div class="input-group-append">
-							<span class="input-group-text"><i class="fas fa-search"></i></span>
-						  </div>
-						</div> --}}
-
-						{{-- <form action="{{ route('search') }}" method="post">
+						<form action="{{ route('search-m-name') }}" method="post">
 							@csrf
 							<div class="input-group">
 								<input class="form-control" placeholder="الاسم" type="search" name="searchTerm">
@@ -63,46 +58,48 @@
 									<button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
 								</div>
 							</div>
-						</form> --}}
- 
+						</form>
 					</div>
 					<div class="col-4">
-						<div class="input-group">
-						  <input class="form-control" placeholder="المحافظة" type="search">
-						  <div class="input-group-append">
-							<span class="input-group-text"><i class="fas fa-search"></i></span>
-						  </div>
-						</div>
+						<form action="{{ route('search-m-occupation') }}" method="post">
+							@csrf
+							<div class="input-group">
+								<input class="form-control" placeholder="المهنة" type="search" name="searchTerm">
+								<div class="input-group-append">
+									<button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
+								</div>
+							</div>
+						</form>
 					</div>
 				</div>
 				<br>
 				<div class="row">
 					<div class="col-4">
-						<div class="input-group">
-						  <input class="form-control" placeholder="المؤهل العلمي" type="search">
-						  <div class="input-group-append">
-							<span class="input-group-text"><i class="fas fa-search"></i></span>
-						  </div>
-						</div>
+						<form action="{{ route('search-m-qualification') }}" method="post">
+							@csrf
+							<div class="input-group">
+								<input class="form-control" placeholder="المؤهل العلمي" type="search" name="searchTerm">
+								<div class="input-group-append">
+									<button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
+								</div>
+							</div>
+						</form>
 					</div>
 					<div class="col-4">
-						<div class="input-group">
-						  <input class="form-control" placeholder="الاختصاص" type="search">
-						  <div class="input-group-append">
-							<span class="input-group-text"><i class="fas fa-search"></i></span>
-						  </div>
-						</div>
+						<form action="{{ route('search-m-specialization') }}" method="post">
+							@csrf
+							<div class="input-group">
+								<input class="form-control" placeholder="الاختصاص" type="search" name="searchTerm">
+								<div class="input-group-append">
+									<button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
+								</div>
+							</div>
+						</form>
 					</div>
-					<div class="col-4">
-						<div class="input-group">
-						  <input class="form-control" placeholder="المهنة" type="search">
-						  <div class="input-group-append">
-							<span class="input-group-text"><i class="fas fa-search"></i></span>
-						  </div>
-						</div>
-					</div>
+		
 				</div>
 				<br>
+
 				<!-- breadcrumb -->
 @endsection
 @section('content')

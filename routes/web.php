@@ -47,6 +47,12 @@ Route::middleware(['auth', 'verified', 'admin'])-> prefix('admin')->group(functi
 
 
 
+    //Excel
+    Route::post('/import', [MemberController::class, 'import'])->name('import');
+    Route::get('/export', [MemberController::class, 'export'])->name('export');
+
+
+
     //   /member
     Route:: prefix('member')->group(function () {
 
@@ -71,13 +77,10 @@ Route::middleware(['auth', 'verified', 'admin'])-> prefix('admin')->group(functi
 
 
         //order
-        // Route::get('last', [MemberController::class, 'orderBy_Last'])->name('order-last');
         Route::get('last', [MemberController::class, 'orderBy_Last'])->name('order-last');
         Route::get('name', [MemberController::class, 'orderBy_Name'])->name('order-name');
         Route::get('team', [MemberController::class, 'orderBy_IDTeam'])->name('order-team');
         Route::get('join', [MemberController::class, 'orderBy_DateOfJoin'])->name('order-join');
-
-
 
     });
 
@@ -156,6 +159,11 @@ Route::middleware(['auth', 'verified', 'manager'])-> prefix('manager')->group(fu
     //index
     Route::get('', [AdminController::class, 'index']);
 
+
+    //Excel
+    Route::get('/export', [MemberController::class, 'export'])->name('exportm');
+
+
     //   /memberm
     Route:: prefix('memberm')->group(function () {
 
@@ -169,9 +177,20 @@ Route::middleware(['auth', 'verified', 'manager'])-> prefix('manager')->group(fu
         Route::delete('delete/{id}', [MemberController::class, 'destroy'])->name('memberm.delete');
 
 
-        //search
-        // Route::post('name', [MemberController::class, 'searchByName'])->name('search');
+        // search
+        Route::post('team', [MemberController::class, 'searchByIDTeam'])->name('search-m-team');
+        Route::post('name', [MemberController::class, 'searchByName'])->name('search-m-name');
 
+        Route::post('qualification', [MemberController::class, 'searchByQualification'])->name('search-m-qualification');
+        Route::post('specialization', [MemberController::class, 'searchBySpecialization'])->name('search-m-specialization');
+        Route::post('occupation', [MemberController::class, 'searchByOccupation'])->name('search-m-occupation');
+
+
+        //order
+        Route::get('last', [MemberController::class, 'orderBy_Last'])->name('order-m-last');
+        Route::get('name', [MemberController::class, 'orderBy_Name'])->name('order-m-name');
+        Route::get('team', [MemberController::class, 'orderBy_IDTeam'])->name('order-m-team');
+        Route::get('join', [MemberController::class, 'orderBy_DateOfJoin'])->name('order-m-join');
 
     });
 

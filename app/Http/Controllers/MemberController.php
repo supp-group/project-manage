@@ -25,11 +25,11 @@ class MemberController extends Controller
         $city = User::find($user->city_id);
         
         if ($city) {
-            $members = Member::where('City', $city->Name)->orderBy('updated_at', 'desc') ->get();
+            $members = Member::where('City', 'حلب')->orderBy('created_at', 'desc') ->get();
         } else {
            
-         $members = Member::orderBy('updated_at','desc')->get();
-         return view('admin.member.show',compact('members'));
+         $members = Member::orderBy('created_at','desc')->get();
+         return view('manager.member.show',compact('members'));
         }
         // $city = User::find(auth()->user()->city_id);
         //  $members = Member::where('City',$city->Name)->orderBy('updated_at','desc')->get();
@@ -55,32 +55,9 @@ class MemberController extends Controller
          if ($city) {
              $members = Member::where('City', $city->Name)->orderBy('created_at', 'desc') ->get();
                 } 
-          return view('admin.member.show',compact('members'));
+          return view('manager.member.show',compact('members'));
          }
     }
-
-
-    // public function orderBy_Last($order)
-    // { 
-    //     if (optional(auth()->user())->Role == 'admin') 
-    //     {
-    //         $members = Member::orderBy($order, 'desc')->get();
-            
-    //         return view('admin.member.show', compact('members'));
-    //     }
-    //     elseif (optional(auth()->user())->Role == 'manager')
-    //     {
-    //         $user = auth()->user();
-    //         $city = User::find($user->city_id);
-            
-    //         if ($city) {
-    //             $members = Member::where('City', $city->Name)->orderBy($order, 'desc')->get();
-    //         } 
-    //         return view('admin.member.show', compact('members'));
-    //     }
-    // }
-    
-
 
 
     public function orderBy_Name()
@@ -98,7 +75,7 @@ class MemberController extends Controller
          if ($city) {
              $members = Member::where('City', $city->Name)->orderBy('FullName', 'Asc') ->get();
                 } 
-          return view('admin.member.show',compact('members'));
+          return view('manager.member.show',compact('members'));
     }
 }
 
@@ -117,7 +94,7 @@ class MemberController extends Controller
          if ($city) {
              $members = Member::where('City', $city->Name)->orderBy('IDTeam', 'Asc') ->get();
                 } 
-          return view('admin.member.show',compact('members'));
+          return view('manager.member.show',compact('members'));
     }
     }
      public function orderBy_DateOfJoin()
@@ -136,7 +113,7 @@ class MemberController extends Controller
          if ($city) {
              $members = Member::where('City', $city->Name)->orderBy('DateOfJoin', 'Asc') ->get();
                 } 
-          return view('admin.member.show',compact('members'));
+          return view('manager.member.show',compact('members'));
     }
 
     }
@@ -487,14 +464,14 @@ class MemberController extends Controller
             $members = Member::all();
         }
     
-    $csvFileName = 'posts.csv';
+    $csvFileName = 'Members.csv';
     $headers = [
         'Content-Type' => 'text/csv',
         'Content-Disposition' => 'attachment; filename="' . $csvFileName . '"',
     ];
 
     $handle = fopen('php://output', 'w');
-    fputcsv($handle, ['NotPad', 'branch','IDTeam','FullName','MotherName','PlaceOfBirth','BirthDate','Constraint',
+    fputcsv($handle, ['ملاحظات', 'branch','IDTeam','FullName','MotherName','PlaceOfBirth','BirthDate','Constraint',
             'City','IDNumber','Gender','Qualification','Occupation','MobilePhone','HomeAddress','WorkAddress',
             'HomePhone','WorkPhone','DateOfJoin','Specialization','Image']); // Add more headers as needed
 
