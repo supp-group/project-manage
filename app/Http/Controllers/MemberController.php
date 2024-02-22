@@ -25,11 +25,11 @@ class MemberController extends Controller
         $city = User::find($user->city_id);
         
         if ($city) {
-            $members = Member::where('City', 'حلب')->orderBy('created_at', 'desc') ->get();
+            $members = Member::where('City', $city->Name)->orderBy('updated_at', 'desc') ->get();
         } else {
            
-         $members = Member::orderBy('created_at','desc')->get();
-         return view('manager.member.show',compact('members'));
+         $members = Member::orderBy('updated_at','desc')->get();
+         return view('admin.member.show',compact('members'));
         }
         // $city = User::find(auth()->user()->city_id);
         //  $members = Member::where('City',$city->Name)->orderBy('updated_at','desc')->get();
@@ -55,9 +55,32 @@ class MemberController extends Controller
          if ($city) {
              $members = Member::where('City', $city->Name)->orderBy('created_at', 'desc') ->get();
                 } 
-          return view('manager.member.show',compact('members'));
+          return view('admin.member.show',compact('members'));
          }
     }
+
+
+    // public function orderBy_Last($order)
+    // { 
+    //     if (optional(auth()->user())->Role == 'admin') 
+    //     {
+    //         $members = Member::orderBy($order, 'desc')->get();
+            
+    //         return view('admin.member.show', compact('members'));
+    //     }
+    //     elseif (optional(auth()->user())->Role == 'manager')
+    //     {
+    //         $user = auth()->user();
+    //         $city = User::find($user->city_id);
+            
+    //         if ($city) {
+    //             $members = Member::where('City', $city->Name)->orderBy($order, 'desc')->get();
+    //         } 
+    //         return view('admin.member.show', compact('members'));
+    //     }
+    // }
+    
+
 
 
     public function orderBy_Name()
@@ -75,7 +98,7 @@ class MemberController extends Controller
          if ($city) {
              $members = Member::where('City', $city->Name)->orderBy('FullName', 'Asc') ->get();
                 } 
-          return view('manager.member.show',compact('members'));
+          return view('admin.member.show',compact('members'));
     }
 }
 
@@ -94,7 +117,7 @@ class MemberController extends Controller
          if ($city) {
              $members = Member::where('City', $city->Name)->orderBy('IDTeam', 'Asc') ->get();
                 } 
-          return view('manager.member.show',compact('members'));
+          return view('admin.member.show',compact('members'));
     }
     }
      public function orderBy_DateOfJoin()
@@ -113,7 +136,7 @@ class MemberController extends Controller
          if ($city) {
              $members = Member::where('City', $city->Name)->orderBy('DateOfJoin', 'Asc') ->get();
                 } 
-          return view('manager.member.show',compact('members'));
+          return view('admin.member.show',compact('members'));
     }
 
     }
@@ -452,6 +475,47 @@ class MemberController extends Controller
     return redirect()->back()->with('success', 'CSV file imported successfully.');
     }
 
+//     public function export()
+//     {
+//         $data = session('searchData');
+//         if ($data) {
+//             $members = Member::contains('Name', $data)Member::contains('IDTeam', $data)
+//             Member::contains('Qualification', $data)Member::contains('Specialization', $data)
+//             $members =  Member::contains('City', $data)||Member::contains('Occupation', $data) ->get(); // تغيير Name إلى الحقل المناسب
+//         } else {
+//             $members = Member::all();
+//         }
+    
+//     $csvFileName = 'posts.csv';
+//     $headers = [
+//         'Content-Type' => 'text/csv',
+//         'Content-Disposition' => 'attachment; filename="' . $csvFileName . '"',
+//     ];
+
+//     $handle = fopen('php://output', 'w');
+//     fputcsv($handle, ['NotPad', 'branch','IDTeam','FullName','MotherName','PlaceOfBirth','BirthDate','Constraint',
+//             'City','IDNumber','Gender','Qualification','Occupation','MobilePhone','HomeAddress','WorkAddress',
+//             'HomePhone','WorkPhone','DateOfJoin','Specialization','Image']); // Add more headers as needed
+
+//     foreach ($members as $member) {
+//         fputcsv($handle, [$member->NotPad, $member->branch,$member->IDTeam,$member->FullName,$member->MotherName,
+//         $member->PlaceOfBirth, $member->BirthDate,$member->Constraint,$member->City,$member->IDNumber,
+//         $member->Gender, $member->Qualification,$member->Occupation,$member->MobilePhone,$member->HomeAddress,
+//         $member->WorkAddress, $member->HomePhone,$member->WorkPhone,$member->DateOfJoin,$member->Specialization,
+//         $member->Image]); // Add more fields as needed
+//     }
+
+//     fclose($handle);
+
+//     return Response::make('CSV file exported successfully.', 200, $headers);
+//     }
+
+//     public function GetCityWithMemberCount($data)
+//     {
+//    $member =  Member::where('City', $data)->count();
+   
+//     return view('admin.index',compact('member'));
+//    }
 
 function exportDataToCSV($members) {
     $filename = "members.csv";
