@@ -12,8 +12,10 @@ class QualificationController extends Controller
   
     public function indexQualification()
     { 
-        $qualifications = Qualification::where('parentId','<',0)->orderBy('Name','Asc')->get();
-        return view('admin.qualification.show',compact('qualifications'));
+
+         $qualifications = Qualification::whereNull('parentId')->orderBy('Name','Asc')->get();
+         return view('admin.qualification.show',compact('qualifications'));
+
     }
     public function indexSpecialization()
     { 
@@ -38,7 +40,8 @@ class QualificationController extends Controller
 
     public function createSpecialization()
     {
-        $qualifications = Qualification::where('parentId','=','0')->orderBy('Name','Asc')->get('Name');
+      $qualifications = Qualification::whereNull('parentId')->orderBy('Name','asc')->get('Name');
+        // $qualifications = Qualification::where('parentId','=','0')->orderBy('Name','Asc')->get('Name');
         return view('admin.specialization.add', compact('qualifications'));
     }
 
