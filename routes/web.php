@@ -22,7 +22,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 Route::get('/dashboard', function () {
@@ -42,6 +42,10 @@ Route::middleware(['auth', 'verified', 'admin'])-> prefix('admin')->group(functi
 
     //index
     Route::get('', [AdminController::class, 'index']);
+
+    Route::get('show-members', [MemberController::class, 'index']);
+
+
 
     //   /member
     Route:: prefix('member')->group(function () {
@@ -121,6 +125,34 @@ Route::middleware(['auth', 'verified', 'admin'])-> prefix('admin')->group(functi
         Route::delete('delete/{id}', [QualificationController::class, 'destroySpecialization'])->name('specialization.delete');
     });
 
+});
+
+
+
+// Manager Routes
+Route::middleware(['auth', 'verified', 'manager'])-> prefix('manager')->group(function () {
+
+    //index
+    Route::get('', [AdminController::class, 'index']);
+
+    //   /memberm
+    Route:: prefix('memberm')->group(function () {
+
+        Route::get('show', [MemberController::class, 'index']);
+        Route::get('add', [MemberController::class, 'create']);
+        Route::post('save', [MemberController::class, 'store'])->name('memberm.save');
+    
+        Route::get('edit/{id}', [MemberController::class, 'edit'])->name('memberm.edit');
+        Route::post('update/{id}', [MemberController::class, 'update'])->name('memberm.update');
+
+        Route::delete('delete/{id}', [MemberController::class, 'destroy'])->name('memberm.delete');
+
+
+        //search
+        Route::post('name', [MemberController::class, 'searchByName'])->name('search');
+
+
+    });
 
 });
 

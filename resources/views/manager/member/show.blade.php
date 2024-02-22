@@ -32,6 +32,77 @@
 						<a href="" type="button" class="btn btn-primary" style="color: white">&nbsp; استيراد &nbsp;<i class="fas fa-file-download"></i></a>
 					</div> --}}
 				</div>
+
+				<div class="row">
+					<div class="col-4">
+						<form action="" method="post">
+							@csrf
+							<div class="input-group">
+								<input class="form-control" placeholder="الرقم الحزبي" type="search">
+								<div class="input-group-append">
+								  <span class="input-group-text"><i class="fas fa-search"></i></span>
+								</div>
+							</div>
+						</form>
+
+
+					</div>
+					<div class="col-4">
+						{{-- <div class="input-group">
+						  <input class="form-control" placeholder="الاسم" type="search">
+						  <div class="input-group-append">
+							<span class="input-group-text"><i class="fas fa-search"></i></span>
+						  </div>
+						</div> --}}
+
+						<form action="{{ route('search') }}" method="post">
+							@csrf
+							<div class="input-group">
+								<input class="form-control" placeholder="الاسم" type="search" name="searchTerm">
+								<div class="input-group-append">
+									<button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
+								</div>
+							</div>
+						</form>
+ 
+					</div>
+					<div class="col-4">
+						<div class="input-group">
+						  <input class="form-control" placeholder="المحافظة" type="search">
+						  <div class="input-group-append">
+							<span class="input-group-text"><i class="fas fa-search"></i></span>
+						  </div>
+						</div>
+					</div>
+				</div>
+				<br>
+				<div class="row">
+					<div class="col-4">
+						<div class="input-group">
+						  <input class="form-control" placeholder="المؤهل العلمي" type="search">
+						  <div class="input-group-append">
+							<span class="input-group-text"><i class="fas fa-search"></i></span>
+						  </div>
+						</div>
+					</div>
+					<div class="col-4">
+						<div class="input-group">
+						  <input class="form-control" placeholder="الاختصاص" type="search">
+						  <div class="input-group-append">
+							<span class="input-group-text"><i class="fas fa-search"></i></span>
+						  </div>
+						</div>
+					</div>
+					<div class="col-4">
+						<div class="input-group">
+						  <input class="form-control" placeholder="المهنة" type="search">
+						  <div class="input-group-append">
+							<span class="input-group-text"><i class="fas fa-search"></i></span>
+						  </div>
+						</div>
+					</div>
+				</div>
+				<br>
 				<!-- breadcrumb -->
 @endsection
 @section('content')
@@ -93,26 +164,53 @@
 												<th class="wd-15p border-bottom-0">هاتف العمل</th>
 												<th class="wd-15p border-bottom-0">تاريخ الانتساب</th>
 												<th class="wd-15p border-bottom-0">الصورة</th>
-												<th class="wd-15p border-bottom-0">العمليات</th>
+												<th class="wd-15p border-bottom-0">تعديل</th>
+												<th class="wd-15p border-bottom-0">حذف</th>
 											</tr>
 										</thead>
-										{{-- <tbody>
-											<!-- ?php $i = 1 ?> -->
+										<tbody>
+											<?php $i = 1 ?>
 											@foreach($members as $member)
 											<tr>
 												<td>{{$i++}}</td>
-												<td>{{$member->name}}</td>
+												<td>{{$member->NotPad}}</td>
+												<td>{{$member->branch}}</td>
+												<td>{{$member->IDTeam}}</td>
+												<td>{{$member->FullName}}</td>
+												<td>{{$member->MotherName}}</td>
+												<td>{{$member->PlaceOfBirth}}</td>
+												<td>{{$member->BirthDate}}</td>
+												<td>{{$member->Constraint}}</td>
+												<td>{{$member->City}}</td>
+												<td>{{$member->IDNumber}}</td>
+												<td>{{$member->Gender}}</td>
+
+												<td>{{$member->Qualification}}</td>
+												<td>{{$member->Specialization}}</td>
+												<td>{{$member->Occupation}}</td>
+												<td>{{$member->MobilePhone}}</td>
+												<td>{{$member->HomeAddress}}</td>
+												<td>{{$member->WorkAddress}}</td>
+												<td>{{$member->HomePhone}}</td>
+												<td>{{$member->WorkPhone}}</td>
+												<td>{{$member->DateOfJoin}}</td>
+												<td>{{$member->Image}}</td>
 
 												<td>
-													<a class="btn btn-sm btn-info" href="{{ route('user.edit', $user->id) }}" title="تعديل"><i class="las la-pen"></i></a>
-
-													<a class="modal-effect btn btn-sm btn-danger" data-effect="effect-scale"
-                                                	data-id="{{ $user->id }}" data-title="{{ $user->name }}" data-toggle="modal"
-                                                	href="#modaldemo9" title="حذف"><i class="las la-trash"></i></a>
+													<a class="btn btn-sm btn-info" href="{{ route('memberm.edit', $member->id) }}" title="تعديل"><i class="las la-pen"></i></a>
+												</td>
+												<td>
+													<form action={{ route('memberm.delete', $member->id) }} method="post">
+														{{method_field('delete')}}
+														{{csrf_field()}}
+														<button class="modal-effect btn btn-sm btn-danger" data-effect="effect-scale"
+														data-id="{{ $member->id }}" data-title="{{ $member->FullName }}" data-toggle="modal"
+														href="#modaldemo9" title="حذف"><i class="las la-trash"></i></button>
+													</form>	
 												</td>
 											</tr>
 											@endforeach
-										</tbody> --}}
+										</tbody>
 									</table>
 								</div>
 							</div>
@@ -121,10 +219,6 @@
 					<!--/div-->
 				</div>
 				<!-- /row -->
-			</div>
-			<!-- Container closed -->
-		</div>
-		<!-- main-content closed -->
 @endsection
 @section('js')
 <!-- Internal Data tables -->

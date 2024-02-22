@@ -114,7 +114,7 @@ class MemberController extends Controller
         ]);
         
       
-        $member= Member::create([
+    $member= Member::create([
 
     'NotPad'=>$request->NotPad,
     'branch'=>$request->branch,
@@ -259,10 +259,11 @@ class MemberController extends Controller
        }
     }
 
-     public function searchByName($data)
+     public function searchByName(Request $request)
     {
-        
-   $members =  Member::contains('Name', $data);
+        $searchTerm = $request->input('searchTerm');
+
+   $members =  Member::contains('Name', $searchTerm);
    if ( auth()->user()->Role == 'admin')
    {
     return view('admin.member.show',compact('member'));

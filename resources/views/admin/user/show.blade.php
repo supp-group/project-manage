@@ -56,7 +56,7 @@
 											<tr>
 												<th class="wd-15p border-bottom-0">#</th>
 												<th class="wd-15p border-bottom-0">البريد الإلكتروني</th>
-												<th class="wd-15p border-bottom-0">كلمة المرور</th>
+												{{-- <th class="wd-15p border-bottom-0">كلمة المرور</th> --}}
 												<th class="wd-15p border-bottom-0">الدور</th>
 												<th class="wd-15p border-bottom-0">المحافظة</th>
 												{{-- <th class="wd-15p border-bottom-0">الفرع</th> --}}
@@ -70,10 +70,18 @@
 											<tr>
 												<td>{{$i++}}</td>
 												<td>{{$user->email}}</td>
-												<td>{{$user->password}}</td>
+												{{-- <td>{{$user->password}}</td> --}}
 												<td>{{$user->Role}}</td>
-												<td>{{$user->city_id}}</td>
+												{{-- <td>{{ App\Models\City::find($user->city_id)->Name }}</td> --}}
 
+												<td>
+													@if($city = App\Models\City::find($user->city_id))
+														{{ $city->Name }}
+													@else
+														{{-- City Not Found --}}
+													@endif
+												</td>
+												
 												<td>
 													<a class="btn btn-sm btn-info" href="{{ route('user.edit', $user->id) }}" title="تعديل"><i class="las la-pen"></i></a>
 												</td>
@@ -96,38 +104,7 @@
 					</div>
 					<!--/div-->
 				</div>
-				<!-- /row -->
-			</div>
-			<!-- Container closed -->
-		</div>
-		<!-- main-content closed -->
-
-
-
-<!-- delete -->
-{{-- <div class="modal" id="modaldemo9">
-	<div class="modal-dialog modal-dialog-centered" role="document">
-		<div class="modal-content modal-content-demo">
-			<div class="modal-header">
-				<h6 class="modal-title">حذف العضو</h6><button aria-label="Close" class="close" data-dismiss="modal"
-					type="button"><span aria-hidden="true">&times;</span></button>
-			</div>
-			<form action={{ route('member.delete', $member->id) }} method="post">
-				{{method_field('delete')}}
-				{{csrf_field()}}
-				<div class="modal-body">
-					<p>هل أنت متأكد من عملية الحذف؟</p><br>
-					<input type="hidden" name="id" id="id">
-					<input class="form-control" name="FullName" id="FullName" type="text" readonly>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-dismiss="modal">إلغاء</button>
-					<button type="submit" class="btn btn-danger">تأكيد</button>
-				</div>
-		</div>
-		</form>
-	</div>
-</div>		 --}}
+			<!-- /row -->
 
 @endsection
 @section('js')

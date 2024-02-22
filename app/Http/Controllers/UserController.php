@@ -8,8 +8,8 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-use Illuminate\Support\Facades\Crypt;
-use Illuminate\Contracts\Encryption\DecryptException;
+// use Illuminate\Support\Facades\Crypt;
+// use Illuminate\Contracts\Encryption\DecryptException;
 
 class UserController extends Controller
 {
@@ -30,18 +30,16 @@ class UserController extends Controller
     public function store(Request $request)
     {
       $validated = $request->validate([
-
-            'email' => 'required|unique:users|max:255',
-             'password'=>'required',
-             'Role'=>'required',
-             'city_id'=>'required',
-
-        ]);
+        'email' => 'required|unique:users|max:255',
+        'password'=>'required',
+        'Role'=>'required',
+        'city_id'=>'required',
+      ]);
 
         User::create([
             'email'=>$request->email,
-            // 'password'=>$request->password,
-            'password' => Crypt::decryptString($request->password),
+            'password'=>$request->password,
+            // 'password' => Crypt::decryptString($request->password),
             'Role'=>$request->Role,
             'city_id'=>$request->city_id,
         ]);

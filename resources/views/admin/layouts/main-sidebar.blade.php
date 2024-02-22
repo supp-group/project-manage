@@ -16,7 +16,13 @@
 						</div>
 						<div class="user-info">
 							<h4 class="font-weight-semibold mt-3 mb-0">{{Auth::user()->email}}</h4>
-							<span class="mb-0 text-muted">{{Auth::user()->City}}</span>
+							<span class="mb-0 text-muted">
+								@if($city = App\Models\City::find(Auth::user()->city_id))
+									{{ $city->Name }}
+								@else
+									{{-- City Not Found --}}
+								@endif
+							</span>
 						</div>
 					</div>
 				</div>
@@ -83,6 +89,15 @@
 							<li><a class="slide-item" href="{{ url('/admin/occupation/show') }}">جميع المهن</a></li>
 							<li><a class="slide-item" href="{{ url('/admin/occupation/add') }}">إضافة مهنة</a></li>
 						</ul>
+					</li>
+
+					<li class="slide">
+						<a class="side-menu__item" data-toggle="slide" href="{{ route('logout') }}"
+						onclick="event.preventDefault();document.getElementById('logout-form').submit();"><i
+						class="bx bx-log-out"></i>تسجيل خروج</a>
+						<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+						@csrf
+						</form>
 					</li>
 
 				</ul>

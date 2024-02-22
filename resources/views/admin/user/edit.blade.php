@@ -59,8 +59,7 @@
 										<div class="col">
 											<label for="inputName" class="control-label">كلمة المرور</label>
 											<input type="hidden" name="password" value="{{ $user->password }}">
-											<input type="text" class="form-control" id="inputName" name="password"
-											value="{{ $user->password }}" required>
+											<input type="text" class="form-control" id="inputName" name="password" required>
 										</div>
 									</div><br>
 
