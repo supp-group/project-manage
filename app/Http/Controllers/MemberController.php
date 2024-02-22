@@ -592,9 +592,7 @@ function exportDataToCSV() {
 
     return Response::make('CSV file exported successfully.', 200, $headers);
     
-
 }
-
 
 
 
