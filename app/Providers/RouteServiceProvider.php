@@ -18,15 +18,6 @@ class RouteServiceProvider extends ServiceProvider
      * @var string
      */
 
-    //  public const HOME = '';
-
-    //  if (optional(auth()->user())->Role == 'admin') {
-    //     HOME = '/admin';
-
-    // } else{
-    //     HOME = '/manager';
-    // }
-
     public const HOME = '/dashboard';
 
     /**

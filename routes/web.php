@@ -49,7 +49,7 @@ Route::middleware(['auth', 'verified', 'admin'])-> prefix('admin')->group(functi
 
     //Excel
     Route::post('/import', [MemberController::class, 'import'])->name('import');
-    Route::get('/export', [MemberController::class, 'export'])->name('export');
+    Route::get('/export', [MemberController::class, 'exportDataToCSV'])->name('export');
 
 
 
@@ -161,7 +161,7 @@ Route::middleware(['auth', 'verified', 'manager'])-> prefix('manager')->group(fu
 
 
     //Excel
-    Route::get('/export', [MemberController::class, 'export'])->name('exportm');
+    Route::get('/export', [MemberController::class, 'exportDataToCSV'])->name('exportm');
 
 
     //   /memberm
