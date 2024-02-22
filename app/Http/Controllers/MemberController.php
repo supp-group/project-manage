@@ -416,4 +416,19 @@ class MemberController extends Controller
     return Response::make('CSV file exported successfully.', 200, $headers);
     }
 
+    public function GetCityWithMemberCount($data)
+    {
+   $member =  Member::where('City', $data)->count();
+   
+    return view('admin.index',compact('member'));
+   }
+
+
+  public function GetCityWithMember($data)
+   {
+  $member =  Member::where('City', $data)->get();
+  
+   return view('admin.show-members',compact('member'));
+  }
+
 }
