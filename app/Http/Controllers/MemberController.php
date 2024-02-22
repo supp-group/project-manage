@@ -453,18 +453,6 @@ class MemberController extends Controller
     }
 
 
-//     public function export()
-//     {
-//         $data = session('searchData');
-//         if ($data) {
-//             $members = Member::contains('Name', $data)||Member::contains('IDTeam', $data)||
-//             Member::contains('Qualification', $data)||Member::contains('Specialization', $data)||
-//             $members =  Member::contains('City', $data)||Member::contains('Occupation', $data) ->get(); // تغيير Name إلى الحقل المناسب
-//         } else {
-//             $members = Member::all();
-//         }
-    
-
 function exportDataToCSV($members) {
     $filename = "members.csv";
     $handle = fopen($filename, 'w');
@@ -492,7 +480,6 @@ function exportDataToCSV($members) {
         ' الاختصاص',
         'رابط الصورة',
     ]);
->>>>>>> d4dbde12bafd51ef352fc434a9c2cdd0bbea1ef4
 
     foreach ($members as $member) {
         $row = [
