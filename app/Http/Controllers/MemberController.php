@@ -480,8 +480,8 @@ class MemberController extends Controller
 //         $data = session('searchData');
 //         if ($data) {
 //             $members = Member::contains('Name', $data)||Member::contains('IDTeam', $data)
-//             ||Member::contains('Qualification', $data)||Member::contains('Specialization', $data)
-//             ||Member::contains('City', $data)||Member::contains('Occupation', $data) ->get(); // تغيير Name إلى الحقل المناسب
+//            || Member::contains('Qualification', $data)||Member::contains('Specialization', $data)
+//              Member::contains('City', $data)||Member::contains('Occupation', $data) ->get(); // تغيير Name إلى الحقل المناسب
 //         } else {
 //             $members = Member::all();
 //         }
@@ -517,17 +517,7 @@ class MemberController extends Controller
 //     return view('admin.index',compact('member'));
 //    }
 
-function exportDataToCSV() {
-
-    $data = session('searchData');
-            if ($data) {
-                $members = Member::contains('Name', $data)||Member::contains('IDTeam', $data)
-                ||Member::contains('Qualification', $data)||Member::contains('Specialization', $data)
-                ||Member::contains('City', $data)||Member::contains('Occupation', $data) ->get(); // تغيير Name إلى الحقل المناسب
-            } else {
-                $members = Member::all();
-            }
-
+function exportDataToCSV($members) {
     $filename = "members.csv";
     $handle = fopen($filename, 'w');
 
@@ -589,10 +579,6 @@ function exportDataToCSV() {
     }
 
     fclose($handle);
-
-    return Response::make('CSV file exported successfully.', 200, $headers);
-    
-
 }
 
 
