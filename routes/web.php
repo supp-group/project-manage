@@ -56,7 +56,7 @@ Route::middleware(['auth', 'verified', 'admin'])-> prefix('admin')->group(functi
 
     Route::get('show-members', [MemberController::class, 'index']);
 
-    Route::get('/getCount', [MemberController::class, 'GetCityWithMemberCount'])->name('getCount');
+    // Route::get('/getCount', [MemberController::class, 'GetCityWithMemberCount'])->name('getCount');
 
 
     //Excel

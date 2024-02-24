@@ -13,7 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
-
+use Illuminate\Support\Facades\DB;
 class MemberController extends Controller
 {
     public function index()
@@ -23,24 +23,19 @@ class MemberController extends Controller
          $members = Member::orderBy('updated_at','desc')->get();
          return view('admin.member.show',compact('members'));
      }
-      elseif (optional(auth()->user())->Role == 'manager')
-       {
+     elseif (optional(auth()->user())->Role == 'manager') {
         $user = auth()->user();
-        $city = User::find($user->city_id);
+        $cityName = DB::table('cities')
+            ->where('id', $user->city_id)
+            ->value('Name');
         
-        if ($city) {
-            $members = Member::where('City', $city->Name)->orderBy('updated_at', 'desc') ->get();
-        } else {
-           
-         $members = Member::orderBy('updated_at','desc')->get();
-         return view('admin.member.show',compact('members'));
-        }
-        // $city = User::find(auth()->user()->city_id);
-        //  $members = Member::where('City',$city->Name)->orderBy('updated_at','desc')->get();
-         return view('manager.member.show',compact('members'));
+        $members = Member::where('City', $cityName)->orderBy('updated_at', 'desc')->get();
+        
+        return view('manager.member.show', compact('members'));
+    }
       }
     
-    }
+    
 
 
 
@@ -51,41 +46,18 @@ class MemberController extends Controller
             $members = Member::orderBy('created_at','desc')->get();
             return view('admin.member.show',compact('members'));
         }
-        elseif (optional(auth()->user())->Role == 'manager')
-        {
-         $user = auth()->user();
-         $city = User::find($user->city_id);
-         
-         if ($city) {
-             $members = Member::where('City', $city->Name)->orderBy('created_at', 'desc') ->get();
-                } 
-          return view('admin.member.show',compact('members'));
+        elseif (optional(auth()->user())->Role == 'manager') {
+            $user = auth()->user();
+            $cityName = DB::table('cities')
+                ->where('id', $user->city_id)
+                ->value('Name');
+            
+            $members = Member::where('City', $cityName)->orderBy('updated_at', 'desc')->get();
+          return view('manager.member.show',compact('members'));
          }
     }
 
-
-    // public function orderBy_Last($order)
-    // { 
-    //     if (optional(auth()->user())->Role == 'admin') 
-    //     {
-    //         $members = Member::orderBy($order, 'desc')->get();
-            
-    //         return view('admin.member.show', compact('members'));
-    //     }
-    //     elseif (optional(auth()->user())->Role == 'manager')
-    //     {
-    //         $user = auth()->user();
-    //         $city = User::find($user->city_id);
-            
-    //         if ($city) {
-    //             $members = Member::where('City', $city->Name)->orderBy($order, 'desc')->get();
-    //         } 
-    //         return view('admin.member.show', compact('members'));
-    //     }
-    // }
     
-
-
 
     public function orderBy_Name()
     { 
@@ -94,15 +66,14 @@ class MemberController extends Controller
             $members = Member::orderBy('FullName','Asc')->get();
             return view('admin.member.show',compact('members'));
         }
-        elseif (optional(auth()->user())->Role == 'manager')
-        {
-         $user = auth()->user();
-         $city = User::find($user->city_id);
-         
-         if ($city) {
-             $members = Member::where('City', $city->Name)->orderBy('FullName', 'Asc') ->get();
-                } 
-          return view('admin.member.show',compact('members'));
+        elseif (optional(auth()->user())->Role == 'manager') {
+            $user = auth()->user();
+            $cityName = DB::table('cities')
+                ->where('id', $user->city_id)
+                ->value('Name');
+            
+            $members = Member::where('City', $cityName)->orderBy('updated_at', 'desc')->get();
+          return view('manager.member.show',compact('members'));
     }
 }
 
@@ -113,15 +84,14 @@ class MemberController extends Controller
             $members = Member::orderBy('IDTeam','Asc')->get();
             return view('admin.member.show',compact('members'));
         }
-        elseif (optional(auth()->user())->Role == 'manager')
-        {
-         $user = auth()->user();
-         $city = User::find($user->city_id);
-         
-         if ($city) {
-             $members = Member::where('City', $city->Name)->orderBy('IDTeam', 'Asc') ->get();
-                } 
-          return view('admin.member.show',compact('members'));
+        elseif (optional(auth()->user())->Role == 'manager') {
+            $user = auth()->user();
+            $cityName = DB::table('cities')
+                ->where('id', $user->city_id)
+                ->value('Name');
+            
+            $members = Member::where('City', $cityName)->orderBy('updated_at', 'desc')->get();
+          return view('manager.member.show',compact('members'));
     }
     }
      public function orderBy_DateOfJoin()
@@ -132,15 +102,14 @@ class MemberController extends Controller
         $members = Member::orderBy('DateOfJoin','desc')->get();
         return view('admin.member.show',compact('members'));
     }
-    elseif (optional(auth()->user())->Role == 'manager')
-        {
-         $user = auth()->user();
-         $city = User::find($user->city_id);
-         
-         if ($city) {
-             $members = Member::where('City', $city->Name)->orderBy('DateOfJoin', 'Asc') ->get();
-                } 
-          return view('admin.member.show',compact('members'));
+    elseif (optional(auth()->user())->Role == 'manager') {
+        $user = auth()->user();
+        $cityName = DB::table('cities')
+            ->where('id', $user->city_id)
+            ->value('Name');
+        
+        $members = Member::where('City', $cityName)->orderBy('updated_at', 'desc')->get();
+          return view('manager.member.show',compact('members'));
     }
 
     }
@@ -356,13 +325,18 @@ class MemberController extends Controller
     {
         $searchTerm = $request->input('searchTerm');
 
-   $members =  Member::where('FullName', 'like', '%'.$searchTerm.'%')->get();
+   $members =  Member::where('FullName', 'like', '%'.$searchTerm.'%')->orderBy('FullName', 'Asc')->get();
    if ( auth()->user()->Role == 'admin')
    {
     return view('admin.member.show',compact('members'));
    }
-  else if ( auth()->user()->Role == 'manager')
-   {
+   elseif (optional(auth()->user())->Role == 'manager') {
+    $user = auth()->user();
+    $cityName = DB::table('cities')
+        ->where('id', $user->city_id)
+        ->value('Name');
+    
+    $members = Member::where('City', $cityName)->where('FullName', 'like', '%'.$searchTerm.'%')->orderBy('FullName', 'Asc')->get();
     return view('manager.member.show',compact('members'));
    }
     }
@@ -372,14 +346,19 @@ class MemberController extends Controller
     {
         $searchTerm = $request->input('searchTerm');
 
-   $members =  Member::where('IDTeam', 'like', '%'.$searchTerm.'%')->get();
+   $members =  Member::where('IDTeam', 'like', '%'.$searchTerm.'%')->orderBy('IDTeam', 'Asc')->get();
 
    if ( auth()->user()->Role == 'admin')
    {
     return view('admin.member.show',compact('members'));
    }
-  else if ( auth()->user()->Role == 'manager')
-   {
+   elseif (optional(auth()->user())->Role == 'manager') {
+    $user = auth()->user();
+    $cityName = DB::table('cities')
+        ->where('id', $user->city_id)
+        ->value('Name');
+    $members = Member::where('City', $cityName)->where('IDTeam', 'like', '%'.$searchTerm.'%')->orderBy('IDTeam', 'Asc')->get();
+
     return view('manager.member.show',compact('members'));
    }
     }
@@ -388,14 +367,19 @@ class MemberController extends Controller
     {
         $searchTerm = $request->input('searchTerm');
 
-        $members =  Member::where('Qualification', 'like', '%'.$searchTerm.'%')->get();
+        $members =  Member::where('Qualification', 'like', '%'.$searchTerm.'%')->orderBy('Qualification', 'Asc')->get();
 
    if ( auth()->user()->Role == 'admin')
    {
     return view('admin.member.show',compact('members'));
    }
-  else if ( auth()->user()->Role == 'manager')
-   {
+   elseif (optional(auth()->user())->Role == 'manager') {
+    $user = auth()->user();
+    $cityName = DB::table('cities')
+        ->where('id', $user->city_id)
+        ->value('Name');
+    $members = Member::where('City', $cityName)->where('Qualification', 'like', '%'.$searchTerm.'%')->orderBy('Qualification', 'Asc')->get();
+
     return view('manager.member.show',compact('members'));
    }
     }
@@ -404,14 +388,18 @@ class MemberController extends Controller
     {
         $searchTerm = $request->input('searchTerm');
 
-        $members =  Member::where('Specialization', 'like', '%'.$searchTerm.'%')->get();
-
+        $members =  Member::where('Specialization', 'like', '%'.$searchTerm.'%')->orderBy('Specialization', 'Asc')->get();
    if ( auth()->user()->Role == 'admin')
    {
     return view('admin.member.show',compact('members'));
    }
-  else if ( auth()->user()->Role == 'manager')
-   {
+   elseif (optional(auth()->user())->Role == 'manager') {
+    $user = auth()->user();
+    $cityName = DB::table('cities')
+        ->where('id', $user->city_id)
+        ->value('Name');
+    $members = Member::where('City', $cityName)->where('Specialization', 'like', '%'.$searchTerm.'%')->orderBy('Specialization', 'Asc')->get();
+
     return view('manager.member.show',compact('members'));
    }
     }
@@ -426,10 +414,7 @@ class MemberController extends Controller
    {
     return view('admin.member.show',compact('members'));
    }
-  else if ( auth()->user()->Role == 'manager')
-   {
-    return view('manager.member.show',compact('members'));
-   }
+ 
     }
 
     
@@ -437,14 +422,19 @@ class MemberController extends Controller
     {
         $searchTerm = $request->input('searchTerm');
 
-        $members =  Member::where('Occupation', 'like', '%'.$searchTerm.'%')->get();
+        $members =  Member::where('Occupation', 'like', '%'.$searchTerm.'%')->orderBy('Occupation', 'Asc')->get();
 
    if ( auth()->user()->Role == 'admin')
    {
     return view('admin.member.show',compact('members'));
    }
-  else if ( auth()->user()->Role == 'manager')
-   {
+   elseif (optional(auth()->user())->Role == 'manager') {
+    $user = auth()->user();
+    $cityName = DB::table('cities')
+        ->where('id', $user->city_id)
+        ->value('Name');
+    $members = Member::where('City', $cityName)->where('Occupation', 'like', '%'.$searchTerm.'%')->orderBy('Occupation', 'Asc')->get();
+
     return view('manager.member.show',compact('members'));
    }
     }
