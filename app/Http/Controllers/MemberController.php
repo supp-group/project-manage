@@ -656,11 +656,11 @@ public function GetCityWithMemberCount(Request $request)
   public function GetCityWithMember(Request $request)
    {
     $searchTerm = $request->input('searchTerm');
+    $members =  Member::where('City', $searchTerm)->get();
 
-    $members =  Member::where('City', 'like', $searchTerm)->get();
-//   $member =  Member::where('City', $data)->get();
+//   $members =  Member::where('City', 'حلب')->get();
   
-   return view('admin.show-members',compact('member'));
+   return view('admin.show-members',compact('members'));
   }
 
 }

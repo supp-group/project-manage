@@ -43,6 +43,7 @@ Route::get('/index', [AdminController::class, 'index']);
 
 Route::get('/getCount', [MemberController::class, 'GetCityWithMemberCount'])->name('getCount');
 
+Route::get('/cityMember', [MemberController::class, 'GetCityWithMember'])->name('cityMember');
 
 
 
