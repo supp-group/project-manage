@@ -74,9 +74,9 @@
 
 				<form action="{{ url('/getCount') }}" method="GET">
 					@csrf
-					@php
+					{{-- @php
 						$members = session('members');
-					@endphp
+					@endphp --}}
 					@if ($members)
 						@foreach ($members as $member)
 							<div class="col-md-6 col-sm-6 col-lg-6 col-xl-4">
