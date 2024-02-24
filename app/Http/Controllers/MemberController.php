@@ -515,22 +515,22 @@ class MemberController extends Controller
          
     }
 
-    public function export()
-    {
-        $data = session('searchData');
-        if ($data) {
-            $members = Member::contains('Name', $data)||Member::contains('IDTeam', $data)
-            ||Member::contains('Qualification', $data)||Member::contains('Specialization', $data)
-            ||Member::contains('City', $data)||Member::contains('Occupation', $data) ->get(); // تغيير Name إلى الحقل المناسب
-        } else {
-            $members = Member::all();
-        }
+    // public function export()
+    // {
+    //     $data = session('searchData');
+    //     if ($data) {
+    //         $members = Member::contains('Name', $data)||Member::contains('IDTeam', $data)
+    //         ||Member::contains('Qualification', $data)||Member::contains('Specialization', $data)
+    //         ||Member::contains('City', $data)||Member::contains('Occupation', $data) ->get(); // تغيير Name إلى الحقل المناسب
+    //     } else {
+    //         $members = Member::all();
+    //     }
     
-    $csvFileName = 'Members.csv';
-    $headers = [
-        'Content-Type' => 'text/csv',
-        'Content-Disposition' => 'attachment; filename="' . $csvFileName . '"',
-    ];
+    // $csvFileName = 'Members.csv';
+    // $headers = [
+    //     'Content-Type' => 'text/csv',
+    //     'Content-Disposition' => 'attachment; filename="' . $csvFileName . '"',
+    // ];
 
 //     fclose($handle);
 
@@ -546,8 +546,9 @@ class MemberController extends Controller
 // //    $member =  Member::where('City', $data)->count();
    
 //     return view('admin.index',compact('member'));
-   }
+//    }
 
+//in second way
 // function exportDataToCSV($members) {
 //     $filename = "members.csv";
 //     $handle = fopen($filename, 'w');
@@ -640,86 +641,6 @@ public function exportDataToCSV(Request $request)
     return Response::make('CSV file exported successfully.', 200, $headers);
 
     }
-
-
-// function exportDataToCSV() {
-
-//     $data = session('searchData');
-//             if ($data) {
-//                 $members = Member::contains('Name', $data)||Member::contains('IDTeam', $data)
-//                 ||Member::contains('Qualification', $data)||Member::contains('Specialization', $data)
-//                 ||Member::contains('City', $data)||Member::contains('Occupation', $data) ->get(); // تغيير Name إلى الحقل المناسب
-//             } else {
-//                 $members = Member::all();
-//             }
-
-//     $filename = "members.csv";
-//     $handle = fopen($filename, 'w');
-
-//     fputcsv($handle, [
-//         'الملاحظات',
-//         'الفرع',
-//         'الرقم الحزبي',
-//         'الاسم الثلاثي',
-//         'اسم الأم',
-//         ' مكان الولادة ',
-//         'تاريخ الولادة',
-//         'محل ورقم القيد ',
-//         'المحافظة',
-//         'الرقم الوطني',
-//         'الجنس',
-//         'الؤهل العلمي',
-//         'المهنة',
-//         'موبايل',
-//         'عنوان المنزل',
-//         'عنوان العمل',
-//         'هاتف المنزل',
-//         'هاتف العمل',
-//         'تاريخ الإنتساب',
-//         ' الاختصاص',
-//         'رابط الصورة',
-//     ]);
-
-//     foreach ($members as $member) {
-//         $row = [
-//             $member->NotPad,
-//              $member->branch,
-//              $member->IDTeam,
-//              $member->FullName,
-//              $member->MotherName,
-//              $member->PlaceOfBirth, 
-//              $member->BirthDate,
-//              $member->Constraint,
-//              $member->City,
-//              $member->IDNumber,
-//              $member->Gender,
-//              $member->Qualification,
-//              $member->Occupation,
-//              $member->MobilePhone,
-//              $member->HomeAddress,
-//              $member->WorkAddress, 
-//              $member->HomePhone,
-//              $member->WorkPhone,
-//              $member->DateOfJoin,
-//              $member->Specialization,
-//              $member->Image
-//         ];
-
-//         // تحويل ترميز الحروف إلى UTF-8
-//         $row = array_map(function($value) {
-//             return mb_convert_encoding($value, 'UTF-8', 'auto');
-//         }, $row);
-
-//         fputcsv($handle, $row);
-//     }
-
-//     fclose($handle);
-
-//     return Response::make('CSV file exported successfully.', 200, $headers);
-    
-// }
-
-}
 
 
 
