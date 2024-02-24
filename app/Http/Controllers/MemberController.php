@@ -644,11 +644,13 @@ public function exportDataToCSV(Request $request)
 
 
 
-public function GetCityWithMemberCount($data)
+public function GetCityWithMemberCount(Request $request)
 {
-$members =  Member::where('City', $data)->count();
 
-return view('admin.index',compact('members'));
+    $members =  Member::where('City', 'حلب')->count();
+    
+    session()->put('members', $members);
+    return view('admin.index',compact('members'));
 }
 
   public function GetCityWithMember(Request $request)
