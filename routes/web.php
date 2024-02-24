@@ -48,8 +48,6 @@ Route::get('/cityMember', [MemberController::class, 'GetCityWithMember'])->name(
 
 
 
-
-
 // Admin Routes
 Route::middleware(['auth', 'verified', 'admin'])-> prefix('admin')->group(function () {
 

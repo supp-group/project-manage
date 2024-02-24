@@ -167,6 +167,7 @@
 										</thead>
 										<tbody>
 											<?php $i = 1 ?>
+											@if(isset($members) && !$members->isEmpty()) {
 											@foreach($members as $member)
 											<tr>
 												<td>{{$i++}}</td>
@@ -207,6 +208,12 @@
 												</td>
 											</tr>
 											@endforeach
+											
+										} @else 
+										<tr>
+											<td colspan="20">لم يتم العثور على نتائج</td>
+										</tr>
+										@endif
 										</tbody>
 									</table>
 								</div>

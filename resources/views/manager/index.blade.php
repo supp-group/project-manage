@@ -11,6 +11,38 @@
 					</div>
 				</div>
 				<!-- breadcrumb -->
+
+				<style>
+					.dash-widget {
+						background-color: #fff;
+						border-radius: 4px;
+						margin-bottom: 30px;
+						padding: 20px;
+						position: relative;
+						box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
+					}
+					.dash-widget-bg1 {
+						width: 65px;
+						float: left;
+						color: #fff;
+						display: block;
+						font-size: 50px;
+						text-align: center;
+						line-height: 65px;
+						background: #0162e8;
+						border-radius: 50%;
+						font-size: 40px;
+						height: 65px;
+					}
+					.dash-widget-info > span.widget-title1 {
+						background: #0162e8;
+						color: #fff;
+						padding: 5px 10px;
+						border-radius: 4px;
+						font-size: 13px;
+					}
+				</style>
+
 @endsection
 @section('content')
 				<!-- row -->
