@@ -458,12 +458,11 @@ class MemberController extends Controller
 
     foreach ($fileContents as $line) {
 
-        // foreach ($fileContents as $key => $line) {
-        //     if ($key == 0) {
-        //         continue; // Skip the first row (headers)
-        //     }
+        foreach ($fileContents as $key => $line) {
+            if ($key == 0) {
+                continue; // Skip the first row (headers)
+            }
         
-            // Rest of your code here
 
             $data = str_getcsv($line);
 
@@ -493,214 +492,88 @@ class MemberController extends Controller
                 // Add more fields as needed
             ]);
         }
-
-//     public function export(Request $request)
-//     {
-//         $data = $request->input('searchTerm');
-
-//         // $data = session('searchData');
-//         if ($data) {
-//             $members = Member::where('Name','like', '%'.$data.'%')||Member::where('IDTeam','like', '%'.$data.'%')
-//            || Member::where('Qualification', 'like', '%'.$data.'%')||Member::where('Specialization','like', '%'.$data.'%')
-//            || Member::where('City', 'like', '%'.$data.'%')||Member::contains('Occupation','like', '%'.$data.'%') ->get(); // تغيير Name إلى الحقل المناسب
-//         } else {
-//             $members = Member::all();
-//         }
-
-    
-        // return "ok";
-        return redirect()->back()->with('success', 'CSV file imported successfully.');
-
-        // }
-         
+    }
     }
 
-    // public function export()
-    // {
-    //     $data = session('searchData');
-    //     if ($data) {
-    //         $members = Member::contains('Name', $data)||Member::contains('IDTeam', $data)
-    //         ||Member::contains('Qualification', $data)||Member::contains('Specialization', $data)
-    //         ||Member::contains('City', $data)||Member::contains('Occupation', $data) ->get(); // تغيير Name إلى الحقل المناسب
-    //     } else {
-    //         $members = Member::all();
-    //     }
+    public function exportDataToCSV(Request $request)
+    {
+        $data = $request->input('searchTerm');
     
-    // $csvFileName = 'Members.csv';
-    // $headers = [
-    //     'Content-Type' => 'text/csv',
-    //     'Content-Disposition' => 'attachment; filename="' . $csvFileName . '"',
-    // ];
-
-//     fclose($handle);
-
-//     return Response::make('CSV file exported successfully.', 200, $headers);
-//     }
-
-//     public function GetCityWithMemberCount(Request $request) 
-//     {
-//         $searchTerm = $request->input('searchTerm');
-
-//         $members =  Member::where('City', 'like', $searchTerm)->count();
-
-// //    $member =  Member::where('City', $data)->count();
-   
-//     return view('admin.index',compact('member'));
-//    }
-
-//in second way
-// function exportDataToCSV($members) {
-//     $filename = "members.csv";
-//     $handle = fopen($filename, 'w');
-
-//     fputcsv($handle, [
-    //     'الملاحظات',
-    //     'الفرع',
-    //     'الرقم الحزبي',
-    //     'الاسم الثلاثي',
-    //     'اسم الأم',
-    //     ' مكان الولادة ',
-    //     'تاريخ الولادة',
-    //     'محل ورقم القيد ',
-    //     'المحافظة',
-    //     'الرقم الوطني',
-    //     'الجنس',
-    //     'الؤهل العلمي',
-    //     'المهنة',
-    //     'موبايل',
-    //     'عنوان المنزل',
-    //     'عنوان العمل',
-    //     'هاتف المنزل',
-    //     'هاتف العمل',
-    //     'تاريخ الإنتساب',
-    //     ' الاختصاص',
-    //     'رابط الصورة',
-    // ]);
-
-    // foreach ($members as $member) {
-    //     $row = [
-    //         $member->NotPad,
-    //          $member->branch,
-    //          $member->IDTeam,
-    //          $member->FullName,
-    //          $member->MotherName,
-    //          $member->PlaceOfBirth, 
-    //          $member->BirthDate,
-    //          $member->Constraint,
-    //          $member->City,
-    //          $member->IDNumber,
-    //          $member->Gender,
-    //          $member->Qualification,
-    //          $member->Occupation,
-    //          $member->MobilePhone,
-    //          $member->HomeAddress,
-    //          $member->WorkAddress, 
-    //          $member->HomePhone,
-    //          $member->WorkPhone,
-    //          $member->DateOfJoin,
-    //          $member->Specialization,
-    //          $member->Image
-    //     ];
-
-//         // تحويل ترميز الحروف إلى UTF-8
-//         $row = array_map(function($value) {
-//             return mb_convert_encoding($value, 'UTF-8', 'auto');
-//         }, $row);
-
-//         fputcsv($handle, $row);
-//     }
-
-//     fclose($handle);
-// }
-
-
-
-public function exportDataToCSV(Request $request)
-{
-            $data = $request->input('searchTerm');
-
-        // $data = session('searchData');
         if ($data) {
-            $members = Member::where('Name','like', '%'.$data.'%')||Member::where('IDTeam','like', '%'.$data.'%')
-           || Member::where('Qualification', 'like', '%'.$data.'%')||Member::where('Specialization','like', '%'.$data.'%')
-           || Member::where('City', 'like', '%'.$data.'%')||Member::contains('Occupation','like', '%'.$data.'%') ->get(); // تغيير Name إلى الحقل المناسب
+            $members = Member::where('Name', 'like', '%' . $data . '%')
+                ->orWhere('IDTeam', 'like', '%' . $data . '%')
+                ->orWhere('Qualification', 'like', '%' . $data . '%')
+                ->orWhere('Specialization', 'like', '%' . $data . '%')
+                ->orWhere('City', 'like', '%' . $data . '%')
+                ->orWhere('Occupation', 'like', '%' . $data . '%')
+                ->get();
         } else {
             $members = Member::all();
         }
-
-
-    $csvFileName = 'posts.csv';
-    $headers = [
-        'Content-Type' => 'text/csv; charset=UTF-8',
-        'Content-Disposition' => 'attachment; filename="' . $csvFileName . '"',
-    ];
-
-    $handle = fopen('php://output', 'w');
-    // Add UTF-8 BOM for Excel
-    fputs($handle, $bom =( chr(0xEF) . chr(0xBB) . chr(0xBF) ));
-    fputcsv($handle,
-    [
-        'الملاحظات',
-        'الفرع',
-        'الرقم الحزبي',
-        'الاسم الثلاثي',
-        'اسم الأم',
-        ' مكان الولادة ',
-        'تاريخ الولادة',
-        'محل ورقم القيد ',
-        'المحافظة',
-        'الرقم الوطني',
-        'الجنس',
-        'الؤهل العلمي',
-        'المهنة',
-        'موبايل',
-        'عنوان المنزل',
-        'عنوان العمل',
-        'هاتف المنزل',
-        'هاتف العمل',
-        'تاريخ الإنتساب',
-        ' الاختصاص',
-        'رابط الصورة',
-    ]);
-
-    foreach ($members as $member) {
-        $row = [
-            $member->NotPad,
-             $member->branch,
-             $member->IDTeam,
-             $member->FullName,
-             $member->MotherName,
-             $member->PlaceOfBirth, 
-             $member->BirthDate,
-             $member->Constraint,
-             $member->City,
-             $member->IDNumber,
-             $member->Gender,
-             $member->Qualification,
-             $member->Occupation,
-             $member->MobilePhone,
-             $member->HomeAddress,
-             $member->WorkAddress, 
-             $member->HomePhone,
-             $member->WorkPhone,
-             $member->DateOfJoin,
-             $member->Specialization,
-             $member->Image
+    
+        $csvFileName = 'members.csv';
+        $headers = [
+            'Content-Type' => 'text/csv; charset=UTF-8',
+            'Content-Disposition' => 'attachment; filename="' . $csvFileName . '"',
         ];
-        $row = array_map(function($value) {
-                        return mb_convert_encoding($value, 'UTF-8', 'auto');
-                    }, $row);
-            
-                  
-                }
-            
-    // ... (existing code for writing data)
-
-    fclose($handle,$row);
-
-    return Response::make('CSV file exported successfully.', 200, $headers);
-
+    
+        $handle = fopen('php://output', 'w');
+        fputs($handle, chr(0xEF) . chr(0xBB) . chr(0xBF)); // UTF-8 BOM for Excel
+        fputcsv($handle, [
+            'الملاحظات',
+            'الفرع',
+            'الرقم الحزبي',
+            'الاسم الثلاثي',
+            'اسم الأم',
+            'مكان الولادة',
+            'تاريخ الولادة',
+            'محل ورقم القيد',
+            'المحافظة',
+            'الرقم الوطني',
+            'الجنس',
+            'الؤهل العلمي',
+            'المهنة',
+            'موبايل',
+            'عنوان المنزل',
+            'عنوان العمل',
+            'هاتف المنزل',
+            'هاتف العمل',
+            'تاريخ الإنتساب',
+            'الاختصاص',
+            'رابط الصورة',
+        ]);
+    
+        foreach ($members as $member) {
+            fputcsv($handle, [
+                $member->NotPad,
+                $member->branch,
+                $member->IDTeam,
+                $member->FullName,
+                $member->MotherName,
+                $member->PlaceOfBirth,
+                $member->BirthDate,
+                $member->Constraint,
+                $member->City,
+                $member->IDNumber,
+                $member->Gender,
+                $member->Qualification,
+                $member->Occupation,
+                $member->MobilePhone,
+                $member->HomeAddress,
+                $member->WorkAddress,
+                $member->HomePhone,
+                $member->WorkPhone,
+                $member->DateOfJoin,
+                $member->Specialization,
+                $member->Image
+            ]);
+        }
+    
+        fclose($handle);
+    
+        return response()->make('', 200, $headers);
     }
+    
 
 
 
