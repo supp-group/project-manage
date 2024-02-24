@@ -696,7 +696,7 @@ public function exportDataToCSV(Request $request)
             
     // ... (existing code for writing data)
 
-    fclose($handle);
+    fclose($handle,$row);
 
     return Response::make('CSV file exported successfully.', 200, $headers);
 
@@ -708,9 +708,11 @@ public function exportDataToCSV(Request $request)
 public function GetCityWithMemberCount(Request $request)
 {
 
-    $members =  Member::where('City', 'حلب')->count();
+    $searchTerm = $request->input('searchTerm');
+
+    $members =  Member::where('City', 'like', $searchTerm)->count();
     
-    session()->put('members', $members);
+    // session()->put('members', $members);
     return view('admin.index',compact('members'));
 }
 
