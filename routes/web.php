@@ -37,11 +37,20 @@ Route::middleware('auth')->group(function () {
 
 
 
+// index
+Route::get('/index', [AdminController::class, 'index']);
+
+
+Route::get('/getCount', [MemberController::class, 'GetCityWithMemberCount'])->name('getCount');
+
+
+
+
 // Admin Routes
 Route::middleware(['auth', 'verified', 'admin'])-> prefix('admin')->group(function () {
 
     //index
-    Route::get('', [AdminController::class, 'index']);
+    // Route::get('', [AdminController::class, 'index']);
 
     Route::get('show-members', [MemberController::class, 'index']);
 
@@ -49,7 +58,8 @@ Route::middleware(['auth', 'verified', 'admin'])-> prefix('admin')->group(functi
 
     //Excel
     Route::post('/import', [MemberController::class, 'import'])->name('import');
-    Route::get('/export', [MemberController::class, 'exportDataToCSV'])->name('export');
+    // Route::get('/export', [MemberController::class, 'exportDataToCSV'])->name('export');
+    Route::get('/export', [MemberController::class, 'export'])->name('export');
 
 
 
@@ -157,7 +167,7 @@ Route::middleware(['auth', 'verified', 'admin'])-> prefix('admin')->group(functi
 Route::middleware(['auth', 'verified', 'manager'])-> prefix('manager')->group(function () {
 
     //index
-    Route::get('', [AdminController::class, 'index']);
+    // Route::get('', [AdminController::class, 'index']);
 
 
     //Excel

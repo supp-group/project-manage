@@ -127,9 +127,9 @@
 										<input type="hidden" name="City" value="{{ $member->City }}">
 										<select name="City" class="form-control select">
 
-											 {{-- @foreach($cities as $city)
-											<option value="{{$city->id}}">{{$city->name}}</option>
-											@endforeach  --}}
+											 @foreach($cities as $city)
+											<option value="{{$city->id}}">{{$city->Name}}</option>
+											@endforeach 
 
 										</select>
 									</div>
@@ -164,9 +164,9 @@
 										<input type="hidden" name="Qualification" value="{{ $member->Qualification }}">
 										<select name="Qualification" class="form-control select">
 
-											 {{-- @foreach($cities as $city)
-											<option value="{{$city->id}}">{{$city->name}}</option>
-											@endforeach  --}}
+											 @foreach($qualifications as $qualification)
+											<option value="{{$qualification->id}}">{{$qualification->Name}}</option>
+											@endforeach 
 
 										</select>
 									</div>
@@ -176,9 +176,9 @@
 										<input type="hidden" name="Specialization" value="{{ $member->Specialization }}">
 										<select name="Specialization" class="form-control select">
 
-											 {{-- @foreach($cities as $city)
-											<option value="{{$city->id}}">{{$city->name}}</option>
-											@endforeach  --}}
+											 @foreach($specializations as $specialization)
+											<option value="{{$specialization->id}}">{{$specialization->specialization}}</option>
+											@endforeach 
 
 										</select>
 									</div>
@@ -188,9 +188,9 @@
 										<input type="hidden" name="Occupation" value="{{ $member->Occupation }}">
 										<select name="Occupation" class="form-control select">
 
-											 {{-- @foreach($cities as $city)
-											<option value="{{$city->id}}">{{$city->name}}</option>
-											@endforeach  --}}
+											 @foreach($occupations as $occupation)
+											<option value="{{$occupation->id}}">{{$occupation->Name}}</option>
+											@endforeach 
 
 										</select>
 									</div>
@@ -268,10 +268,7 @@
 					</div>
 				</div>
 				<!-- row closed -->
-			</div>
-			<!-- Container closed -->
-		</div>
-		<!-- main-content closed -->
+
 @endsection
 
 @section('js')

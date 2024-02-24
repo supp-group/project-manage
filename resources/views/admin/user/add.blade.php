@@ -57,23 +57,13 @@
 										</div>
 									</div><br>
 
-									<div class="row">
-										<div class="col">
-											<label for="inputName" class="control-label">الدور</label>
-											<input type="text" class="form-control" id="inputName" name="Role" required>
-										</div>
-									</div><br>
-
-									{{-- <div class="form-group">
+									<div class="form-group">
 										<label>الدور</label>
-										<select name="Role" class="form-control select">
-											
-											@foreach($cities as $city)
-											<option value="{{$city->id}}">{{$city->Name}}</option>
-											@endforeach 
-
-										</select>
-									</div><br> --}}
+											<select name="Role" class="form-control select">
+												<option value="admin">مدير الموقع</option>
+												<option value="manager">مدير</option>
+											</select>
+									</div><br>
 
 									<div class="form-group">
 										<label>المحافظة</label>
@@ -95,10 +85,7 @@
 					</div>
 				</div>
 				<!-- row closed -->
-			</div>
-			<!-- Container closed -->
-		</div>
-		<!-- main-content closed -->
+
 @endsection
 @section('js')
 

@@ -63,15 +63,13 @@
 										</div>
 									</div><br>
 
-									<div class="row">
-										<div class="col">
-											<label for="inputName" class="control-label">الدور</label>
-											<input type="hidden" name="Role" value="{{ $user->Role }}">
-											<input type="text" class="form-control" id="inputName" name="Role"
-											value="{{ $user->Role }}" required>
-										</div>
+									<div class="form-group">
+										<label>الدور</label>
+											<select name="Role" class="form-control select">
+												<option value="admin">مدير الموقع</option>
+												<option value="manager">المدير</option>
+											</select>
 									</div><br>
-
 
 									<div class="form-group">
 										<label>المحافظة</label>

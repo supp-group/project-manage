@@ -45,21 +45,38 @@
 
 @endsection
 @section('content')
-				<!-- row -->
-				<div class="row">
+			<!-- row -->
+			<div class="row">
+
+					<div class="col-md-6 col-sm-6 col-lg-6 col-xl-4">
+						<a href="{{ route('getCount') }}">
+							<div class="dash-widget">
+								<span class="dash-widget-bg1"><i class="fa fa-users" aria-hidden="true"></i></span>
+								<div class="dash-widget-info text-right">
+
+								  <input type="hidden" value="">
+								  
+								  <h3 style="color: black;">555</h3>
+								  <span class="widget-title1">دمشق &nbsp; <i class="fa fa-check" aria-hidden="true"></i></span>
+								</div>
+							</div>
+						</a>
+					</div>
+
 					<div class="col-md-6 col-sm-6 col-lg-6 col-xl-4">
 						<a href="">
 							<div class="dash-widget">
 								<span class="dash-widget-bg1"><i class="fa fa-users" aria-hidden="true"></i></span>
 								<div class="dash-widget-info text-right">
 								  <h3 style="color: black;">555</h3>
-								  <span class="widget-title1">Admin &nbsp; <i class="fa fa-check" aria-hidden="true"></i></span>
+								  <span class="widget-title1">حلب &nbsp; <i class="fa fa-check" aria-hidden="true"></i></span>
 								</div>
 							</div>
 						</a>
 					</div>
-				</div>
-				<!-- row closed -->
+
+			</div>
+			<!-- row closed -->
 @endsection
 @section('js')
 @endsection

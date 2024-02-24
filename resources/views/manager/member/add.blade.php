@@ -108,9 +108,9 @@
 										<label>المحافظة</label>
 										<select name="City" class="form-control select">
 											
-											{{-- @foreach($cities as $city)
-											<option value="{{$city->id}}">{{$city->city}}</option>
-											@endforeach  --}}
+											@foreach($cities as $city)
+											<option value="{{$city->id}}">{{$city->Name}}</option>
+											@endforeach 
 
 										</select>
 									</div><br>
@@ -142,9 +142,9 @@
 										<label>المؤهل العلمي</label>
 										<select name="Qualification" class="form-control select">
 											
-											{{-- @foreach($qualifications as $qualification)
-											<option value="{{$qualification->id}}">{{$qualification->name}}</option>
-											@endforeach  --}}
+											@foreach($qualifications as $qualification)
+											<option value="{{$qualification->id}}">{{$qualification->Name}}</option>
+											@endforeach 
 
 										</select>
 									</div><br>
@@ -153,9 +153,9 @@
 										<label>الاختصاص</label>
 										<select name="Specialization" class="form-control select">
 											
-											{{-- @foreach($specializations as $specialization)
-											<option value="{{$specialization->id}}">{{$specialization->name}}</option>
-											@endforeach  --}}
+											@foreach($specializations as $specialization)
+											<option value="{{$specialization->id}}">{{$specialization->specialization}}</option>
+											@endforeach 
 
 										</select>
 									</div><br>
@@ -164,9 +164,9 @@
 										<label>المهنة</label>
 										<select name="Occupation" class="form-control select">
 											
-											{{-- @foreach($occupations as $occupation)
-											<option value="{{$occupation->id}}">{{$occupation->name}}</option>
-											@endforeach  --}}
+											@foreach($occupations as $occupation)
+											<option value="{{$occupation->id}}">{{$occupation->Name}}</option>
+											@endforeach 
 
 										</select>
 									</div><br>
