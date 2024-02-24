@@ -48,20 +48,55 @@
 			<!-- row -->
 			<div class="row">
 
+				{{-- <form action="{{ url('/getCount') }}" method="GET">
+					@csrf
+				@foreach ($members as $member)
+
 					<div class="col-md-6 col-sm-6 col-lg-6 col-xl-4">
-						<a href="{{ route('getCount') }}">
+						
 							<div class="dash-widget">
 								<span class="dash-widget-bg1"><i class="fa fa-users" aria-hidden="true"></i></span>
 								<div class="dash-widget-info text-right">
 
-								  <input type="hidden" value="">
-								  
-								  <h3 style="color: black;">555</h3>
-								  <span class="widget-title1">دمشق &nbsp; <i class="fa fa-check" aria-hidden="true"></i></span>
+									<input class="form-control" type="hidden" name="searchTerm" value="حلب">
+										
+								  <a href="#" style="color: black;">{{ $member->count() }}</a>
+
+								  <span class="widget-title1">حلب &nbsp; <i class="fa fa-check" aria-hidden="true"></i></span>
 								</div>
 							</div>
-						</a>
+					
 					</div>
+				@endforeach
+
+				</form> --}}
+
+
+				<form action="{{ url('/getCount') }}" method="GET">
+					@csrf
+					@php
+						$members = session('members');
+					@endphp
+					@if ($members)
+						@foreach ($members as $member)
+							<div class="col-md-6 col-sm-6 col-lg-6 col-xl-4">
+								<div class="dash-widget">
+									<span class="dash-widget-bg1"><i class="fa fa-users" aria-hidden="true"></i></span>
+									<div class="dash-widget-info text-right">
+										<input class="form-control" type="hidden" name="searchTerm" value="حلب">
+										<a href="#" style="color: black;">{{ $member }}</a>
+										<span class="widget-title1">حلب &nbsp; <i class="fa fa-check" aria-hidden="true"></i></span>
+									</div>
+								</div>
+							</div>
+						@endforeach
+					@else
+						<p>No members found.</p>
+					@endif
+				</form> 
+
+				
+
 
 					<div class="col-md-6 col-sm-6 col-lg-6 col-xl-4">
 						<a href="">
