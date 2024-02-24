@@ -729,6 +729,7 @@ $members =  Member::where('City', $data)->count();
 
 return view('admin.index',compact('members'));
 }
+
   public function GetCityWithMember(Request $request)
    {
     $searchTerm = $request->input('searchTerm');
