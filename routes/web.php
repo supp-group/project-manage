@@ -42,9 +42,8 @@ Route::get('/index', [AdminController::class, 'index']);
 
 
 
-Route::get('/getCount', [MemberController::class, 'GetCityWithMemberCount'])->name('getCount');
-
-Route::get('/cityMember', [MemberController::class, 'GetCityWithMember'])->name('cityMember');
+// Route::get('/getCount', [MemberController::class, 'GetCityWithMemberCount'])->name('getCount');
+// Route::get('/cityMember', [MemberController::class, 'GetCityWithMember'])->name('cityMember');
 
 
 
@@ -190,6 +189,7 @@ Route::middleware(['auth', 'verified', 'manager'])-> prefix('manager')->group(fu
 
         Route::delete('delete/{id}', [MemberController::class, 'destroy'])->name('memberm.delete');
 
+        Route::get('/get-specializations/{qualificationId}',[MemberController::class, 'getSpecializations']);
 
         // search
         Route::post('team', [MemberController::class, 'searchByIDTeam'])->name('search-m-team');
