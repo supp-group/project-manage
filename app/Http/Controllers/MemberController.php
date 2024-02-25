@@ -117,21 +117,50 @@ class MemberController extends Controller
 
     public function create()
     {
-        $cities = City::orderBy('Name','Asc')->get();
+        $user = auth()->user();
+        $city = DB::table('cities')
+            ->where('id', $user->city_id)
+            ->value('Name');
+            if( $city)
+            {
+                $cityName = $city;
+            }
+            else
+            {
+                $cityName =City::orderBy('Name','Asc')->get();
+            }
+
         $qualifications = Qualification::whereNotNull('Name')->orderBy('Name','Asc')->get();
         $specializations = Qualification::whereNotNull('specialization')->orderBy('Name','Asc')->get();
         $occupations = Occupation::orderBy('Name','Asc')->get();
 
         if ( auth()->user()->Role == 'admin')
         {
-            return view('admin.member.add', compact('cities', 'qualifications', 'specializations', 'occupations'));
+            return view('admin.member.add', compact('cityName', 'qualifications', 'occupations'));
         }
        else if ( auth()->user()->Role == 'manager')
         {
-            return view('manager.member.add', compact('cities', 'qualifications', 'specializations', 'occupations'));
+            return view('manager.member.add', compact('cityName', 'qualifications', 'occupations'));
         }
     }
+    public function getSpecializations($qualificationId)
+    {
+        $specializations = Qualification::where('parentId', $qualificationId)
+                                        ->whereNotNull('specialization')
+                                        ->orderBy('specialization', 'Asc')
+                                        ->get();
+    
+        return response()->json($specializations);
 
+    //     if ( auth()->user()->Role == 'admin')
+    //     {
+    //         return view('admin.member.add', compact('specializations'));
+    //     }
+    //    else if ( auth()->user()->Role == 'manager')
+    //     {
+    //         return view('manager.member.add', compact('specializations'));
+    //     }
+    }
 
     public function store(Request $request)
     {
@@ -167,20 +196,21 @@ class MemberController extends Controller
             $img_name = $img->getClientOriginalName();
             $img->move(public_path('images'), $img_name);
         }
-      
+        
+
+  $IDTeam = Member::where('IDTeam')->latest();
+
     $member= Member::create([
 
     'NotPad'=>$request->NotPad,
     'branch'=>$request->branch,
-    'IDTeam' => $request->IDTeam,
+    'IDTeam' =>$IDTeam,
     'FullName' => $request->FullName,
     'MotherName' => $request->MotherName,
     'PlaceOfBirth' => $request->PlaceOfBirth,
     'BirthDate' => $request->BirthDate,
     'Constraint' => $request->Constraint,
-    'City'=>auth()->city_id->Name,
-    // 'City' => $user->city->name,
-    // 'City' => $user->city->name,
+    'City'=>$request->cityName,
     'IDNumber' => $request->IDNumber,
     'Gender' => $request->Gender == 'ذكر' ? 'ذكر' : 'أنثى',
     'Qualification' =>$request->Qualification ,
@@ -198,8 +228,8 @@ class MemberController extends Controller
     //user
    'user_id'=>auth()->id()
 ]);
-
-    session()->flash('Add', 'تم إضافة العضو بنجاح');
+ 
+    session()->flash('Add',$IDTeam, ' تم إضافة العضو بنجاح ورقمه الحزبي هو');
     return back();
     
 //     if ( auth()->user()->Role == 'admin')

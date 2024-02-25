@@ -59,14 +59,7 @@
 											<input type="text" class="form-control" id="inputName" name="branch" required>
 										</div>
 									</div><br>
-
-									<div class="row">
-										<div class="col">
-											<label for="inputName" class="control-label">الرقم الحزبي</label>
-											<input type="text" class="form-control" id="inputName" name="IDTeam" required>
-										</div>
-									</div><br>
-					
+									
 									<div class="row">
 										<div class="col">
 											<label for="inputName" class="control-label">الاسم الثلاثي</label>
@@ -108,9 +101,9 @@
 										<label>المحافظة</label>
 										<select name="City" class="form-control select">
 											
-											@foreach($cities as $city)
-											<option value="{{$city->id}}">{{$city->Name}}</option>
-											@endforeach 
+											{{-- @foreach($cityName as $city) --}}
+											<option >{{$cityName}}</option>
+											{{-- @endforeach  --}}
 
 										</select>
 									</div><br>
