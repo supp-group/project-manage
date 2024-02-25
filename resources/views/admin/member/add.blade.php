@@ -242,7 +242,7 @@
 <script>
 	config = {
     	enableTime: true,
-    	dateFormat: "Y-m-d",
+    	dateFormat: "Y-m-d:h-m-s",
 		altInput: true,
 		altFormat: "F j, Y"
 	}
