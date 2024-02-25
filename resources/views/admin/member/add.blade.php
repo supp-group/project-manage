@@ -147,6 +147,7 @@
 									<div class="form-group">
 										<label>المؤهل العلمي</label>
 										<select name="Qualification" id="qualificationSelect"  class="form-control select" onChange="loadSpecializations()">
+											<option >اختر المؤهل العلمي</option>
 											@foreach($qualifications as $qualification)
 											<option value="{{$qualification->id}}">{{$qualification->Name}}</option>
 											@endforeach 
