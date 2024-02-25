@@ -60,13 +60,6 @@
 										</div>
 									</div><br>
 
-									{{-- <div class="row">
-										<div class="col">
-											<label for="inputName" class="control-label">الرقم الحزبي</label>
-											<input type="text" class="form-control" id="inputName" name="IDTeam" required>
-										</div>
-									</div><br> --}}
-					
 									<div class="row">
 										<div class="col">
 											<label for="inputName" class="control-label">الاسم الثلاثي</label>
@@ -108,9 +101,9 @@
 										<label>المحافظة</label>
 										<select name="City" class="form-control select">
 											
-											@foreach($cities as $city)
-											<option value="{{$city->id}}">{{$city->Name}}</option>
-											@endforeach 
+											{{-- @foreach($cityName as $city) --}}
+											<option >{{$cityName}}</option>
+											{{-- @endforeach  --}}
 
 										</select>
 									</div><br>
@@ -249,22 +242,6 @@
 
 	flatpickr("input[type=datetime-local]", config);
 </script>
-
-
-
-{{-- <script type="text/javascript">
-	function text(x) {
-		if (x == 0) {
-			document.getElementById('mycode0').style.display = 'block';
-			document.getElementById('mycode1').style.display = 'block';
-		}
-		else {
-			document.getElementById('mycode0').style.display = 'none';
-			document.getElementById('mycode1').style.display = 'none';
-		}
-	}
-</script> --}}
-
 
 
 <!--Internal  Datepicker js -->
