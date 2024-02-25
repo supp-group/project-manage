@@ -74,7 +74,7 @@
 												<td>
 
 												@if($qua = App\Models\Qualification::find($specialization->parentId))
-												{{ $specialization->Name }}
+												{{ $qua->Name }}
 											  @else
 												{{-- this is a qualification --}}
 											  @endif

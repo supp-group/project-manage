@@ -68,14 +68,14 @@
 										</div>
 									</div><br>
 
-									<div class="row">
+									{{-- <div class="row">
 										<div class="col">
 											<label for="inputName" class="control-label">الرقم الحزبي</label>
 											<input type="hidden" name="IDTeam" value="{{ $member->IDTeam }}">
 											<input type="text" class="form-control" id="inputName" name="IDTeam"
 											value="{{ $member->IDTeam }}" required>
 										</div>
-									</div><br>
+									</div><br> --}}
 
 									<div class="row">
 										<div class="col">

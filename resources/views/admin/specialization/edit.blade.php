@@ -48,7 +48,7 @@
 
 									<div class="row">
 										<div class="col">
-											<label for="inputName" class="control-label">ملاحظات</label>
+											<label for="inputName" class="control-label">الاختصاص</label>
 											<input type="hidden" name="specialization" value="{{ $specialization->specialization }}">
 											<input type="text" class="form-control" id="inputName" name="specialization"
 											value="{{ $specialization->specialization }}" required>

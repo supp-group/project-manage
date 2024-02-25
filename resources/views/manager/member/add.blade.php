@@ -60,12 +60,12 @@
 										</div>
 									</div><br>
 
-									<div class="row">
+									{{-- <div class="row">
 										<div class="col">
 											<label for="inputName" class="control-label">الرقم الحزبي</label>
 											<input type="text" class="form-control" id="inputName" name="IDTeam" required>
 										</div>
-									</div><br>
+									</div><br> --}}
 					
 									<div class="row">
 										<div class="col">
@@ -249,6 +249,23 @@
 
 	flatpickr("input[type=datetime-local]", config);
 </script>
+
+
+
+{{-- <script type="text/javascript">
+	function text(x) {
+		if (x == 0) {
+			document.getElementById('mycode0').style.display = 'block';
+			document.getElementById('mycode1').style.display = 'block';
+		}
+		else {
+			document.getElementById('mycode0').style.display = 'none';
+			document.getElementById('mycode1').style.display = 'none';
+		}
+	}
+</script> --}}
+
+
 
 <!--Internal  Datepicker js -->
 <script src="{{URL::asset('assets/plugins/jquery-ui/ui/widgets/datepicker.js')}}"></script>
