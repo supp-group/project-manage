@@ -44,7 +44,7 @@
 					<div class="col-lg-12 col-md-12">
 						<div class="card">
 							<div class="card-body">
-								<form action="{{ route('member.save') }}" method="post" enctype="multipart/form-data" autocomplete="off">
+								<form action="{{ url('admin/member/save') }}" method="post" enctype="multipart/form-data" autocomplete="off">
 									{{ csrf_field() }}
 			
 									<div class="row">

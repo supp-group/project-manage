@@ -162,7 +162,7 @@ class MemberController extends Controller
     //     }
     }
 
-    public function store(Request $request)
+    public function storem(Request $request)
     {
         $validated = $request->validate([
             'NotPad' => 'required|max:255',
@@ -229,8 +229,10 @@ class MemberController extends Controller
    'user_id'=>auth()->id()
 ]);
  
-    session()->flash('Add',$IDTeam, ' تم إضافة العضو بنجاح ورقمه الحزبي هو');
-    return back();
+dd($member);
+
+    // session()->flash('Add',$IDTeam, ' تم إضافة العضو بنجاح ورقمه الحزبي هو');
+    // return back();
     
 //     if ( auth()->user()->Role == 'admin')
 //     {
