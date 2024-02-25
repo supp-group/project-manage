@@ -164,6 +164,8 @@ class MemberController extends Controller
 
     public function storem(Request $request)
     {
+      //  return dd($request->all());
+        /*
         $validated = $request->validate([
             'NotPad' => 'required|max:255',
             'branch' => 'required',
@@ -186,53 +188,113 @@ class MemberController extends Controller
             'DateOfJoin' => 'required|date|before_or_equal:today',
             'Specialization' => 'required',
             'Image' =>'required',
-            'qualification_id'=>'required',
-            'occupation_id'=>'required'
+            // 'qualification_id'=>'required',
+            // 'occupation_id'=>'required'
         ]);
-        
+        */
         // store image
-        if($request->hasfile('Image')){
-            $img = $request->file('Image');
-            $img_name = $img->getClientOriginalName();
-            $img->move(public_path('images'), $img_name);
-        }
+       
         
 
   $IDTeam = Member::where('IDTeam')->latest();
 
-    $member= Member::create([
+//     $member= Member::create([
 
-    'NotPad'=>$request->NotPad,
-    'branch'=>$request->branch,
-    'IDTeam' =>$IDTeam,
-    'FullName' => $request->FullName,
-    'MotherName' => $request->MotherName,
-    'PlaceOfBirth' => $request->PlaceOfBirth,
-    'BirthDate' => $request->BirthDate,
-    'Constraint' => $request->Constraint,
-    'City'=>$request->cityName,
-    'IDNumber' => $request->IDNumber,
-    'Gender' => $request->Gender == 'ذكر' ? 'ذكر' : 'أنثى',
-    'Qualification' =>$request->Qualification ,
-    'Occupation' => $request->Occupation,
-    'MobilePhone' => $request->MobilePhone ,
-    'HomeAddress' => $request->HomeAddress ,
-    'WorkAddress' => $request->WorkAddress ,
-    'HomePhone' => $request->Occupation,
-    'WorkPhone' => $request->MobilePhone ,
-    'DateOfJoin' => $request->DateOfJoin ,
-    'Specialization' => $request->Specialization ,
-    'Image' => $request->Image->getClientOriginalName(),
-    'qualification_id'=>$request->qualification_id,
-    'occupation_id'=>$request->occupation_id,
-    //user
-   'user_id'=>auth()->id()
+//     'NotPad'=>$request->NotPad,
+//     'branch'=>$request->branch,
+//     'IDTeam' =>$IDTeam++,
+//     'FullName' => $request->FullName,
+//     'MotherName' => $request->MotherName,
+//     'PlaceOfBirth' => $request->PlaceOfBirth,
+//     'BirthDate' => $request->BirthDate,
+//     'Constraint' => $request->Constraint,
+//     'City'=>$request->cityName,
+//     'IDNumber' => $request->IDNumber,
+//     'Gender' => $request->Gender == 'ذكر' ? 'ذكر' : 'أنثى',
+//     'Qualification' =>$request->Qualification ,
+//     'Occupation' => $request->Occupation,
+//     'MobilePhone' => $request->MobilePhone ,
+//     'HomeAddress' => $request->HomeAddress ,
+//     'WorkAddress' => $request->WorkAddress ,
+//     'HomePhone' => $request->Occupation,
+//     'WorkPhone' => $request->MobilePhone ,
+//     'DateOfJoin' => $request->DateOfJoin ,
+//     'Specialization' => $request->Specialization ,
+//     'Image' => $request->Image->getClientOriginalName(),
+//     'qualification_id'=>$request->qualification_id,
+//     'occupation_id'=>$request->occupation_id,
+//     //user
+//    'user_id'=>auth()->id()
+// ]);
+$cityName='';
+$user = auth()->user();
+$city = DB::table('cities')
+->where('id', $user->city_id)
+->value('Name');
+if( $city)
+{
+    $cityName = $city;
+}
+else
+{
+    $cityName =City::orderBy('Name','Asc')->get();
+}
+    $member = new Member();
+    /*
+    $member->NotPad = $request->NotPad;
+   
+    $member->branch = $request->branch;
+    $member->IDTeam  = $IDTeam++;
+    $member->FullName = $request->FullName;
+    $member->MotherName = $request->MotherName;
+    $member->PlaceOfBirth = $request->PlaceOfBirth;
+    $member->BirthDate = $request->BirthDate;
+    $member->Constraint = $request->Constraint;
+    $member->City = $cityName;
+    $member->IDNumber  = $request->IDNumber;
+
+    $member->Gender  = $request->Gender == 'ذكر' ? 'ذكر' : 'أنثى';
+    $member->Qualification  = $request->Qualification;
+    $member->Occupation  = $request->Occupation;
+    $member->MobilePhone  = $request->MobilePhone;
+    $member->HomeAddress  = $request->HomeAddress;
+    $member->WorkAddress  = $request->WorkAddress;
+    $member->HomePhone  = $request->HomePhone;
+
+    $member->WorkPhone  = $request->WorkPhone;
+    $member->DateOfJoin  = $request->DateOfJoin;
+    $member->Specialization  = $request->Specialization;
+  
+  //  $member->user_id  = auth()->user()->id();
+
+    // $member->qualification_id  = $request->qualification_id;
+    // $member->occupation_id  = $request->occupation_id;
+*/
+    $member->save();
+
+    if($request->hasfile('Image')){
+        $img = $request->file('Image');
+        $img_name = $img->getClientOriginalName();
+        $img->move(public_path('images'), $img_name);
+
+      //  $member->Image  =   $img_name;
+      //  $member->save();
+Member::find($member->id)->update([
+    'Image'=> $img_name,
 ]);
- 
-dd($member);
 
-    // session()->flash('Add',$IDTeam, ' تم إضافة العضو بنجاح ورقمه الحزبي هو');
-    // return back();
+    }
+
+
+
+
+
+
+
+
+
+    session()->flash('Add',$IDTeam, ' تم إضافة العضو بنجاح ورقمه الحزبي هو');
+    return back();
     
 //     if ( auth()->user()->Role == 'admin')
 //     {

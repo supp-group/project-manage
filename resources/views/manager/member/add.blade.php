@@ -120,13 +120,13 @@
 									<div class="form-group">
 										<label class="display-block">الجنس</label> <br>
 										<div class="form-check form-check-inline">
-											<input class="form-check-input" type="radio" name="Gender" id="status_active" value="male" checked>
+											<input class="form-check-input" type="radio" value="ذكر" name="Gender" id="status_active" value="male" checked>
 											<label class="form-check-label" for="status_active">
 												&nbsp; ذكر 
 											</label>
 										</div> 
 										<div class="form-check form-check-inline">
-											<input class="form-check-input" type="radio" name="Gender" id="status_inactive" value="female">
+											<input class="form-check-input" type="radio" value="أنثى" name="Gender" id="status_inactive" value="female">
 											<label class="form-check-label" for="status_inactive">
 												&nbsp; أنثى
 											</label>

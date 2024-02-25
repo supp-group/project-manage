@@ -16,7 +16,7 @@ class Member extends Model
     'City','IDNumber','Gender','Qualification','Occupation','MobilePhone','HomeAddress',
     'WorkAddress','HomePhone','WorkPhone','DateOfJoin','Specialization','Image',
     'user_id','qualification_id','occupation_id'];
-
+   
 
 public function user(): BelongsTo
 {
