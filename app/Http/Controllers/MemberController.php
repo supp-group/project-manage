@@ -20,8 +20,8 @@ class MemberController extends Controller
     { 
      if (optional(auth()->user())->Role == 'admin') 
      {
-         $members = Member::orderBy('updated_at','desc')->get();
-         return view('admin.member.show',compact('members'));
+        $members = Member::orderBy('updated_at','desc')->get();
+        return view('admin.member.show',compact('members'));
      }
      elseif (optional(auth()->user())->Role == 'manager') {
         $user = auth()->user();
@@ -34,11 +34,8 @@ class MemberController extends Controller
         return view('manager.member.show', compact('members'));
     }
       }
+
     
-    
-
-
-
     public function orderBy_Last()
     { 
         if (optional(auth()->user())->Role == 'admin') 
@@ -58,7 +55,6 @@ class MemberController extends Controller
     }
 
     
-
     public function orderBy_Name()
     { 
         if (optional(auth()->user())->Role == 'admin') 
@@ -77,7 +73,7 @@ class MemberController extends Controller
     }
 }
 
-     public function orderBy_IDTeam()
+    public function orderBy_IDTeam()
     { 
         if (optional(auth()->user())->Role == 'admin') 
         {
@@ -92,9 +88,11 @@ class MemberController extends Controller
             
             $members = Member::where('City', $cityName)->orderBy('updated_at', 'desc')->get();
           return view('manager.member.show',compact('members'));
+        }
     }
-    }
-     public function orderBy_DateOfJoin()
+
+
+    public function orderBy_DateOfJoin()
     { 
    
     if (optional(auth()->user())->Role == 'admin') 
@@ -114,6 +112,7 @@ class MemberController extends Controller
 
     }
 
+
     public function create()
     {
         $cities = City::orderBy('Name','Asc')->get();
@@ -129,7 +128,6 @@ class MemberController extends Controller
         {
             return view('manager.member.add', compact('cities', 'qualifications', 'specializations', 'occupations'));
         }
-    
     }
 
 
@@ -161,12 +159,12 @@ class MemberController extends Controller
             'occupation_id'=>'required'
         ]);
         
-             // store image
-             if($request->hasfile('Image')){
-                $img = $request->file('Image');
-                $img_name = $img->getClientOriginalName();
-                $img->move(public_path('images'), $img_name);
-            }
+        // store image
+        if($request->hasfile('Image')){
+            $img = $request->file('Image');
+            $img_name = $img->getClientOriginalName();
+            $img->move(public_path('images'), $img_name);
+        }
       
     $member= Member::create([
 
@@ -465,6 +463,9 @@ class MemberController extends Controller
                 'MotherName' => $data[4],
                 'PlaceOfBirth' => $data[5],
                 'BirthDate' => $data[6],
+
+                // $birthDate = \Carbon\Carbon::createFromFormat('m/d/Y H:i', $data[6]);
+                
                 'Constraint' => $data[7],
                 'City' => $data[8],
                 'IDNumber' => $data[9],

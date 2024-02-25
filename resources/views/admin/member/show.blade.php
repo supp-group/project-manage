@@ -242,37 +242,6 @@
 					<!--/div-->
 				</div>
 				<!-- /row -->
-			</div>
-			<!-- Container closed -->
-		</div>
-		<!-- main-content closed -->
-
-
-
-<!-- delete -->
-{{-- <div class="modal" id="modaldemo9">
-	<div class="modal-dialog modal-dialog-centered" role="document">
-		<div class="modal-content modal-content-demo">
-			<div class="modal-header">
-				<h6 class="modal-title">حذف العضو</h6><button aria-label="Close" class="close" data-dismiss="modal"
-					type="button"><span aria-hidden="true">&times;</span></button>
-			</div>
-			<form action={{ route('member.delete', $member->id) }} method="post">
-				{{method_field('delete')}}
-				{{csrf_field()}}
-				<div class="modal-body">
-					<p>هل أنت متأكد من عملية الحذف؟</p><br>
-					<input type="hidden" name="id" id="id">
-					<input class="form-control" name="FullName" id="FullName" type="text" readonly>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-dismiss="modal">إلغاء</button>
-					<button type="submit" class="btn btn-danger">تأكيد</button>
-				</div>
-		</div>
-		</form>
-	</div>
-</div>		 --}}
 
 @endsection
 @section('js')
