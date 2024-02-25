@@ -9,12 +9,14 @@ use App\Models\Occupation;
 use App\Models\Qualification;
 use App\Models\User;
 use Auth;
+use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 class MemberController extends Controller
+
 {
     public function index()
     { 
@@ -439,22 +441,28 @@ class MemberController extends Controller
 
 
 
+ 
     public function import(Request $request)
     {
-    $file = $request->file('file');
-    $fileContents = file($file->getPathname());
-
-    foreach ($fileContents as $line) {
-
+        $file = $request->file('file');
+        $fileContents = file($file->getPathname());
+    
         foreach ($fileContents as $key => $line) {
             if ($key == 0) {
                 continue; // Skip the first row (headers)
             }
-        
-
+    
             $data = str_getcsv($line);
+    
+            // Convert Birthdate format
+            $birthDate = DateTime::createFromFormat('m/d/Y H:i', $data[6]);
+            $birthDateFormatted = $birthDate ? $birthDate->format('Y-m-d H:i:s') : null;
 
-
+                
+            // Convert DateOfJoin format
+            $dateJoin = DateTime::createFromFormat('m/d/Y H:i', $data[18]);
+            $dateJoinFormatted = $dateJoin ? $dateJoin->format('Y-m-d H:i:s') : null;
+    
             Member::create([
                 'NotPad' => $data[0],
                 'branch' => $data[1],
@@ -462,10 +470,7 @@ class MemberController extends Controller
                 'FullName' => $data[3],
                 'MotherName' => $data[4],
                 'PlaceOfBirth' => $data[5],
-                'BirthDate' => $data[6],
-
-                // $birthDate = \Carbon\Carbon::createFromFormat('m/d/Y H:i', $data[6]);
-                
+                'BirthDate' => $birthDateFormatted,
                 'Constraint' => $data[7],
                 'City' => $data[8],
                 'IDNumber' => $data[9],
@@ -477,14 +482,15 @@ class MemberController extends Controller
                 'WorkAddress' => $data[15],
                 'HomePhone' => $data[16],
                 'WorkPhone' => $data[17],
-                'DateOfJoin' => $data[18],
+                'DateOfJoin' => $dateJoinFormatted,
                 'Specialization' => $data[19],
                 'Image' => $data[20],
-                // Add more fields as needed
             ]);
         }
+        session()->flash('Add', 'تم إستيراد البيانات بنجاح');
+        return back();
     }
-    }
+    
 
     public function exportDataToCSV(Request $request)
     {
