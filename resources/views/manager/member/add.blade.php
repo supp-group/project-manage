@@ -4,6 +4,7 @@
 {{-- flatpicker --}}
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 
+
 <!--- Internal Select2 css-->
 <link href="{{URL::asset('assets/plugins/select2/css/select2.min.css')}}" rel="stylesheet">
 <!---Internal Fileupload css-->
@@ -43,7 +44,7 @@
 					<div class="col-lg-12 col-md-12">
 						<div class="card">
 							<div class="card-body">
-								<form action="{{ route('memberm.save') }}" method="post" enctype="multipart/form-data" autocomplete="off">
+								<form action="{{ route('member.save') }}" method="post" enctype="multipart/form-data" autocomplete="off">
 									{{ csrf_field() }}
 			
 									<div class="row">
@@ -60,6 +61,7 @@
 										</div>
 									</div><br>
 
+					
 									<div class="row">
 										<div class="col">
 											<label for="inputName" class="control-label">الاسم الثلاثي</label>
@@ -132,9 +134,20 @@
 									</div><br>
 
 									<div class="form-group">
-										<label>المؤهل العلمي</label>
-										<select name="Qualification" class="form-control select">
+										<label>المهنة</label>
+										<select name="Occupation" class="form-control select" id="Occupation"> 
 											
+											@foreach($occupations as $occupation)
+											<option value="{{$occupation->id}}">{{$occupation->Name}}</option>
+											@endforeach 
+
+										</select>
+									</div><br>
+
+									<div class="form-group">
+										<label>المؤهل العلمي</label>
+										<select name="Qualification" id="qualificationSelect"  class="form-control select" onChange="loadSpecializations()">
+											<option >اختر المؤهل العلمي</option>
 											@foreach($qualifications as $qualification)
 											<option value="{{$qualification->id}}">{{$qualification->Name}}</option>
 											@endforeach 
@@ -144,81 +157,67 @@
 
 									<div class="form-group">
 										<label>الاختصاص</label>
-										<select name="Specialization" class="form-control select">
-											
-											@foreach($specializations as $specialization)
-											<option value="{{$specialization->id}}">{{$specialization->specialization}}</option>
-											@endforeach 
-
+										<select name="Specialization" class="form-control select" id="specializationSelect">
+											<!-- Options will be loaded dynamically -->
 										</select>
 									</div><br>
-
-									<div class="form-group">
-										<label>المهنة</label>
-										<select name="Occupation" class="form-control select">
-											
-											@foreach($occupations as $occupation)
-											<option value="{{$occupation->id}}">{{$occupation->Name}}</option>
-											@endforeach 
-
-										</select>
-									</div><br>
+									
 
 									<div class="row">
 										<div class="col">
-											<label for="inputName" class="control-label">رقم الموبايل</label>
-											<input type="text" class="form-control" id="inputName" name="MobilePhone" required>
+										  <label for="inputName" class="control-label">رقم الموبايل</label>
+										  <input type="text" class="form-control" id="inputName" name="MobilePhone" required>
 										</div>
-									</div><br>
-
-									<div class="row">
+									  </div><br>
+					
+									  <div class="row">
 										<div class="col">
-											<label for="inputName" class="control-label">عنوان المنزل</label>
-											<input type="text" class="form-control" id="inputName" name="HomeAddress" required>
+										  <label for="inputName" class="control-label">عنوان المنزل</label>
+										  <input type="text" class="form-control" id="inputName" name="HomeAddress" required>
 										</div>
-									</div><br>
-
-									<div class="row">
+									  </div><br>
+					
+									  <div class="row">
 										<div class="col">
-											<label for="inputName" class="control-label">عنوان العمل</label>
-											<input type="text" class="form-control" id="inputName" name="WorkAddress" required>
+										  <label for="inputName" class="control-label">عنوان العمل</label>
+										  <input type="text" class="form-control" id="inputName" name="WorkAddress" required>
 										</div>
-									</div><br>
-
-									<div class="row">
+									  </div><br>
+					
+									  <div class="row">
 										<div class="col">
-											<label for="inputName" class="control-label">هاتف المنزل</label>
-											<input type="text" class="form-control" id="inputName" name="HomePhone" required>
+										  <label for="inputName" class="control-label">هاتف المنزل</label>
+										  <input type="text" class="form-control" id="inputName" name="HomePhone" required>
 										</div>
-									</div><br>
-
-									<div class="row">
+									  </div><br>
+					
+									  <div class="row">
 										<div class="col">
-											<label for="inputName" class="control-label">هاتف العمل</label>
-											<input type="text" class="form-control" id="inputName" name="WorkPhone" required>
+										  <label for="inputName" class="control-label">هاتف العمل</label>
+										  <input type="text" class="form-control" id="inputName" name="WorkPhone" required>
 										</div>
-									</div><br>
-
-									<div class="row">
+									  </div><br>
+					
+									  <div class="row">
 										<div class="col">
-											<div class="form-group">
-												<label>تاريخ الانتساب</label>
-													<input type="datetime-local" class="form-control" name="DateOfJoin" required>
-											</div>
+										  <div class="form-group">
+											<label>تاريخ الانتساب</label>
+											  <input type="datetime-local" class="form-control" name="DateOfJoin" required>
+										  </div>
 										</div>
-									</div><br>
-
-									<div class="row">
+									  </div><br>
+					
+									  <div class="row">
 										<div class="col">
-											<label for="exampleTextarea">صورة العضو المنتسب</label>
-											<input type="file" name="Image" class="dropify" accept=".jpg, .png, image/jpeg, image/png"
-											data-height="70" />
+										  <label for="exampleTextarea">صورة العضو المنتسب</label>
+										  <input type="file" name="Image" class="dropify" accept=".jpg, .png, image/jpeg, image/png"
+										  data-height="70" />
 										</div>
-									</div><br>
-
-									<div class="d-flex justify-content-center">
+									  </div><br>
+					
+									  <div class="d-flex justify-content-center">
 										<button type="submit" class="btn btn-primary">حفظ البيانات</button>
-									</div>
+									  </div>
 			
 								</form>
 							</div>
@@ -226,7 +225,6 @@
 					</div>
 				</div>
 				<!-- row closed -->
-
 @endsection
 @section('js')
 
@@ -235,13 +233,47 @@
 <script>
 	config = {
     	enableTime: true,
-    	dateFormat: "Y-m-d",
+    	// dateFormat: "Y-m-d",
+		dateFormat: "Y/m/d H:i",
 		altInput: true,
 		altFormat: "F j, Y"
 	}
 
 	flatpickr("input[type=datetime-local]", config);
 </script>
+
+
+
+	 <script>
+		document.addEventListener("DOMContentLoaded", function() {
+		  const qualificationSelect = document.querySelector('#qualificationSelect');
+		  const specializationSelect = document.querySelector('#specializationSelect');
+		
+		  qualificationSelect.addEventListener('change', function() {
+			const qualificationId = this.value;
+			fetch(`get-specializations/${qualificationId}`)  // Corrected URL format
+			  .then(response => {
+				if (!response.ok) {
+				  throw new Error('Network response was not ok');
+				}
+				return response.json();
+			  })
+			  .then(specializations => {
+				specializationSelect.innerHTML = '<option value="">اختر الاختصاص</option>'; // Clear and add a placeholder
+				specializations.forEach(specialization => {
+				  const option = document.createElement('option');
+				  option.value = specialization.id;
+				  option.textContent = specialization.specialization;
+				  specializationSelect.appendChild(option);
+				});
+			  })
+			  .catch(error => {
+				console.error('There has been a problem with your fetch operation:', error);
+			  });
+		  });
+		});
+		</script>
+		
 
 
 <!--Internal  Datepicker js -->
