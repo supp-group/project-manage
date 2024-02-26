@@ -158,7 +158,7 @@ class MemberController extends Controller
 
     public function store(Request $request)
     {
-      //  return dd($request->all());
+    //    return dd($request->all());
         
         $validated = $request->validate([
             'NotPad' => 'required|max:255',
@@ -521,7 +521,7 @@ $member->update();
    }
     }
 
-    
+
     public function searchByCity(Request $request)
     {
         $searchTerm = $request->input('searchTerm');
