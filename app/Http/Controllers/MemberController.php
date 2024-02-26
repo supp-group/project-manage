@@ -339,33 +339,33 @@ class MemberController extends Controller
   $dateJoinFormatted = $dateJoin ? $dateJoin->format('Y-m-d H:i:s') : null;
 
 
-//   $qualificationId = $request->Qualification;
-//   $qualificationName = Qualification::where('id', $qualificationId)->first()->Name;
+  $qualificationId = $request->Qualification;
+  $qualificationName = Qualification::where('id', $qualificationId)->first()->Name;
   
   
-//   $specializationId = $request->Specialization;
-//   $specializationName = Qualification::where('id', $specializationId)->first()->specialization;
+  $specializationId = $request->Specialization;
+  $specializationName = Qualification::where('id', $specializationId)->first()->specialization;
 
 
-$qualificationId = $request->Qualification;
-$qualification = Qualification::find($qualificationId);
+// $qualificationId = $request->Qualification;
+// $qualification = Qualification::find($qualificationId);
 
-if ($qualification) {
-    $qualificationName = $qualification->Name;
-} else {
-    // Handle the case where the qualification is not found
-    $qualificationName = 'Unknown Qualification';
-}
+// if ($qualification) {
+//     $qualificationName = $qualification->Name;
+// } else {
+//     // Handle the case where the qualification is not found
+//     $qualificationName = 'Unknown Qualification';
+// }
 
-$specializationId = $request->Specialization;
-$specialization = Qualification::find($specializationId);
+// $specializationId = $request->Specialization;
+// $specialization = Qualification::find($specializationId);
 
-if ($specialization) {
-    $specializationName = $specialization->specialization;
-} else {
-    // Handle the case where the specialization is not found
-    $specializationName = 'Unknown Specialization';
-}
+// if ($specialization) {
+//     $specializationName = $specialization->specialization;
+// } else {
+//     // Handle the case where the specialization is not found
+//     $specializationName = 'Unknown Specialization';
+// }
 
 
 

@@ -120,13 +120,13 @@
 									<div class="form-group">
 										<label class="display-block">الجنس</label> <br>
 										<div class="form-check form-check-inline">
-											<input class="form-check-input" type="radio" value="ذكر" name="Gender" id="status_active" value="male" checked>
+											<input class="form-check-input" type="radio" value="ذكر" name="Gender" id="status_active" checked>
 											<label class="form-check-label" for="status_active">
 												&nbsp; ذكر 
 											</label>
 										</div> 
 										<div class="form-check form-check-inline">
-											<input class="form-check-input" type="radio" value="أنثى" name="Gender" id="status_inactive" value="female">
+											<input class="form-check-input" type="radio" value="أنثى" name="Gender" id="status_inactive">
 											<label class="form-check-label" for="status_inactive">
 												&nbsp; أنثى
 											</label>
@@ -146,7 +146,7 @@
 
 									<div class="form-group">
 										<label>المؤهل العلمي</label>
-										<select name="Qualification" id="qualificationSelect"  class="form-control select" onChange="loadSpecializations()">
+										<select name="Qualification" id="qualificationSelect"  class="form-control select" >
 											<option >اختر المؤهل العلمي</option>
 											@foreach($qualifications as $qualification)
 											<option value="{{$qualification->id}}">{{$qualification->Name}}</option>
