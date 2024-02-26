@@ -143,6 +143,8 @@ class MemberController extends Controller
             return view('manager.member.add', compact('cityName', 'qualifications', 'occupations'));
         }
     }
+
+
     public function getSpecializations($qualificationId)
     {
         $specializations = Qualification::where('parentId', $qualificationId)
@@ -151,25 +153,17 @@ class MemberController extends Controller
                                         ->get();
     
         return response()->json($specializations);
-
-    //     if ( auth()->user()->Role == 'admin')
-    //     {
-    //         return view('admin.member.add', compact('specializations'));
-    //     }
-    //    else if ( auth()->user()->Role == 'manager')
-    //     {
-    //         return view('manager.member.add', compact('specializations'));
-    //     }
     }
+
 
     public function store(Request $request)
     {
       //  return dd($request->all());
-        /*
+        
         $validated = $request->validate([
             'NotPad' => 'required|max:255',
             'branch' => 'required',
-            'IDTeam' => 'required|unique:members|max:255',
+            // 'IDTeam' => 'required|unique:members|max:255',
             'FullName' => 'required',
             'MotherName' => 'required',
             'PlaceOfBirth' => 'required',
@@ -191,11 +185,9 @@ class MemberController extends Controller
             // 'qualification_id'=>'required',
             // 'occupation_id'=>'required'
         ]);
-        */
-        // store image
-       
         
-    
+
+    // for increment IDTeam automatically when adding a new member
     $latestIDTeam = DB::table('members')->orderBy('IDTeam', 'desc')->first();
     if($latestIDTeam){
         $IDTeam = $latestIDTeam->IDTeam + 1;
@@ -205,55 +197,7 @@ class MemberController extends Controller
     }
     
 
-//     $member= Member::create([
-
-//     'NotPad'=>$request->NotPad,
-//     'branch'=>$request->branch,
-//     'IDTeam' =>$IDTeam++,
-//     'FullName' => $request->FullName,
-//     'MotherName' => $request->MotherName,
-//     'PlaceOfBirth' => $request->PlaceOfBirth,
-//     'BirthDate' => $request->BirthDate,
-//     'Constraint' => $request->Constraint,
-//     'City'=>$request->cityName,
-//     'IDNumber' => $request->IDNumber,
-//     'Gender' => $request->Gender == 'ذكر' ? 'ذكر' : 'أنثى',
-//     'Qualification' =>$request->Qualification ,
-//     'Occupation' => $request->Occupation,
-//     'MobilePhone' => $request->MobilePhone ,
-//     'HomeAddress' => $request->HomeAddress ,
-//     'WorkAddress' => $request->WorkAddress ,
-//     'HomePhone' => $request->Occupation,
-//     'WorkPhone' => $request->MobilePhone ,
-//     'DateOfJoin' => $request->DateOfJoin ,
-//     'Specialization' => $request->Specialization ,
-//     'Image' => $request->Image->getClientOriginalName(),
-//     'qualification_id'=>$request->qualification_id,
-//     'occupation_id'=>$request->occupation_id,
-//     //user
-//    'user_id'=>auth()->id()
-// ]);
-
-
-    // $cityName='';
-    // $user = auth()->user();
-
-    // $city = DB::table('cities')
-    // ->where('id', $user->city_id)
-    // ->value('Name');
-
-    // if( $city)
-    // {
-    //     $cityName = $city;
-    // }
-    // else
-    // {
-    //     $cityName =City::orderBy('Name','Asc')->get();
-    // }
-
-
-
-    // Convert Birthdate format
+  // Convert Birthdate format
   $birthDate = DateTime::createFromFormat('m/d/Y H:i',$request->BirthDate);
   $birthDateFormatted = $birthDate ? $birthDate->format('Y-m-d H:i:s') : null;
 
@@ -302,14 +246,10 @@ class MemberController extends Controller
     $member->WorkPhone  = $request->WorkPhone;
     $member->DateOfJoin  = $dateJoinFormatted;
     
-  
-    // $member->user_id  = $user->id();
-
-    // $member->qualification_id  = $request->qualification_id;
-    // $member->occupation_id  = $request->occupation_id;
-
     $member->save();
 
+
+    // store image
     if($request->hasfile('Image')){
         $img = $request->file('Image');
         $img_name = $img->getClientOriginalName();
@@ -324,15 +264,6 @@ class MemberController extends Controller
 
     session()->flash('Add', ' تم إضافة العضو بنجاح ورقمه الحزبي هو '.$IDTeam);
     return back();
-    
-//     if ( auth()->user()->Role == 'admin')
-//     {
-//         return redirect()->route('admin.member.add');
-//     }
-//    else if ( auth()->user()->Role == 'manager')
-//     {
-//         return redirect()->route('manager.member.add');
-//     }
   }
 
   
@@ -340,18 +271,30 @@ class MemberController extends Controller
   {
      $member = Member::findOrFail($id);
 
-     $cities = City::orderBy('Name','Asc')->get();
+     $user = auth()->user();
+     $city = DB::table('cities')
+         ->where('id', $user->city_id)
+         ->value('Name');
+         if( $city)
+         {
+             $cityName = $city;
+         }
+         else
+         {
+             $cityName =City::orderBy('Name','Asc')->get();
+         }
+
      $qualifications = Qualification::whereNotNull('Name')->orderBy('Name','Asc')->get();
      $specializations = Qualification::whereNotNull('specialization')->orderBy('Name','Asc')->get();
      $occupations = Occupation::orderBy('Name','Asc')->get();
 
      if ( auth()->user()->Role == 'admin')
      {
-      return view('admin.member.edit',compact('member', 'cities', 'qualifications', 'specializations', 'occupations'));
+      return view('admin.member.edit',compact('member', 'cityName', 'qualifications', 'specializations', 'occupations'));
      }
     else if ( auth()->user()->Role == 'manager')
      {
-      return view('manager.member.edit',compact('member', 'cities', 'qualifications', 'specializations', 'occupations'));
+      return view('manager.member.edit',compact('member', 'cityName', 'qualifications', 'specializations', 'occupations'));
      }
      
   }
@@ -359,77 +302,125 @@ class MemberController extends Controller
   
   public function update(Request $request, $id)
   {
-    $validated = $request->validate([
-        'NotPad' => 'required|max:255',
-        'branch' => 'required',
-        'IDTeam' => 'required|unique:members|max:255',
-        'FullName' => 'required',
-        'MotherName' => 'required',
-        'PlaceOfBirth' => 'required',
-        'BirthDate' => 'required|date|before_or_equal:today',
-        'Constraint' => 'required',
-        'City' => 'required',
-        'IDNumber' => 'required|unique:members|min:11|max:11',
-        'Gender' => 'required',
-        'Qualification' =>'required',
-        'Occupation' => 'required',
-        'MobilePhone' => 'required|max:10',
-        'HomeAddress' => 'required',
-        'WorkAddress' => 'required',
-        'HomePhone' => 'required|max:10',
-        'WorkPhone' => 'required|max:10',
-        'DateOfJoin' => 'required|date|before_or_equal:today',
-        'Specialization' => 'required',
-        'Image' =>'required',
-        'qualification_id'=>'required',
-        'occupation_id'=>'required'
-    ]);
+    // $validated = $request->validate([
+    //     'NotPad' => 'required|max:255',
+    //     'branch' => 'required',
+    //     // 'IDTeam' => 'required|unique:members|max:255',
+    //     'FullName' => 'required',
+    //     'MotherName' => 'required',
+    //     'PlaceOfBirth' => 'required',
+    //     'BirthDate' => 'required|date|before_or_equal:today',
+    //     'Constraint' => 'required',
+    //     'City' => 'required',
+    //     'IDNumber' => 'required|unique:members|min:11|max:11',
+    //     'Gender' => 'required',
+    //     'Qualification' =>'required',
+    //     'Occupation' => 'required',
+    //     'MobilePhone' => 'required|max:10',
+    //     'HomeAddress' => 'required',
+    //     'WorkAddress' => 'required',
+    //     'HomePhone' => 'required|max:10',
+    //     'WorkPhone' => 'required|max:10',
+    //     'DateOfJoin' => 'required|date|before_or_equal:today',
+    //     'Specialization' => 'required',
+    //     'Image' =>'required',
+    //     // 'qualification_id'=>'required',
+    //     // 'occupation_id'=>'required'
+    // ]);
     
   
 
-    $member = Member::findOrFail($id);
-    $member->update([
-    'NotPad'=>$request->NotPad,
-    'branch'=>$request->branch,
-    'IDTeam' => $request->IDTeam,
-    'FullName' => $request->FullName,
-    'MotherName' => $request->MotherName,
-    'PlaceOfBirth' => $request->PlaceOfBirth,
-    'BirthDate' => $request->BirthDate,
-    'Constraint' => $request->Constraint,
-    'City'=>$request->City,
-    'IDNumber' => $request->IDNumber,
-    
-    'Gender' => $request->Gender == 'ذكر' ? 'ذكر' : 'أنثى',
-    'Qualification' => $request->Qualification ,
-    'Occupation' => $request->Occupation,
-    'MobilePhone' => $request->MobilePhone ,
-    'HomeAddress' => $request->HomeAddress ,
-    'WorkAddress' => $request->WorkAddress ,
-    'HomePhone' => $request->Occupation,
-    'WorkPhone' => $request->MobilePhone ,
-    'DateOfJoin' => $request->DateOfJoin ,
-    'Specialization' => $request->Specialization ,
-    'Image' => $request->Image ,
-    'qualification_id'=>$request->qualification_id,
-    'occupation_id'=>$request->occupation_id,
-    //user
-   'user_id'=>auth()->id()
-      ]);
+  // Convert Birthdate format
+  $birthDate = DateTime::createFromFormat('m/d/Y H:i',$request->BirthDate);
+  $birthDateFormatted = $birthDate ? $birthDate->format('Y-m-d H:i:s') : null;
+
+  // Convert DateOfJoin format
+  $dateJoin = DateTime::createFromFormat('m/d/Y H:i',$request->DateOfJoin );
+  $dateJoinFormatted = $dateJoin ? $dateJoin->format('Y-m-d H:i:s') : null;
+
+
+//   $qualificationId = $request->Qualification;
+//   $qualificationName = Qualification::where('id', $qualificationId)->first()->Name;
+  
+  
+//   $specializationId = $request->Specialization;
+//   $specializationName = Qualification::where('id', $specializationId)->first()->specialization;
+
+
+$qualificationId = $request->Qualification;
+$qualification = Qualification::find($qualificationId);
+
+if ($qualification) {
+    $qualificationName = $qualification->Name;
+} else {
+    // Handle the case where the qualification is not found
+    $qualificationName = 'Unknown Qualification';
+}
+
+$specializationId = $request->Specialization;
+$specialization = Qualification::find($specializationId);
+
+if ($specialization) {
+    $specializationName = $specialization->specialization;
+} else {
+    // Handle the case where the specialization is not found
+    $specializationName = 'Unknown Specialization';
+}
+
+
+
+$member = Member::findOrFail($id);
+
+$member->NotPad = $request->NotPad;
+
+$member->branch = $request->branch;
+// $member->IDTeam  = $IDTeam;
+
+$member->FullName = $request->FullName;
+$member->MotherName = $request->MotherName;
+
+$member->PlaceOfBirth = $request->PlaceOfBirth;
+$member->BirthDate = $birthDateFormatted;
+ 
+$member->Constraint = $request->Constraint;
+$member->City = $request->City;
+$member->IDNumber  = $request->IDNumber;
+
+$member->Gender  = $request->Gender == 'ذكر' ? 'ذكر' : 'أنثى';
+
+$member->Qualification = $qualificationName;
+$member->Specialization  = $specializationName;
+$member->Occupation  = $request->Occupation;
+
+$member->MobilePhone  = $request->MobilePhone;
+$member->HomeAddress  = $request->HomeAddress;
+$member->WorkAddress  = $request->WorkAddress;
+$member->HomePhone  = $request->HomePhone;
+
+$member->WorkPhone  = $request->WorkPhone;
+$member->DateOfJoin  = $dateJoinFormatted;
+
+$member->update();
+
+
+
+    // store image
+    if($request->hasfile('Image')){
+        $img = $request->file('Image');
+        $img_name = $img->getClientOriginalName();
+        $img->move(public_path('images'), $img_name);
+
+      //  $member->Image  =   $img_name;
+      //  $member->save();
+        Member::find($member->id)->update([
+        'Image'=> $img_name,
+        ]);
+    }
 
     session()->flash('Edit', 'تم تعديل العضو بنجاح');
-    return back();
-
-    //   if ( auth()->user()->Role == 'admin')
-    //   {
-    //      return redirect()->route('admin.member.show');
-    //   }
-    //  else if ( auth()->user()->Role == 'manager')
-    //   {
-    //      return redirect()->route('manager.member.show');
-    //   }
-     
+    return back(); 
   }
+
 
   public function destroy( $id)
     {
@@ -443,6 +434,7 @@ class MemberController extends Controller
           return redirect()->route('manager.member.show');
        }
     }
+
 
      public function searchByName(Request $request)
     {
@@ -486,6 +478,7 @@ class MemberController extends Controller
    }
     }
 
+
     public function searchByQualification(Request $request)
     {
         $searchTerm = $request->input('searchTerm');
@@ -507,6 +500,7 @@ class MemberController extends Controller
    }
     }
 
+
     public function searchBySpecialization(Request $request)
     {
         $searchTerm = $request->input('searchTerm');
@@ -527,6 +521,7 @@ class MemberController extends Controller
    }
     }
 
+    
     public function searchByCity(Request $request)
     {
         $searchTerm = $request->input('searchTerm');

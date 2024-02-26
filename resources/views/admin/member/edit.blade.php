@@ -68,14 +68,14 @@
 										</div>
 									</div><br>
 
-									{{-- <div class="row">
+									<div class="row">
 										<div class="col">
 											<label for="inputName" class="control-label">الرقم الحزبي</label>
 											<input type="hidden" name="IDTeam" value="{{ $member->IDTeam }}">
 											<input type="text" class="form-control" id="inputName" name="IDTeam"
-											value="{{ $member->IDTeam }}" required>
+											value="{{ $member->IDTeam }}" required readonly>
 										</div>
-									</div><br> --}}
+									</div><br>
 
 									<div class="row">
 										<div class="col">
@@ -127,8 +127,8 @@
 										<input type="hidden" name="City" value="{{ $member->City }}">
 										<select name="City" class="form-control select">
 
-											 @foreach($cities as $city)
-											<option value="{{$city->id}}">{{$city->Name}}</option>
+											@foreach($cityName as $city)
+												<option >{{$city->Name}}</option>
 											@endforeach 
 
 										</select>
@@ -146,13 +146,13 @@
 									<div class="form-group">
 										<label class="display-block">الجنس</label> <br>
 										<div class="form-check form-check-inline">
-											<input class="form-check-input" type="radio" name="Gender" id="status_active" value="male" checked>
+											<input class="form-check-input" type="radio" value="ذكر" name="Gender" id="status_active" value="male" checked>
 											<label class="form-check-label" for="status_active">
 												&nbsp; ذكر 
 											</label>
 										</div> 
 										<div class="form-check form-check-inline">
-											<input class="form-check-input" type="radio" name="Gender" id="status_inactive" value="female">
+											<input class="form-check-input" type="radio" value="أنثى" name="Gender" id="status_inactive" value="female">
 											<label class="form-check-label" for="status_inactive">
 												&nbsp; أنثى
 											</label>
@@ -160,40 +160,55 @@
 									</div>
 
 									<div class="form-group">
-										<label>المؤهل العلمي</label>
-										<input type="hidden" name="Qualification" value="{{ $member->Qualification }}">
-										<select name="Qualification" class="form-control select">
-
-											 @foreach($qualifications as $qualification)
-											<option value="{{$qualification->id}}">{{$qualification->Name}}</option>
+										<label>المهنة</label>
+										<input type="hidden" name="Occupation" value="{{ $member->Occupation }}">
+										<select name="Occupation" class="form-control select">
+											<option value="{{ $member->Occupation }}">اختر المهنة</option>
+											 @foreach($occupations as $occupation)
+											<option value="{{$occupation->Name}}">{{$occupation->Name}}</option>
 											@endforeach 
 
+										</select>
+									</div>
+
+									{{-- <div class="form-group">
+										<label>المؤهل العلمي</label>
+										<input type="hidden" name="Qualification" value="{{ $member->Qualification }}">
+										<select name="Qualification" id="qualificationSelect" class="form-control select" onChange="loadSpecializations()">
+											<option>اختر المؤهل العلمي</option>
+
+											@foreach($qualifications as $qualification)
+												<option value="{{$qualification->id}}">{{$qualification->Name}}</option>
+											@endforeach 
 										</select>
 									</div>
 
 									<div class="form-group">
 										<label>الاختصاص</label>
 										<input type="hidden" name="Specialization" value="{{ $member->Specialization }}">
-										<select name="Specialization" class="form-control select">
-
-											 @foreach($specializations as $specialization)
-											<option value="{{$specialization->id}}">{{$specialization->specialization}}</option>
-											@endforeach 
-
+										<select name="Specialization" class="form-control select" id="specializationSelect">
+											<!-- Options will be loaded dynamically -->
 										</select>
-									</div>
+									</div> --}}
 
 									<div class="form-group">
-										<label>المهنة</label>
-										<input type="hidden" name="Occupation" value="{{ $member->Occupation }}">
-										<select name="Occupation" class="form-control select">
-
-											 @foreach($occupations as $occupation)
-											<option value="{{$occupation->id}}">{{$occupation->Name}}</option>
+										<label>المؤهل العلمي</label>
+										<select name="Qualification" id="qualificationSelect"  class="form-control select" onChange="loadSpecializations()">
+											<option>اختر المؤهل العلمي</option>
+											@foreach($qualifications as $qualification)
+												
+												<option value="{{$qualification->id}}">{{$qualification->Name}}</option>
 											@endforeach 
-
 										</select>
-									</div>
+									</div><br>
+
+									<div class="form-group">
+										<label>الاختصاص</label>
+										<select name="Specialization" class="form-control select" id="specializationSelect">
+											<!-- Options will be loaded dynamically -->
+										</select>
+									</div><br> 
+
 
 									<div class="row">
 										<div class="col">
@@ -287,6 +302,41 @@
 
 	flatpickr("input[type=datetime-local]", config);
 </script>
+
+
+
+{{-- Dependent Dropdown ===> qualification & specialization --}}
+<script>
+	document.addEventListener("DOMContentLoaded", function() {
+	  const qualificationSelect = document.querySelector('#qualificationSelect');
+	  const specializationSelect = document.querySelector('#specializationSelect');
+	
+	  qualificationSelect.addEventListener('change', function() {
+		const qualificationId = this.value;
+
+		fetch(`get-specializations/${qualificationId}`)  // Corrected URL format
+		  .then(response => {
+			if (!response.ok) {
+			  throw new Error('Network response was not ok');
+			}
+			return response.json();
+		  })
+		  .then(specializations => {
+			specializationSelect.innerHTML = '<option value="">اختر الاختصاص</option>'; // Clear and add a placeholder
+			specializations.forEach(specialization => {
+			  const option = document.createElement('option');
+			  option.value = specialization.id;
+			  option.textContent = specialization.specialization;
+			  specializationSelect.appendChild(option);
+			});
+		  })
+		  .catch(error => {
+			console.error('There has been a problem with your fetch operation:', error);
+		  });
+	  });
+	});
+</script>
+
 
 
 <!--Internal  Datepicker js -->
