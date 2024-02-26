@@ -15,9 +15,9 @@ class Qualification extends Model
 
     protected  $fillable =['Name','parentId','specialization'];
 
-    public function members(): HasMany
-    {
-        return $this->hasMany(Member::class,'qualification_id');
-    }
+    // public function members(): HasMany
+    // {
+    //     return $this->hasMany(Member::class,'qualification_id');
+    // }
 
 }

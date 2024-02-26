@@ -162,7 +162,7 @@ class MemberController extends Controller
     //     }
     }
 
-    public function storem(Request $request)
+    public function store(Request $request)
     {
       //  return dd($request->all());
         /*
@@ -195,8 +195,15 @@ class MemberController extends Controller
         // store image
        
         
-
-  $IDTeam = Member::where('IDTeam')->latest();
+    
+    $latestIDTeam = DB::table('members')->orderBy('IDTeam', 'desc')->first();
+    if($latestIDTeam){
+        $IDTeam = $latestIDTeam->IDTeam + 1;
+    }
+    else{
+        $IDTeam = 1;
+    }
+    
 
 //     $member= Member::create([
 
@@ -226,50 +233,81 @@ class MemberController extends Controller
 //     //user
 //    'user_id'=>auth()->id()
 // ]);
-$cityName='';
-$user = auth()->user();
-$city = DB::table('cities')
-->where('id', $user->city_id)
-->value('Name');
-if( $city)
-{
-    $cityName = $city;
-}
-else
-{
-    $cityName =City::orderBy('Name','Asc')->get();
-}
+
+
+    // $cityName='';
+    // $user = auth()->user();
+
+    // $city = DB::table('cities')
+    // ->where('id', $user->city_id)
+    // ->value('Name');
+
+    // if( $city)
+    // {
+    //     $cityName = $city;
+    // }
+    // else
+    // {
+    //     $cityName =City::orderBy('Name','Asc')->get();
+    // }
+
+
+
+    // Convert Birthdate format
+  $birthDate = DateTime::createFromFormat('m/d/Y H:i',$request->BirthDate);
+  $birthDateFormatted = $birthDate ? $birthDate->format('Y-m-d H:i:s') : null;
+
+  // Convert DateOfJoin format
+  $dateJoin = DateTime::createFromFormat('m/d/Y H:i',$request->DateOfJoin );
+  $dateJoinFormatted = $dateJoin ? $dateJoin->format('Y-m-d H:i:s') : null;
+
+
+  $qualificationId = $request->Qualification;
+  $qualificationName = Qualification::where('id', $qualificationId)->first()->Name;
+  
+  
+  $specializationId = $request->Specialization;
+  $specializationName = Qualification::where('id', $specializationId)->first()->specialization;
+
+
+
     $member = new Member();
-    /*
+    
     $member->NotPad = $request->NotPad;
    
     $member->branch = $request->branch;
-    $member->IDTeam  = $IDTeam++;
+    $member->IDTeam  = $IDTeam;
+    
     $member->FullName = $request->FullName;
     $member->MotherName = $request->MotherName;
+   
     $member->PlaceOfBirth = $request->PlaceOfBirth;
-    $member->BirthDate = $request->BirthDate;
+    $member->BirthDate = $birthDateFormatted;
+     
     $member->Constraint = $request->Constraint;
-    $member->City = $cityName;
+    $member->City = $request->City;
     $member->IDNumber  = $request->IDNumber;
 
     $member->Gender  = $request->Gender == 'ذكر' ? 'ذكر' : 'أنثى';
-    $member->Qualification  = $request->Qualification;
+    
+    $member->Qualification = $qualificationName;
+    $member->Specialization  = $specializationName;
     $member->Occupation  = $request->Occupation;
+    
     $member->MobilePhone  = $request->MobilePhone;
     $member->HomeAddress  = $request->HomeAddress;
     $member->WorkAddress  = $request->WorkAddress;
     $member->HomePhone  = $request->HomePhone;
 
     $member->WorkPhone  = $request->WorkPhone;
-    $member->DateOfJoin  = $request->DateOfJoin;
-    $member->Specialization  = $request->Specialization;
+    $member->DateOfJoin  = $dateJoinFormatted;
+    
   
-  //  $member->user_id  = auth()->user()->id();
+    // $member->user_id  = $user->id();
 
     // $member->qualification_id  = $request->qualification_id;
     // $member->occupation_id  = $request->occupation_id;
-*/
+
     $member->save();
 
     if($request->hasfile('Image')){
@@ -279,21 +317,12 @@ else
 
       //  $member->Image  =   $img_name;
       //  $member->save();
-Member::find($member->id)->update([
-    'Image'=> $img_name,
-]);
-
+        Member::find($member->id)->update([
+        'Image'=> $img_name,
+        ]);
     }
 
-
-
-
-
-
-
-
-
-    session()->flash('Add',$IDTeam, ' تم إضافة العضو بنجاح ورقمه الحزبي هو');
+    session()->flash('Add', ' تم إضافة العضو بنجاح ورقمه الحزبي هو '.$IDTeam);
     return back();
     
 //     if ( auth()->user()->Role == 'admin')

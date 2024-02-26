@@ -54,7 +54,7 @@
 										</div>
 									</div><br>
 			
-									<div class="row">
+									 <div class="row">
 										<div class="col">
 											<label for="inputName" class="control-label">الفرع</label>
 											<input type="text" class="form-control" id="inputName" name="branch" required>
@@ -138,7 +138,7 @@
 										<select name="Occupation" class="form-control select" id="Occupation"> 
 											
 											@foreach($occupations as $occupation)
-											<option value="{{$occupation->id}}">{{$occupation->Name}}</option>
+											<option value="{{$occupation->Name}}">{{$occupation->Name}}</option>
 											@endforeach 
 
 										</select>
@@ -147,11 +147,11 @@
 									<div class="form-group">
 										<label>المؤهل العلمي</label>
 										<select name="Qualification" id="qualificationSelect"  class="form-control select" onChange="loadSpecializations()">
-											<option >اختر المؤهل العلمي</option>
+											<option>اختر المؤهل العلمي</option>
 											@foreach($qualifications as $qualification)
-											<option value="{{$qualification->id}}">{{$qualification->Name}}</option>
+												
+												<option value="{{$qualification->id}}">{{$qualification->Name}}</option>
 											@endforeach 
-
 										</select>
 									</div><br>
 
@@ -160,10 +160,10 @@
 										<select name="Specialization" class="form-control select" id="specializationSelect">
 											<!-- Options will be loaded dynamically -->
 										</select>
-									</div><br>
+									</div><br> 
 									
 
-									<div class="row">
+									 <div class="row">
 										<div class="col">
 										  <label for="inputName" class="control-label">رقم الموبايل</label>
 										  <input type="text" class="form-control" id="inputName" name="MobilePhone" required>
@@ -213,7 +213,7 @@
 										  <input type="file" name="Image" class="dropify" accept=".jpg, .png, image/jpeg, image/png"
 										  data-height="70" />
 										</div>
-									  </div><br>
+									  </div><br> 
 					
 									  <div class="d-flex justify-content-center">
 										<button type="submit" class="btn btn-primary">حفظ البيانات</button>
@@ -244,7 +244,8 @@
 
 
 
-	 <script>
+	{{-- Dependent Dropdown ===> qualification & specialization --}}
+	<script>
 		document.addEventListener("DOMContentLoaded", function() {
 		  const qualificationSelect = document.querySelector('#qualificationSelect');
 		  const specializationSelect = document.querySelector('#specializationSelect');
@@ -272,7 +273,7 @@
 			  });
 		  });
 		});
-		</script>
+	</script>
 		
 
 

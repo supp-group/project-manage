@@ -70,7 +70,7 @@ Route::middleware(['auth', 'verified', 'admin'])-> prefix('admin')->group(functi
 
         Route::get('show', [MemberController::class, 'index']);
         Route::get('add', [MemberController::class, 'create']);
-        Route::post('save', [MemberController::class, 'storem'])->name('member.save');
+        Route::post('save', [MemberController::class, 'store'])->name('member.save');
     
         Route::get('edit/{id}', [MemberController::class, 'edit'])->name('member.edit');
         Route::post('update/{id}', [MemberController::class, 'update'])->name('member.update');

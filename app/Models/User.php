@@ -52,10 +52,10 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    public function members(): HasMany
-    {
-        return $this->hasMany(Member::class,'user_id');
-    }
+    // public function members(): HasMany
+    // {
+    //     return $this->hasMany(Member::class,'user_id');
+    // }
 
     public function city(): BelongsTo
     {

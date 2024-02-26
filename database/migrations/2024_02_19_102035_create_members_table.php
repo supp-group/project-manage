@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('Constraint')->nullable();
             $table->string('City')->nullable();
             $table->string('IDNumber')->unique()->nullable();
-            $table->string('Gender')->default('male')->nullable();
+            $table->string('Gender')->default('ذكر')->nullable();
             $table->string('Qualification')->nullable();
             $table->string('Occupation')->nullable();
             $table->string('MobilePhone')->nullable();
@@ -37,17 +37,17 @@ return new class extends Migration
             $table->timestamps();
 
             //users_table
-            $table->foreignId('user_id')->nullable();
+            // $table->foreignId('user_id')->nullable();
             // $table->unsignedBigInteger('user_id');
             // $table->foreign('user_id')->references('id')->on('users');
 
              //qualifications_table
-            $table->foreignId('qualification_id')->nullable();
+            // $table->foreignId('qualification_id')->nullable();
             //  $table->unsignedBigInteger('qualification_id');
             //  $table->foreign('qualification_id')->references('id')->on('qualifications');
 
               //occupations_table
-            $table->foreignId('occupation_id')->nullable();
+            // $table->foreignId('occupation_id')->nullable();
             // $table->unsignedBigInteger('occupation_id');
             // $table->foreign('occupation_id')->references('id')->on('occupations');
 

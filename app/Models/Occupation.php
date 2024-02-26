@@ -12,8 +12,8 @@ class Occupation extends Model
     protected  $fillable =['Name'];
 
     
-    public function members(): HasMany
-    {
-        return $this->hasMany(Member::class,'occupation_id');
-    }
+    // public function members(): HasMany
+    // {
+    //     return $this->hasMany(Member::class,'occupation_id');
+    // }
 }
