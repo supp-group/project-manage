@@ -167,7 +167,7 @@ class MemberController extends Controller
             'FullName' => 'required',
             'MotherName' => 'required',
             'PlaceOfBirth' => 'required',
-            'BirthDate' => 'required|date|before_or_equal:today',
+            'BirthDate' => 'required|date|before:today',
             'Constraint' => 'required',
             'City' => 'required',
             'IDNumber' => 'required|unique:members|min:11|max:11',
@@ -184,8 +184,36 @@ class MemberController extends Controller
             'Image' =>'required',
             // 'qualification_id'=>'required',
             // 'occupation_id'=>'required'
+
+            [
+                'NotPad.required' => 'يرجى ادخال الملاحظات الخاصة بالعضو ',
+                'branch.required' => 'يرجى ادخال الفرع الذي ينتمي اليه العضو ',
+                'FullName.required' => 'يرجى ادخال الاسم الثلاثي للعضو بشكل صحيح',
+                'MotherName.required' => 'يرجى ادخال اسم الأم للعضو',
+                'PlaceOfBirth.required' => 'يرجى ادخال مكتن الولادة للعضو',
+                'BirthDate.required' => 'يرجى ادخال مواليد العضو بشكل صحيح',
+                'Constraint.required' => 'يرجى ادخال محل ورقم القيد للعضو ',
+                'City.required' => 'يرجى اخال المحافظة للعضو',
+                'IDNumber.required' => 'يرجى ادخال الرقم الوطني للعضو',
+                //'Gender.required' => 'يرجى',
+                'Qualification.required' => 'يرجى ادخال المؤهل العلمي للعضو',
+                'Occupation.required' => 'يرجى اخال مهنة العضو',
+                'MobilePhone.required' => 'يرجى ادخال رقم الموبايل للعضو',
+                'HomeAddress.required' => 'يرجى اخال عنوان المنزل للعضو',
+                'WorkAddress.required' => 'يرجى اخال عنوان العمل للعضو ',
+                'HomePhone.required' => 'يرجى ادخال هاتف المنزل للعضو',
+                'WorkPhone.required' => 'يرجى ادخال هاتف العمل للعضو',
+                'DateOfJoin.required' => 'يرجى ادخال تاريخ الانضمام للعضو',
+                'Specialization.required' => 'يرجى ادخال التخصص للعضو',
+            ]
         ]);
         
+
+      
+           
+      
+
+
 
     // for increment IDTeam automatically when adding a new member
     $latestIDTeam = DB::table('members')->orderBy('IDTeam', 'desc')->first();
@@ -539,7 +567,7 @@ $member->update();
         $fileContents = file($file->getPathname());
     
         foreach ($fileContents as $key => $line) {
-            if ($key == 0) {
+            if ($key == 0 ||$key=='فارغ'||$key=='') {
                 continue; // Skip the first row (headers)
             }
     

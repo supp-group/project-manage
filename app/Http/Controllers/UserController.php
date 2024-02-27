@@ -84,6 +84,7 @@ class UserController extends Controller
         User::findOrFail($id)->delete();
         session()->flash('delete', 'Deleted successfully.');
 
-          return redirect()->route('admin.user.show');
+        return back();
+      
        }
 }
