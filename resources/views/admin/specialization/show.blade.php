@@ -83,12 +83,33 @@
 													<a class="btn btn-sm btn-info" href="{{ route('specialization.edit', $specialization->id) }}" title="تعديل"><i class="las la-pen"></i></a>
 												</td>
 												<td>
-													<form action={{ route('specialization.delete', $specialization->id) }} method="post">
-														{{method_field('delete')}}
-														{{csrf_field()}}
-														<button class="modal-effect btn btn-sm btn-danger" data-effect="effect-scale"
-														data-id="{{ $specialization->id }}" data-title="{{ $specialization->specialization }}" data-toggle="modal"
-														href="#modaldemo9" title="حذف"><i class="las la-trash"></i></button>
+													<a class="modal-effect btn btn-sm btn-danger" data-toggle="modal" style="cursor: pointer;"
+													data-target="#delete{{$specialization->id}}"><i class="las la-trash"></i></a>
+													<form action="{{route('specialization.delete', $specialization->id)}}" method="POST" enctype="multipart/form-data">
+															@csrf
+															@method('DELETE')
+														<div id="delete{{$specialization->id}}" class="modal fade delete-modal" role="dialog">
+															<div class="modal-dialog modal-dialog-centered">
+																<div class="modal-content">
+			
+																	<div class="modal-header">
+																		<h6 class="modal-title">حذف الاختصاص: &nbsp; {{$specialization->specialization}}</h6><button aria-label="Close" class="close" data-dismiss="modal"
+																			type="button"><span aria-hidden="true">&times;</span></button>
+																	</div>
+			
+																	<div class="modal-body text-center">
+																		<img src="{{URL::asset('assets/img/media/sent.png')}}" alt="" width="50" height="46">
+																		<br><br>
+																		<h5>هل أنت متأكد من عملية الحذف؟</h5>
+																		<br>
+																		<div class="m-t-20"> <a href="#" class="btn btn-white" data-dismiss="modal">إلغاء</a>
+																			<button type="submit" class="btn btn-danger">حذف</button>
+																		</div>
+																		<br>
+																	</div>
+																</div>
+															</div>
+														</div>
 													</form>
 												</td>
 											</tr>
