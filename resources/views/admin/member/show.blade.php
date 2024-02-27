@@ -118,6 +118,77 @@
 				</div>
 				<br>
 
+
+{{-- <style>
+
+	.content .popup-image{
+	position: fixed;
+	top: 0;
+	left: 0;
+	background: rgba(0, 0, 0, 0.7);
+	height: 100%;
+	width: 100%;
+	z-index: 100;
+	display: none;
+    }
+    .content .popup-image span{
+	position: absolute;
+	top: 0;
+	right: 10px;
+	font-size: 60px;
+	font-weight: bolder;
+	color: #fff;
+	cursor: pointer;
+	z-index: 100;
+    }
+	.content .popup-image img{
+		position: absolute;
+		top: 50%;
+		left: 50%;
+	    transform: translate(-50%, -50%);
+	    border: 5px solid #fff;
+	    border-radius: 5px;
+	    width: 750px;
+	    object-fit: cover;
+	    }
+
+	img{
+		cursor: pointer;
+	}
+	
+	.content .popup-image{
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.7);
+    height: 100%;
+    width: 100%;
+    z-index: 100;
+    display: none;
+	}
+	.content .popup-image span{
+	position: absolute;
+	top: 35px;
+	right: 10px;
+	font-size: 60px;
+	font-weight: bolder;
+	color: #fff;
+	cursor: pointer;
+	z-index: 100;
+	}
+	.content .popup-image img{
+	position: absolute;
+	top: 55%;
+	left: 55%;
+	transform: translate(-50%, -50%);
+	border: 5px solid #fff;
+	border-radius: 5px;
+	width: 750px;
+	object-fit: cover;
+	}
+
+</style> --}}
+
 				<!-- breadcrumb -->
 @endsection
 @section('content')
@@ -220,20 +291,49 @@
 												<td>{{$member->HomePhone}}</td>
 												<td>{{$member->WorkPhone}}</td>
 												<td>{{$member->DateOfJoin}}</td>
-												<td>{{$member->Image}}</td>
+												<td><img src="{{asset('images/'.$member->Image)}}" style="width: 50px;"></td>
 
 												<td>
 													<a class="btn btn-sm btn-info" href="{{ route('member.edit', $member->id) }}" title="تعديل"><i class="las la-pen"></i></a>
 												</td>
 												<td>
-													<form action={{ route('member.delete', $member->id) }} method="post">
-														{{method_field('delete')}}
-														{{csrf_field()}}
-														<button class="modal-effect btn btn-sm btn-danger" data-effect="effect-scale"
-														data-id="{{ $member->id }}" data-title="{{ $member->FullName }}" data-toggle="modal"
-														href="#modaldemo9" title="حذف"><i class="las la-trash"></i></button>
-													</form>	
+													<a class="modal-effect btn btn-sm btn-danger" data-toggle="modal" style="cursor: pointer;"
+													data-target="#delete{{$member->id}}"><i class="las la-trash"></i></a>
+													<form action="{{route('member.delete', $member->id)}}" method="POST" enctype="multipart/form-data">
+															@csrf
+															@method('DELETE')
+														<div id="delete{{$member->id}}" class="modal fade delete-modal" role="dialog">
+															<div class="modal-dialog modal-dialog-centered">
+																<div class="modal-content">
+			
+																	<div class="modal-header">
+																		<h6 class="modal-title">حذف العضو: &nbsp; {{$member->FullName}}</h6><button aria-label="Close" class="close" data-dismiss="modal"
+																			type="button"><span aria-hidden="true">&times;</span></button>
+																	</div>
+			
+																	<div class="modal-body text-center">
+																		<img src="{{URL::asset('assets/img/media/sent.png')}}" alt="" width="50" height="46">
+																		<br><br>
+																		<h5>هل أنت متأكد من عملية الحذف؟</h5>
+																		<br>
+																		<div class="m-t-20"> <a href="#" class="btn btn-white" data-dismiss="modal">إلغاء</a>
+																			<button type="submit" class="btn btn-danger">حذف</button>
+																		</div>
+																		<br>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</form>
 												</td>
+
+
+												{{-- <div class="popup-image">
+													<span>&times;</span>
+													<img src="{{asset($member['Image'])}}" alt="">
+												</div> --}}
+
+
 											</tr>
 											@endforeach
 
@@ -254,6 +354,21 @@
 
 @endsection
 @section('js')
+
+{{-- <script>
+	document.querySelectorAll('img').forEach(image => {
+		image.onclick = () => {
+			document.querySelector('.popup-image').style.display = 'block';
+			document.querySelector('.popup-image img').src = image.getAttribute('src');
+		}
+	});
+
+	document.querySelector('.popup-image span').onclick = () => {
+		document.querySelector('.popup-image').style.display = 'none';
+	}
+
+</script> --}}
+
 <!-- Internal Data tables -->
 <script src="{{URL::asset('assets/plugins/datatable/js/jquery.dataTables.min.js')}}"></script>
 <script src="{{URL::asset('assets/plugins/datatable/js/dataTables.dataTables.min.js')}}"></script>

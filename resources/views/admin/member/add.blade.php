@@ -136,6 +136,7 @@
 									<div class="form-group">
 										<label>المهنة</label>
 										<select name="Occupation" class="form-control select" id="Occupation"> 
+											<option>اختر المهنة</option>
 											
 											@foreach($occupations as $occupation)
 											<option value="{{$occupation->Name}}">{{$occupation->Name}}</option>

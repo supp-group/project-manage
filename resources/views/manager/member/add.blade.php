@@ -136,6 +136,7 @@
 									<div class="form-group">
 										<label>المهنة</label>
 										<select name="Occupation" class="form-control select" id="Occupation"> 
+											<option>اختر المهنة</option>
 											
 											@foreach($occupations as $occupation)
 											<option value="{{$occupation->id}}">{{$occupation->Name}}</option>
@@ -243,7 +244,7 @@
 </script>
 
 
-
+	{{-- Dependent Dropdown ===> qualification & specialization --}}
 	 <script>
 		document.addEventListener("DOMContentLoaded", function() {
 		  const qualificationSelect = document.querySelector('#qualificationSelect');

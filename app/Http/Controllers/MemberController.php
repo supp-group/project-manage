@@ -347,32 +347,10 @@ class MemberController extends Controller
   $specializationName = Qualification::where('id', $specializationId)->first()->specialization;
 
 
-// $qualificationId = $request->Qualification;
-// $qualification = Qualification::find($qualificationId);
-
-// if ($qualification) {
-//     $qualificationName = $qualification->Name;
-// } else {
-//     // Handle the case where the qualification is not found
-//     $qualificationName = 'Unknown Qualification';
-// }
-
-// $specializationId = $request->Specialization;
-// $specialization = Qualification::find($specializationId);
-
-// if ($specialization) {
-//     $specializationName = $specialization->specialization;
-// } else {
-//     // Handle the case where the specialization is not found
-//     $specializationName = 'Unknown Specialization';
-// }
-
-
 
 $member = Member::findOrFail($id);
 
 $member->NotPad = $request->NotPad;
-
 $member->branch = $request->branch;
 // $member->IDTeam  = $IDTeam;
 
@@ -425,14 +403,9 @@ $member->update();
   public function destroy( $id)
     {
        Member::findOrFail($id)->delete();
-       if ( auth()->user()->Role == 'admin')
-       {
-          return redirect()->route('admin.member.show');
-       }
-      else if ( auth()->user()->Role == 'manager')
-       {
-          return redirect()->route('manager.member.show');
-       }
+
+       session()->flash('delete', 'تم حذف العضو بنجاح');
+       return back(); 
     }
 
 

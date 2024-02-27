@@ -79,6 +79,7 @@ Route::middleware(['auth', 'verified', 'admin'])-> prefix('admin')->group(functi
 
         Route::get('/get-specializations/{qualificationId}',[MemberController::class, 'getSpecializations']);
 
+        
         // search
         Route::post('team', [MemberController::class, 'searchByIDTeam'])->name('search-team');
         Route::post('name', [MemberController::class, 'searchByName'])->name('search-name');

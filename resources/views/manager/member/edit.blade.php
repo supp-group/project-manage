@@ -298,18 +298,21 @@
 </script>
 
 
-
-	 <script>
+	{{-- Dependent Dropdown ===> qualification & specialization --}}
+	<script>
 		document.addEventListener("DOMContentLoaded", function() {
 		  const qualificationSelect = document.querySelector('#qualificationSelect');
 		  const specializationSelect = document.querySelector('#specializationSelect');
 		
 		  qualificationSelect.addEventListener('change', function() {
 			const qualificationId = this.value;
-			var url="{{ url('manager/memberm/get-specializations/[itemid]') }}";
 
- url=url.replace('[itemid]',qualificationId);
-			fetch( url)  // Corrected URL format
+			
+			var url="{{ url('manager/memberm/get-specializations/[itemid]') }}";
+			url = url.replace('[itemid]',qualificationId);
+
+
+			fetch(url)  // Corrected URL format
 			  .then(response => {
 				if (!response.ok) {
 				  throw new Error('Network response was not ok');
@@ -330,7 +333,7 @@
 			  });
 		  });
 		});
-		</script>
+	</script>
 		
 
 

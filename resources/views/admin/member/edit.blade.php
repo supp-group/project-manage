@@ -145,58 +145,65 @@
 
 									<div class="form-group">
 										<label class="display-block">الجنس</label> <br>
+
+										@if ($member->Gender == 'ذكر')
+											
 										<div class="form-check form-check-inline">
-											<input class="form-check-input" type="radio" value="ذكر" name="Gender" id="status_active" value="male" checked>
+											<input class="form-check-input" type="radio" value="ذكر" name="Gender" id="status_active" checked>
 											<label class="form-check-label" for="status_active">
 												&nbsp; ذكر 
 											</label>
 										</div> 
+
+										@else
 										<div class="form-check form-check-inline">
-											<input class="form-check-input" type="radio" value="أنثى" name="Gender" id="status_inactive" value="female">
+											<input class="form-check-input" type="radio" value="ذكر" name="Gender" id="status_active">
+											<label class="form-check-label" for="status_active">
+												&nbsp; ذكر 
+											</label>
+										</div> 
+
+										@endif
+
+										@if ($member->Gender == 'أنثى')
+
+										<div class="form-check form-check-inline">
+											<input class="form-check-input" type="radio" value="أنثى" name="Gender" id="status_inactive" checked>
 											<label class="form-check-label" for="status_inactive">
 												&nbsp; أنثى
 											</label>
 										</div>
-									</div>
+
+										@else
+										<div class="form-check form-check-inline">
+											<input class="form-check-input" type="radio" value="أنثى" name="Gender" id="status_inactive">
+											<label class="form-check-label" for="status_inactive">
+												&nbsp; أنثى
+											</label>
+										</div>
+										@endif
+
+									</div><br>
+
 
 									<div class="form-group">
 										<label>المهنة</label>
 										<input type="hidden" name="Occupation" value="{{ $member->Occupation }}">
 										<select name="Occupation" class="form-control select">
 											<option value="{{ $member->Occupation }}">اختر المهنة</option>
-											 @foreach($occupations as $occupation)
+											
+											@foreach($occupations as $occupation)
 											<option value="{{$occupation->Name}}">{{$occupation->Name}}</option>
 											@endforeach 
-
 										</select>
 									</div>
-
-									{{-- <div class="form-group">
-										<label>المؤهل العلمي</label>
-										<input type="hidden" name="Qualification" value="{{ $member->Qualification }}">
-										<select name="Qualification" id="qualificationSelect" class="form-control select" onChange="loadSpecializations()">
-											<option>اختر المؤهل العلمي</option>
-
-											@foreach($qualifications as $qualification)
-												<option value="{{$qualification->id}}">{{$qualification->Name}}</option>
-											@endforeach 
-										</select>
-									</div>
-
-									<div class="form-group">
-										<label>الاختصاص</label>
-										<input type="hidden" name="Specialization" value="{{ $member->Specialization }}">
-										<select name="Specialization" class="form-control select" id="specializationSelect">
-											<!-- Options will be loaded dynamically -->
-										</select>
-									</div> --}}
 
 									<div class="form-group">
 										<label>المؤهل العلمي</label>
 										<select name="Qualification" id="qualificationSelect"  class="form-control select" onChange="loadSpecializations()">
 											<option>اختر المؤهل العلمي</option>
-											@foreach($qualifications as $qualification)
-												
+
+											@foreach($qualifications as $qualification)	
 												<option value="{{$qualification->id}}">{{$qualification->Name}}</option>
 											@endforeach 
 										</select>
@@ -208,7 +215,6 @@
 											<!-- Options will be loaded dynamically -->
 										</select>
 									</div><br> 
-
 
 									<div class="row">
 										<div class="col">
@@ -264,10 +270,17 @@
 										</div>
 									</div><br>
 
+
+									{{-- <td><img src="{{asset('images/'.$member->Image)}}" style="width: 50px;"></td> --}}
+
+
 									<div class="row">
 										<div class="col">
 											<label for="exampleTextarea">صورة العضو المنتسب</label> <br>
 											<input type="hidden" name="Image" value="{{ $member->Image }}">
+											
+											<img src="{{asset('images/'.$member->Image)}}" style="width: 100px;">
+											
 											<input type="file" name="Image" value="{{ $member->Image }}" class="dropify" accept=".jpg, .png, image/jpeg, image/png"
 											data-height="70" />
 										</div>
@@ -314,7 +327,12 @@
 	  qualificationSelect.addEventListener('change', function() {
 		const qualificationId = this.value;
 
-		fetch(`get-specializations/${qualificationId}`)  // Corrected URL format
+
+		var url="{{ url('admin/member/get-specializations/[itemid]') }}";
+		url = url.replace('[itemid]',qualificationId);
+
+
+		fetch(url)  // Corrected URL format
 		  .then(response => {
 			if (!response.ok) {
 			  throw new Error('Network response was not ok');
