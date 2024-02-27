@@ -175,6 +175,7 @@
 											<!-- Options will be loaded dynamically -->
 										</select>
 									</div><br> 
+									
 									<div class="form-group">
 										<label>المهنة</label>
 										<input type="hidden" name="Occupation" value="{{ $member->Occupation }}">

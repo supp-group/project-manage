@@ -351,7 +351,6 @@ class MemberController extends Controller
 $member = Member::findOrFail($id);
 
 $member->NotPad = $request->NotPad;
-
 $member->branch = $request->branch;
 // $member->IDTeam  = $IDTeam;
 
@@ -404,14 +403,9 @@ $member->update();
   public function destroy( $id)
     {
        Member::findOrFail($id)->delete();
-       if ( auth()->user()->Role == 'admin')
-       {
-          return back();
-       }
-      else if ( auth()->user()->Role == 'manager')
-       {
-          return back();
-       }
+
+       session()->flash('delete', 'تم حذف العضو بنجاح');
+       return back(); 
     }
 
 
