@@ -159,8 +159,29 @@ class MemberController extends Controller
     public function store(Request $request)
     {
     //    return dd($request->all());
-        
-        $validated = $request->validate([
+    $messages =  [
+        'NotPad.required' => 'يرجى ادخال الملاحظات الخاصة بالعضو ',
+        'branch.required' => 'يرجى ادخال الفرع الذي ينتمي اليه العضو ',
+        'FullName.required' => 'يرجى ادخال الاسم الثلاثي للعضو بشكل صحيح',
+        'MotherName.required' => 'يرجى ادخال اسم الأم للعضو',
+        'PlaceOfBirth.required' => 'يرجى ادخال مكتن الولادة للعضو',
+        'BirthDate.required' => 'يرجى ادخال مواليد العضو بشكل صحيح',
+        'Constraint.required' => 'يرجى ادخال محل ورقم القيد للعضو ',
+        'City.required' => 'يرجى اخال المحافظة للعضو',
+        'IDNumber.required' => 'يرجى ادخال الرقم الوطني للعضو',
+        //'Gender.required' => 'يرجى',
+        'Qualification.required' => 'يرجى ادخال المؤهل العلمي للعضو',
+        'Occupation.required' => 'يرجى اخال مهنة العضو',
+        'MobilePhone.required' => 'يرجى ادخال رقم الموبايل للعضو',
+        'HomeAddress.required' => 'يرجى اخال عنوان المنزل للعضو',
+        'WorkAddress.required' => 'يرجى اخال عنوان العمل للعضو ',
+        'HomePhone.required' => 'يرجى ادخال هاتف المنزل للعضو',
+        'WorkPhone.required' => 'يرجى ادخال هاتف العمل للعضو',
+        'DateOfJoin.required' => 'يرجى ادخال تاريخ الانضمام للعضو',
+        'Specialization.required' => 'يرجى ادخال التخصص للعضو',
+    ];
+    
+    $validator = Validator::make($request->all(), [
             'NotPad' => 'required|max:255',
             'branch' => 'required',
             // 'IDTeam' => 'required|unique:members|max:255',
@@ -185,28 +206,8 @@ class MemberController extends Controller
             // 'qualification_id'=>'required',
             // 'occupation_id'=>'required'
 
-            [
-                'NotPad.required' => 'يرجى ادخال الملاحظات الخاصة بالعضو ',
-                'branch.required' => 'يرجى ادخال الفرع الذي ينتمي اليه العضو ',
-                'FullName.required' => 'يرجى ادخال الاسم الثلاثي للعضو بشكل صحيح',
-                'MotherName.required' => 'يرجى ادخال اسم الأم للعضو',
-                'PlaceOfBirth.required' => 'يرجى ادخال مكتن الولادة للعضو',
-                'BirthDate.required' => 'يرجى ادخال مواليد العضو بشكل صحيح',
-                'Constraint.required' => 'يرجى ادخال محل ورقم القيد للعضو ',
-                'City.required' => 'يرجى اخال المحافظة للعضو',
-                'IDNumber.required' => 'يرجى ادخال الرقم الوطني للعضو',
-                //'Gender.required' => 'يرجى',
-                'Qualification.required' => 'يرجى ادخال المؤهل العلمي للعضو',
-                'Occupation.required' => 'يرجى اخال مهنة العضو',
-                'MobilePhone.required' => 'يرجى ادخال رقم الموبايل للعضو',
-                'HomeAddress.required' => 'يرجى اخال عنوان المنزل للعضو',
-                'WorkAddress.required' => 'يرجى اخال عنوان العمل للعضو ',
-                'HomePhone.required' => 'يرجى ادخال هاتف المنزل للعضو',
-                'WorkPhone.required' => 'يرجى ادخال هاتف العمل للعضو',
-                'DateOfJoin.required' => 'يرجى ادخال تاريخ الانضمام للعضو',
-                'Specialization.required' => 'يرجى ادخال التخصص للعضو',
-            ]
-        ]);
+          
+        ], $messages);
         
 
       
