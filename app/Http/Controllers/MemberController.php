@@ -347,27 +347,6 @@ class MemberController extends Controller
   $specializationName = Qualification::where('id', $specializationId)->first()->specialization;
 
 
-// $qualificationId = $request->Qualification;
-// $qualification = Qualification::find($qualificationId);
-
-// if ($qualification) {
-//     $qualificationName = $qualification->Name;
-// } else {
-//     // Handle the case where the qualification is not found
-//     $qualificationName = 'Unknown Qualification';
-// }
-
-// $specializationId = $request->Specialization;
-// $specialization = Qualification::find($specializationId);
-
-// if ($specialization) {
-//     $specializationName = $specialization->specialization;
-// } else {
-//     // Handle the case where the specialization is not found
-//     $specializationName = 'Unknown Specialization';
-// }
-
-
 
 $member = Member::findOrFail($id);
 
@@ -427,11 +406,11 @@ $member->update();
        Member::findOrFail($id)->delete();
        if ( auth()->user()->Role == 'admin')
        {
-          return redirect()->route('admin.member.show');
+          return back();
        }
       else if ( auth()->user()->Role == 'manager')
        {
-          return redirect()->route('manager.member.show');
+          return back();
        }
     }
 
@@ -566,7 +545,7 @@ $member->update();
         $fileContents = file($file->getPathname());
     
         foreach ($fileContents as $key => $line) {
-            if ($key == 0) {
+            if ($key == 0 ||$key=='فارغ'||$key=='') {
                 continue; // Skip the first row (headers)
             }
     

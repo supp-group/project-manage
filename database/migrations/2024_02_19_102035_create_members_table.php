@@ -22,7 +22,7 @@ return new class extends Migration
             $table->dateTime('BirthDate')->nullable();
             $table->string('Constraint')->nullable();
             $table->string('City')->nullable();
-            $table->string('IDNumber')->unique()->nullable();
+            $table->string('IDNumber')->nullable();
             $table->string('Gender')->default('ذكر')->nullable();
             $table->string('Qualification')->nullable();
             $table->string('Occupation')->nullable();
