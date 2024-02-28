@@ -42,28 +42,13 @@ Route::get('/index', [AdminController::class, 'index']);
 
 
 
-// Route::get('/getCount', [MemberController::class, 'GetCityWithMemberCount'])->name('getCount');
-// Route::get('/cityMember', [MemberController::class, 'GetCityWithMember'])->name('cityMember');
-
-
-
 // Admin Routes
 Route::middleware(['auth', 'verified', 'admin'])-> prefix('admin')->group(function () {
-
-    //index
-    // Route::get('', [AdminController::class, 'index']);
-
-    Route::get('show-members', [MemberController::class, 'index']);
-
-    // Route::get('/getCount', [MemberController::class, 'GetCityWithMemberCount'])->name('getCount');
-
 
     //Excel
     Route::post('/import', [MemberController::class, 'import'])->name('import');
     Route::get('/export', [MemberController::class, 'exportDataToCSV'])->name('export');
-    // Route::get('/export', [MemberController::class, 'export'])->name('export');
-
-
+   
 
     //   /member
     Route:: prefix('member')->group(function () {
@@ -148,7 +133,7 @@ Route::middleware(['auth', 'verified', 'admin'])-> prefix('admin')->group(functi
     Route::post('update/{id}', [QualificationController::class, 'updateQualification'])->name('qualification.update');
 
     Route::delete('delete/{id}', [QualificationController::class, 'destroyQualification'])->name('qualification.delete');
-    });
+  });
 
     //   /specialization
     Route:: prefix('specialization')->group(function () {
@@ -169,10 +154,6 @@ Route::middleware(['auth', 'verified', 'admin'])-> prefix('admin')->group(functi
 
 // Manager Routes
 Route::middleware(['auth', 'verified', 'manager'])-> prefix('manager')->group(function () {
-
-    //index
-    // Route::get('', [AdminController::class, 'index']);
-
 
     //Excel
     Route::get('/export', [MemberController::class, 'exportDataToCSV'])->name('exportm');

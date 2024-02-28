@@ -30,21 +30,32 @@
 @endsection
 @section('content')
 
-@if(session()->has('Add'))
+@if(session()->has('Edit'))
 <div class="alert alert-success alert-dismissible fade show" role="alert">
-	<strong>{{ session()->get('Add') }}</strong>
+	<strong>{{ session()->get('Edit') }}</strong>
 	<button type="button" class="close" data_dismiss="alert" aria_lable="Close">
 		<span aria_hidden="true">&times;</span>
 	</button>
 </div>
 @endif
 
+
+{{-- @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif --}}
+
 				<!-- row -->
 				<div class="row">
 					<div class="col-lg-12 col-md-12">
 						<div class="card">
 							<div class="card-body">
-								<form action="{{ route('member.save') }}" method="post" enctype="multipart/form-data" autocomplete="off">
+								<form action="{{ route('memberm.update', $member->id) }}" method="post" enctype="multipart/form-data" autocomplete="off">
 									{{ csrf_field() }}
 			
 									<div class="row">
@@ -265,7 +276,14 @@
 										<div class="col">
 										  <label for="exampleTextarea">صورة العضو المنتسب</label>
 										  <input type="hidden" name="Image" value="{{ $member->Image }}">
-										  <input type="file" name="Image" value="{{ $member->Image }}" class="dropify" accept=".jpg, .png, image/jpeg, image/png"
+										  	<br>
+										  	@if ($member->Image)
+												<td><img src="{{asset('images/'.$member->Image)}}" style="width: 100px;"></td>
+											@else
+												<td><img src="{{URL::asset('assets/img/media/user.jpg')}}"  style="width: 100px;"></td>
+											@endif
+											<br>										  
+											<input type="file" name="Image" value="{{ $member->Image }}" class="dropify" accept=".jpg, .png, image/jpeg, image/png"
 										  data-height="70" />
 										</div>
 									  </div><br>

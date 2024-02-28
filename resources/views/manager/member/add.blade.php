@@ -44,20 +44,30 @@
 					<div class="col-lg-12 col-md-12">
 						<div class="card">
 							<div class="card-body">
-								<form action="{{ route('member.save') }}" method="post" enctype="multipart/form-data" autocomplete="off">
+								<form action="{{ route('memberm.save') }}" method="post" enctype="multipart/form-data" autocomplete="off">
 									{{ csrf_field() }}
 			
 									<div class="row">
 										<div class="col">
 											<label for="inputName" class="control-label">ملاحظات</label>
-											<input type="text" class="form-control" id="inputName" name="NotPad" required>
+											<input type="text" class="form-control @error('NotPad') is-invalid @enderror" 
+											id="inputName" name="NotPad" required>
+
+											@error('NotPad')
+												<div class="alert alert-danger">{{ $message }}</div>
+											@enderror
 										</div>
 									</div><br>
 			
-									<div class="row">
+									 <div class="row">
 										<div class="col">
 											<label for="inputName" class="control-label">الفرع</label>
-											<input type="text" class="form-control" id="inputName" name="branch" required>
+											<input type="text" class="form-control @error('branch') is-invalid @enderror" 
+											id="inputName" name="branch" required>
+										
+											@error('branch')
+												<div class="alert alert-danger">{{ $message }}</div>
+											@enderror
 										</div>
 									</div><br>
 
@@ -65,21 +75,36 @@
 									<div class="row">
 										<div class="col">
 											<label for="inputName" class="control-label">الاسم الثلاثي</label>
-											<input type="text" class="form-control" id="inputName" name="FullName" required>
+											<input type="text" class="form-control @error('FullName') is-invalid @enderror" 
+											id="inputName" name="FullName" required>
+										
+											@error('FullName')
+												<div class="alert alert-danger">{{ $message }}</div>
+											@enderror
 										</div>
 									</div><br>
 
 									<div class="row">
 										<div class="col">
 											<label for="inputName" class="control-label">اسم الأم</label>
-											<input type="text" class="form-control" id="inputName" name="MotherName" required>
+											<input type="text" class="form-control @error('MotherName') is-invalid @enderror" 
+											id="inputName" name="MotherName" required>
+
+											@error('MotherName')
+												<div class="alert alert-danger">{{ $message }}</div>
+											@enderror
 										</div>
 									</div><br>
 
 									<div class="row">
 										<div class="col">
 											<label for="inputName" class="control-label">محل الولادة</label>
-											<input type="text" class="form-control" id="inputName" name="PlaceOfBirth" required>
+											<input type="text" class="form-control @error('PlaceOfBirth') is-invalid @enderror" 
+											id="inputName" name="PlaceOfBirth" required>
+
+											@error('PlaceOfBirth')
+												<div class="alert alert-danger">{{ $message }}</div>
+											@enderror
 										</div>
 									</div><br>
 
@@ -87,7 +112,12 @@
 										<div class="col">
 											<div class="form-group">
 												<label>تاريخ الولادة</label>
-													<input type="datetime-local" class="form-control" name="BirthDate" required>
+													<input type="datetime-local" class="form-control @error('BirthDate') is-invalid @enderror" 
+													name="BirthDate" required>
+
+													@error('BirthDate')
+														<div class="alert alert-danger">{{ $message }}</div>
+													@enderror
 											</div>
 										</div>
 									</div><br>
@@ -95,7 +125,12 @@
 									<div class="row">
 										<div class="col">
 											<label for="inputName" class="control-label">محل ورقم القيد</label>
-											<input type="text" class="form-control" id="inputName" name="Constraint" required>
+											<input type="text" class="form-control @error('Constraint') is-invalid @enderror" 
+											id="inputName" name="Constraint" required>
+
+											@error('Constraint')
+												<div class="alert alert-danger">{{ $message }}</div>
+											@enderror
 										</div>
 									</div><br>
 
@@ -113,20 +148,29 @@
 									<div class="row">
 										<div class="col">
 											<label for="inputName" class="control-label">الرقم الوطني</label>
-											<input type="text" class="form-control" id="inputName" name="IDNumber" required>
+											<input type="text" class="form-control @error('IDNumber') is-invalid @enderror" 
+											id="inputName" name="IDNumber" required>
+
+											@error('IDNumber')
+    											<div class="alert alert-danger">{{ $message }}</div>
+											@enderror
 										</div>
 									</div><br>
 
 									<div class="form-group">
 										<label class="display-block">الجنس</label> <br>
 										<div class="form-check form-check-inline">
-											<input class="form-check-input" type="radio" value="ذكر" name="Gender" id="status_active" checked>
+											<input class="form-check-input" 
+											type="radio" name="Gender" id="status_active" value="ذكر" checked>
+
 											<label class="form-check-label" for="status_active">
 												&nbsp; ذكر 
 											</label>
 										</div> 
 										<div class="form-check form-check-inline">
-											<input class="form-check-input" type="radio" value="أنثى" name="Gender" id="status_inactive">
+											<input class="form-check-input" 
+											type="radio" name="Gender" id="status_inactive" value="أنثى">
+
 											<label class="form-check-label" for="status_inactive">
 												&nbsp; أنثى
 											</label>
@@ -135,67 +179,104 @@
 
 									<div class="form-group">
 										<label>المهنة</label>
-										<select name="Occupation" class="form-control select" id="Occupation"> 
+										<select name="Occupation" class="form-control select @error('Occupation') is-invalid @enderror" id="Occupation"> 
 											<option>اختر المهنة</option>
 											
 											@foreach($occupations as $occupation)
-											<option value="{{$occupation->id}}">{{$occupation->Name}}</option>
+											<option value="{{$occupation->Name}}">{{$occupation->Name}}</option>
 											@endforeach 
 
 										</select>
+
+										@error('Occupation')
+											<div class="alert alert-danger">{{ $message }}</div>
+										@enderror
 									</div><br>
 
 									<div class="form-group">
 										<label>المؤهل العلمي</label>
-										<select name="Qualification" id="qualificationSelect"  class="form-control select" >
-											<option >اختر المؤهل العلمي</option>
+										<select name="Qualification" id="qualificationSelect" class="form-control select @error('Qualification') is-invalid @enderror" onChange="loadSpecializations()">
+											<option>اختر المؤهل العلمي</option>
 											@foreach($qualifications as $qualification)
-											<option value="{{$qualification->id}}">{{$qualification->Name}}</option>
+												
+												<option value="{{$qualification->id}}">{{$qualification->Name}}</option>
 											@endforeach 
-
 										</select>
+
+										@error('Qualification')
+											<div class="alert alert-danger">{{ $message }}</div>
+										@enderror
 									</div><br>
 
 									<div class="form-group">
 										<label>الاختصاص</label>
-										<select name="Specialization" class="form-control select" id="specializationSelect">
+										<select name="Specialization" class="form-control select @error('Specialization') is-invalid @enderror" id="specializationSelect">
 											<!-- Options will be loaded dynamically -->
 										</select>
-									</div><br>
+
+										@error('Specialization')
+											<div class="alert alert-danger">{{ $message }}</div>
+										@enderror
+									</div><br> 
 									
 
-									<div class="row">
+									 <div class="row">
 										<div class="col">
 										  <label for="inputName" class="control-label">رقم الموبايل</label>
-										  <input type="text" class="form-control" id="inputName" name="MobilePhone" required>
+										  <input type="text" class="form-control @error('MobilePhone') is-invalid @enderror" 
+										  id="inputName" name="MobilePhone" required>
+
+										@error('MobilePhone')
+											<div class="alert alert-danger">{{ $message }}</div>
+										@enderror
 										</div>
 									  </div><br>
 					
 									  <div class="row">
 										<div class="col">
 										  <label for="inputName" class="control-label">عنوان المنزل</label>
-										  <input type="text" class="form-control" id="inputName" name="HomeAddress" required>
+										  <input type="text" class="form-control @error('HomeAddress') is-invalid @enderror" 
+										  id="inputName" name="HomeAddress" required>
+
+										    @error('HomeAddress')
+										  		<div class="alert alert-danger">{{ $message }}</div>
+									  		@enderror
 										</div>
 									  </div><br>
 					
 									  <div class="row">
 										<div class="col">
 										  <label for="inputName" class="control-label">عنوان العمل</label>
-										  <input type="text" class="form-control" id="inputName" name="WorkAddress" required>
+										  <input type="text" class="form-control @error('WorkAddress') is-invalid @enderror" 
+										  id="inputName" name="WorkAddress" required>
+										
+										    @error('WorkAddress')
+										  		<div class="alert alert-danger">{{ $message }}</div>
+									  		@enderror
 										</div>
 									  </div><br>
 					
 									  <div class="row">
 										<div class="col">
 										  <label for="inputName" class="control-label">هاتف المنزل</label>
-										  <input type="text" class="form-control" id="inputName" name="HomePhone" required>
+										  <input type="text" class="form-control @error('HomePhone') is-invalid @enderror" 
+										  id="inputName" name="HomePhone" required>
+										
+										  	@error('HomePhone')
+										  		<div class="alert alert-danger">{{ $message }}</div>
+									  		@enderror
 										</div>
 									  </div><br>
 					
 									  <div class="row">
 										<div class="col">
 										  <label for="inputName" class="control-label">هاتف العمل</label>
-										  <input type="text" class="form-control" id="inputName" name="WorkPhone" required>
+										  <input type="text" class="form-control @error('WorkPhone') is-invalid @enderror" 
+										  id="inputName" name="WorkPhone" required>
+
+										  	@error('WorkPhone')
+										  		<div class="alert alert-danger">{{ $message }}</div>
+									  		@enderror
 										</div>
 									  </div><br>
 					
@@ -203,7 +284,12 @@
 										<div class="col">
 										  <div class="form-group">
 											<label>تاريخ الانتساب</label>
-											  <input type="datetime-local" class="form-control" name="DateOfJoin" required>
+											  <input type="datetime-local" class="form-control @error('DateOfJoin') is-invalid @enderror" 
+											  name="DateOfJoin" required>
+
+											@error('DateOfJoin')
+										  		<div class="alert alert-danger">{{ $message }}</div>
+									  		@enderror
 										  </div>
 										</div>
 									  </div><br>

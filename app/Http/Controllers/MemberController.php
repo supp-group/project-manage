@@ -10,6 +10,9 @@ use App\Models\Qualification;
 use App\Models\User;
 use Auth;
 use DateTime;
+
+use Illuminate\Http\RedirectResponse;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Validator;
@@ -96,7 +99,6 @@ class MemberController extends Controller
 
     public function orderBy_DateOfJoin()
     { 
-   
     if (optional(auth()->user())->Role == 'admin') 
     {
         $members = Member::orderBy('DateOfJoin','desc')->get();
@@ -111,7 +113,6 @@ class MemberController extends Controller
         $members = Member::where('City', $cityName)->orderBy('updated_at', 'desc')->get();
           return view('manager.member.show',compact('members'));
     }
-
     }
 
 
@@ -156,32 +157,9 @@ class MemberController extends Controller
     }
 
 
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
-    //    return dd($request->all());
-    $messages =  [
-        'NotPad.required' => 'يرجى ادخال الملاحظات الخاصة بالعضو ',
-        'branch.required' => 'يرجى ادخال الفرع الذي ينتمي اليه العضو ',
-        'FullName.required' => 'يرجى ادخال الاسم الثلاثي للعضو بشكل صحيح',
-        'MotherName.required' => 'يرجى ادخال اسم الأم للعضو',
-        'PlaceOfBirth.required' => 'يرجى ادخال مكتن الولادة للعضو',
-        'BirthDate.required' => 'يرجى ادخال مواليد العضو بشكل صحيح',
-        'Constraint.required' => 'يرجى ادخال محل ورقم القيد للعضو ',
-        'City.required' => 'يرجى اخال المحافظة للعضو',
-        'IDNumber.required' => 'يرجى ادخال الرقم الوطني للعضو',
-        //'Gender.required' => 'يرجى',
-        'Qualification.required' => 'يرجى ادخال المؤهل العلمي للعضو',
-        'Occupation.required' => 'يرجى اخال مهنة العضو',
-        'MobilePhone.required' => 'يرجى ادخال رقم الموبايل للعضو',
-        'HomeAddress.required' => 'يرجى اخال عنوان المنزل للعضو',
-        'WorkAddress.required' => 'يرجى اخال عنوان العمل للعضو ',
-        'HomePhone.required' => 'يرجى ادخال هاتف المنزل للعضو',
-        'WorkPhone.required' => 'يرجى ادخال هاتف العمل للعضو',
-        'DateOfJoin.required' => 'يرجى ادخال تاريخ الانضمام للعضو',
-        'Specialization.required' => 'يرجى ادخال التخصص للعضو',
-    ];
-    
-    $validator = Validator::make($request->all(), [
+        $validated = $request->validate([
             'NotPad' => 'required|max:255',
             'branch' => 'required',
             // 'IDTeam' => 'required|unique:members|max:255',
@@ -203,17 +181,58 @@ class MemberController extends Controller
             'DateOfJoin' => 'required|date|before_or_equal:today',
             'Specialization' => 'required',
             'Image' =>'required',
-            // 'qualification_id'=>'required',
-            // 'occupation_id'=>'required'
+        ]);
 
-          
-        ], $messages);
-        
 
-      
-           
-      
-
+    //    return dd($request->all());
+    // $messages =  [
+    //     'NotPad.required' => 'يرجى ادخال الملاحظات الخاصة بالعضو ',
+    //     'branch.required' => 'يرجى ادخال الفرع الذي ينتمي اليه العضو ',
+    //     'FullName.required' => 'يرجى ادخال الاسم الثلاثي للعضو بشكل صحيح',
+    //     'MotherName.required' => 'يرجى ادخال اسم الأم للعضو',
+    //     'PlaceOfBirth.required' => 'يرجى ادخال مكتن الولادة للعضو',
+    //     'BirthDate.required' => 'يرجى ادخال مواليد العضو بشكل صحيح',
+    //     'Constraint.required' => 'يرجى ادخال محل ورقم القيد للعضو ',
+    //     'City.required' => 'يرجى اخال المحافظة للعضو',
+    //     'IDNumber.required' => 'يرجى ادخال الرقم الوطني للعضو',
+    //     //'Gender.required' => 'يرجى',
+    //     'Qualification.required' => 'يرجى ادخال المؤهل العلمي للعضو',
+    //     'Occupation.required' => 'يرجى اخال مهنة العضو',
+    //     'MobilePhone.required' => 'يرجى ادخال رقم الموبايل للعضو',
+    //     'HomeAddress.required' => 'يرجى اخال عنوان المنزل للعضو',
+    //     'WorkAddress.required' => 'يرجى اخال عنوان العمل للعضو ',
+    //     'HomePhone.required' => 'يرجى ادخال هاتف المنزل للعضو',
+    //     'WorkPhone.required' => 'يرجى ادخال هاتف العمل للعضو',
+    //     'DateOfJoin.required' => 'يرجى ادخال تاريخ الانضمام للعضو',
+    //     'Specialization.required' => 'يرجى ادخال التخصص للعضو',
+    // ];
+    
+    // $validator = Validator::make($request->all(), [
+    //         'NotPad' => 'required|max:255',
+    //         'branch' => 'required',
+    //         // 'IDTeam' => 'required|unique:members|max:255',
+    //         'FullName' => 'required',
+    //         'MotherName' => 'required',
+    //         'PlaceOfBirth' => 'required',
+    //         'BirthDate' => 'required|date|before:today',
+    //         'Constraint' => 'required',
+    //         'City' => 'required',
+    //         'IDNumber' => 'required|unique:members|min:11|max:11',
+    //         'Gender' => 'required',
+    //         'Qualification' =>'required',
+    //         'Occupation' => 'required',
+    //         'MobilePhone' => 'required|max:10',
+    //         'HomeAddress' => 'required',
+    //         'WorkAddress' => 'required',
+    //         'HomePhone' => 'required|max:10',
+    //         'WorkPhone' => 'required|max:10',
+    //         'DateOfJoin' => 'required|date|before_or_equal:today',
+    //         'Specialization' => 'required',
+    //         'Image' =>'required',
+    //         // 'qualification_id'=>'required',
+    //         // 'occupation_id'=>'required'
+    //     // ], $messages);
+    // ]);
 
 
     // for increment IDTeam automatically when adding a new member
@@ -325,7 +344,6 @@ class MemberController extends Controller
      {
       return view('manager.member.edit',compact('member', 'cityName', 'qualifications', 'specializations', 'occupations'));
      }
-     
   }
 
   
@@ -357,7 +375,35 @@ class MemberController extends Controller
     //     // 'occupation_id'=>'required'
     // ]);
     
+
+
+    $validator = Validator::make($request->all(), [
+        'NotPad' => 'required|max:255',
+        'branch' => 'required',
+        // 'IDTeam' => 'required|unique:members|max:255',
+        'FullName' => 'required',
+        'MotherName' => 'required',
+        'PlaceOfBirth' => 'required',
+        'BirthDate' => 'required|date|before_or_equal:today',
+        'Constraint' => 'required',
+        'City' => 'required',
+        'IDNumber' => 'required|unique:members|min:11|max:11',
+        'Gender' => 'required',
+        'Qualification' =>'required',
+        'Occupation' => 'required',
+        'MobilePhone' => 'required|max:10',
+        'HomeAddress' => 'required',
+        'WorkAddress' => 'required',
+        'HomePhone' => 'required|max:10',
+        'WorkPhone' => 'required|max:10',
+        'DateOfJoin' => 'required|date|before_or_equal:today',
+        'Specialization' => 'required',
+        'Image' =>'required',
+        // 'qualification_id'=>'required',
+        // 'occupation_id'=>'required'
+    ]);
   
+
 
   // Convert Birthdate format
   $birthDate = DateTime::createFromFormat('m/d/Y H:i',$request->BirthDate);
@@ -560,7 +606,6 @@ $member->update();
     }
 
 
-
  
     public function import(Request $request)
     {
@@ -690,21 +735,41 @@ $member->update();
     
         return response()->make('', 200, $headers);
     }
+
     
-
-
+    // public function GetCityWithMemberCount(Request $request)
+    // {
+    //     $searchTerm = $request->input('searchTerm');
+    //     $membersCount = Member::where('City', 'like', $searchTerm)->count();
+        
+    //     return view('admin.index', compact('membersCount'));
+    // }
+    
 
 
 public function GetCityWithMemberCount(Request $request)
 {
-
-    $searchTerm = $request->input('searchTerm');
-
-    $members =  Member::where('City', 'like', $searchTerm)->count();
+    // $searchTerm = $request->input('searchTerm');
+    $members =  Member::where('City', 'like', 'حلب')->count();
     
-    // session()->put('members', $members);
-    return view('admin.index',compact('members'));
+    if($members)
+        return view('admin.index', compact('members'));
+    else
+        return view('404');
 }
+
+
+
+// public function getMembersCountByCity()
+// {
+//     $membersCountByCity = Member::select('City', DB::raw('count(*) as count'))
+//         ->groupBy('City')
+//         ->get();
+
+//     return view('admin.index', ['membersCountByCity' => $membersCountByCity]);
+// }
+
+
 
   public function GetCityWithMember(Request $request)
    {

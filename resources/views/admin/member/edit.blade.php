@@ -270,17 +270,19 @@
 										</div>
 									</div><br>
 
-
-									{{-- <td><img src="{{asset('images/'.$member->Image)}}" style="width: 50px;"></td> --}}
-
-
 									<div class="row">
 										<div class="col">
 											<label for="exampleTextarea">صورة العضو المنتسب</label> <br>
 											<input type="hidden" name="Image" value="{{ $member->Image }}">
+											<br>
 											
-											<img src="{{asset('images/'.$member->Image)}}" style="width: 100px;">
+											@if ($member->Image)
+												<td><img src="{{asset('images/'.$member->Image)}}" style="width: 100px;"></td>
+											@else
+												<td><img src="{{URL::asset('assets/img/media/user.jpg')}}"  style="width: 100px;"></td>
+											@endif
 											
+											<br>											
 											<input type="file" name="Image" value="{{ $member->Image }}" class="dropify" accept=".jpg, .png, image/jpeg, image/png"
 											data-height="70" />
 										</div>

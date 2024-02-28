@@ -82,9 +82,8 @@ class UserController extends Controller
     public function destroy( $id)
     {
         User::findOrFail($id)->delete();
-        session()->flash('delete', 'Deleted successfully.');
 
+        session()->flash('delete', 'تم حذف المدير بنجاح');
         return back();
-      
-       }
+    }
 }

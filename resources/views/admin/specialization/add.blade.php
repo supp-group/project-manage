@@ -47,19 +47,28 @@
 									<div class="row">
 										<div class="col">
 											<label for="inputName" class="control-label">الاختصاص</label>
-											<input type="text" class="form-control" id="inputName" name="specialization" required>
+											<input type="text" class="form-control @error('specialization') is-invalid @enderror" 
+											id="inputName" name="specialization" required>
+
+											@error('specialization')
+												<div class="alert alert-danger">{{ $message }}</div>
+											@enderror
 										</div>
 									</div><br>
 
 									<div class="form-group">
 										<label>المؤهل العلمي</label>
-										<select name="parentId" class="form-control select">
+										<select name="parentId" class="form-control select @error('parentId') is-invalid @enderror">
+											<option>اختر المؤهل العلمي</option>
 											
 											@foreach($qualifications as $qualification)
 											<option value="{{$qualification->id}}">{{$qualification->Name}}</option>
 											@endforeach 
-
 										</select>
+
+										@error('parentId')
+												<div class="alert alert-danger">{{ $message }}</div>
+											@enderror
 									</div><br>
 
 									<div class="d-flex justify-content-center">

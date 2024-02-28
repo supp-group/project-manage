@@ -46,34 +46,51 @@
 									<div class="row">
 										<div class="col">
 											<label for="inputName" class="control-label">البريد الإلكتروني</label>
-											<input type="email" class="form-control" id="inputName" name="email" required>
+											<input type="email" class="form-control @error('email') is-invalid @enderror" 
+											id="inputName" name="email" required>
+
+											@error('email')
+												<div class="alert alert-danger">{{ $message }}</div>
+											@enderror
 										</div>
 									</div><br>
 		
 									<div class="row">
 										<div class="col">
 											<label for="inputName" class="control-label">كلمة المرور</label>
-											<input type="password" class="form-control" id="inputName" name="password" required>
+											<input type="password" class="form-control @error('password') is-invalid @enderror" 
+											id="inputName" name="password" required>
+
+											@error('password')
+												<div class="alert alert-danger">{{ $message }}</div>
+											@enderror
 										</div>
 									</div><br>
 
 									<div class="form-group">
 										<label>الدور</label>
-											<select name="Role" class="form-control select">
+											<select name="Role" class="form-control select @error('Role') is-invalid @enderror">
 												<option value="admin">مدير الموقع</option>
 												<option value="manager">مدير</option>
 											</select>
+
+											@error('Role')
+												<div class="alert alert-danger">{{ $message }}</div>
+											@enderror
 									</div><br>
 
 									<div class="form-group">
 										<label>المحافظة</label>
-										<select name="city_id" class="form-control select">
+										<select name="city_id" class="form-control select @error('city_id') is-invalid @enderror">
 											
 											@foreach($cities as $city)
 											<option value="{{$city->id}}">{{$city->Name}}</option>
 											@endforeach 
-
 										</select>
+
+										@error('city_id')
+												<div class="alert alert-danger">{{ $message }}</div>
+										@enderror
 									</div><br>
 
 									<div class="d-flex justify-content-center">

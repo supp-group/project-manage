@@ -45,22 +45,91 @@
 
 @endsection
 @section('content')
-				<!-- row -->
-				<div class="row">
-					<div class="col-md-6 col-sm-6 col-lg-6 col-xl-4">
-						<a href="">
-							<div class="dash-widget">
-								<span class="dash-widget-bg1"><i class="fa fa-users" aria-hidden="true"></i></span>
-								<div class="dash-widget-info text-right">
-								  <h3 style="color: black;">555</h3>
-								  <span class="widget-title1">Admin &nbsp; <i class="fa fa-check" aria-hidden="true"></i></span>
-								</div>
-							</div>
-						</a>
+	<!-- row -->
+	<div class="row">
+		<div class="col-md-6 col-sm-6 col-lg-6 col-xl-6">
+			<a href="{{ url('manager/memberm/show') }}">
+				<div class="dash-widget">
+					<span class="dash-widget-bg1"><i class="fa fa-users" aria-hidden="true"></i></span>
+					<div class="dash-widget-info text-right">
+						<br>
+							<h3 style="color: black;">الأعضاء</h3>
+						  <br>
 					</div>
 				</div>
-				<!-- row closed -->
+			</a>
+		</div>
+	
+		<div class="col-md-6 col-sm-6 col-lg-6 col-xl-6">
 
+				<div class="dash-widget">
+					<span class="dash-widget-bg1"><i class="fa fa-user" aria-hidden="true"></i></span>
+					<div class="dash-widget-info text-right">
+						<br>
+							<h3 style="color: black;">المدراء</h3>
+						  <br>
+					</div>
+				</div>
+
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="col-md-6 col-sm-6 col-lg-6 col-xl-6">
+
+				<div class="dash-widget">
+					<span class="dash-widget-bg1"><i class="fa fa-home" aria-hidden="true"></i></span>
+					<div class="dash-widget-info text-right">
+						<br>
+							<h3 style="color: black;">المحافظات</h3>
+						  <br>
+					</div>
+				</div>
+
+		</div>
+	
+		<div class="col-md-6 col-sm-6 col-lg-6 col-xl-6">
+
+				<div class="dash-widget">
+					<span class="dash-widget-bg1"><i class="fa fa-university" aria-hidden="true"></i></span>
+					<div class="dash-widget-info text-right">
+						<br>
+							<h3 style="color: black;">المؤهلات العلمية</h3>
+						  <br>
+					</div>
+				</div>
+
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="col-md-6 col-sm-6 col-lg-6 col-xl-6">
+
+				<div class="dash-widget">
+					<span class="dash-widget-bg1"><i class="fa fa-graduation-cap" aria-hidden="true"></i></span>
+					<div class="dash-widget-info text-right">
+						<br>
+							<h3 style="color: black;">الاختصاصات</h3>
+						  <br>
+					</div>
+				</div>
+
+		</div>
+	
+		<div class="col-md-6 col-sm-6 col-lg-6 col-xl-6">
+
+				<div class="dash-widget">
+					<span class="dash-widget-bg1"><i class="fa fa-gavel" aria-hidden="true"></i></span>
+					<div class="dash-widget-info text-right">
+						<br>
+							<h3 style="color: black;">المهن</h3>
+						  <br>
+					</div>
+				</div>
+
+		</div>
+	</div>
+	<!-- row closed -->
 @endsection
 @section('js')
 @endsection

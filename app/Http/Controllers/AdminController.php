@@ -14,10 +14,10 @@ class AdminController extends Controller
     public function index()
     {
         if(auth()->user()->Role == "admin") {
-            return view('admin.member.show');
+            return view('admin.index');
         }
         else if(auth()->user()->Role == "manager") {
-            return view('manager.member.show');
+            return view('manager.index');
         }
     }
 
