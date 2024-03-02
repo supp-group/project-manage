@@ -14,10 +14,12 @@ use DateTime;
 use Illuminate\Http\RedirectResponse;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Date;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
-use Illuminate\Support\Facades\DB;
+
 class MemberController extends Controller
 
 {
@@ -169,16 +171,16 @@ class MemberController extends Controller
             'BirthDate' => 'required|date|before:today',
             'Constraint' => 'required',
             'City' => 'required',
-            'IDNumber' => 'required|unique:members|min:11|max:11',
+            'IDNumber' => 'required|unique:members|min:10|max:11',
             'Gender' => 'required',
             'Qualification' =>'required',
             'Occupation' => 'required',
-            'MobilePhone' => 'required|max:10',
+            'MobilePhone' => 'required|max:10|min:9',
             'HomeAddress' => 'required',
             'WorkAddress' => 'required',
-            'HomePhone' => 'required|max:10',
-            'WorkPhone' => 'required|max:10',
-            'DateOfJoin' => 'required|date|before_or_equal:today',
+            'HomePhone' => 'required|max:10|min:9',
+            'WorkPhone' => 'required|max:10|min:9',
+            'DateOfJoin' => 'required|numeric|digits:4|before_or_equal:' . date('Y'),
             'Specialization' => 'required',
             'Image' =>'required',
         ]);
@@ -246,12 +248,12 @@ class MemberController extends Controller
     
 
   // Convert Birthdate format
-  $birthDate = DateTime::createFromFormat('m/d/Y H:i',$request->BirthDate);
-  $birthDateFormatted = $birthDate ? $birthDate->format('Y-m-d H:i:s') : null;
+  $birthDate = DateTime::createFromFormat('m/d/Y',$request->BirthDate);
+  $birthDateFormatted = $birthDate ? $birthDate->format('Y-m-d') : $request->BirthDate;
 
   // Convert DateOfJoin format
-  $dateJoin = DateTime::createFromFormat('m/d/Y H:i',$request->DateOfJoin );
-  $dateJoinFormatted = $dateJoin ? $dateJoin->format('Y-m-d H:i:s') : null;
+  $dateJoin = DateTime::createFromFormat('Y',$request->DateOfJoin );
+  $dateJoinFormatted = $dateJoin ? $dateJoin->format('Y') : null;
 
 
   $qualificationId = $request->Qualification;
@@ -275,6 +277,8 @@ class MemberController extends Controller
    
     $member->PlaceOfBirth = $request->PlaceOfBirth;
     $member->BirthDate = $birthDateFormatted;
+    // $member->BirthDate = $request->BirthDate;
+
      
     $member->Constraint = $request->Constraint;
     $member->City = $request->City;
@@ -293,6 +297,7 @@ class MemberController extends Controller
 
     $member->WorkPhone  = $request->WorkPhone;
     $member->DateOfJoin  = $dateJoinFormatted;
+    // $member->DateOfJoin  = $request->DateOfJoin;
     
     $member->save();
 
@@ -347,7 +352,7 @@ class MemberController extends Controller
   }
 
   
-  public function update(Request $request, $id)
+  public function update(Request $request, $id): RedirectResponse
   {
     // $validated = $request->validate([
     //     'NotPad' => 'required|max:255',
@@ -377,14 +382,14 @@ class MemberController extends Controller
     
 
 
-    $validator = Validator::make($request->all(), [
+    $validated = $request->validate([
         'NotPad' => 'required|max:255',
         'branch' => 'required',
         // 'IDTeam' => 'required|unique:members|max:255',
         'FullName' => 'required',
         'MotherName' => 'required',
         'PlaceOfBirth' => 'required',
-        'BirthDate' => 'required|date|before_or_equal:today',
+        'BirthDate' => 'required|date|before:today',
         'Constraint' => 'required',
         'City' => 'required',
         'IDNumber' => 'required|unique:members|min:11|max:11',
@@ -399,19 +404,17 @@ class MemberController extends Controller
         'DateOfJoin' => 'required|date|before_or_equal:today',
         'Specialization' => 'required',
         'Image' =>'required',
-        // 'qualification_id'=>'required',
-        // 'occupation_id'=>'required'
     ]);
   
 
 
   // Convert Birthdate format
-  $birthDate = DateTime::createFromFormat('m/d/Y H:i',$request->BirthDate);
-  $birthDateFormatted = $birthDate ? $birthDate->format('Y-m-d H:i:s') : null;
+  $birthDate = DateTime::createFromFormat('m/d/Y',$request->BirthDate);
+  $birthDateFormatted = $birthDate ? $birthDate->format('Y-m-d') : $request->BirthDate;
 
   // Convert DateOfJoin format
-  $dateJoin = DateTime::createFromFormat('m/d/Y H:i',$request->DateOfJoin );
-  $dateJoinFormatted = $dateJoin ? $dateJoin->format('Y-m-d H:i:s') : null;
+  $dateJoin = DateTime::createFromFormat('Y',$request->DateOfJoin );
+  $dateJoinFormatted = $dateJoin ? $dateJoin->format('Y') : null;
 
 
   $qualificationId = $request->Qualification;
@@ -620,13 +623,13 @@ $member->update();
             $data = str_getcsv($line);
     
             // Convert Birthdate format
-            $birthDate = DateTime::createFromFormat('m/d/Y H:i', $data[6]);
-            $birthDateFormatted = $birthDate ? $birthDate->format('Y-m-d H:i:s') : null;
+            $birthDate = DateTime::createFromFormat('m/d/Y', $data[6]);
+            $birthDateFormatted = $birthDate ? $birthDate->format('Y-m-d') : null;
 
                 
             // Convert DateOfJoin format
-            $dateJoin = DateTime::createFromFormat('m/d/Y H:i', $data[18]);
-            $dateJoinFormatted = $dateJoin ? $dateJoin->format('Y-m-d H:i:s') : null;
+            // $dateJoin = DateTime::createFromFormat('Y', $data[18]);
+            // $dateJoinFormatted = $dateJoin ? $dateJoin->format('Y') : null;
     
             Member::create([
                 'NotPad' => $data[0],
@@ -647,7 +650,7 @@ $member->update();
                 'WorkAddress' => $data[15],
                 'HomePhone' => $data[16],
                 'WorkPhone' => $data[17],
-                'DateOfJoin' => $dateJoinFormatted,
+                'DateOfJoin' => $data[18],
                 'Specialization' => $data[19],
                 'Image' => $data[20],
             ]);

@@ -50,8 +50,12 @@
 										<div class="col">
 											<label for="inputName" class="control-label">البريد الإلكتروني</label>
 											<input type="hidden" name="email" value="{{ $user->email }}">
-											<input type="text" class="form-control" id="inputName" name="email"
-											value="{{ $user->email }}" required>
+											<input type="text" class="form-control @error('email') is-invalid @enderror" 
+											id="inputName" name="email" value="{{ $user->email }}" required>
+
+											@error('email')
+												<div class="alert alert-danger">{{ $message }}</div>
+											@enderror
 										</div>
 									</div><br>
 
@@ -59,7 +63,11 @@
 										<div class="col">
 											<label for="inputName" class="control-label">كلمة المرور</label>
 											<input type="hidden" name="password" value="{{ $user->password }}">
-											<input type="text" class="form-control" id="inputName" name="password" required>
+											<input type="text" class="form-control @error('password') is-invalid @enderror" id="inputName" name="password" required>
+
+											@error('password')
+												<div class="alert alert-danger">{{ $message }}</div>
+											@enderror
 										</div>
 									</div><br>
 
@@ -73,13 +81,16 @@
 
 									<div class="form-group">
 										<label>المحافظة</label>
-										<select name="city_id" class="form-control select">
+										<select name="city_id" class="form-control select @error('Role') is-invalid @enderror">
 											
 											@foreach($cities as $city)
 											<option value="{{$city->id}}">{{$city->Name}}</option>
 											@endforeach 
-
 										</select>
+
+										@error('city_id')
+												<div class="alert alert-danger">{{ $message }}</div>
+										@enderror
 									</div><br>
 
 									<div class="d-flex justify-content-center">

@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('FullName')->nullable();
             $table->string('MotherName')->nullable();
             $table->string('PlaceOfBirth')->nullable();
-            $table->dateTime('BirthDate')->nullable();
+            $table->date('BirthDate')->nullable();
             $table->string('Constraint')->nullable();
             $table->string('City')->nullable();
             $table->string('IDNumber')->nullable();
@@ -31,7 +31,10 @@ return new class extends Migration
             $table->string('WorkAddress')->nullable();
             $table->string('HomePhone')->nullable();
             $table->string('WorkPhone')->nullable();
-            $table->dateTime('DateOfJoin')->nullable();
+            // $table->dateTime('DateOfJoin')->nullable();
+            
+            $table->year('DateOfJoin')->nullable();
+
             $table->string('Specialization')->nullable();
             $table->string('Image')->nullable();  
             $table->timestamps();

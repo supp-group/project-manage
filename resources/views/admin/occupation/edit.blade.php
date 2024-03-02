@@ -50,8 +50,12 @@
 										<div class="col">
 											<label for="inputName" class="control-label">المهنة</label>
 											<input type="hidden" name="Name" value="{{ $occupation->Name }}">
-											<input type="text" class="form-control" id="inputName" name="Name"
-											value="{{ $occupation->Name }}" required>
+											<input type="text" class="form-control @error('Name') is-invalid @enderror" 
+											id="inputName" name="Name" value="{{ $occupation->Name }}" required>
+
+											@error('Name')
+												<div class="alert alert-danger">{{ $message }}</div>
+											@enderror
 										</div>
 									</div><br>
 

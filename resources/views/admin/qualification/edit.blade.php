@@ -48,10 +48,14 @@
 
 									<div class="row">
 										<div class="col">
-											<label for="inputName" class="control-label">ملاحظات</label>
+											<label for="inputName" class="control-label">المؤهل العلمي</label>
 											<input type="hidden" name="Name" value="{{ $qualification->Name }}">
-											<input type="text" class="form-control" id="inputName" name="Name"
-											value="{{ $qualification->Name }}" required>
+											<input type="text" class="form-control @error('Name') is-invalid @enderror" 
+											id="inputName" name="Name" value="{{ $qualification->Name }}" required>
+
+											@error('Name')
+												<div class="alert alert-danger">{{ $message }}</div>
+											@enderror
 										</div>
 									</div><br>
 
