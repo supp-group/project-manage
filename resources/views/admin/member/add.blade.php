@@ -4,7 +4,6 @@
 {{-- flatpicker --}}
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 
-
 <!--- Internal Select2 css-->
 <link href="{{URL::asset('assets/plugins/select2/css/select2.min.css')}}" rel="stylesheet">
 <!---Internal Fileupload css-->
@@ -299,17 +298,26 @@
 									  <div class="row">
 										<div class="col">
 										  <div class="form-group">
-											<label>تاريخ الانتساب</label>
-											  <input type="datetime-local" class="form-control @error('DateOfJoin') is-invalid @enderror" 
-											  name="DateOfJoin" required>
+											<label>تاريخ الانتساب</label> <br>
+											  {{-- <input type="datetime-local" class="form-control @error('DateOfJoin') is-invalid @enderror" 
+											  name="DateOfJoin" required> --}}
+											  <select class="form-control select" name="DateOfJoin" id="year"></select>
 
 											@error('DateOfJoin')
 										  		<div class="alert alert-danger">{{ $message }}</div>
 									  		@enderror
+												
 										  </div>
 										</div>
 									  </div><br>
 					
+									  {{-- <form>
+										<span>
+											<label for="year">Year:</label>
+											<select name="year" id="year">Year:</select>
+										</span>
+									  </form> --}}
+
 									  <div class="row">
 										<div class="col">
 										  <label for="exampleTextarea">صورة العضو المنتسب</label>
@@ -330,6 +338,23 @@
 				<!-- row closed -->
 @endsection
 @section('js')
+
+<script>
+	const yearSelect = document.getElementById("year");
+
+	function populateYears(){
+		let year = new Date().getFullYear();
+		for(let i=0; i<101; i++){
+			const option = document.createElement("option");
+			option.textContent = year-i;
+			yearSelect.appendChild(option);
+		}
+	}
+	populateYears();
+</script>
+
+
+
 
 {{-- flatpicker --}}
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>

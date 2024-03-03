@@ -628,8 +628,8 @@ $member->update();
 
                 
             // Convert DateOfJoin format
-            // $dateJoin = DateTime::createFromFormat('Y', $data[18]);
-            // $dateJoinFormatted = $dateJoin ? $dateJoin->format('Y') : null;
+            $dateJoin = DateTime::createFromFormat('Y', $data[18]);
+            $dateJoinFormatted = $dateJoin ? $dateJoin->format('Y') : null;
     
             Member::create([
                 'NotPad' => $data[0],
