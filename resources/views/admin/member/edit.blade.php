@@ -139,7 +139,7 @@
 										<div class="col">
 											<label for="inputName" class="control-label">تاريخ الولادة</label>
 											<input type="hidden" name="BirthDate" value="{{ $member->BirthDate }}">
-											<input type="datetime-local" class="form-control @error('BirthDate') is-invalid @enderror" 
+											<input type="datetime" class="form-control @error('BirthDate') is-invalid @enderror" 
 											id="inputName" name="BirthDate" value="{{ $member->BirthDate }}" required>
 
 											@error('BirthDate')
@@ -343,8 +343,11 @@
 										<div class="col">
 											<label for="inputName" class="control-label">تاريخ الانتساب</label>
 											<input type="hidden" name="DateOfJoin" value="{{ $member->DateOfJoin }}">
-											<input type="datetime-local" class="form-control @error('DateOfJoin') is-invalid @enderror" 
-											id="inputName" name="DateOfJoin" value="{{ $member->DateOfJoin }}" required>
+											{{-- <input type="datetime-local" class="form-control @error('DateOfJoin') is-invalid @enderror" 
+											id="inputName" name="DateOfJoin" value="{{ $member->DateOfJoin }}" required> --}}
+
+											<select class="form-control select @error('DateOfJoin') is-invalid @enderror" 
+											name="DateOfJoin" id="year"></select>
 
 											@error('DateOfJoin')
 										  		<div class="alert alert-danger">{{ $message }}</div>
@@ -385,19 +388,53 @@
 
 @section('js')
 
+<script>
+	const yearSelect = document.getElementById("year");
+
+	function populateYears(){
+		let year = new Date().getFullYear();
+		for(let i=0; i<101; i++){
+			const option = document.createElement("option");
+			option.textContent = year-i;
+			yearSelect.appendChild(option);
+		}
+	}
+	populateYears();
+</script>
+
+
 {{-- flatpicker --}}
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <script>
 	config = {
-    	enableTime: true,
+    	// enableTime: true,
     	// dateFormat: "Y-m-d",
-		dateFormat: "m/d/Y H:i",
+		// dateFormat: "Y/m/d H:i",
+		dateFormat: "Y",
 
 		altInput: true,
-		altFormat: "F j, Y"
+		// altFormat: "F j, Y"
+		altFormat: "Y"
+
 	}
 
 	flatpickr("input[type=datetime-local]", config);
+</script>
+
+<script>
+	config = {
+    	// enableTime: true,
+    	dateFormat: "Y-m-d",
+		// dateFormat: "Y/m/d H:i",
+		// dateFormat: "Y",
+
+		altInput: true,
+		altFormat: "F j, Y"
+		// altFormat: "Y"
+
+	}
+
+	flatpickr("input[type=datetime]", config);
 </script>
 
 

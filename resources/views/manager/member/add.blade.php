@@ -112,7 +112,7 @@
 										<div class="col">
 											<div class="form-group">
 												<label>تاريخ الولادة</label>
-													<input type="datetime-local" class="form-control @error('BirthDate') is-invalid @enderror" 
+													<input type="datetime" class="form-control @error('BirthDate') is-invalid @enderror" 
 													name="BirthDate" required>
 
 													@error('BirthDate')
@@ -283,13 +283,15 @@
 									  <div class="row">
 										<div class="col">
 										  <div class="form-group">
-											<label>تاريخ الانتساب</label>
-											  <input type="datetime-local" class="form-control @error('DateOfJoin') is-invalid @enderror" 
-											  name="DateOfJoin" required>
+											<label>تاريخ الانتساب</label> <br>
+											  {{-- <input type="datetime-local" class="form-control @error('DateOfJoin') is-invalid @enderror" 
+											  name="DateOfJoin" required> --}}
+											  <select class="form-control select" name="DateOfJoin" id="year"></select>
 
 											@error('DateOfJoin')
 										  		<div class="alert alert-danger">{{ $message }}</div>
 									  		@enderror
+												
 										  </div>
 										</div>
 									  </div><br>
@@ -315,19 +317,55 @@
 @endsection
 @section('js')
 
+<script>
+	const yearSelect = document.getElementById("year");
+
+	function populateYears(){
+		let year = new Date().getFullYear();
+		for(let i=0; i<101; i++){
+			const option = document.createElement("option");
+			option.textContent = year-i;
+			yearSelect.appendChild(option);
+		}
+	}
+	populateYears();
+</script>
+
+
 {{-- flatpicker --}}
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <script>
 	config = {
-    	enableTime: true,
+    	// enableTime: true,
     	// dateFormat: "Y-m-d",
-		dateFormat: "Y/m/d H:i",
+		// dateFormat: "Y/m/d H:i",
+		dateFormat: "Y",
+
 		altInput: true,
-		altFormat: "F j, Y"
+		// altFormat: "F j, Y"
+		altFormat: "Y"
+
 	}
 
 	flatpickr("input[type=datetime-local]", config);
 </script>
+
+<script>
+	config = {
+    	// enableTime: true,
+    	dateFormat: "Y-m-d",
+		// dateFormat: "Y/m/d H:i",
+		// dateFormat: "Y",
+
+		altInput: true,
+		altFormat: "F j, Y"
+		// altFormat: "Y"
+
+	}
+
+	flatpickr("input[type=datetime]", config);
+</script>
+
 
 
 	{{-- Dependent Dropdown ===> qualification & specialization --}}

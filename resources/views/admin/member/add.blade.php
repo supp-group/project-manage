@@ -310,13 +310,6 @@
 										  </div>
 										</div>
 									  </div><br>
-					
-									  {{-- <form>
-										<span>
-											<label for="year">Year:</label>
-											<select name="year" id="year">Year:</select>
-										</span>
-									  </form> --}}
 
 									  <div class="row">
 										<div class="col">
@@ -352,8 +345,6 @@
 	}
 	populateYears();
 </script>
-
-
 
 
 {{-- flatpicker --}}
