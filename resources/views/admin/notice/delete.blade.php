@@ -13,40 +13,22 @@
 				<div class="breadcrumb-header justify-content-between">
 					<div class="my-auto">
 						<div class="d-flex">
-							<h4 class="content-title mb-0 my-auto">المحافظات</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ جميع المحافظات</span>
+							<h4 class="content-title mb-0 my-auto">إشعارات الحذف</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ جميع الإشعارات</span>
 						</div>
 					</div>
-				</div>
 				<!-- breadcrumb -->
+
 @endsection
 @section('content')
-
-@if(session()->has('delete'))
-<div class="alert alert-danger alert-dismissible fade show" role="alert">
-	<strong>{{ session()->get('delete') }}</strong>
-	<button type="button" class="close" data_dismiss="alert" aria_lable="Close">
-		<span aria_hidden="true">&times;</span>
-	</button>
-</div>
-@endif
-
-@if(session()->has('Edit'))
-<div class="alert alert-success alert-dismissible fade show" role="alert">
-	<strong>{{ session()->get('Edit') }}</strong>
-	<button type="button" class="close" data_dismiss="alert" aria_lable="Close">
-		<span aria_hidden="true">&times;</span>
-	</button>
-</div>
-@endif
-
 				<!-- row opened -->
 				<div class="row row-sm">
 					<div class="col-xl-12">
 						<div class="card">
 							<div class="card-header pb-0">
 								<div class="d-flex justify-content-between">
-									<h4 class="card-title mg-b-0">جميع المحافظات</h4>
+									<h4 class="card-title mg-b-0">إشعارات الحذف</h4>
 									<i class="mdi mdi-dots-horizontal text-gray"></i>
+								
 								</div>
 							</div>
 							<div class="card-body">
@@ -55,54 +37,38 @@
 										<thead>
 											<tr>
 												<th class="wd-15p border-bottom-0">#</th>
+												<th class="wd-15p border-bottom-0">المدير</th>
 												<th class="wd-15p border-bottom-0">المحافظة</th>
-												<th class="wd-15p border-bottom-0">تعديل</th>
-												<th class="wd-15p border-bottom-0">حذف</th>
+												<th class="wd-15p border-bottom-0">الرقم الحزبي</th>
+												<th class="wd-15p border-bottom-0">الاسم الثلاثي</th>
+												<th class="wd-15p border-bottom-0">تفاصيل العضو</th>
 											</tr>
 										</thead>
-										<tbody>
+										{{-- <tbody>
 											<?php $i = 1 ?>
-											@foreach($cities as $city)
+
+											@if(isset($members) && !$members->isEmpty()) 
+											@foreach($members as $member)
 											<tr>
 												<td>{{$i++}}</td>
-												<td>{{$city->Name}}</td>
-												
+
+												<td>{{$member->email}}</td>
+												<td>{{$member->City}}</td>
+												<td>{{$member->IDTeam}}</td>
+												<td>{{$member->FullName}}</td>
+
 												<td>
-													<a class="btn btn-sm btn-info" href="{{ route('city.edit', $city->id) }}" title="تعديل"><i class="las la-pen"></i></a>
-												</td>
-												<td>
-													<a class="modal-effect btn btn-sm btn-danger" data-toggle="modal" style="cursor: pointer;"
-													data-target="#delete{{$city->id}}"><i class="las la-trash"></i></a>
-													<form action="{{route('city.delete', $city->id)}}" method="POST" enctype="multipart/form-data">
-															@csrf
-															@method('DELETE')
-														<div id="delete{{$city->id}}" class="modal fade delete-modal" role="dialog">
-															<div class="modal-dialog modal-dialog-centered">
-																<div class="modal-content">
-			
-																	<div class="modal-header">
-																		<h6 class="modal-title">حذف المحافظة: &nbsp; {{$city->Name}}</h6><button aria-label="Close" class="close" data-dismiss="modal"
-																			type="button"><span aria-hidden="true">&times;</span></button>
-																	</div>
-			
-																	<div class="modal-body text-center">
-																		<img src="{{URL::asset('assets/img/media/sent.png')}}" alt="" width="50" height="46">
-																		<br><br>
-																		<h5>هل أنت متأكد من عملية الحذف؟</h5>
-																		<br>
-																		<div class="m-t-20"> <a href="#" class="btn btn-white" data-dismiss="modal">إلغاء</a>
-																			<button type="submit" class="btn btn-danger">حذف</button>
-																		</div>
-																		<br>
-																	</div>
-																</div>
-															</div>
-														</div>
-													</form>
+													<a class="btn btn-sm btn-info" href="{{ route('member.edit', $member->id) }}" title="تعديل"><i class="las la-pen"></i></a>
 												</td>
 											</tr>
 											@endforeach
-										</tbody>
+
+										    @else 
+										    <tr>
+											    <td colspan="20">لم يتم العثور على نتائج</td>
+										    </tr>
+										    @endif
+										</tbody> --}}
 									</table>
 								</div>
 							</div>
@@ -111,14 +77,10 @@
 					<!--/div-->
 				</div>
 				<!-- /row -->
-			</div>
-			<!-- Container closed -->
-		</div>
-		<!-- main-content closed -->
 
-		
 @endsection
 @section('js')
+
 <!-- Internal Data tables -->
 <script src="{{URL::asset('assets/plugins/datatable/js/jquery.dataTables.min.js')}}"></script>
 <script src="{{URL::asset('assets/plugins/datatable/js/dataTables.dataTables.min.js')}}"></script>

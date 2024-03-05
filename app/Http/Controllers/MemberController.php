@@ -361,7 +361,7 @@ class MemberController extends Controller
     //     'FullName' => 'required',
     //     'MotherName' => 'required',
     //     'PlaceOfBirth' => 'required',
-    //     'BirthDate' => 'required|date|before_or_equal:today',
+    //     'BirthDate' => 'required|date|before:today',
     //     'Constraint' => 'required',
     //     'City' => 'required',
     //     'IDNumber' => 'required|unique:members|min:11|max:11',
@@ -376,35 +376,7 @@ class MemberController extends Controller
     //     'DateOfJoin' => 'required|date|before_or_equal:today',
     //     'Specialization' => 'required',
     //     'Image' =>'required',
-    //     // 'qualification_id'=>'required',
-    //     // 'occupation_id'=>'required'
     // ]);
-    
-
-
-    $validated = $request->validate([
-        'NotPad' => 'required|max:255',
-        'branch' => 'required',
-        // 'IDTeam' => 'required|unique:members|max:255',
-        'FullName' => 'required',
-        'MotherName' => 'required',
-        'PlaceOfBirth' => 'required',
-        'BirthDate' => 'required|date|before:today',
-        'Constraint' => 'required',
-        'City' => 'required',
-        'IDNumber' => 'required|unique:members|min:11|max:11',
-        'Gender' => 'required',
-        'Qualification' =>'required',
-        'Occupation' => 'required',
-        'MobilePhone' => 'required|max:10',
-        'HomeAddress' => 'required',
-        'WorkAddress' => 'required',
-        'HomePhone' => 'required|max:10',
-        'WorkPhone' => 'required|max:10',
-        'DateOfJoin' => 'required|date|before_or_equal:today',
-        'Specialization' => 'required',
-        'Image' =>'required',
-    ]);
   
 
 
@@ -416,10 +388,10 @@ class MemberController extends Controller
   $dateJoin = DateTime::createFromFormat('Y',$request->DateOfJoin );
   $dateJoinFormatted = $dateJoin ? $dateJoin->format('Y') : null;
 
-
+ 
   $qualificationId = $request->Qualification;
   $qualificationName = Qualification::where('id', $qualificationId)->first()->Name;
-  
+ 
   
   $specializationId = $request->Specialization;
   $specializationName = Qualification::where('id', $specializationId)->first()->specialization;

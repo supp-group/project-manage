@@ -86,4 +86,10 @@ class UserController extends Controller
         session()->flash('delete', 'تم حذف المدير بنجاح');
         return back();
     }
+
+
+
+    public function allEditNotice(){
+    
+    }
 }

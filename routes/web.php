@@ -135,18 +135,26 @@ Route::middleware(['auth', 'verified', 'admin'])-> prefix('admin')->group(functi
     Route::delete('delete/{id}', [QualificationController::class, 'destroyQualification'])->name('qualification.delete');
   });
 
-    //   /specialization
-    Route:: prefix('specialization')->group(function () {
+  //   /specialization
+  Route:: prefix('specialization')->group(function () {
 
-        Route::get('show', [QualificationController::class, 'indexSpecialization']);
-        Route::get('add', [QualificationController::class, 'createSpecialization']);
-        Route::post('save', [QualificationController::class, 'storeSpecialization'])->name('specialization.save');
+    Route::get('show', [QualificationController::class, 'indexSpecialization']);
+    Route::get('add', [QualificationController::class, 'createSpecialization']);
+    Route::post('save', [QualificationController::class, 'storeSpecialization'])->name('specialization.save');
 
-        Route::get('edit/{id}', [QualificationController::class, 'editSpecialization'])->name('specialization.edit');
-        Route::post('update/{id}', [QualificationController::class, 'updateSpecialization'])->name('specialization.update');
+    Route::get('edit/{id}', [QualificationController::class, 'editSpecialization'])->name('specialization.edit');
+    Route::post('update/{id}', [QualificationController::class, 'updateSpecialization'])->name('specialization.update');
 
-        Route::delete('delete/{id}', [QualificationController::class, 'destroySpecialization'])->name('specialization.delete');
-    });
+    Route::delete('delete/{id}', [QualificationController::class, 'destroySpecialization'])->name('specialization.delete');
+  });
+
+  //   /notice
+  Route:: prefix('notice')->group(function () {
+
+    Route::get('show', [UserController::class, 'allEditNotice']);
+    Route::post('update/{id}', [UserController::class, 'getEditNotice'])->name('getEditNotice');
+
+  });
 
 });
 
