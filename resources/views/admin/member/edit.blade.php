@@ -239,7 +239,7 @@
 											<option value="{{ $member->Occupation }}">اختر المهنة</option>
 											
 											@foreach($occupations as $occupation)
-											<option value="{{$occupation->Name}}">{{$occupation->Name}}</option>
+											<option value="{{$occupation->Name}}" @selected(old('Occupation')==$occupation->Name)>{{$occupation->Name}}</option>
 											@endforeach 
 										</select>
 
@@ -251,10 +251,10 @@
 									<div class="form-group">
 										<label>المؤهل العلمي</label>
 										<select name="Qualification" id="qualificationSelect" class="form-control select @error('Qualification') is-invalid @enderror" onChange="loadSpecializations()">
-											<option>اختر المؤهل العلمي</option>
+											<option value="{{ $member->Qualification }}">اختر المؤهل العلمي</option>
 
 											@foreach($qualifications as $qualification)	
-												<option value="{{$qualification->id}}">{{$qualification->Name}}</option>
+												<option value="{{$qualification->id}}" @selected(old('Qualification')==$qualification->id)>{{$qualification->Name}}</option>
 											@endforeach 
 										</select>
 
@@ -265,14 +265,32 @@
 
 									<div class="form-group">
 										<label>الاختصاص</label>
-										<select name="Specialization" class="form-control select @error('Specialization') is-invalid @enderror" id="specializationSelect">
-											<!-- Options will be loaded dynamically -->
+										<select name="Specialization" id="specializationSelect"
+										class="form-control select @error('Specialization') is-invalid @enderror">
+											<option value="{{ $member->Specialization }}">اختر الاختصاص</option>
+										<!-- Options will be loaded dynamically -->
 										</select>
-
-										@error('Specialization')
+										
+										 @error('Specialization')
 											<div class="alert alert-danger">{{ $message }}</div>
 										@enderror
 									</div><br> 
+
+{{-- 
+									<div class="form-group">
+										<label>الاختصاص</label>
+										<select name="Specialization" id="specializationSelect" data-value="{{ $member ? $member->value : old('Specialization') }}"
+											class="form-control select @error('Specialization') is-invalid @enderror">
+											<option value="">اختر الاختصاص</option>
+										</select>
+									
+										@error('Specialization')
+											<div class="alert alert-danger">{{ $message }}</div>
+										@enderror
+									</div><br> --}}
+
+
+
 
 									<div class="row">
 										<div class="col">
@@ -440,7 +458,7 @@
 
 
 {{-- Dependent Dropdown ===> qualification & specialization --}}
-<script>
+{{-- <script>
 	document.addEventListener("DOMContentLoaded", function() {
 	  const qualificationSelect = document.querySelector('#qualificationSelect');
 	  const specializationSelect = document.querySelector('#specializationSelect');
@@ -474,7 +492,55 @@
 		  });
 	  });
 	});
+</script> --}}
+
+
+
+
+
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function() {
+  const qualificationSelect = document.querySelector('#qualificationSelect');
+  const specializationSelect = document.querySelector('#specializationSelect');
+
+  qualificationSelect.addEventListener('change', function() {
+    const qualificationName = this.value;
+
+    var url = "{{ url('admin/member/get-specializations/[itemname]') }}";
+    url = url.replace('[itemname]', qualificationName);
+
+    fetch(url)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then(specializations => {
+        specializationSelect.innerHTML = '<option value=""></option>';
+        specializations.forEach(specialization => {
+          const option = document.createElement('option');
+          option.value = specialization.id;
+          option.textContent = specialization.specialization;
+          specializationSelect.appendChild(option);
+        });
+      })
+      .catch(error => {
+        console.error('There has been a problem with your fetch operation:', error);
+      });
+  });
+});
+
+	
 </script>
+
+
+
+
+
+
 
 
 

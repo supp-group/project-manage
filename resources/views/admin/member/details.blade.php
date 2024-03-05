@@ -235,6 +235,10 @@
 										</div>
 									</div><br>
 
+									<div class="d-flex justify-content-center">
+                                        <a href="{{ url('admin/member/show') }}" class="btn btn-primary" style="align-items: center;">رجوع &nbsp; <i class="fa fa-arrow-left"></i></a>
+                                    </div>
+
 								</form>
 							</div>
 						</div>

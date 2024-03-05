@@ -421,13 +421,28 @@ class MemberController extends Controller
   $dateJoin = DateTime::createFromFormat('Y',$request->DateOfJoin );
   $dateJoinFormatted = $dateJoin ? $dateJoin->format('Y') : null;
 
- 
-  $qualificationId = $request->Qualification;
-  $qualificationName = Qualification::where('id', $qualificationId)->first()->Name;
- 
+
+  $qualification = $request->Qualification;
+
+  if (is_numeric($qualification)) {
+      // إذا كانت القيمة هي id
+      $qualificationName = Qualification::where('id', $qualification)->value('Name');
+  } else {
+      // إذا كانت القيمة هي اسم
+      $qualificationName = $qualification;
+  }
   
-  $specializationId = $request->Specialization;
-  $specializationName = Qualification::where('id', $specializationId)->first()->specialization;
+  
+$specialization = $request->Specialization;
+
+  if (is_numeric($specialization)) {
+      // إذا كانت القيمة هي id
+      $specializationName = Qualification::where('id', $specialization)->value('specialization');
+
+  } else {
+      // إذا كانت القيمة هي اسم
+      $specializationName = $specialization;
+  }
 
 
 
