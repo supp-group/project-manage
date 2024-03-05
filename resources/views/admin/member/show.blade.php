@@ -7,6 +7,8 @@
 <link href="{{URL::asset('assets/plugins/datatable/css/jquery.dataTables.min.css')}}" rel="stylesheet">
 <link href="{{URL::asset('assets/plugins/datatable/css/responsive.dataTables.min.css')}}" rel="stylesheet">
 <link href="{{URL::asset('assets/plugins/select2/css/select2.min.css')}}" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" 
+integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 @endsection
 @section('page-header')
 				<!-- breadcrumb -->
@@ -119,75 +121,31 @@
 				<br>
 
 
-{{-- <style>
+ <style>
 
-	.content .popup-image{
-	position: fixed;
-	top: 0;
-	left: 0;
-	background: rgba(0, 0, 0, 0.7);
-	height: 100%;
-	width: 100%;
-	z-index: 100;
-	display: none;
-    }
-    .content .popup-image span{
-	position: absolute;
-	top: 0;
-	right: 10px;
-	font-size: 60px;
-	font-weight: bolder;
-	color: #fff;
-	cursor: pointer;
-	z-index: 100;
-    }
-	.content .popup-image img{
-		position: absolute;
-		top: 50%;
-		left: 50%;
-	    transform: translate(-50%, -50%);
-	    border: 5px solid #fff;
-	    border-radius: 5px;
-	    width: 750px;
-	    object-fit: cover;
-	    }
+.pagination {
+    display: flex;
+    justify-content: center;
+}
 
-	img{
-		cursor: pointer;
-	}
-	
-	.content .popup-image{
-    position: fixed;
-    top: 0;
-    left: 0;
-    background: rgba(0, 0, 0, 0.7);
-    height: 100%;
-    width: 100%;
-    z-index: 100;
-    display: none;
-	}
-	.content .popup-image span{
-	position: absolute;
-	top: 35px;
-	right: 10px;
-	font-size: 60px;
-	font-weight: bolder;
-	color: #fff;
-	cursor: pointer;
-	z-index: 100;
-	}
-	.content .popup-image img{
-	position: absolute;
-	top: 55%;
-	left: 55%;
-	transform: translate(-50%, -50%);
-	border: 5px solid #fff;
-	border-radius: 5px;
-	width: 750px;
-	object-fit: cover;
-	}
+.pagination .page-item {
+    margin: 0 5px;
+}
 
-</style> --}}
+.pagination .page-link {
+    font-size: 16px; /* تعديل حجم الخط حسب الحاجة */
+    padding: 5px 10px; /* تعديل حجم الهامش حول العناصر */
+    border: 1px solid #ccc; /* إضافة حدود للعناصر */
+    border-radius: 5px; /* تقويس زوايا العناصر */
+}
+
+.pagination .page-item.active .page-link {
+    background-color: #007bff; /* تغيير لون الخلفية للصفحة النشطة */
+    color: #fff; /* تغيير لون النص للصفحة النشطة */
+}
+
+
+</style>
 
 				<!-- breadcrumb -->
 @endsection
@@ -220,142 +178,112 @@
 </div>
 @endif
 
-				<!-- row opened -->
-				<div class="row row-sm">
-					<div class="col-xl-12">
-						<div class="card">
-							<div class="card-header pb-0">
-								<div class="d-flex justify-content-between">
-									<h4 class="card-title mg-b-0">جميع الأعضاء</h4>
-									<i class="mdi mdi-dots-horizontal text-gray"></i>
+
+
+<div class="row row-sm">
+    <div class="col-xl-12">
+        <div class="card">
+            <div class="card-header pb-0">
+                <div class="d-flex justify-content-between">
+                    <h4 class="card-title mg-b-0">جميع الأعضاء</h4>
+                    <i class="mdi mdi-dots-horizontal text-gray"></i>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table text-md-nowrap" id="example1">
+                        <thead>
+                            <tr>
+								<th class="wd-15p border-bottom-0">#</th>
+								<th class="wd-15p border-bottom-0">الفرع</th>
+								<th class="wd-15p border-bottom-0">الرقم الحزبي</th>
+								<th class="wd-15p border-bottom-0">الاسم الثلاثي</th>
+								<th class="wd-15p border-bottom-0">المحافظة</th>
+								<th class="wd-15p border-bottom-0">التفاصيل</th>
+								<th class="wd-15p border-bottom-0">تعديل</th>
+								<th class="wd-15p border-bottom-0">حذف</th>
+							</tr>
+                        </thead>
+                    	<tbody>
+							<?php $i = 1 ?>
+
+							@if(isset($members) && !$members->isEmpty()) 
+							@foreach($members as $member)
+							<tr>
+								<td>{{$i++}}</td>
+								<td>{{$member->branch}}</td>
+								<td>{{$member->IDTeam}}</td>
+								<td>{{$member->FullName}}</td>
+								<td>{{$member->City}}</td>
 								
-								</div>
-							</div>
-							<div class="card-body">
-								<div class="table-responsive">
-									<table class="table text-md-nowrap" id="example1">
-										<thead>
-											<tr>
-												<th class="wd-15p border-bottom-0">#</th>
-												<th class="wd-15p border-bottom-0">ملاحظات</th>
-												<th class="wd-15p border-bottom-0">الفرع</th>
-												<th class="wd-15p border-bottom-0">الرقم الحزبي</th>
-												<th class="wd-15p border-bottom-0">الاسم الثلاثي</th>
-												<th class="wd-15p border-bottom-0">اسم الأم</th>
-												<th class="wd-15p border-bottom-0">محل الولادة</th>
-												<th class="wd-15p border-bottom-0">تاريخ الولادة</th>
-												<th class="wd-15p border-bottom-0">محل ورقم القيد</th>
-												<th class="wd-15p border-bottom-0">المحافظة</th>
-												<th class="wd-15p border-bottom-0">الرقم الوطني</th>
-												<th class="wd-15p border-bottom-0">الجنس</th>
-                                                
-												<th class="wd-15p border-bottom-0">المؤهل العلمي</th>
-												<th class="wd-15p border-bottom-0">الاختصاص</th>
-												<th class="wd-15p border-bottom-0">المهنة</th>
-												<th class="wd-15p border-bottom-0">رقم الموبايل</th>
-												<th class="wd-15p border-bottom-0">عنوان المنزل</th>
-												<th class="wd-15p border-bottom-0">عنوان العمل</th>
-												<th class="wd-15p border-bottom-0">هاتف المنزل</th>
-												<th class="wd-15p border-bottom-0">هاتف العمل</th>
-												<th class="wd-15p border-bottom-0">تاريخ الانتساب</th>
-												<th class="wd-15p border-bottom-0">الصورة</th>
-												<th class="wd-15p border-bottom-0">تعديل</th>
-												<th class="wd-15p border-bottom-0">حذف</th>
-											</tr>
-										</thead>
-										<tbody>
-											<?php $i = 1 ?>
 
-											@if(isset($members) && !$members->isEmpty()) 
-											@foreach($members as $member)
-											<tr>
-												<td>{{$i++}}</td>
-												<td>{{$member->NotPad}}</td>
-												<td>{{$member->branch}}</td>
-												<td>{{$member->IDTeam}}</td>
-												<td>{{$member->FullName}}</td>
-												<td>{{$member->MotherName}}</td>
-												<td>{{$member->PlaceOfBirth}}</td>
-												<td>{{$member->BirthDate}}</td>
-												<td>{{$member->Constraint}}</td>
-												<td>{{$member->City}}</td>
-												<td>{{$member->IDNumber}}</td>
-												<td>{{$member->Gender}}</td>
+								{{-- @if ($member->Image)
+									<td><img src="{{asset('images/'.$member->Image)}}" style="width: 50px;"></td>
+								@else
+									<td><img src="{{URL::asset('assets/img/media/user.jpg')}}"  style="width: 50px;"></td>
+								@endif --}}
 
-												<td>{{$member->Qualification}}</td>
-												<td>{{$member->Specialization}}</td>
-												<td>{{$member->Occupation}}</td>
-												<td>{{$member->MobilePhone}}</td>
-												<td>{{$member->HomeAddress}}</td>
-												<td>{{$member->WorkAddress}}</td>
-												<td>{{$member->HomePhone}}</td>
-												<td>{{$member->WorkPhone}}</td>
-												<td>{{$member->DateOfJoin}}</td>
+								<td>
+									{{-- {{ route('member.details', $member->id) }} --}}
+									<a class="btn btn-sm btn-success" href="" title="التفاصيل"><i class="las la-user"></i></a>
+								</td>
+								<td>
+									<a class="btn btn-sm btn-info" href="{{ route('member.edit', $member->id) }}" title="تعديل"><i class="las la-pen"></i></a>
+								</td>
+								<td>
+									<a class="modal-effect btn btn-sm btn-danger" data-toggle="modal" style="cursor: pointer;"
+									data-target="#delete{{$member->id}}"><i class="las la-trash"></i></a>
+									<form action="{{route('member.delete', $member->id)}}" method="POST" enctype="multipart/form-data">
+											@csrf
+											@method('DELETE')
+										<div id="delete{{$member->id}}" class="modal fade delete-modal" role="dialog">
+											<div class="modal-dialog modal-dialog-centered">
+												<div class="modal-content">
 
-												@if ($member->Image)
-													<td><img src="{{asset('images/'.$member->Image)}}" style="width: 50px;"></td>
-												@else
-													<td><img src="{{URL::asset('assets/img/media/user.jpg')}}"  style="width: 50px;"></td>
-												@endif
+													<div class="modal-header">
+														<h6 class="modal-title">حذف العضو: &nbsp; {{$member->FullName}}</h6><button aria-label="Close" class="close" data-dismiss="modal"
+															type="button"><span aria-hidden="true">&times;</span></button>
+													</div>
 
-												<td>
-													<a class="btn btn-sm btn-info" href="{{ route('member.edit', $member->id) }}" title="تعديل"><i class="las la-pen"></i></a>
-												</td>
-												<td>
-													<a class="modal-effect btn btn-sm btn-danger" data-toggle="modal" style="cursor: pointer;"
-													data-target="#delete{{$member->id}}"><i class="las la-trash"></i></a>
-													<form action="{{route('member.delete', $member->id)}}" method="POST" enctype="multipart/form-data">
-															@csrf
-															@method('DELETE')
-														<div id="delete{{$member->id}}" class="modal fade delete-modal" role="dialog">
-															<div class="modal-dialog modal-dialog-centered">
-																<div class="modal-content">
-			
-																	<div class="modal-header">
-																		<h6 class="modal-title">حذف العضو: &nbsp; {{$member->FullName}}</h6><button aria-label="Close" class="close" data-dismiss="modal"
-																			type="button"><span aria-hidden="true">&times;</span></button>
-																	</div>
-			
-																	<div class="modal-body text-center">
-																		<img src="{{URL::asset('assets/img/media/sent.png')}}" alt="" width="50" height="46">
-																		<br><br>
-																		<h5>هل أنت متأكد من عملية الحذف؟</h5>
-																		<br>
-																		<div class="m-t-20"> <a href="#" class="btn btn-white" data-dismiss="modal">إلغاء</a>
-																			<button type="submit" class="btn btn-danger">حذف</button>
-																		</div>
-																		<br>
-																	</div>
-																</div>
-															</div>
+													<div class="modal-body text-center">
+														<img src="{{URL::asset('assets/img/media/sent.png')}}" alt="" width="50" height="46">
+														<br><br>
+														<h5>هل أنت متأكد من عملية الحذف؟</h5>
+														<br>
+														<div class="m-t-20"> <a href="#" class="btn btn-white" data-dismiss="modal">إلغاء</a>
+															<button type="submit" class="btn btn-danger">حذف</button>
 														</div>
-													</form>
-												</td>
+														<br>
+													</div>
+												</div>
+											</div>
+										</div>
+									</form>
+								</td>
+							</tr>
+							@endforeach
+
+						 @else 
+						<tr>
+							<td colspan="20">لم يتم العثور على نتائج</td>
+						</tr>
+						@endif
+						</tbody>
+                    </table>
+                </div>
+                <!-- Pagination Links -->
+ 
+ {{-- <div class="d-flex justify-content-center">
+	
+	{!! $members->links() !!}
+	
+</div> --}}
+            </div>
+        </div>
+    </div>
+</div>
 
 
-												{{-- <div class="popup-image">
-													<span>&times;</span>
-													<img src="{{asset($member['Image'])}}" alt="">
-												</div> --}}
-
-
-											</tr>
-											@endforeach
-
-										 @else 
-										<tr>
-											<td colspan="20">لم يتم العثور على نتائج</td>
-										</tr>
-										@endif
-										</tbody>
-									</table>
-								</div>
-							</div>
-						</div>
-					</div>
-					<!--/div-->
-				</div>
-				<!-- /row -->
 
 @endsection
 @section('js')

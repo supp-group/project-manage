@@ -19,29 +19,62 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
-
+use Illuminate\Database\Eloquent\Collection;
 class MemberController extends Controller
 
 {
+
     public function index()
-    { 
-     if (optional(auth()->user())->Role == 'admin') 
-     {
-        $members = Member::orderBy('updated_at','desc')->get();
-        return view('admin.member.show',compact('members'));
-     }
-     elseif (optional(auth()->user())->Role == 'manager') {
+{ 
+    if (optional(auth()->user())->Role == 'admin') {
+        $members = Member::orderBy('updated_at', 'desc')->select('id','branch','IDTeam','FullName',
+        'City')->get();
+        return view('admin.member.show', compact('members'));
+    } elseif (optional(auth()->user())->Role == 'manager') {
         $user = auth()->user();
         $cityName = DB::table('cities')
             ->where('id', $user->city_id)
             ->value('Name');
         
-        $members = Member::where('City', $cityName)->orderBy('updated_at', 'desc')->get();
+        $members = Member::where('City', $cityName)->orderBy('updated_at', 'desc')->paginate(50);
         
         return view('manager.member.show', compact('members'));
     }
-      }
+}
 
+
+    // public function index()
+    // { 
+    //  if (optional(auth()->user())->Role == 'admin') 
+    //  {
+    //     $members = Member::orderBy('updated_at', 'desc')->get();
+    //     return view('admin.member.show',compact('members'));
+
+    //     // $members = Member::orderBy('created_at', 'desc')->limit(25)->get();
+
+    //     // return view('admin.member.show', [
+    //     //     'members' => $members,
+    //     //     'Member' => Member::all() 
+    //     //  ]);
+
+
+    //     // $members = Member::orderBy('updated_at','desc')->paginate(
+    //     //     $perPage = 50, $columns = ['*'], $pageName = 'members');
+    //     // return view('admin.member.show',compact('members'));
+
+    //  }
+    //  elseif (optional(auth()->user())->Role == 'manager') {
+    //     $user = auth()->user();
+    //     $cityName = DB::table('cities')
+    //         ->where('id', $user->city_id)
+    //         ->value('Name');
+        
+    //     $members = Member::where('City', $cityName)->orderBy('updated_at', 'desc')->get();
+        
+    //     return view('manager.member.show', compact('members'));
+    // }
+    //   }
+      
     
     public function orderBy_Last()
     { 
@@ -650,7 +683,7 @@ $member->update();
                 'WorkAddress' => $data[15],
                 'HomePhone' => $data[16],
                 'WorkPhone' => $data[17],
-                'DateOfJoin' => $data[18],
+                'DateOfJoin' => $dateJoinFormatted,
                 'Specialization' => $data[19],
                 'Image' => $data[20],
             ]);
@@ -663,18 +696,23 @@ $member->update();
     public function exportDataToCSV(Request $request)
     {
         $data = $request->input('searchTerm');
+
+        $query = Member::query(); // Start with a base query
     
-        if ($data) {
-            $members = Member::where('Name', 'like', '%' . $data . '%')
-                ->orWhere('IDTeam', 'like', '%' . $data . '%')
-                ->orWhere('Qualification', 'like', '%' . $data . '%')
-                ->orWhere('Specialization', 'like', '%' . $data . '%')
-                ->orWhere('City', 'like', '%' . $data . '%')
-                ->orWhere('Occupation', 'like', '%' . $data . '%')
-                ->get();
-        } else {
-            $members = Member::all();
+        // Only apply filters if $data is not null or not empty
+        if (!empty($data)) {
+            $query->where(function ($q) use ($data) {
+                $q->where('Name', 'like', '%' . $data . '%')
+                    ->orWhere('IDTeam', 'like', '%' . $data . '%')
+                    ->orWhere('Qualification', 'like', '%' . $data . '%')
+                    ->orWhere('Specialization', 'like', '%' . $data . '%')
+                    ->orWhere('City', 'like', '%' . $data . '%')
+                    ->orWhere('Occupation', 'like', '%' . $data . '%');
+            });
         }
+    
+        $members = $query->get(); // Execute the query
+    
     
         $csvFileName = 'members.csv';
         $headers = [
@@ -782,6 +820,21 @@ public function GetCityWithMemberCount(Request $request)
 //   $members =  Member::where('City', 'حلب')->get();
   
    return view('admin.show-members',compact('members'));
+  }
+
+
+  public function details($id)
+  {
+     $member = Member::where('id',$id)->get();
+
+     if ( auth()->user()->Role == 'admin')
+     {
+      return view('admin.member.details',compact('member'));
+     }
+    else if ( auth()->user()->Role == 'manager')
+     {
+      return view('manager.member.details',compact('member'));
+     }
   }
 
 }
