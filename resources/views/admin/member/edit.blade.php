@@ -268,29 +268,13 @@
 										<select name="Specialization" id="specializationSelect"
 										class="form-control select @error('Specialization') is-invalid @enderror">
 											<option value="{{ $member->Specialization }}">اختر الاختصاص</option>
-										<!-- Options will be loaded dynamically -->
+											<!-- Options will be loaded dynamically -->
 										</select>
 										
 										 @error('Specialization')
 											<div class="alert alert-danger">{{ $message }}</div>
 										@enderror
 									</div><br> 
-
-{{-- 
-									<div class="form-group">
-										<label>الاختصاص</label>
-										<select name="Specialization" id="specializationSelect" data-value="{{ $member ? $member->value : old('Specialization') }}"
-											class="form-control select @error('Specialization') is-invalid @enderror">
-											<option value="">اختر الاختصاص</option>
-										</select>
-									
-										@error('Specialization')
-											<div class="alert alert-danger">{{ $message }}</div>
-										@enderror
-									</div><br> --}}
-
-
-
 
 									<div class="row">
 										<div class="col">
@@ -496,11 +480,7 @@
 
 
 
-
-
-
 <script>
-
 document.addEventListener("DOMContentLoaded", function() {
   const qualificationSelect = document.querySelector('#qualificationSelect');
   const specializationSelect = document.querySelector('#specializationSelect');
@@ -531,16 +511,8 @@ document.addEventListener("DOMContentLoaded", function() {
         console.error('There has been a problem with your fetch operation:', error);
       });
   });
-});
-
-	
+});	
 </script>
-
-
-
-
-
-
 
 
 

@@ -224,7 +224,6 @@ integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEw
 								@endif --}}
 
 								<td>
-									{{-- {{ route('member.details', $member->id) }} --}}
 									<a class="btn btn-sm btn-success" href="{{ route('member.details', $member->id)}}" title="التفاصيل"><i class="las la-user"></i></a>
 								</td>
 								<td>
@@ -271,13 +270,12 @@ integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEw
 						</tbody>
                     </table>
                 </div>
+				
                 <!-- Pagination Links -->
- 
- {{-- <div class="d-flex justify-content-center">
-	
-	{!! $members->links() !!}
-	
-</div> --}}
+ 				{{-- <div class="d-flex justify-content-center">
+					{!! $members->links() !!}
+				</div> --}}
+
             </div>
         </div>
     </div>

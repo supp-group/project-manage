@@ -28,8 +28,10 @@ class MemberController extends Controller
 { 
     if (optional(auth()->user())->Role == 'admin') {
         $members = Member::orderBy('updated_at', 'desc')->select('id','branch','IDTeam','FullName',
-        'City')->get();
+        'City')->paginate(50);
+
         return view('admin.member.show', compact('members'));
+        
     } elseif (optional(auth()->user())->Role == 'manager') {
         $user = auth()->user();
         $cityName = DB::table('cities')

@@ -135,34 +135,17 @@
 							</div>
 							<div class="card-body">
 								<div class="table-responsive">
-									<table class="table text-md-nowrap" id="example1">
+									<table class="table text-md-nowrap">
 										<thead>
 											<tr>
 												<th class="wd-15p border-bottom-0">#</th>
-												<th class="wd-15p border-bottom-0">ملاحظات</th>
 												<th class="wd-15p border-bottom-0">الفرع</th>
 												<th class="wd-15p border-bottom-0">الرقم الحزبي</th>
 												<th class="wd-15p border-bottom-0">الاسم الثلاثي</th>
-												<th class="wd-15p border-bottom-0">اسم الأم</th>
-												<th class="wd-15p border-bottom-0">محل الولادة</th>
-												<th class="wd-15p border-bottom-0">تاريخ الولادة</th>
-												<th class="wd-15p border-bottom-0">محل ورقم القيد</th>
 												<th class="wd-15p border-bottom-0">المحافظة</th>
-												<th class="wd-15p border-bottom-0">الرقم الوطني</th>
-												<th class="wd-15p border-bottom-0">الجنس</th>
-                                                
-												<th class="wd-15p border-bottom-0">المؤهل العلمي</th>
-												<th class="wd-15p border-bottom-0">الاختصاص</th>
-												<th class="wd-15p border-bottom-0">المهنة</th>
-												<th class="wd-15p border-bottom-0">رقم الموبايل</th>
-												<th class="wd-15p border-bottom-0">عنوان المنزل</th>
-												<th class="wd-15p border-bottom-0">عنوان العمل</th>
-												<th class="wd-15p border-bottom-0">هاتف المنزل</th>
-												<th class="wd-15p border-bottom-0">هاتف العمل</th>
-												<th class="wd-15p border-bottom-0">تاريخ الانتساب</th>
-												<th class="wd-15p border-bottom-0">الصورة</th>
+												<th class="wd-15p border-bottom-0">التفاصيل</th>
 												<th class="wd-15p border-bottom-0">تعديل</th>
-												<th class="wd-15p border-bottom-0">حذف</th>
+												 <th class="wd-15p border-bottom-0">حذف</th>
 											</tr>
 										</thead>
 										<tbody>
@@ -171,34 +154,20 @@
 											@foreach($members as $member)
 											<tr>
 												<td>{{$i++}}</td>
-												<td>{{$member->NotPad}}</td>
 												<td>{{$member->branch}}</td>
 												<td>{{$member->IDTeam}}</td>
 												<td>{{$member->FullName}}</td>
-												<td>{{$member->MotherName}}</td>
-												<td>{{$member->PlaceOfBirth}}</td>
-												<td>{{$member->BirthDate}}</td>
-												<td>{{$member->Constraint}}</td>
 												<td>{{$member->City}}</td>
-												<td>{{$member->IDNumber}}</td>
-												<td>{{$member->Gender}}</td>
 
-												<td>{{$member->Qualification}}</td>
-												<td>{{$member->Specialization}}</td>
-												<td>{{$member->Occupation}}</td>
-												<td>{{$member->MobilePhone}}</td>
-												<td>{{$member->HomeAddress}}</td>
-												<td>{{$member->WorkAddress}}</td>
-												<td>{{$member->HomePhone}}</td>
-												<td>{{$member->WorkPhone}}</td>
-												<td>{{$member->DateOfJoin}}</td>
-
-												@if ($member->Image)
+												{{-- @if ($member->Image)
 													<td><img src="{{asset('images/'.$member->Image)}}" style="width: 50px;"></td>
 												@else
 													<td><img src="{{URL::asset('assets/img/media/user.jpg')}}"  style="width: 50px;"></td>
-												@endif
+												@endif --}}
 
+												<td>
+													<a class="btn btn-sm btn-success" href="{{ route('memberm.details', $member->id)}}" title="التفاصيل"><i class="las la-user"></i></a>
+												</td>
 												<td>
 													<a class="btn btn-sm btn-info" href="{{ route('memberm.edit', $member->id) }}" title="تعديل"><i class="las la-pen"></i></a>
 												</td>
@@ -243,6 +212,9 @@
 										@endif
 										</tbody>
 									</table>
+
+									{!! $members->withQueryString()->links('pagination::bootstrap-4') !!}
+									
 								</div>
 							</div>
 						</div>
