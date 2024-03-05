@@ -7,6 +7,7 @@ use App\Http\Controllers\OccupationController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\QualificationController;
 use App\Http\Controllers\UserController;
+use App\Models\Member;
 use Illuminate\Support\Facades\Route;
 
 
@@ -64,6 +65,7 @@ Route::middleware(['auth', 'verified', 'admin'])-> prefix('admin')->group(functi
 
         Route::get('/get-specializations/{qualificationId}',[MemberController::class, 'getSpecializations']);
 
+        Route::get('details/{id}',[MemberController::class,'details'])->name('getDetails');
         
         // search
         Route::post('team', [MemberController::class, 'searchByIDTeam'])->name('search-team');
@@ -180,6 +182,9 @@ Route::middleware(['auth', 'verified', 'manager'])-> prefix('manager')->group(fu
         Route::delete('delete/{id}', [MemberController::class, 'destroy'])->name('memberm.delete');
 
         Route::get('/get-specializations/{qualificationId}',[MemberController::class, 'getSpecializations']);
+
+        Route::get('details/{id}',[MemberController::class,'details'])->name('getDetails');
+
 
         // search
         Route::post('team', [MemberController::class, 'searchByIDTeam'])->name('search-m-team');
