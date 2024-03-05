@@ -191,7 +191,7 @@ integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEw
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table text-md-nowrap" id="example1">
+                    <table class="table text-md-nowrap" id="">
                         <thead>
                             <tr>
 								<th class="wd-15p border-bottom-0">#</th>
@@ -269,6 +269,7 @@ integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEw
 						@endif
 						</tbody>
                     </table>
+					{!! $members->withQueryString()->links('pagination::bootstrap-4') !!}
                 </div>
 				
                 <!-- Pagination Links -->
@@ -281,6 +282,13 @@ integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEw
     </div>
 </div>
 
+{{-- <div class="d-flex justify-content-center">
+	{!! $members->link() !!}
+</div> --}}
+
+{{-- <div class="d-flex justify-content-center">
+    {!! $paginationLinks !!}
+</div>  --}}
 
 
 @endsection
