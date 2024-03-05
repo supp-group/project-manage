@@ -33,6 +33,7 @@ public function index()
             'members' => $members,
             'paginationLinks' => $paginationLinks
         ]);
+
   
 
     } elseif (optional(auth()->user())->Role == 'manager') {
