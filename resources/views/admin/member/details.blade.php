@@ -33,7 +33,7 @@
 					<div class="col-lg-12 col-md-12">
 						<div class="card">
 							<div class="card-body">
-								<form action="{{ url('details', [$member->id]) }}" method="get" autocomplete="off">
+								<form action="{{ route('member.details', $member->id) }}" method="get" autocomplete="off">
 									{{ csrf_field() }}
                                     @method('get')
 

@@ -225,7 +225,7 @@ integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEw
 
 								<td>
 									{{-- {{ route('member.details', $member->id) }} --}}
-									<a class="btn btn-sm btn-success" href="{{ url('details', [$member->id])}}" title="التفاصيل"><i class="las la-user"></i></a>
+									<a class="btn btn-sm btn-success" href="{{ route('member.details', $member->id)}}" title="التفاصيل"><i class="las la-user"></i></a>
 								</td>
 								<td>
 									<a class="btn btn-sm btn-info" href="{{ route('member.edit', $member->id) }}" title="تعديل"><i class="las la-pen"></i></a>

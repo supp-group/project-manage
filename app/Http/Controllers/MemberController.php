@@ -797,7 +797,7 @@ public function GetCityWithMemberCount(Request $request)
 
   public function details($id)
   {
-     $member = Member::where('id',$id)->get();
+     $member = Member::where('id',$id)->first();
 
      if ( auth()->user()->Role == 'admin')
      {
