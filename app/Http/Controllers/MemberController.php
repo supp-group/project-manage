@@ -23,16 +23,18 @@ use Illuminate\Database\Eloquent\Collection;
 class MemberController extends Controller
 
 {
-
-    public function index()
+public function index()
 { 
     if (optional(auth()->user())->Role == 'admin') {
         $members = Member::orderBy('updated_at', 'desc')->select('id','branch','IDTeam','FullName',
         'City')->paginate(50);
-          return view('admin.member.show', [
+        $paginationLinks = $members->withQueryString()->links('pagination::bootstrap-4');
+        return view('admin.member.show', [
             'members' => $members,
-            'paginationLinks' => $members->links()
+            'paginationLinks' => $paginationLinks
         ]);
+  
+
     } elseif (optional(auth()->user())->Role == 'manager') {
         $user = auth()->user();
         $cityName = DB::table('cities')

@@ -270,18 +270,17 @@ integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEw
 						@endif
 						</tbody>
                     </table>
-					{!! $members->withQueryString()->links('pagination::bootstrap-4') !!}
+					{{-- {!! $members->withQueryString()->links('pagination::bootstrap-4') !!} --}}
+					{!! $paginationLinks !!}
+
                 </div>
-                <!-- Pagination Links -->
- 
-
-
+            
 
             </div>
         </div>
     </div>
 </div>
-
+    <!-- Pagination Links -->
 {{-- <div class="d-flex justify-content-center">
 	{!! $members->link() !!}
 </div> --}}
