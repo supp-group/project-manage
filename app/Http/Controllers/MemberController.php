@@ -661,7 +661,7 @@ $member->update();
             $data = str_getcsv($line);
     
             // Convert Birthdate format
-            $birthDate = DateTime::createFromFormat('m/d/Y', $data[6]);
+            $birthDate = DateTime::createFromFormat('d/m/Y', $data[6]);
             $birthDateFormatted = $birthDate ? $birthDate->format('Y-m-d') : null;
 
                 
