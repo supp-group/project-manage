@@ -490,7 +490,7 @@ $member->update();
 
      public function searchByName(Request $request)
     {
-        $searchTerm = $request->input('searchTerm');
+        $searchTerm = $request->input('search_FullName');
 
    if ( auth()->user()->Role == 'admin')
    {
@@ -521,7 +521,7 @@ $member->update();
 
     public function searchByIDTeam(Request $request)
     {
-        $searchTerm = $request->input('searchTerm');
+        $searchTerm = $request->input('search_IDTeam');
    if ( auth()->user()->Role == 'admin')
    {
     $members =  Member::where('IDTeam', 'like', '%'.$searchTerm.'%')->orderBy('IDTeam', 'Asc')->paginate(50);
@@ -549,7 +549,7 @@ $member->update();
 
     public function searchByQualification(Request $request)
     {
-        $searchTerm = $request->input('searchTerm');
+        $searchTerm = $request->input('search_Qualification');
    if ( auth()->user()->Role == 'admin')
    {
     $members =  Member::where('Qualification', 'like', '%'.$searchTerm.'%')->orderBy('Qualification', 'Asc')->paginate(50);
@@ -577,7 +577,7 @@ $member->update();
 
     public function searchBySpecialization(Request $request)
     {
-        $searchTerm = $request->input('searchTerm');
+        $searchTerm = $request->input('search_Specialization');
    if ( auth()->user()->Role == 'admin')
    {
     $members =  Member::where('Specialization', 'like', '%'.$searchTerm.'%')->orderBy('Specialization', 'Asc')->paginate(50);
@@ -605,7 +605,7 @@ $member->update();
 
     public function searchByCity(Request $request)
     {
-        $searchTerm = $request->input('searchTerm');
+        $searchTerm = $request->input('search_City');
 
     $members =  Member::where('City', 'like', '%'.$searchTerm.'%')->paginate(50);
 
@@ -619,7 +619,7 @@ $member->update();
     
     public function searchByOccupation(Request $request)
     {
-        $searchTerm = $request->input('searchTerm');
+        $searchTerm = $request->input('search_Occupation');
 
    if ( auth()->user()->Role == 'admin')
    {
@@ -702,23 +702,82 @@ $member->update();
 
     public function exportDataToCSV(Request $request)
     {
-        $data = $request->input('searchTerm');
 
-        $query = Member::query(); // Start with a base query
+        $searchName = $request->input('search_FullName');
+        $searchIDTeam = $request->input('search_IDTeam');
+        $searchQualification = $request->input('search_Qualification');
+        $searchSpecialization = $request->input('search_Specialization');
+        $searchCity = $request->input('search_City');
+        $searchOccupation = $request->input('search_Occupation');
+
+
+if($request->input('search_FullName') )
+{
+    $data = Member::where('FullName', 'like', '%' . $searchName . '%')->get();
+}
+elseif($searchIDTeam)
+{
+    $data = Member::where('IDTeam', 'like', '%' . $searchIDTeam . '%')->get();
+}
+elseif($searchQualification)
+{
+    $data = Member::where('Qualification', 'like', '%' . $searchQualification . '%')->get();
+}
+elseif($searchSpecialization)
+{
+    $data = Member::where('Specialization', 'like', '%' . $searchSpecialization . '%')->get();
+}
+elseif($searchCity)
+{
+    $data = Member::where('City', 'like', '%' . $searchCity . '%')->get();
+}
+elseif($searchOccupation)
+{
+    $data = Member::where('Occupation', 'like', '%' . $searchOccupation . '%')->get();
+}
+else{
+    $data = '';
+}
+        // $data = Member::query()
+        //     ->when($searchName, function ($query) use ($searchName) {
+        //         $query->where('FullName', 'like', '%' . $searchName . '%');
+        //     })
+        //     ->when($searchIDTeam, function ($query) use ($searchIDTeam) {
+        //         $query->where('IDTeam', 'like', '%' . $searchIDTeam . '%');
+        //     })
+        //     ->when($searchQualification, function ($query) use ($searchQualification) {
+        //         $query->where('Qualification', 'like', '%' . $searchQualification . '%');
+        //     })
+        //     ->when($searchSpecialization, function ($query) use ($searchSpecialization) {
+        //         $query->where('Specialization', 'like', '%' . $searchSpecialization . '%');
+        //     })
+        //     ->when($searchCity, function ($query) use ($searchCity) {
+        //         $query->where('City', 'like', '%' . $searchCity . '%');
+        //     })
+        //     ->when($searchOccupation, function ($query) use ($searchOccupation) {
+        //         $query->where('Occupation', 'like', '%' . $searchOccupation . '%');
+        //     })
+        //     ->get();
+           
+     return dd($data);
+
+        // $data = $request->input('searchTerm');
+
+        // $query = Member::query(); // Start with a base query
     
-        // Only apply filters if $data is not null or not empty
-        if (!empty($data)) {
-            $query->where(function ($q) use ($data) {
-                $q->where('Name', 'like', '%' . $data . '%')
-                    ->orWhere('IDTeam', 'like', '%' . $data . '%')
-                    ->orWhere('Qualification', 'like', '%' . $data . '%')
-                    ->orWhere('Specialization', 'like', '%' . $data . '%')
-                    ->orWhere('City', 'like', '%' . $data . '%')
-                    ->orWhere('Occupation', 'like', '%' . $data . '%');
-            });
-        }
+        // // Only apply filters if $data is not null or not empty
+        // if (!empty($data)) {
+        //     $query->where(function ($q) use ($data) {
+        //         $q->where('FullName', 'like', '%' . $data . '%')
+        //             ->orWhere('IDTeam', 'like', '%' . $data . '%')
+        //             ->orWhere('Qualification', 'like', '%' . $data . '%')
+        //             ->orWhere('Specialization', 'like', '%' . $data . '%')
+        //             ->orWhere('City', 'like', '%' . $data . '%')
+        //             ->orWhere('Occupation', 'like', '%' . $data . '%');
+        //     });
+        // }
     
-        $members = $query->get(); // Execute the query
+        // $members = $query->get(); // Execute the query
     
     
         $csvFileName = 'members.csv';
@@ -753,7 +812,7 @@ $member->update();
             'رابط الصورة',
         ]);
     
-        foreach ($members as $member) {
+        foreach ($data as $member) {
             fputcsv($handle, [
                 $member->NotPad,
                 $member->branch,

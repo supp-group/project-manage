@@ -52,7 +52,7 @@ integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEw
 						<form action="{{ route('search-team') }}" method="post">
 							@csrf
 							<div class="input-group">
-								<input class="form-control" placeholder="الرقم الحزبي" type="search" name="searchTerm">
+								<input class="form-control" placeholder="الرقم الحزبي" type="search" name="search_IDTeam">
 								<div class="input-group-append">
 									<button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
 								</div>
@@ -63,7 +63,7 @@ integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEw
 						<form action="{{ route('search-name') }}" method="post">
 							@csrf
 							<div class="input-group">
-								<input class="form-control" placeholder="الاسم" type="search" name="searchTerm">
+								<input class="form-control" placeholder="الاسم" type="search" name="search_FullName">
 								<div class="input-group-append">
 									<button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
 								</div>
@@ -74,7 +74,7 @@ integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEw
 						<form action="{{ route('search-city') }}" method="post">
 							@csrf
 							<div class="input-group">
-								<input class="form-control" placeholder="المحافظة" type="search" name="searchTerm">
+								<input class="form-control" placeholder="المحافظة" type="search" name="search_City">
 								<div class="input-group-append">
 									<button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
 								</div>
@@ -88,7 +88,7 @@ integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEw
 						<form action="{{ route('search-qualification') }}" method="post">
 							@csrf
 							<div class="input-group">
-								<input class="form-control" placeholder="المؤهل العلمي" type="search" name="searchTerm">
+								<input class="form-control" placeholder="المؤهل العلمي" type="search" name="search_Qualification">
 								<div class="input-group-append">
 									<button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
 								</div>
@@ -99,7 +99,7 @@ integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEw
 						<form action="{{ route('search-specialization') }}" method="post">
 							@csrf
 							<div class="input-group">
-								<input class="form-control" placeholder="الاختصاص" type="search" name="searchTerm">
+								<input class="form-control" placeholder="الاختصاص" type="search" name="search_Specialization">
 								<div class="input-group-append">
 									<button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
 								</div>
@@ -110,7 +110,7 @@ integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEw
 						<form action="{{ route('search-occupation') }}" method="post">
 							@csrf
 							<div class="input-group">
-								<input class="form-control" placeholder="المهنة" type="search" name="searchTerm">
+								<input class="form-control" placeholder="المهنة" type="search" name="search_Occupation">
 								<div class="input-group-append">
 									<button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
 								</div>
