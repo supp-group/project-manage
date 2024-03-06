@@ -661,14 +661,16 @@ $member->update();
             $data = str_getcsv($line);
     
             // Convert Birthdate format
-            $birthDate = DateTime::createFromFormat('d/m/Y', $data[6]);
-            $birthDateFormatted = $birthDate ? $birthDate->format('Y-m-d') : null;
+            // $birthDate = DateTime::createFromFormat('d/m/Y', $data[6]);
+            // $birthDateFormatted = $birthDate ? $birthDate->format('Y-m-d') : null;
 
                 
             // Convert DateOfJoin format
             // $dateJoin = DateTime::createFromFormat('Y', $data[18]);
             // $dateJoinFormatted = $dateJoin ? $dateJoin->format('Y') : null;
     
+            // var_dump( $data[13]);
+
             Member::create([
                 'NotPad' => $data[0],
                 'branch' => $data[1],
@@ -676,7 +678,7 @@ $member->update();
                 'FullName' => $data[3],
                 'MotherName' => $data[4],
                 'PlaceOfBirth' => $data[5],
-                'BirthDate' => $birthDateFormatted,
+                'BirthDate' => $data[6],
                 'Constraint' => $data[7],
                 'City' => $data[8],
                 'IDNumber' => $data[9],
