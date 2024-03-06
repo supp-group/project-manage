@@ -736,7 +736,7 @@ elseif($searchOccupation)
     $data = Member::where('Occupation', 'like', '%' . $searchOccupation . '%')->get();
 }
 else{
-    $data = '';
+    $data = Member::get();
 }
         // $data = Member::query()
         //     ->when($searchName, function ($query) use ($searchName) {
@@ -759,7 +759,7 @@ else{
         //     })
         //     ->get();
            
-     return dd($data);
+    //  return dd($data);
 
         // $data = $request->input('searchTerm');
 
