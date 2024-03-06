@@ -614,8 +614,7 @@ $member->update();
         'members' => $members,
         'paginationLinks' => $paginationLinks
     ]);
- 
-    }
+}
 
     
     public function searchByOccupation(Request $request)
