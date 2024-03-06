@@ -666,8 +666,8 @@ $member->update();
 
                 
             // Convert DateOfJoin format
-            $dateJoin = DateTime::createFromFormat('Y', $data[18]);
-            $dateJoinFormatted = $dateJoin ? $dateJoin->format('Y') : null;
+            // $dateJoin = DateTime::createFromFormat('Y', $data[18]);
+            // $dateJoinFormatted = $dateJoin ? $dateJoin->format('Y') : null;
     
             Member::create([
                 'NotPad' => $data[0],
@@ -688,7 +688,7 @@ $member->update();
                 'WorkAddress' => $data[15],
                 'HomePhone' => $data[16],
                 'WorkPhone' => $data[17],
-                'DateOfJoin' => $dateJoinFormatted,
+                'DateOfJoin' => $data[18],
                 'Specialization' => $data[19],
                 'Image' => $data[20],
             ]);
