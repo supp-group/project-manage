@@ -131,10 +131,12 @@ $specialization = $request->Specialization;
 
 public function storeDeletedMember($id)
    {
+  //  return $id;
       
   $user = auth()->user();
 
   $Oldmember = Member::find($id);
+  //return   $Oldmember;
   $member = new Temporary(); 
   $member->NotPad = $Oldmember->NotPad;
   $member->branch = $Oldmember->branch;
@@ -147,7 +149,7 @@ public function storeDeletedMember($id)
   $member->City = $Oldmember->City;
   $member->IDNumber  = $Oldmember->IDNumber;
   $member->Gender  = $Oldmember->Gender ;
-  $member->Oldmember = $Oldmember->Oldmember;
+  $member->Qualification = $Oldmember->Qualification;
   $member->Specialization  = $Oldmember->Specialization;
   $member->Occupation  = $Oldmember->Occupation;
   $member->MobilePhone  = $Oldmember->MobilePhone;
@@ -162,7 +164,7 @@ public function storeDeletedMember($id)
 
   // store image
   if($Oldmember->hasfile('Image')){
-      $img = $request->file('Image');
+      $img = $Oldmember->file('Image');
       $img_name = $img->getClientOriginalName();
       $img->move(public_path('images'), $img_name);
 
@@ -186,7 +188,9 @@ public function destroyNotice( $id)
 public function editDetails($IDTeam)
 {
    $memb = Temporary::where('IDTeam',$IDTeam)->first();
-  return view('admin.notice.editDetails',compact('memb'));
+
+   return $memb;
+  return view('admin.notice.editDetails',['memb'=>$memb]);
 // return dd($mem);
 }
 

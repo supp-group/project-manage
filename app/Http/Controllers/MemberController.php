@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\TemporaryController;
 use App\Models\City;
 use App\Models\Member;
+use App\Models\Temporary;
 use App\Models\Occupation;
 use App\Models\Qualification;
 use App\Models\User;
@@ -901,8 +903,12 @@ public function GetCityWithMemberCount(Request $request)
 
   public function detailsForCompare($IDTeam)
   {
+    $memb = Temporary::where('IDTeam',$IDTeam)->first();
     $member = Member::where('IDTeam',$IDTeam)->first();
-    return view('admin.notice.editDetails',compact('member'));
+  //  $temctrlr=new TemporaryController();
+ //   $temctrlr->getDeletedMember()
+    return view('admin.notice.editDetails',compact('member','memb'));
   }
+
 
 }
