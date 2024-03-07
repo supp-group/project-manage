@@ -186,7 +186,7 @@ Route::middleware(['auth', 'verified', 'manager'])-> prefix('manager')->group(fu
         Route::get('edit/{id}', [MemberController::class, 'edit'])->name('memberm.edit');
         Route::post('update/{id}', [TemporaryController::class, 'storeUpdatedMember'])->name('memberm.update');
 
-        Route::delete('delete/{id}', [MemberController::class, 'destroy'])->name('memberm.delete');
+        Route::post('delete/{id}', [TemporaryController::class, 'storeDeletedMember'])->name('memberm.delete');
 
         Route::get('/get-specializations/{qualificationId}',[MemberController::class, 'getSpecializations']);
 

@@ -52,7 +52,7 @@
 							</div>
 
 							<div class="dash-widget-info text-left">
-								<a class="btn btn-sm btn-info" href="{{ route('notice.deleteDetails', $member->IDTeam) }}" style="font-size: 14px;">إظهار التفاصيل</a> &nbsp;
+								{{-- <a class="btn btn-sm btn-info" href="{{ route('notice.deleteDetails', $member->IDTeam) }}" style="font-size: 14px;">إظهار التفاصيل</a> &nbsp; --}}
 								<a class="btn btn-sm btn-success" href="" style="font-size: 14px;">تأكيد</a> &nbsp;
 								<a class="btn btn-sm btn-danger" href="" style="font-size: 14px;">تجاهل</a>
 							</div>

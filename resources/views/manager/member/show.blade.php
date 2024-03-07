@@ -176,7 +176,7 @@
 													data-target="#delete{{$member->id}}"><i class="las la-trash"></i></a>
 													<form action="{{route('memberm.delete', $member->id)}}" method="POST" enctype="multipart/form-data">
 															@csrf
-															@method('DELETE')
+															@method('POST')
 														<div id="delete{{$member->id}}" class="modal fade delete-modal" role="dialog">
 															<div class="modal-dialog modal-dialog-centered">
 																<div class="modal-content">
@@ -192,7 +192,7 @@
 																		<h5>هل أنت متأكد من عملية الحذف؟</h5>
 																		<br>
 																		<div class="m-t-20"> <a href="#" class="btn btn-white" data-dismiss="modal">إلغاء</a>
-																			<button type="submit" class="btn btn-danger">حذف</button>
+																			<button type="submit" class="btn btn-danger">إرسال طلب الحذف للمدير</button>
 																		</div>
 																		<br>
 																	</div>

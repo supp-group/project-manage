@@ -194,7 +194,7 @@ $specialization = $request->Specialization;
       ]);
   }
 
-  session()->flash('delete', ' سيتم حذف العضو بعد الموافقة عليه من قبل المدير');
+  session()->flash('delete', 'سيتم حذف العضو بعد الموافقة عليه من قبل المدير');
   return back();
 }
 
