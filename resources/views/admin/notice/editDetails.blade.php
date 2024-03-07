@@ -36,7 +36,7 @@
 					<div class="col-lg-6 col-md-6">
 						<div class="card">
 							<div class="card-body">
-								<form action="{{ route('notice.editDetailsNew', $mem->id) }}" method="get" autocomplete="off">
+								<form action="{{ route('notice.editDetailsNew', $mem->IDTeam) }}" method="get" autocomplete="off">
 									{{ csrf_field() }}
                                     @method('get')
 

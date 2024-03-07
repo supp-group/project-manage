@@ -156,10 +156,12 @@ Route::middleware(['auth', 'verified', 'admin'])-> prefix('admin')->group(functi
   Route:: prefix('notice')->group(function () {
 
     Route::get('edit', [TemporaryController::class, 'getEtidedMember']);
+    Route::get('editDetails/{IDTeam}', [MemberController::class, 'detailsForCompare'])->name('notice.editDetails');
+    Route::get('editDetailsNew/{IDTeam}', [TemporaryController::class, 'editDetails'])->name('notice.editDetailsNew');
 
-    Route::get('editDetails/{idTeam}', [MemberController::class, 'detailsForCompare'])->name('notice.editDetails');
 
-    Route::get('editDetailsNew/{id}', [TemporaryController::class, 'details'])->name('notice.editDetailsNew');
+    Route::get('delete', [TemporaryController::class, 'getDeletedMember']);
+    Route::get('deleteDetails/{IDTeam}', [MemberController::class, 'deleteDetails'])->name('notice.deleteDetails');
 
   });
 

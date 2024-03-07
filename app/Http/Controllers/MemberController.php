@@ -899,9 +899,9 @@ public function GetCityWithMemberCount(Request $request)
      }
   }
 
-  public function detailsForCompare($idTeam)
+  public function detailsForCompare($IDTeam)
   {
-    $member = Member::where('IDTeam',$idTeam)->first();
+    $member = Member::where('IDTeam',$IDTeam)->first();
     return view('admin.notice.editDetails',compact('member'));
   }
 

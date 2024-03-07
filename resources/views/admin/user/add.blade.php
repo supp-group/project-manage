@@ -71,7 +71,7 @@
 										<label>الدور</label>
 											<select name="Role" class="form-control select @error('Role') is-invalid @enderror">
 												<option value="admin">مدير الموقع</option>
-												<option value="manager">مدير</option>
+												<option value="manager">مدير فرعي</option>
 											</select>
 
 											@error('Role')

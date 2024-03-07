@@ -206,11 +206,17 @@ public function destroyNotice( $id)
    return back(); 
 }
 
-public function details($id)
+public function editDetails($IDTeam)
 {
-   $mem = Temporary::where('id',$id)->first();
-
+   $mem = Temporary::where('IDTeam',$IDTeam)->first();
   return view('admin.notice.editDetails',compact('mem'));
 // return dd($mem);
 }
+
+public function deleteDetails($IDTeam)
+{
+   $member = Temporary::where('IDTeam',$IDTeam)->first();
+   return view('admin.notice.deleteDetails',compact('member'));
+}
+
 }
