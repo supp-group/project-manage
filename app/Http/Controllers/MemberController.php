@@ -899,4 +899,10 @@ public function GetCityWithMemberCount(Request $request)
      }
   }
 
+  public function detailsForCompare($idTeam)
+  {
+    $member = Member::where('IDTeam',$idTeam)->first();
+    return view('admin.notice.details',compact('member'));
+  }
+
 }

@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('members', function (Blueprint $table) {
+        Schema::create('temporaries', function (Blueprint $table) {
             $table->id();
             $table->string('NotPad')->nullable();
             $table->string('branch')->nullable();
@@ -31,29 +31,12 @@ return new class extends Migration
             $table->string('WorkAddress')->nullable();
             $table->string('HomePhone')->nullable();
             $table->string('WorkPhone')->nullable();
-            // $table->dateTime('DateOfJoin')->nullable();
             $table->year('DateOfJoin')->nullable();
             $table->string('Specialization')->nullable();
             $table->string('Image')->nullable();  
+            $table->boolean('operation')->nullable();
+            $table->string('managerEmail')->nullable();
             $table->timestamps();
-
-            //users_table
-            // $table->foreignId('user_id')->nullable();
-            // $table->unsignedBigInteger('user_id');
-            // $table->foreign('user_id')->references('id')->on('users');
-
-             //qualifications_table
-            // $table->foreignId('qualification_id')->nullable();
-            //  $table->unsignedBigInteger('qualification_id');
-            //  $table->foreign('qualification_id')->references('id')->on('qualifications');
-
-              //occupations_table
-            // $table->foreignId('occupation_id')->nullable();
-            // $table->unsignedBigInteger('occupation_id');
-            // $table->foreign('occupation_id')->references('id')->on('occupations');
-
-          
-          
         });
     }
 
@@ -62,6 +45,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('members');
+        Schema::dropIfExists('temporaries');
     }
 };
