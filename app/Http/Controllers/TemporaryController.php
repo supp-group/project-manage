@@ -158,20 +158,21 @@ public function storeDeletedMember($id)
   $member->HomePhone  = $Oldmember->HomePhone;
   $member->WorkPhone  = $Oldmember->WorkPhone;
   $member->DateOfJoin  = $Oldmember->DateOfJoin;
+  $member->Image  = $Oldmember->Image;
   $member->operation ='0';
   $member->managerEmail =$user->email;
   $member->save();
 
   // store image
-  if($Oldmember->hasfile('Image')){
-      $img = $Oldmember->file('Image');
-      $img_name = $img->getClientOriginalName();
-      $img->move(public_path('images'), $img_name);
+//   if($Oldmember->hasfile('Image')){
+//       $img = $Oldmember->file('Image');
+//       $img_name = $img->getClientOriginalName();
+//       $img->move(public_path('images'), $img_name);
 
-      Temporary::find($member->id)->update([
-      'Image'=> $img_name,
-      ]);
-  }
+//       Temporary::find($member->id)->update([
+//       'Image'=> $img_name,
+//       ]);
+//   }
 
   session()->flash('delete', 'سيتم حذف العضو بعد الموافقة عليه من قبل المدير');
   return back();
