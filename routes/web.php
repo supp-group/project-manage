@@ -38,6 +38,14 @@ Route::middleware('auth')->group(function () {
 
 
 
+
+Route::get('/edit', function () {
+  return view('admin.notice.edit');
+});
+
+
+
+
 // index
 Route::get('/index', [AdminController::class, 'index']);
 
@@ -153,8 +161,7 @@ Route::middleware(['auth', 'verified', 'admin'])-> prefix('admin')->group(functi
   //   /notice
   Route:: prefix('notice')->group(function () {
 
-    Route::get('show', [UserController::class, 'allEditNotice']);
-    Route::post('update/{id}', [UserController::class, 'getEditNotice'])->name('getEditNotice');
+   
 
   });
 

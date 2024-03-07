@@ -9,72 +9,60 @@
 <link href="{{URL::asset('assets/plugins/select2/css/select2.min.css')}}" rel="stylesheet">
 @endsection
 @section('page-header')
-				<!-- breadcrumb -->
-				<div class="breadcrumb-header justify-content-between">
-					<div class="my-auto">
-						<div class="d-flex">
-							<h4 class="content-title mb-0 my-auto">إشعارات الحذف</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ جميع الإشعارات</span>
+						<!-- breadcrumb -->
+						<div class="breadcrumb-header justify-content-between">
+							<div class="my-auto">
+								<div class="d-flex">
+									<h4 class="content-title mb-0 my-auto">إشعارات الحذف</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0"></span>
+								</div>
+							</div>
 						</div>
-					</div>
-				<!-- breadcrumb -->
+						<!-- breadcrumb -->
+
+				<style>
+					.dash-widget {
+						background-color: #fff;
+						border-radius: 4px;
+						margin-bottom: 30px;
+						padding: 20px;
+						position: relative;
+						box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
+					}
+					.dash-widget-info > span.widget-title1 {
+						background: #0162e8;
+						color: #fff;
+						padding: 5px 10px;
+						border-radius: 4px;
+						font-size: 13px;
+					}
+				</style>
 
 @endsection
 @section('content')
 				<!-- row opened -->
-				<div class="row row-sm">
-					<div class="col-xl-12">
-						<div class="card">
-							<div class="card-header pb-0">
-								<div class="d-flex justify-content-between">
-									<h4 class="card-title mg-b-0">إشعارات الحذف</h4>
-									<i class="mdi mdi-dots-horizontal text-gray"></i>
-								
-								</div>
+				<div class="row">
+					<div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+
+						{{-- @foreach($members as $member) --}}
+						<div class="dash-widget">
+							<div class="dash-widget-info text-right">
+								<h5 style="color: black;">قام {{Auth::user()->email}}  
+									{{-- بحذف العضو {{$member->FullName}} --}}
+									{{-- ذو الرقم الحزبي {{$member->IDTeam}}</h5> --}}
 							</div>
-							<div class="card-body">
-								<div class="table-responsive">
-									<table class="table text-md-nowrap" id="example1">
-										<thead>
-											<tr>
-												<th class="wd-15p border-bottom-0">#</th>
-												<th class="wd-15p border-bottom-0">المدير</th>
-												<th class="wd-15p border-bottom-0">المحافظة</th>
-												<th class="wd-15p border-bottom-0">الرقم الحزبي</th>
-												<th class="wd-15p border-bottom-0">الاسم الثلاثي</th>
-												<th class="wd-15p border-bottom-0">تفاصيل العضو</th>
-											</tr>
-										</thead>
-										{{-- <tbody>
-											<?php $i = 1 ?>
 
-											@if(isset($members) && !$members->isEmpty()) 
-											@foreach($members as $member)
-											<tr>
-												<td>{{$i++}}</td>
-
-												<td>{{$member->email}}</td>
-												<td>{{$member->City}}</td>
-												<td>{{$member->IDTeam}}</td>
-												<td>{{$member->FullName}}</td>
-
-												<td>
-													<a class="btn btn-sm btn-info" href="{{ route('member.edit', $member->id) }}" title="تعديل"><i class="las la-pen"></i></a>
-												</td>
-											</tr>
-											@endforeach
-
-										    @else 
-										    <tr>
-											    <td colspan="20">لم يتم العثور على نتائج</td>
-										    </tr>
-										    @endif
-										</tbody> --}}
-									</table>
-								</div>
+							<div class="dash-widget-info text-left">
+								<a class="btn btn-sm btn-info" href="" style="font-size: 14px;">إظهار التفاصيل</a> &nbsp;
+								<a class="btn btn-sm btn-success" href="" style="font-size: 14px;">تأكيد</a> &nbsp;
+								<a class="btn btn-sm btn-danger" href="" style="font-size: 14px;">تجاهل</a>
 							</div>
 						</div>
+						{{-- @endforeach --}}
+
 					</div>
-					<!--/div-->
+
+					{{-- {!! $paginationLinks !!} --}}
+
 				</div>
 				<!-- /row -->
 
