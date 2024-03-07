@@ -129,11 +129,12 @@ $specialization = $request->Specialization;
   return back();
 }
 
-public function storeDeletedMember(Request $request,$id)
+public function storeDeletedMember($id)
    {
       
   $user = auth()->user();
-  $Oldmember = Member::where('id',$id)->first();
+
+  $Oldmember = Member::find($id);
   $member = new Temporary(); 
   $member->NotPad = $Oldmember->NotPad;
   $member->branch = $Oldmember->branch;
