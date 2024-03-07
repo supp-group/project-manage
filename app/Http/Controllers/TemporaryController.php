@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Temporary;
 use App\Models\Qualification;
+use App\Models\Member;
 use Illuminate\Http\Request;
 use DateTime;
 class TemporaryController extends Controller
@@ -128,63 +129,38 @@ $specialization = $request->Specialization;
   return back();
 }
 
-public function storeDeletedMember(Request $request)
+public function storeDeletedMember(Request $request,$id)
    {
       
-  // Convert Birthdate format
-  $birthDate = DateTime::createFromFormat('m/d/Y',$request->BirthDate);
-  $birthDateFormatted = $birthDate ? $birthDate->format('Y-m-d') : $request->BirthDate;
-
-  
-  $qualification = $request->Qualification;
-
-  if (is_numeric($qualification)) {
-      // إذا كانت القيمة هي id
-      $qualificationName = Qualification::where('id', $qualification)->value('Name');
-  } else {
-      // إذا كانت القيمة هي اسم
-      $qualificationName = $qualification;
-  }
-  
-$specialization = $request->Specialization;
-
-  if (is_numeric($specialization)) {
-      // إذا كانت القيمة هي id
-      $specializationName = Qualification::where('id', $specialization)->value('specialization');
-
-  } else {
-      // إذا كانت القيمة هي اسم
-      $specializationName = $specialization;
-  }
   $user = auth()->user();
-
+  $Oldmember = Member::where('id',$id)->first();
   $member = new Temporary(); 
-  $member->NotPad = $request->NotPad;
-  $member->branch = $request->branch;
-  $member->IDTeam  = $request->IDTeam;
-  $member->FullName = $request->FullName;
-  $member->MotherName = $request->MotherName;
-  $member->PlaceOfBirth = $request->PlaceOfBirth;
-  $member->BirthDate = $birthDateFormatted;
-  $member->Constraint = $request->Constraint;
-  $member->City = $request->City;
-  $member->IDNumber  = $request->IDNumber;
-  $member->Gender  = $request->Gender == 'ذكر' ? 'ذكر' : 'أنثى';
-  $member->Qualification = $qualificationName;
-  $member->Specialization  = $specializationName;
-  $member->Occupation  = $request->Occupation;
-  $member->MobilePhone  = $request->MobilePhone;
-  $member->HomeAddress  = $request->HomeAddress;
-  $member->WorkAddress  = $request->WorkAddress;
-  $member->HomePhone  = $request->HomePhone;
-  $member->WorkPhone  = $request->WorkPhone;
-  $member->DateOfJoin  = $request->DateOfJoin;
+  $member->NotPad = $Oldmember->NotPad;
+  $member->branch = $Oldmember->branch;
+  $member->IDTeam  = $Oldmember->IDTeam;
+  $member->FullName = $Oldmember->FullName;
+  $member->MotherName = $Oldmember->MotherName;
+  $member->PlaceOfBirth = $Oldmember->PlaceOfBirth;
+  $member->BirthDate = $Oldmember->BirthDate;
+  $member->Constraint = $Oldmember->Constraint;
+  $member->City = $Oldmember->City;
+  $member->IDNumber  = $Oldmember->IDNumber;
+  $member->Gender  = $Oldmember->Gender ;
+  $member->Oldmember = $Oldmember->Oldmember;
+  $member->Specialization  = $Oldmember->Specialization;
+  $member->Occupation  = $Oldmember->Occupation;
+  $member->MobilePhone  = $Oldmember->MobilePhone;
+  $member->HomeAddress  = $Oldmember->HomeAddress;
+  $member->WorkAddress  = $Oldmember->WorkAddress;
+  $member->HomePhone  = $Oldmember->HomePhone;
+  $member->WorkPhone  = $Oldmember->WorkPhone;
+  $member->DateOfJoin  = $Oldmember->DateOfJoin;
   $member->operation ='0';
   $member->managerEmail =$user->email;
   $member->save();
 
   // store image
-  if($request->hasfile('Image')){
+  if($Oldmember->hasfile('Image')){
       $img = $request->file('Image');
       $img_name = $img->getClientOriginalName();
       $img->move(public_path('images'), $img_name);
@@ -208,8 +184,8 @@ public function destroyNotice( $id)
 
 public function editDetails($IDTeam)
 {
-   $mem = Temporary::where('IDTeam',$IDTeam)->first();
-  return view('admin.notice.editDetails',compact('mem'));
+   $memb = Temporary::where('IDTeam',$IDTeam)->first();
+  return view('admin.notice.editDetails',compact('memb'));
 // return dd($mem);
 }
 
