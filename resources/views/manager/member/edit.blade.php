@@ -63,7 +63,7 @@
 											<label for="inputName" class="control-label">ملاحظات</label>
 											<input type="hidden" name="NotPad" value="{{ $member->NotPad }}">
 											<input type="text" class="form-control @error('NotPad') is-invalid @enderror" 
-											id="inputName" name="NotPad" value="{{ $member->NotPad }}" required>
+											id="inputName" name="NotPad" value="{{ $member->NotPad }}">
 
 											@error('NotPad')
 												<div class="alert alert-danger">{{ $message }}</div>
@@ -76,7 +76,7 @@
 											<label for="inputName" class="control-label">الفرع</label>
 											<input type="hidden" name="branch" value="{{ $member->branch }}">
 											<input type="text" class="form-control @error('branch') is-invalid @enderror" 
-											id="inputName" name="branch" value="{{ $member->branch }}" required>
+											id="inputName" name="branch" value="{{ $member->branch }}">
 
 											@error('branch')
 												<div class="alert alert-danger">{{ $message }}</div>
@@ -89,7 +89,7 @@
 											<label for="inputName" class="control-label">الرقم الحزبي</label>
 											<input type="hidden" name="IDTeam" value="{{ $member->IDTeam }}">
 											<input type="text" class="form-control" id="inputName" name="IDTeam"
-											value="{{ $member->IDTeam }}" required readonly>
+											value="{{ $member->IDTeam }}" readonly>
 										</div>
 									</div><br>
 
@@ -98,7 +98,7 @@
 											<label for="inputName" class="control-label">الاسم الثلاثي</label>
 											<input type="hidden" name="FullName" value="{{ $member->FullName }}">
 											<input type="text" class="form-control @error('FullName') is-invalid @enderror" 
-											id="inputName" name="FullName" value="{{ $member->FullName }}" required>
+											id="inputName" name="FullName" value="{{ $member->FullName }}">
 
 											@error('FullName')
 												<div class="alert alert-danger">{{ $message }}</div>
@@ -111,7 +111,7 @@
 											<label for="inputName" class="control-label">اسم الأم</label>
 											<input type="hidden" name="MotherName" value="{{ $member->MotherName }}">
 											<input type="text" class="form-control @error('MotherName') is-invalid @enderror" 
-											id="inputName" name="MotherName" value="{{ $member->MotherName }}" required>
+											id="inputName" name="MotherName" value="{{ $member->MotherName }}">
 
 											@error('MotherName')
 												<div class="alert alert-danger">{{ $message }}</div>
@@ -124,7 +124,7 @@
 											<label for="inputName" class="control-label">محل الولادة</label>
 											<input type="hidden" name="PlaceOfBirth" value="{{ $member->PlaceOfBirth }}">
 											<input type="text" class="form-control @error('PlaceOfBirth') is-invalid @enderror" 
-											id="inputName" name="PlaceOfBirth" value="{{ $member->PlaceOfBirth }}" required>
+											id="inputName" name="PlaceOfBirth" value="{{ $member->PlaceOfBirth }}">
 
 											@error('PlaceOfBirth')
 												<div class="alert alert-danger">{{ $message }}</div>
@@ -137,7 +137,7 @@
 											<label for="inputName" class="control-label">تاريخ الولادة</label>
 											<input type="hidden" name="BirthDate" value="{{ $member->BirthDate }}">
 											<input type="datetime" class="form-control @error('BirthDate') is-invalid @enderror" 
-											id="inputName" name="BirthDate" value="{{ $member->BirthDate }}" required>
+											id="inputName" name="BirthDate" value="{{ $member->BirthDate }}">
 
 											@error('BirthDate')
 												<div class="alert alert-danger">{{ $message }}</div>
@@ -150,7 +150,7 @@
 											<label for="inputName" class="control-label">محل ورقم القيد</label>
 											<input type="hidden" name="Constraint" value="{{ $member->Constraint }}">
 											<input type="text" class="form-control @error('Constraint') is-invalid @enderror" 
-											id="inputName" name="Constraint" value="{{ $member->Constraint }}" required>
+											id="inputName" name="Constraint" value="{{ $member->Constraint }}">
 
 											@error('Constraint')
 												<div class="alert alert-danger">{{ $message }}</div>
@@ -175,7 +175,7 @@
 											<label for="inputName" class="control-label">الرقم الوطني</label>
 											<input type="hidden" name="IDNumber" value="{{ $member->IDNumber }}">
 											<input type="text" class="form-control @error('IDNumber') is-invalid @enderror" 
-											id="inputName" name="IDNumber" value="{{ $member->IDNumber }}" required>
+											id="inputName" name="IDNumber" value="{{ $member->IDNumber }}">
 
 											@error('IDNumber')
     											<div class="alert alert-danger">{{ $message }}</div>
@@ -275,7 +275,7 @@
 											<label for="inputName" class="control-label">رقم الموبايل</label>
 											<input type="hidden" name="MobilePhone" value="{{ $member->MobilePhone }}">
 											<input type="text" class="form-control @error('MobilePhone') is-invalid @enderror" 
-											id="inputName" name="MobilePhone" value="{{ $member->MobilePhone }}" required>
+											id="inputName" name="MobilePhone" value="{{ $member->MobilePhone }}">
 
 											@error('MobilePhone')
 											<div class="alert alert-danger">{{ $message }}</div>
@@ -288,7 +288,7 @@
 											<label for="inputName" class="control-label">عنوان المنزل</label>
 											<input type="hidden" name="HomeAddress" value="{{ $member->HomeAddress }}">
 											<input type="text" class="form-control @error('HomeAddress') is-invalid @enderror" 
-											id="inputName" name="HomeAddress" value="{{ $member->HomeAddress }}" required>
+											id="inputName" name="HomeAddress" value="{{ $member->HomeAddress }}">
 
 											@error('HomeAddress')
 										  		<div class="alert alert-danger">{{ $message }}</div>
@@ -301,7 +301,7 @@
 											<label for="inputName" class="control-label">عنوان العمل</label>
 											<input type="hidden" name="WorkAddress" value="{{ $member->WorkAddress }}">
 											<input type="text" class="form-control @error('WorkAddress') is-invalid @enderror" 
-											id="inputName" name="WorkAddress" value="{{ $member->WorkAddress }}" required>
+											id="inputName" name="WorkAddress" value="{{ $member->WorkAddress }}">
 
 											@error('WorkAddress')
 										  		<div class="alert alert-danger">{{ $message }}</div>
@@ -314,7 +314,7 @@
 											<label for="inputName" class="control-label">هاتف المنزل</label>
 											<input type="hidden" name="HomePhone" value="{{ $member->HomePhone }}">
 											<input type="text" class="form-control @error('HomePhone') is-invalid @enderror" 
-											id="inputName" name="HomePhone" value="{{ $member->HomePhone }}" required>
+											id="inputName" name="HomePhone" value="{{ $member->HomePhone }}">
 
 											@error('HomePhone')
 										  		<div class="alert alert-danger">{{ $message }}</div>
@@ -327,7 +327,7 @@
 											<label for="inputName" class="control-label">هاتف العمل</label>
 											<input type="hidden" name="WorkPhone" value="{{ $member->WorkPhone }}">
 											<input type="text" class="form-control @error('WorkPhone') is-invalid @enderror" 
-											id="inputName" name="WorkPhone" value="{{ $member->WorkPhone }}" required>
+											id="inputName" name="WorkPhone" value="{{ $member->WorkPhone }}">
 
 											@error('WorkPhone')
 										  		<div class="alert alert-danger">{{ $message }}</div>
@@ -368,7 +368,7 @@
 									  </div><br>
 					
 									  <div class="d-flex justify-content-center">
-										<button type="submit" class="btn btn-primary">حفظ البيانات</button>
+										<button type="submit" class="btn btn-primary">إرسال طلب التعديل للمدير</button>
 									  </div>
 			
 								</form>

@@ -30,10 +30,226 @@
 @section('content')
 				<!-- row -->
 				<div class="row">
-					<div class="col-lg-12 col-md-12">
+				
+
+
+					<div class="col-lg-6 col-md-6">
 						<div class="card">
 							<div class="card-body">
-								<form action="{{ route('member.details', $member->id) }}" method="get" autocomplete="off">
+								<form action="{{ route('notice.editDetailsNew', $mem->id) }}" method="get" autocomplete="off">
+									{{ csrf_field() }}
+                                    @method('get')
+
+                                    <div class="row">
+										<div class="col">
+											<label for="inputName" class="control-label">ملاحظات</label>
+											<input type="hidden" name="NotPad" value="{{ $mem->NotPad }}">
+											<input type="text" class="form-control" id="inputName" name="NotPad"
+											value="{{ $mem->NotPad }}" readonly>
+										</div>
+									</div><br>
+                                       
+                                    <div class="row">
+										<div class="col">
+											<label for="inputName" class="control-label">الفرع</label>
+											<input type="hidden" name="branch" value="{{ $mem->branch }}">
+											<input type="text" class="form-control" id="inputName" name="branch"
+											value="{{ $mem->branch }}" readonly>
+										</div>
+									</div><br>
+
+									<div class="row">
+										<div class="col">
+											<label for="inputName" class="control-label">الرقم الحزبي</label>
+											<input type="hidden" name="IDTeam" value="{{ $mem->IDTeam }}">
+											<input type="text" class="form-control" id="inputName" name="IDTeam"
+											value="{{ $mem->IDTeam }}" readonly>
+										</div>
+									</div><br>
+                                    
+									<div class="row">
+										<div class="col">
+											<label for="inputName" class="control-label">الاسم الثلاثي</label>
+											<input type="hidden" name="FullName" value="{{ $mem->FullName }}">
+											<input type="text" class="form-control" id="inputName" name="FullName"
+											value="{{ $mem->FullName }}" readonly>
+										</div>
+									</div><br>
+                                    
+									<div class="row">
+										<div class="col">
+											<label for="inputName" class="control-label">اسم الأم</label>
+											<input type="hidden" name="MotherName" value="{{ $mem->MotherName }}">
+											<input type="text" class="form-control" id="inputName" name="MotherName"
+											value="{{ $mem->MotherName }}" readonly>
+										</div>
+									</div><br>
+                                    
+                                    <div class="row">
+										<div class="col">
+											<label for="inputName" class="control-label">محل الولادة</label>
+											<input type="hidden" name="PlaceOfBirth" value="{{ $mem->PlaceOfBirth }}">
+											<input type="text" class="form-control" id="inputName" name="PlaceOfBirth"
+											value="{{ $mem->PlaceOfBirth }}" readonly>
+										</div>
+									</div><br>
+                                    
+                                    <div class="row">
+										<div class="col">
+											<label for="inputName" class="control-label">تاريخ الولادة</label>
+											<input type="hidden" name="BirthDate" value="{{ $mem->BirthDate }}">
+											<input type="text" class="form-control" id="inputName" name="BirthDate"
+											value="{{ $mem->BirthDate }}" readonly>
+										</div>
+									</div><br>
+                                    
+                                    <div class="row">
+										<div class="col">
+											<label for="inputName" class="control-label">محل ورقم القيد</label>
+											<input type="hidden" name="Constraint" value="{{ $mem->Constraint }}">
+											<input type="text" class="form-control" id="inputName" name="Constraint"
+											value="{{ $mem->Constraint }}" readonly>
+										</div>
+									</div><br>
+                                    
+                                    <div class="row">
+										<div class="col">
+											<label for="inputName" class="control-label">المحافظة</label>
+											<input type="hidden" name="City" value="{{ $mem->City }}">
+											<input type="text" class="form-control" id="inputName" name="City"
+											value="{{ $mem->City }}" readonly>
+										</div>
+									</div><br>
+                                    
+									<div class="row">
+										<div class="col">
+											<label for="inputName" class="control-label">الرقم الوطني</label>
+											<input type="hidden" name="IDNumber" value="{{ $mem->IDNumber }}">
+											<input type="text" class="form-control" id="inputName" name="IDNumber"
+											value="{{ $mem->IDNumber }}" readonly>
+										</div>
+									</div><br>
+                                    
+                                    <div class="row">
+										<div class="col">
+											<label for="inputName" class="control-label">الجنس</label>
+											<input type="hidden" name="Gender" value="{{ $mem->Gender }}">
+											<input type="text" class="form-control" id="inputName" name="Gender"
+											value="{{ $mem->Gender }}" readonly>
+										</div>
+									</div><br>
+                                    
+                                    <div class="row">
+										<div class="col">
+											<label for="inputName" class="control-label">المهنة</label>
+											<input type="hidden" name="Occupation" value="{{ $mem->Occupation }}">
+											<input type="text" class="form-control" id="inputName" name="Occupation"
+											value="{{ $mem->Occupation }}" readonly>
+										</div>
+									</div><br>
+                                    
+									<div class="row">
+										<div class="col">
+											<label for="inputName" class="control-label">المؤهل العلمي</label>
+											<input type="hidden" name="Qualification" value="{{ $mem->Qualification }}">
+											<input type="text" class="form-control" id="inputName" name="Qualification"
+											value="{{ $mem->Qualification }}" readonly>
+										</div>
+									</div><br>
+                                    
+									<div class="row">
+										<div class="col">
+											<label for="inputName" class="control-label">الاختصاص</label>
+											<input type="hidden" name="Specialization" value="{{ $mem->Specialization }}">
+											<input type="text" class="form-control" id="inputName" name="Specialization"
+											value="{{ $mem->Specialization }}" readonly>
+										</div>
+									</div><br>
+                                    
+									<div class="row">
+										<div class="col">
+											<label for="inputName" class="control-label">رقم الموبايل</label>
+											<input type="hidden" name="MobilePhone" value="{{ $mem->MobilePhone }}">
+											<input type="text" class="form-control" id="inputName" name="MobilePhone"
+											value="{{ $mem->MobilePhone }}" readonly>
+										</div>
+									</div><br>
+                                    
+									<div class="row">
+										<div class="col">
+											<label for="inputName" class="control-label">عنوان المنزل</label>
+											<input type="hidden" name="HomeAddress" value="{{ $mem->HomeAddress }}">
+											<input type="text" class="form-control" id="inputName" name="HomeAddress"
+											value="{{ $mem->HomeAddress }}" readonly>
+										</div>
+									</div><br>
+                                    
+									<div class="row">
+										<div class="col">
+											<label for="inputName" class="control-label">عنوان العمل</label>
+											<input type="hidden" name="WorkAddress" value="{{ $mem->WorkAddress }}">
+											<input type="text" class="form-control" id="inputName" name="WorkAddress"
+											value="{{ $mem->WorkAddress }}" readonly>
+										</div>
+									</div><br>
+                                    
+                                    <div class="row">
+										<div class="col">
+											<label for="inputName" class="control-label">هاتف المنزل</label>
+											<input type="hidden" name="HomePhone" value="{{ $mem->HomePhone }}">
+											<input type="text" class="form-control" id="inputName" name="HomePhone"
+											value="{{ $mem->HomePhone }}" readonly>
+										</div>
+									</div><br>
+                                    
+									<div class="row">
+										<div class="col">
+											<label for="inputName" class="control-label">هاتف العمل</label>
+											<input type="hidden" name="WorkPhone" value="{{ $mem->WorkPhone }}">
+											<input type="text" class="form-control" id="inputName" name="WorkPhone"
+											value="{{ $mem->WorkPhone }}" readonly>
+										</div>
+									</div><br>
+                                    
+									<div class="row">
+										<div class="col">
+											<label for="inputName" class="control-label">تاريخ الانتساب</label>
+											<input type="hidden" name="DateOfJoin" value="{{ $mem->DateOfJoin }}">
+											<input type="text" class="form-control" id="inputName" name="DateOfJoin"
+											value="{{ $mem->DateOfJoin }}" readonly>
+										</div>
+									</div><br>
+                                    
+									<div class="row">
+										<div class="col">
+											<label for="exampleTextarea">صورة العضو المنتسب</label> <br>
+											<input type="hidden" name="Image" value="{{ $mem->Image }}">
+											<br>
+											
+											@if ($mem->Image)
+												<td><img src="{{asset('images/'.$mem->Image)}}" style="width: 100px;"></td>
+											@else
+												<td><img src="{{URL::asset('assets/img/media/user.jpg')}}"  style="width: 100px;"></td>
+											@endif
+										</div>
+									</div><br>
+
+									<div class="d-flex justify-content-center">
+                                        <a href="{{ url('admin/member/show') }}" class="btn btn-primary" style="align-items: center;">رجوع &nbsp; <i class="fa fa-arrow-left"></i></a>
+                                    </div>
+
+								</form>
+							</div>
+						</div>
+					</div>
+
+
+
+
+                    <div class="col-lg-6 col-md-6">
+						<div class="card">
+							<div class="card-body">
+								<form action="{{ route('notice.editDetails', $member->IDTeam) }}" method="get" autocomplete="off">
 									{{ csrf_field() }}
                                     @method('get')
 
@@ -228,21 +444,15 @@
 											@else
 												<td><img src="{{URL::asset('assets/img/media/user.jpg')}}"  style="width: 100px;"></td>
 											@endif
-											
-											{{-- <br>											  
-											<input type="file" name="Image" value="{{ $member->Image }}" class="dropify" accept=".jpg, .png, image/jpeg, image/png"
-											data-height="70" /> --}}
 										</div>
 									</div><br>
-
-									<div class="d-flex justify-content-center">
-                                        <a href="{{ url('admin/member/show') }}" class="btn btn-primary" style="align-items: center;">رجوع &nbsp; <i class="fa fa-arrow-left"></i></a>
-                                    </div>
-
 								</form>
 							</div>
 						</div>
 					</div>
+
+
+
 				</div>
 				<!-- row closed -->
 

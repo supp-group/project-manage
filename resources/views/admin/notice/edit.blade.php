@@ -43,25 +43,25 @@
 				<div class="row">
 					<div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
 
-						{{-- @foreach($members as $member) --}}
+						@foreach($members as $member)
 						<div class="dash-widget">
 							<div class="dash-widget-info text-right">
-								<h5 style="color: black;">قام {{Auth::user()->email}}  
-									{{-- بتعديل العضو {{$member->FullName}} --}}
-									{{-- ذو الرقم الحزبي {{$member->IDTeam}}</h5> --}}
+								<h5 style="color: black;">قام &nbsp; <span style="color: #0162e8">{{$member->managerEmail}} </span> &nbsp;
+									بتعديل العضو: &nbsp; <span style="color: #0162e8">{{$member->FullName}}</span>
+									&nbsp;	ذو الرقم الحزبي: &nbsp; <span style="color: #0162e8">{{$member->IDTeam}}</span> &nbsp; </h5>
 							</div>
 
 							<div class="dash-widget-info text-left">
-								<a class="btn btn-sm btn-info" href="" style="font-size: 14px;">إظهار التفاصيل</a> &nbsp;
+								<a class="btn btn-sm btn-info" href="{{ route('notice.editDetails', $member->IDTeam) }}" style="font-size: 14px;">إظهار التفاصيل</a> &nbsp;
 								<a class="btn btn-sm btn-success" href="" style="font-size: 14px;">تأكيد</a> &nbsp;
-								<a class="btn btn-sm btn-danger" href="" style="font-size: 14px;">تجاهل</a>
+								<a class="btn btn-sm btn-danger" href="" style="font-size: 14px;">تجاهل</a> &nbsp;
 							</div>
 						</div>
-						{{-- @endforeach --}}
+						@endforeach
 
 					</div>
 
-					{{-- {!! $paginationLinks !!} --}}
+					{!! $paginationLinks !!}
 
 				</div>
 				<!-- /row -->

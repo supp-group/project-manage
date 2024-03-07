@@ -6,9 +6,11 @@ use App\Http\Controllers\MemberController;
 use App\Http\Controllers\OccupationController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\QualificationController;
+use App\Http\Controllers\TemporaryController;
 use App\Http\Controllers\UserController;
 use App\Models\Member;
 use Illuminate\Support\Facades\Route;
+
 
 
 /*
@@ -35,14 +37,6 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
-
-
-
-
-Route::get('/edit', function () {
-  return view('admin.notice.edit');
-});
-
 
 
 
@@ -161,7 +155,11 @@ Route::middleware(['auth', 'verified', 'admin'])-> prefix('admin')->group(functi
   //   /notice
   Route:: prefix('notice')->group(function () {
 
-   
+    Route::get('edit', [TemporaryController::class, 'getEtidedMember']);
+
+    Route::get('editDetails/{idTeam}', [MemberController::class, 'detailsForCompare'])->name('notice.editDetails');
+
+    Route::get('editDetailsNew/{id}', [TemporaryController::class, 'details'])->name('notice.editDetailsNew');
 
   });
 
@@ -184,7 +182,7 @@ Route::middleware(['auth', 'verified', 'manager'])-> prefix('manager')->group(fu
         Route::post('save', [MemberController::class, 'store'])->name('memberm.save');
     
         Route::get('edit/{id}', [MemberController::class, 'edit'])->name('memberm.edit');
-        Route::post('update/{id}', [MemberController::class, 'update'])->name('memberm.update');
+        Route::post('update/{id}', [TemporaryController::class, 'storeUpdatedMember'])->name('memberm.update');
 
         Route::delete('delete/{id}', [MemberController::class, 'destroy'])->name('memberm.delete');
 

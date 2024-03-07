@@ -36,29 +36,29 @@ class TemporaryController extends Controller
    }
    public function storeUpdatedMember(Request $request)
    {
-       $validated = $request->validate([
-           'NotPad' => 'required|max:255',
-           'branch' => 'required',
-           // 'IDTeam' => 'required|unique:members|max:255',
-           'FullName' => 'required',
-           'MotherName' => 'required',
-           'PlaceOfBirth' => 'required',
-           'BirthDate' => 'required|date|before:today',
-           'Constraint' => 'required',
-           'City' => 'required',
-           'IDNumber' => 'required|unique:members|min:10|max:11',
-           'Gender' => 'required',
-           'Qualification' =>'required',
-           'Occupation' => 'required',
-           'MobilePhone' => 'required|max:10|min:9',
-           'HomeAddress' => 'required',
-           'WorkAddress' => 'required',
-           'HomePhone' => 'required|max:10|min:9',
-           'WorkPhone' => 'required|max:10|min:9',
-           'DateOfJoin' => 'required|numeric|digits:4|before_or_equal:' . date('Y'),
-           'Specialization' => 'required',
-           'Image' =>'required',
-       ]);
+    //    $validated = $request->validate([
+    //        'NotPad' => 'required|max:255',
+    //        'branch' => 'required',
+    //        // 'IDTeam' => 'required|unique:members|max:255',
+    //        'FullName' => 'required',
+    //        'MotherName' => 'required',
+    //        'PlaceOfBirth' => 'required',
+    //        'BirthDate' => 'required|date|before:today',
+    //        'Constraint' => 'required',
+    //        'City' => 'required',
+    //        'IDNumber' => 'required|unique:members|min:10|max:11',
+    //        'Gender' => 'required',
+    //        'Qualification' =>'required',
+    //        'Occupation' => 'required',
+    //        'MobilePhone' => 'required|max:10|min:9',
+    //        'HomeAddress' => 'required',
+    //        'WorkAddress' => 'required',
+    //        'HomePhone' => 'required|max:10|min:9',
+    //        'WorkPhone' => 'required|max:10|min:9',
+    //        'DateOfJoin' => 'required|numeric|digits:4|before_or_equal:' . date('Y'),
+    //        'Specialization' => 'required',
+    //        'Image' =>'required',
+    //    ]);
 
        
   // Convert Birthdate format
@@ -124,7 +124,7 @@ $specialization = $request->Specialization;
       ]);
   }
 
-  session()->flash('update', ' سيتم تعديل العضو بعد الموافقة عليه من قبل المدير');
+  session()->flash('Edit', ' سيتم تعديل العضو بعد الموافقة عليه من قبل المدير');
   return back();
 }
 
@@ -206,10 +206,11 @@ public function destroyNotice( $id)
    return back(); 
 }
 
-public function details($idTeam)
+public function details($id)
 {
-   $member = Temporary::where('IDTeam',$idTeam)->first();
+   $mem = Temporary::where('id',$id)->first();
 
-  return view('admin.notice.details',compact('member'));
+  return view('admin.notice.editDetails',compact('mem'));
+// return dd($mem);
 }
 }
