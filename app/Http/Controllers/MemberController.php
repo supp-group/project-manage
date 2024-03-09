@@ -385,29 +385,6 @@ public function index()
   
   public function update(Request $request, $id): RedirectResponse
   {
-    // $validated = $request->validate([
-    //     'NotPad' => 'required|max:255',
-    //     'branch' => 'required',
-    //     // 'IDTeam' => 'required|unique:members|max:255',
-    //     'FullName' => 'required',
-    //     'MotherName' => 'required',
-    //     'PlaceOfBirth' => 'required',
-    //     'BirthDate' => 'required|date|before:today',
-    //     'Constraint' => 'required',
-    //     'City' => 'required',
-    //     'IDNumber' => 'required|unique:members|min:11|max:11',
-    //     'Gender' => 'required',
-    //     'Qualification' =>'required',
-    //     'Occupation' => 'required',
-    //     'MobilePhone' => 'required|max:10',
-    //     'HomeAddress' => 'required',
-    //     'WorkAddress' => 'required',
-    //     'HomePhone' => 'required|max:10',
-    //     'WorkPhone' => 'required|max:10',
-    //     'DateOfJoin' => 'required|date|before_or_equal:today',
-    //     'Specialization' => 'required',
-    //     'Image' =>'required',
-    // ]);
   
   // Convert Birthdate format
   $birthDate = DateTime::createFromFormat('m/d/Y',$request->BirthDate);
@@ -475,6 +452,8 @@ $member->update();
         'Image'=> $img_name,
         ]);
     }
+ //Temporary::where($request->IDTeam)->get('AdminAgree')->set('1');
+ Temporary::where('IDTeam', $request->IDTeam)->update(['AdminAgree' => 1]);
 
     session()->flash('Edit', 'تم تعديل العضو بنجاح');
     return back(); 
@@ -488,6 +467,15 @@ $member->update();
        session()->flash('delete', 'تم حذف العضو بنجاح');
        return back(); 
     }
+
+    public function destroyForNotice( $IDTeam)
+    {
+       Member::findOrFail($IDTeam)->delete();
+       Temporary::findOrFail($IDTeam)->delete();
+       session()->flash('delete', 'تم حذف العضو بنجاح');
+       return back(); 
+    }
+
 
 
      public function searchByName(Request $request)
