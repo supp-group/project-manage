@@ -177,7 +177,7 @@ public function storeDeletedMember($id)
   return back();
 }
 
-public function destroyNotice( $id)
+public function destroyNotice($id)
 {
     Temporary::findOrFail($id)->delete();
 

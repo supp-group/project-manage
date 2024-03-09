@@ -159,9 +159,10 @@ Route::middleware(['auth', 'verified', 'admin'])-> prefix('admin')->group(functi
     Route::get('editDetails/{IDTeam}', [MemberController::class, 'detailsForCompare'])->name('notice.editDetails');
     Route::get('editDetailsNew/{IDTeam}', [TemporaryController::class, 'editDetails'])->name('notice.editDetailsNew');
 
-
     Route::get('delete', [TemporaryController::class, 'getDeletedMember']);
-    Route::get('deleteDetails/{IDTeam}', [MemberController::class, 'deleteDetails'])->name('notice.deleteDetails');
+    Route::get('deleteDetails/{IDTeam}', [TemporaryController::class, 'deleteDetails'])->name('notice.deleteDetails');
+
+    Route::get('ignore', [TemporaryController::class, 'destroyNotice'])->name('notice.destroyNotice');
 
   });
 
