@@ -190,7 +190,7 @@ public function editDetails($IDTeam)
 {
    $memb = Temporary::where('IDTeam',$IDTeam)->first();
 
-   return $memb;
+  // return $memb;
   return view('admin.notice.editDetails',['memb'=>$memb]);
 // return dd($mem);
 }

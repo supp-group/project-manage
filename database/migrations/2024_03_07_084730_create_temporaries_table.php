@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('NotPad')->nullable();
             $table->string('branch')->nullable();
-            $table->bigInteger('IDTeam')->unique()->nullable();
+            $table->bigInteger('IDTeam')->nullable();
             $table->string('FullName')->nullable();
             $table->string('MotherName')->nullable();
             $table->string('PlaceOfBirth')->nullable();
@@ -35,6 +35,7 @@ return new class extends Migration
             $table->string('Specialization')->nullable();
             $table->string('Image')->nullable();  
             $table->boolean('operation')->nullable();
+            $table->boolean('AdminAgree')->default(0)->nullable();
             $table->string('managerEmail')->nullable();
             $table->timestamps();
         });
