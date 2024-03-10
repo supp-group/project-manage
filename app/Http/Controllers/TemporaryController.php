@@ -159,7 +159,18 @@ class TemporaryController extends Controller
     $member->Image  = $Oldmember->Image;
     $member->operation = '0';
     $member->managerEmail = $user->email;
-    $member->save();
+
+    if(Temporary::where('IDTeam', $member->IDTeam)->where('operation', '0')->exists())
+    {
+        session()->flash('delete', 'طلب الحذف قد تم إرساله مسبقا إلى المدير');
+        return back();
+    }
+    else
+    {
+        $member->save();
+        session()->flash('delete', 'سيتم حذف العضو بعد الموافقة عليه من قبل المدير');
+        return back();
+    }
 
     // store image
     //   if($Oldmember->hasfile('Image')){
