@@ -28,6 +28,16 @@
 @endsection
 
 @section('content')
+
+@if(session()->has('delete'))
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+	<strong>{{ session()->get('delete') }}</strong>
+	<button type="button" class="close" data_dismiss="alert" aria_lable="Close">
+		<span aria_hidden="true">&times;</span>
+	</button>
+</div>
+@endif
+
 				<!-- row -->
                 <div class="col-lg-12 col-md-12">
                     <div class="card">
@@ -236,21 +246,23 @@
 
                 <div class="center" style="text-align: center;">
 
-                    <form action="{{ route('notice.destroyForNotice', $member->IDTeam) }}" method="POST">
+                    <form action="{{ route('notice.destroyForNotice', $member->IDTeam) }}" method="GET">
                         @csrf
                         @method('DELETE')
-                        {{-- {{ method_field('delete') }} --}}
-                        <input type="hidden" name="_method" value="DELETE">
-                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <button class="btn btn-success" style="align-items: center;">تأكيد الحذف &nbsp; <i class="fa fa-check"></i></button> &nbsp;
                     </form>
 
-                    <form action="{{ route('notice.destroyNotice', $member->id) }}" method="POST">
+       
+                    {{-- <form action="{{ route('notice.destroyNotice', $member->id) }}" method="GET">
                         @csrf
                         @method('DELETE')
                         <button class="btn btn-danger" style="align-items: center;">تجاهل الحذف &nbsp;<i class="fas fa-times"></i></button> &nbsp;
-                    </form>
-                    
+                    </form> --}}
+            
+
+                    <a class="btn btn-sm btn-danger" href="{{ route('notice.destroyNotice', $member->id) }}" style="font-size: 14px;">تجاهل</a>
+
+
                     <a href="{{ url('admin/notice/delete') }}" class="btn btn-primary" style="align-items: center;">رجوع &nbsp; <i class="fa fa-arrow-left"></i></a>
                 </div>
                 <br>
