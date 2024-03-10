@@ -70,6 +70,8 @@ Route::middleware(['auth', 'verified', 'admin'])-> prefix('admin')->group(functi
         Route::get('details/{id}',[MemberController::class,'details'])->name('member.details');
         
         // search
+        Route::post('phone', [MemberController::class, 'searchByPhoneNull'])->name('search-phone');
+
         Route::post('team', [MemberController::class, 'searchByIDTeam'])->name('search-team');
         Route::post('name', [MemberController::class, 'searchByName'])->name('search-name');
         Route::post('city', [MemberController::class, 'searchByCity'])->name('search-city');
@@ -198,6 +200,8 @@ Route::middleware(['auth', 'verified', 'manager'])-> prefix('manager')->group(fu
 
 
         // search
+        Route::post('phone', [MemberController::class, 'searchByPhoneNull'])->name('search-m-phone');
+
         Route::post('team', [MemberController::class, 'searchByIDTeam'])->name('search-m-team');
         Route::post('name', [MemberController::class, 'searchByName'])->name('search-m-name');
 

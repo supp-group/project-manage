@@ -499,7 +499,7 @@ document.addEventListener("DOMContentLoaded", function() {
         return response.json();
       })
       .then(specializations => {
-        specializationSelect.innerHTML = '<option value=""></option>';
+        specializationSelect.innerHTML = '<option value="">اختر الاختصاص</option>';
         specializations.forEach(specialization => {
           const option = document.createElement('option');
           option.value = specialization.id;
