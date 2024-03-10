@@ -200,6 +200,7 @@ integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEw
 								<th class="wd-15p border-bottom-0">الاسم الثلاثي</th>
 								<th class="wd-15p border-bottom-0">المحافظة</th>
 								<th class="wd-15p border-bottom-0">التفاصيل</th>
+								<th class="wd-15p border-bottom-0">سجل التعديل</th>
 								<th class="wd-15p border-bottom-0">تعديل</th>
 								<th class="wd-15p border-bottom-0">حذف</th>
 							</tr>
@@ -227,10 +228,13 @@ integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEw
 									<a class="btn btn-sm btn-success" href="{{ route('member.details', $member->id)}}" title="التفاصيل"><i class="las la-user"></i></a>
 								</td>
 								<td>
+									<a class="btn btn-sm btn-primary" href="" title="سجل التعديل"><i class="la la-archive"></i></a>
+								</td>
+								<td>
 									<a class="btn btn-sm btn-info" href="{{ route('member.edit', $member->id) }}" title="تعديل"><i class="las la-pen"></i></a>
 								</td>
 								<td>
-									<a class="modal-effect btn btn-sm btn-danger" data-toggle="modal" style="cursor: pointer;"
+									<a class="modal-effect btn btn-sm btn-danger" title="حذف" data-toggle="modal" style="cursor: pointer;"
 									data-target="#delete{{$member->id}}"><i class="las la-trash"></i></a>
 									<form action="{{route('member.delete', $member->id)}}" method="POST" enctype="multipart/form-data">
 											@csrf

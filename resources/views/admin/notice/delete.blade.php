@@ -42,8 +42,10 @@
 				<!-- row opened -->
 				<div class="row">
 					<div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
-
+							
 						@foreach($members as $member)
+						@if ($member->AdminAgree==0)
+
 						<div class="dash-widget">
 							<div class="dash-widget-info text-right">
 								<h5 style="color: black;">قام &nbsp; <span style="color: #0162e8">{{$member->managerEmail}} </span> &nbsp;
@@ -52,11 +54,13 @@
 							</div>
 
 							<div class="dash-widget-info text-left">
-								<a class="btn btn-sm btn-info" href="{{ route('notice.deleteDetails', $member->IDTeam) }}" style="font-size: 14px;">إظهار التفاصيل</a> &nbsp;
-								<a class="btn btn-sm btn-success" href="" style="font-size: 14px;">تأكيد</a> &nbsp;
+								<a class="btn btn-sm btn-info" href="{{ route('notice.deleteDetails', $member->id) }}" style="font-size: 14px;">إظهار التفاصيل</a> &nbsp;
+								<a class="btn btn-sm btn-success" href="{{ route('notice.destroyForNotice', $member->IDTeam) }}" style="font-size: 14px;">تأكيد</a> &nbsp;
 								<a class="btn btn-sm btn-danger" href="{{ route('notice.destroyNotice', $member->id) }}" style="font-size: 14px;">تجاهل</a>
 							</div>
 						</div>
+						
+						@endif
 						@endforeach
 
 					</div>

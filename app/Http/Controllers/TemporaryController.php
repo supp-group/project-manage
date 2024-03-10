@@ -195,9 +195,9 @@ public function editDetails($IDTeam)
 // return dd($mem);
 }
 
-public function deleteDetails($IDTeam)
+public function deleteDetails($id)
 {
-   $member = Temporary::where('IDTeam',$IDTeam)->first();
+   $member = Temporary::where('id',$id)->get();
    return view('admin.notice.deleteDetails',compact('member'));
 }
 
