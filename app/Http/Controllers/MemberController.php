@@ -512,7 +512,7 @@ $member->update();
     {
    if ( auth()->user()->Role == 'admin')
    {
-   $members =  Member::where('MobilePhone',Null)->orderBy('FullName', 'Asc')->paginate(50);
+   $members =  Member::where('MobilePhone',Null)->orwhere('MobilePhone','')->orderBy('FullName', 'Asc')->paginate(50);
 
     $paginationLinks = $members->withQueryString()->links('pagination::bootstrap-4');
     return view('admin.member.show', [
@@ -527,7 +527,7 @@ $member->update();
         ->where('id', $user->city_id)
         ->value('Name');
     
-    $members = Member::where('City', $cityName)->where('MobilePhone',Null)->orderBy('FullName', 'Asc')->paginate(50);
+    $members = Member::where('City', $cityName)->where('MobilePhone',Null)->orwhere('MobilePhone','')->orderBy('FullName', 'Asc')->paginate(50);
     $paginationLinks = $members->withQueryString()->links('pagination::bootstrap-4');
     return view('manager.member.show', [
         'members' => $members,
