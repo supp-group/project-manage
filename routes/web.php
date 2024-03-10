@@ -60,8 +60,8 @@ Route::middleware(['auth', 'verified', 'admin'])-> prefix('admin')->group(functi
         Route::get('add', [MemberController::class, 'create']);
         Route::post('save', [MemberController::class, 'store'])->name('member.save');
     
-        Route::get('edit/{id}', [MemberController::class, 'edit'])->name('member.edit');
-        Route::post('update/{id}', [MemberController::class, 'update'])->name('member.update');
+        Route::get('edit/{IDTeam}', [MemberController::class, 'edit'])->name('member.edit');
+        Route::post('update/{IDTeam}', [MemberController::class, 'update'])->name('member.update');
 
         Route::delete('delete/{id}', [MemberController::class, 'destroy'])->name('member.delete');
 
@@ -160,9 +160,12 @@ Route::middleware(['auth', 'verified', 'admin'])-> prefix('admin')->group(functi
     Route::get('editDetailsNew/{IDTeam}', [TemporaryController::class, 'editDetails'])->name('notice.editDetailsNew');
 
     Route::get('delete', [TemporaryController::class, 'getDeletedMember']);
-    Route::get('deleteDetails/{IDTeam}', [TemporaryController::class, 'deleteDetails'])->name('notice.deleteDetails');
+    Route::get('deleteDetails/{id}', [TemporaryController::class, 'deleteDetails'])->name('notice.deleteDetails');
 
-    Route::get('ignore', [TemporaryController::class, 'destroyNotice'])->name('notice.destroyNotice');
+    Route::delete('destroyNotice/{id}', [TemporaryController::class, 'destroyNotice'])->name('notice.destroyNotice');
+
+    // delete member from notice
+    Route::delete('destroyForNotice/{IDTeam}', [MemberController::class, 'destroyForNotice'])->name('notice.destroyForNotice');
 
   });
 

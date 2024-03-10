@@ -242,7 +242,7 @@
                         <h4>بعد التعديل</h4>
 						<div class="card">
 							<div class="card-body">
-								<form action= "{{ route('notice.editDetailsNew', $memb->IDTeam) }}"  method="get" autocomplete="off">
+								<form action= "{{ route('notice.editDetailsNew', $memb->IDTeam) }}" method="get" autocomplete="off">
 									{{ csrf_field() }}
                                     @method('get')
 
@@ -449,8 +449,73 @@
 				</div>
 
                 <div class="center" style="text-align: center;">
-                    <a href="{{ url('admin/member/show') }}" class="btn btn-success" style="align-items: center;">تأكيد التعديل &nbsp; <i class="fa fa-check"></i></a> &nbsp;
-                    <a href="{{ url('admin/member/show') }}" class="btn btn-danger" style="align-items: center;">تجاهل التعديل &nbsp;<i class="fas fa-times"></i></a> &nbsp;
+					<form action="{{ route('member.update', $member->IDTeam) }}" method="post">
+						@csrf
+						@method('post')
+												<input type="hidden" name="NotPad" value="{{ $memb->NotPad }}">
+												<input type="hidden" class="form-control" id="inputName" name="NotPad"
+												value="{{ $memb->NotPad }}" readonly>
+												<input type="hidden" name="branch" value="{{ $memb->branch }}">
+												<input type="hidden" class="form-control" id="inputName" name="branch"
+												value="{{ $memb->branch }}" readonly>
+												<input type="hidden" name="IDTeam" value="{{ $memb->IDTeam }}">
+												<input type="hidden" class="form-control" id="inputName" name="IDTeam"
+												value="{{ $memb->IDTeam }}" readonly>
+										<input type="hidden" name="FullName" value="{{ $memb->FullName }}">
+												<input type="hidden" class="form-control" id="inputName" name="FullName"
+												value="{{ $memb->FullName }}" readonly>
+												<input type="hidden" name="MotherName" value="{{ $memb->MotherName }}">
+												<input type="hidden" class="form-control" id="inputName" name="MotherName"
+												value="{{ $memb->MotherName }}" readonly>
+												<input type="hidden" name="PlaceOfBirth" value="{{ $memb->PlaceOfBirth }}">
+												<input type="hidden" class="form-control" id="inputName" name="PlaceOfBirth"
+												value="{{ $memb->PlaceOfBirth }}" readonly>
+												<input type="hidden" name="BirthDate" value="{{ $memb->BirthDate }}">
+												<input type="hidden" class="form-control" id="inputName" name="BirthDate"
+												value="{{ $memb->BirthDate }}" readonly>
+												<input type="hidden" name="Constraint" value="{{ $memb->Constraint }}">
+												<input type="hidden" class="form-control" id="inputName" name="Constraint"
+												value="{{ $memb->Constraint }}" readonly>
+												<input type="hidden" name="City" value="{{ $memb->City }}">
+												<input type="hidden" class="form-control" id="inputName" name="City"
+												value="{{ $memb->City }}" readonly>
+												<input type="hidden" name="IDNumber" value="{{ $memb->IDNumber }}">
+												<input type="hidden" class="form-control" id="inputName" name="IDNumber"
+												value="{{ $memb->IDNumber }}" readonly>
+												<input type="hidden" name="Gender" value="{{ $memb->Gender }}">
+												<input type="hidden" class="form-control" id="inputName" name="Gender"
+												value="{{ $memb->Gender }}" readonly>
+												<input type="hidden" name="Occupation" value="{{ $memb->Occupation }}">
+												<input type="hidden" class="form-control" id="inputName" name="Occupation"
+												value="{{ $memb->Occupation }}" readonly>
+												<input type="hidden" name="Qualification" value="{{ $memb->Qualification }}">
+												<input type="hidden" class="form-control" id="inputName" name="Qualification"
+												value="{{ $memb->Qualification }}" readonly>
+												<input type="hidden" name="Specialization" value="{{ $memb->Specialization }}">
+												<input type="hidden" class="form-control" id="inputName" name="Specialization"
+												value="{{ $memb->Specialization }}" readonly>
+												<input type="hidden" name="MobilePhone" value="{{ $memb->MobilePhone }}">
+												<input type="hidden" class="form-control" id="inputName" name="MobilePhone"
+												value="{{ $memb->MobilePhone }}" readonly>
+												<input type="hidden" name="HomeAddress" value="{{ $memb->HomeAddress }}">
+												<input type="hidden" class="form-control" id="inputName" name="HomeAddress"
+												value="{{ $memb->HomeAddress }}" readonly>
+												<input type="hidden" name="WorkAddress" value="{{ $memb->WorkAddress }}">
+												<input type="hidden" class="form-control" id="inputName" name="WorkAddress"
+												value="{{ $memb->WorkAddress }}" readonly>
+												<input type="hidden" name="HomePhone" value="{{ $memb->HomePhone }}">
+												<input type="hidden" class="form-control" id="inputName" name="HomePhone"
+												value="{{ $memb->HomePhone }}" readonly>
+												<input type="hidden" name="WorkPhone" value="{{ $memb->WorkPhone }}">
+												<input type="hidden" class="form-control" id="inputName" name="WorkPhone"
+												value="{{ $memb->WorkPhone }}" readonly>
+												<input type="hidden" name="DateOfJoin" value="{{ $memb->DateOfJoin }}">
+												<input type="hidden" class="form-control" id="inputName" name="DateOfJoin"
+												value="{{ $memb->DateOfJoin }}" readonly>
+												<input type="hidden" name="Image" value="{{ $memb->Image }}">
+						<button type="submit" class="btn btn-success" style="align-items: center;">تأكيد التعديل &nbsp; <i class="fa fa-check"></i></button> &nbsp;
+					</form>
+                    <a href="{{ route('notice.destroyNotice', $member->id) }}" class="btn btn-danger" style="align-items: center;">تجاهل التعديل &nbsp;<i class="fas fa-times"></i></a> &nbsp;
                     <a href="{{ url('admin/notice/edit') }}" class="btn btn-primary" style="align-items: center;">رجوع &nbsp; <i class="fa fa-arrow-left"></i></a>
                 </div>
                 <br>

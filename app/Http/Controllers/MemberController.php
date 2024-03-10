@@ -351,9 +351,9 @@ public function index()
   }
 
   
-  public function edit($id)
+  public function edit($IDTeam)
   {
-     $member = Member::findOrFail($id);
+     $member = Member::findOrFail($IDTeam);
 
      $user = auth()->user();
      $city = DB::table('cities')
@@ -383,7 +383,7 @@ public function index()
   }
 
   
-  public function update(Request $request, $id): RedirectResponse
+  public function update(Request $request, $IDTeam): RedirectResponse
   {
   
   // Convert Birthdate format
@@ -415,7 +415,7 @@ $specialization = $request->Specialization;
       // إذا كانت القيمة هي اسم
       $specializationName = $specialization;
   }
-$member = Member::findOrFail($id);
+$member = Member::findOrFail($IDTeam);
 $member->NotPad = $request->NotPad;
 $member->branch = $request->branch;
 // $member->IDTeam  = $IDTeam;
@@ -460,7 +460,7 @@ $member->update();
   }
 
 
-  public function destroy( $id)
+  public function destroy($id)
     {
        Member::findOrFail($id)->delete();
 
@@ -468,12 +468,12 @@ $member->update();
        return back(); 
     }
 
-    public function destroyForNotice( $IDTeam)
+    public function destroyForNotice($IDTeam)
     {
        Member::findOrFail($IDTeam)->delete();
        Temporary::findOrFail($IDTeam)->delete();
        session()->flash('delete', 'تم حذف العضو بنجاح');
-       return back(); 
+       return view('admin.notice.delete'); 
     }
 
 

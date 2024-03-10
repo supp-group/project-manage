@@ -193,9 +193,10 @@ class TemporaryController extends Controller
     // return dd($mem);
   }
 
-  public function deleteDetails($IDTeam)
-  {
-    $member = Temporary::where('IDTeam', $IDTeam)->first();
-    return view('admin.notice.deleteDetails', compact('member'));
-  }
+public function deleteDetails($id)
+{
+   $member = Temporary::where('id',$id)->get();
+   return view('admin.notice.deleteDetails',compact('member'));
+}
+
 }
