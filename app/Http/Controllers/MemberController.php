@@ -351,9 +351,9 @@ public function index()
   }
 
   
-  public function edit($IDTeam)
+  public function edit($id)
   {
-     $member = Member::findOrFail($IDTeam);
+     $member = Member::findOrFail($id);
 
      $user = auth()->user();
      $city = DB::table('cities')
@@ -415,7 +415,7 @@ $specialization = $request->Specialization;
       // إذا كانت القيمة هي اسم
       $specializationName = $specialization;
   }
-$member = Member::findOrFail($IDTeam);
+$member = Member::where('IDTeam',$IDTeam);
 $member->NotPad = $request->NotPad;
 $member->branch = $request->branch;
 // $member->IDTeam  = $IDTeam;
@@ -437,9 +437,6 @@ $member->HomePhone  = $request->HomePhone;
 $member->WorkPhone  = $request->WorkPhone;
 $member->DateOfJoin  = $dateJoinFormatted;
 $member->update();
-
-
-
     // store image
     if($request->hasfile('Image')){
         $img = $request->file('Image');
@@ -460,7 +457,7 @@ $member->update();
 
   }
 
-  public function update(Request $request, $IDTeam)
+  public function update(Request $request, $id)
   {
   
   // Convert Birthdate format
@@ -492,7 +489,7 @@ $specialization = $request->Specialization;
       // إذا كانت القيمة هي اسم
       $specializationName = $specialization;
   }
-$member = Member::findOrFail($IDTeam);
+$member = Member::findOrFail($id);
 $member->NotPad = $request->NotPad;
 $member->branch = $request->branch;
 // $member->IDTeam  = $IDTeam;
@@ -529,9 +526,6 @@ $member->update();
         'Image'=> $img_name,
         ]);
     }
- //Temporary::where($request->IDTeam)->get('AdminAgree')->set('1');
- Temporary::where('IDTeam', $request->IDTeam)->update(['AdminAgree' => 1]);
-
     session()->flash('Edit', 'تم تعديل العضو بنجاح');
     return back(); 
   }
