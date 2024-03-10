@@ -206,7 +206,7 @@ class TemporaryController extends Controller
 
 public function deleteDetails($id)
 {
-   $member = Temporary::where('id',$id)->get();
+   $member = Temporary::where('id',$id)->first();
    return view('admin.notice.deleteDetails',compact('member'));
 }
 

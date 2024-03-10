@@ -66,7 +66,7 @@
 
 					</div>
 
-					{{-- {!! $paginationLinks !!} --}}
+					{!! $paginationLinks !!}
 
 				</div>
 				<!-- /row -->
