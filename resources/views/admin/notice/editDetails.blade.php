@@ -467,8 +467,7 @@
 
 				</div>
 
-                <div class="center" style="text-align: center;">
-					<form action="{{ route('notice.updateForNotice', $member->IDTeam) }}" method="post">
+					<form action="{{ route('notice.updateForNotice', $memb->IDTeam) }}" method="post">
 						@csrf
 						@method('post')
 												<input type="hidden" name="NotPad" value="{{ $memb->NotPad }}">
@@ -480,7 +479,7 @@
 												<input type="hidden" name="IDTeam" value="{{ $memb->IDTeam }}">
 												<input type="hidden" class="form-control" id="inputName" name="IDTeam"
 												value="{{ $memb->IDTeam }}" readonly>
-										<input type="hidden" name="FullName" value="{{ $memb->FullName }}">
+												<input type="hidden" name="FullName" value="{{ $memb->FullName }}">
 												<input type="hidden" class="form-control" id="inputName" name="FullName"
 												value="{{ $memb->FullName }}" readonly>
 												<input type="hidden" name="MotherName" value="{{ $memb->MotherName }}">
@@ -533,13 +532,15 @@
 												value="{{ $memb->DateOfJoin }}" readonly>
 												<input type="hidden" name="Image" value="{{ $memb->Image }}">
 
-						<button type="submit" class="btn btn-success" style="align-items: center;">تأكيد التعديل &nbsp; <i class="fa fa-check"></i></button> &nbsp;
+					<div class="center" style="text-align: center;">
+
+						<button type="submit" class="btn btn-success" style="align-items: center; display: inline-block;">تأكيد التعديل &nbsp; <i class="fa fa-check"></i></button> &nbsp;
+						<a class="btn btn-danger" href="{{ route('notice.destroyNoticeUpdate', $memb->id) }}" style="align-items: center; display: inline-block;">تجاهل التعديل &nbsp; <i class="fas fa-times"></i></a> &nbsp;
+						<a href="{{ url('admin/notice/edit') }}" class="btn btn-primary" style="align-items: center; display: inline-block;">رجوع &nbsp; <i class="fa fa-arrow-left"></i></a>
+					
+					</div>
+
 					</form>
-
-					<a class="btn btn-danger" href="{{ route('notice.destroyNoticeUpdate', $memb->id) }}" style="font-size: 14px;">تجاهل التعديل &nbsp; <i class="fas fa-times"></i></a> &nbsp;
-
-                    <a href="{{ url('admin/notice/edit') }}" class="btn btn-primary" style="align-items: center;">رجوع &nbsp; <i class="fa fa-arrow-left"></i></a>
-                </div>
                 <br>
 				<!-- row closed -->
 
