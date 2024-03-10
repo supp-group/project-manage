@@ -415,10 +415,11 @@ $specialization = $request->Specialization;
       // إذا كانت القيمة هي اسم
       $specializationName = $specialization;
   }
-$member = Member::where('IDTeam',$IDTeam);
+$member = Member::where('IDTeam',$IDTeam)->first();
+// return($member);
 $member->NotPad = $request->NotPad;
 $member->branch = $request->branch;
-// $member->IDTeam  = $IDTeam;
+$member->IDTeam  = $IDTeam;
 $member->FullName = $request->FullName;
 $member->MotherName = $request->MotherName;
 $member->PlaceOfBirth = $request->PlaceOfBirth;
@@ -437,6 +438,7 @@ $member->HomePhone  = $request->HomePhone;
 $member->WorkPhone  = $request->WorkPhone;
 $member->DateOfJoin  = $dateJoinFormatted;
 $member->update();
+
     // store image
     if($request->hasfile('Image')){
         $img = $request->file('Image');
@@ -452,7 +454,7 @@ $member->update();
  //Temporary::where($request->IDTeam)->get('AdminAgree')->set('1');
  Temporary::where('IDTeam', $request->IDTeam)->update(['AdminAgree' => 1]);
 
-    session()->flash('Edit', 'تم تعديل العضو بنجاح');
+    session()->flash('Add', 'تم تعديل العضو بنجاح');
     return redirect()->route('edit');
 
   }
