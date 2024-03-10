@@ -36,31 +36,6 @@ class TemporaryController extends Controller
   }
   public function storeUpdatedMember(Request $request)
   {
-    //    $validated = $request->validate([
-    //        'NotPad' => 'required|max:255',
-    //        'branch' => 'required',
-    //        // 'IDTeam' => 'required|unique:members|max:255',
-    //        'FullName' => 'required',
-    //        'MotherName' => 'required',
-    //        'PlaceOfBirth' => 'required',
-    //        'BirthDate' => 'required|date|before:today',
-    //        'Constraint' => 'required',
-    //        'City' => 'required',
-    //        'IDNumber' => 'required|unique:members|min:10|max:11',
-    //        'Gender' => 'required',
-    //        'Qualification' =>'required',
-    //        'Occupation' => 'required',
-    //        'MobilePhone' => 'required|max:10|min:9',
-    //        'HomeAddress' => 'required',
-    //        'WorkAddress' => 'required',
-    //        'HomePhone' => 'required|max:10|min:9',
-    //        'WorkPhone' => 'required|max:10|min:9',
-    //        'DateOfJoin' => 'required|numeric|digits:4|before_or_equal:' . date('Y'),
-    //        'Specialization' => 'required',
-    //        'Image' =>'required',
-    //    ]);
-
-
     // Convert Birthdate format
     $birthDate = DateTime::createFromFormat('m/d/Y', $request->BirthDate);
     $birthDateFormatted = $birthDate ? $birthDate->format('Y-m-d') : $request->BirthDate;
@@ -184,29 +159,10 @@ class TemporaryController extends Controller
         return back();
     }
 
-    // store image
-    //   if($Oldmember->hasfile('Image')){
-    //       $img = $Oldmember->file('Image');
-    //       $img_name = $img->getClientOriginalName();
-    //       $img->move(public_path('images'), $img_name);
-
-    //       Temporary::find($member->id)->update([
-    //       'Image'=> $img_name,
-    //       ]);
-    //   }
-
     session()->flash('delete', 'سيتم حذف العضو بعد الموافقة عليه من قبل المدير');
     return back();
   }
 
-  // public function destroyNotice($id)
-  // {
-    // return($id);
-    // Temporary::find($id)->delete();
-
-    // session()->flash('delete', 'تم تجاهل الإشعار ');
-    // return back();
-  // }
 
     public function destroyNotice_delete($id)
 {

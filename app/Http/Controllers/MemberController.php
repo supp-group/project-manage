@@ -473,11 +473,9 @@ $member->update();
        Member::findOrFail($IDTeam)->delete();
        Temporary::findOrFail($IDTeam)->where('operation', '0')->delete();
        
-       session()->flash('delete', 'تم حذف العضو بنجاح');
-       return view('admin.notice.delete'); 
+       session()->flash('Add', 'تم حذف العضو بنجاح');
+       return redirect()->route('delete');
     }
-
-
 
      public function searchByName(Request $request)
     {
