@@ -39,6 +39,16 @@
 
 @endsection
 @section('content')
+
+@if(session()->has('delete'))
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+	<strong>{{ session()->get('delete') }}</strong>
+	<button type="button" class="close" data_dismiss="alert" aria_lable="Close">
+		<span aria_hidden="true">&times;</span>
+	</button>
+</div>
+@endif
+
 				<!-- row opened -->
 				<div class="row">
 					<div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
