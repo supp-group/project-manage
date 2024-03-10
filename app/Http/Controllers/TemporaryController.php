@@ -23,6 +23,7 @@ class TemporaryController extends Controller
     ]);
   }
 
+  
   public function getEtidedMember()
   {
     $members = Temporary::where('operation', '1')->select('id', 'FullName', 'IDTeam', 'managerEmail')
@@ -34,6 +35,8 @@ class TemporaryController extends Controller
       'paginationLinks' => $paginationLinks
     ]);
   }
+
+
   public function storeUpdatedMember(Request $request)
   {
     // Convert Birthdate format

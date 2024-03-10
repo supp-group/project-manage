@@ -468,7 +468,7 @@
 				</div>
 
                 <div class="center" style="text-align: center;">
-					<form action="{{ route('member.update', $member->IDTeam) }}" method="post">
+					<form action="{{ route('notice.updateForNotice', $member->IDTeam) }}" method="post">
 						@csrf
 						@method('post')
 												<input type="hidden" name="NotPad" value="{{ $memb->NotPad }}">
