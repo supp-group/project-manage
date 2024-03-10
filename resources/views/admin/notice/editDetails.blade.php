@@ -515,7 +515,8 @@
 												<input type="hidden" name="Image" value="{{ $memb->Image }}">
 						<button type="submit" class="btn btn-success" style="align-items: center;">تأكيد التعديل &nbsp; <i class="fa fa-check"></i></button> &nbsp;
 					</form>
-                    <a href="{{ route('notice.destroyNotice', $member->id) }}" class="btn btn-danger" style="align-items: center;">تجاهل التعديل &nbsp;<i class="fas fa-times"></i></a> &nbsp;
+					<a class="btn btn-sm btn-danger" href="{{ route('notice.destroyNoticeUpdate', $memb->id) }}" style="font-size: 14px;">تجاهل</a>
+
                     <a href="{{ url('admin/notice/edit') }}" class="btn btn-primary" style="align-items: center;">رجوع &nbsp; <i class="fa fa-arrow-left"></i></a>
                 </div>
                 <br>

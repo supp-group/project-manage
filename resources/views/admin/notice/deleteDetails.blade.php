@@ -246,19 +246,19 @@
 
                 <div class="center" style="text-align: center;">
 
-                    <form action="{{ route('notice.destroyForNotice', $member->IDTeam) }}" method="GET">
+                    {{-- <form action="{{ route('notice.destroyForNotice', $member->IDTeam) }}" method="GET">
                         @csrf
                         @method('DELETE')
                         <button class="btn btn-success" style="align-items: center;">تأكيد الحذف &nbsp; <i class="fa fa-check"></i></button> &nbsp;
-                    </form>
+                    </form> --}}
 
        
                     {{-- <form action="{{ route('notice.destroyNotice', $member->id) }}" method="GET">
                         @csrf
                         @method('DELETE')
                         <button class="btn btn-danger" style="align-items: center;">تجاهل الحذف &nbsp;<i class="fas fa-times"></i></button> &nbsp;
-                    </form> --}}
-            
+                    </form>
+             --}}
 
                     <a class="btn btn-sm btn-danger" href="{{ route('notice.destroyNotice', $member->id) }}" style="font-size: 14px;">تجاهل</a>
 

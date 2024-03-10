@@ -213,32 +213,23 @@ class TemporaryController extends Controller
      Temporary::find($id)->delete();
      session()->flash('delete', 'تم تجاهل الإشعار ');
      return back();
-      //  $members = Temporary::where('operation', '0')->select('id', 'FullName', 'IDTeam', 'managerEmail')
-      // ->orderBy('updated_at', 'desc')->paginate(4);
-
-    // $paginationLinks = $members->withQueryString()->links('pagination::bootstrap-4');
- 
-    // return view('admin.notice.delete', [
-    //   'members' => $members,
-    //   'paginationLinks' => $paginationLinks
-    // ]);
 } 
 
 public function destroyNotice($id)
 {
      Temporary::find($id)->delete();
-       $members = Temporary::where('operation', '0')->select('id', 'FullName', 'IDTeam', 'managerEmail')
-      ->orderBy('updated_at', 'desc')->paginate(4);
-
-    $paginationLinks = $members->withQueryString()->links('pagination::bootstrap-4');
     session()->flash('delete', 'تم تجاهل الإشعار ');
- 
-    return view('admin.notice.delete', [
-      'members' => $members,
-      'paginationLinks' => $paginationLinks
-    ]);
+    return redirect()->route('delete');
+  
 } 
- 
+public function destroyNoticeUpdate($id)
+{
+     Temporary::find($id)->delete();
+    session()->flash('delete', 'تم تجاهل الإشعار ');
+    return redirect()->route('edit');
+  
+}  
+
 
   public function editDetails($IDTeam)
   {
