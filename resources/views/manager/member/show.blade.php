@@ -27,12 +27,23 @@
 						</select>               
 					</div>
 
-					<div class="d-flex my-xl-auto right-content">
+					{{-- <div class="d-flex my-xl-auto right-content">
 						<a href="{{ route('exportm') }}" type="button" class="btn btn-primary" style="color: white">&nbsp; تصدير &nbsp;<i class="fas fa-file-upload"></i></a>
-					</div>
+					</div> --}}
+
                     {{-- <div class="d-flex my-xl-auto right-content">
 						<a href="" type="button" class="btn btn-primary" style="color: white">&nbsp; استيراد &nbsp;<i class="fas fa-file-download"></i></a>
 					</div> --}}
+
+					<form action="{{ route('search-m-phone') }}" method="post">
+						@csrf
+						<div class="input-group">
+							<div class="input-group-append">
+								<span style="font-size: 16px; padding-top: 8px;">عدم وجود رقم موبايل</span> &nbsp;
+								<button name="search-phone" type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
+							</div>
+						</div>
+					</form>
 				</div>
 
 

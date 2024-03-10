@@ -468,7 +468,7 @@
 
 	
 
-	<script>
+	{{-- <script>
 		document.addEventListener("DOMContentLoaded", function() {
 		  const qualificationSelect = document.querySelector('#qualificationSelect');
 		  const specializationSelect = document.querySelector('#specializationSelect');
@@ -500,7 +500,44 @@
 			  });
 		  });
 		});	
-		</script>
+	</script> --}}
+
+
+	<script>
+		document.addEventListener("DOMContentLoaded", function() {
+		  const qualificationSelect = document.querySelector('#qualificationSelect');
+		  const specializationSelect = document.querySelector('#specializationSelect');
+		
+		  qualificationSelect.addEventListener('change', function() {
+			const qualificationName = this.value;
+		
+			var url = "{{ url('manager/memberm/get-specializations/[itemname]') }}";
+			url = url.replace('[itemname]', qualificationName);
+		
+			fetch(url)
+			  .then(response => {
+				if (!response.ok) {
+				  throw new Error('Network response was not ok');
+				}
+				return response.json();
+			  })
+			  .then(specializations => {
+				specializationSelect.innerHTML = '<option value="">اختر الاختصاص</option>';
+				specializations.forEach(specialization => {
+				  const option = document.createElement('option');
+				  option.value = specialization.id;
+				  option.textContent = specialization.specialization;
+				  specializationSelect.appendChild(option);
+				});
+			  })
+			  .catch(error => {
+				console.error('There has been a problem with your fetch operation:', error);
+			  });
+		  });
+		});	
+	</script>
+
+
 
 
 <!--Internal  Datepicker js -->
