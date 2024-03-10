@@ -471,7 +471,8 @@ $member->update();
     public function destroyForNotice($IDTeam)
     {
        Member::findOrFail($IDTeam)->delete();
-       Temporary::findOrFail($IDTeam)->delete();
+       Temporary::findOrFail($IDTeam)->where('operation', '0')->delete();
+       
        session()->flash('delete', 'تم حذف العضو بنجاح');
        return view('admin.notice.delete'); 
     }
