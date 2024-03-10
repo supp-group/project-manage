@@ -383,7 +383,84 @@ public function index()
   }
 
   
-  public function update(Request $request, $IDTeam): RedirectResponse
+  public function updateForNotice(Request $request, $IDTeam)
+  {
+  
+  // Convert Birthdate format
+  $birthDate = DateTime::createFromFormat('m/d/Y',$request->BirthDate);
+  $birthDateFormatted = $birthDate ? $birthDate->format('Y-m-d') : $request->BirthDate;
+
+  // Convert DateOfJoin format
+  $dateJoin = DateTime::createFromFormat('Y',$request->DateOfJoin );
+  $dateJoinFormatted = $dateJoin ? $dateJoin->format('Y') : null;
+
+
+  $qualification = $request->Qualification;
+
+  if (is_numeric($qualification)) {
+      // إذا كانت القيمة هي id
+      $qualificationName = Qualification::where('id', $qualification)->value('Name');
+  } else {
+      // إذا كانت القيمة هي اسم
+      $qualificationName = $qualification;
+  }
+  
+$specialization = $request->Specialization;
+
+  if (is_numeric($specialization)) {
+      // إذا كانت القيمة هي id
+      $specializationName = Qualification::where('id', $specialization)->value('specialization');
+
+  } else {
+      // إذا كانت القيمة هي اسم
+      $specializationName = $specialization;
+  }
+$member = Member::findOrFail($IDTeam);
+$member->NotPad = $request->NotPad;
+$member->branch = $request->branch;
+// $member->IDTeam  = $IDTeam;
+$member->FullName = $request->FullName;
+$member->MotherName = $request->MotherName;
+$member->PlaceOfBirth = $request->PlaceOfBirth;
+$member->BirthDate = $birthDateFormatted;
+$member->Constraint = $request->Constraint;
+$member->City = $request->City;
+$member->IDNumber  = $request->IDNumber;
+$member->Gender  = $request->Gender == 'ذكر' ? 'ذكر' : 'أنثى';
+$member->Qualification = $qualificationName;
+$member->Specialization  = $specializationName;
+$member->Occupation  = $request->Occupation;
+$member->MobilePhone  = $request->MobilePhone;
+$member->HomeAddress  = $request->HomeAddress;
+$member->WorkAddress  = $request->WorkAddress;
+$member->HomePhone  = $request->HomePhone;
+$member->WorkPhone  = $request->WorkPhone;
+$member->DateOfJoin  = $dateJoinFormatted;
+$member->update();
+
+
+
+    // store image
+    if($request->hasfile('Image')){
+        $img = $request->file('Image');
+        $img_name = $img->getClientOriginalName();
+        $img->move(public_path('images'), $img_name);
+
+      //  $member->Image  =   $img_name;
+      //  $member->save();
+        Member::find($member->id)->update([
+        'Image'=> $img_name,
+        ]);
+    }
+ //Temporary::where($request->IDTeam)->get('AdminAgree')->set('1');
+ Temporary::where('IDTeam', $request->IDTeam)->update(['AdminAgree' => 1]);
+
+    session()->flash('Edit', 'تم تعديل العضو بنجاح');
+    return redirect()->route('edit');
+
+  }
+
+  public function update(Request $request, $IDTeam)
   {
   
   // Convert Birthdate format
