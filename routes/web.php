@@ -173,6 +173,8 @@ Route::middleware(['auth', 'verified', 'admin'])-> prefix('admin')->group(functi
     // delete member from notice
     Route::get('destroyForNotice/{IDTeam}', [MemberController::class, 'destroyForNotice'])->name('notice.destroyForNotice');
 
+    Route::post('updateForNotice/{IDTeam}', [MemberController::class, 'updateForNotice'])->name('notice.updateForNotice');
+
   });
 
 });
