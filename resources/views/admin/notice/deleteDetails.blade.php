@@ -29,6 +29,15 @@
 
 @section('content')
 
+@if(session()->has('Add'))
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+  <strong>{{ session()->get('Add') }}</strong>
+  <button type="button" class="close" data_dismiss="alert" aria_lable="Close">
+    <span aria_hidden="true">&times;</span>
+  </button>
+</div>
+@endif
+
 @if(session()->has('delete'))
 <div class="alert alert-danger alert-dismissible fade show" role="alert">
 	<strong>{{ session()->get('delete') }}</strong>
@@ -252,17 +261,9 @@
                         <button class="btn btn-success" style="align-items: center;">تأكيد الحذف &nbsp; <i class="fa fa-check"></i></button> &nbsp;
                     </form> --}}
 
-       
-                    {{-- <form action="{{ route('notice.destroyNotice', $member->id) }}" method="GET">
-                        @csrf
-                        @method('DELETE')
-                        <button class="btn btn-danger" style="align-items: center;">تجاهل الحذف &nbsp;<i class="fas fa-times"></i></button> &nbsp;
-                    </form>
-             --}}
 
-                    <a class="btn btn-sm btn-danger" href="{{ route('notice.destroyNotice', $member->id) }}" style="font-size: 14px;">تجاهل</a>
-
-
+                    <a class="btn btn-success" href="{{ route('notice.destroyForNotice', $member->IDTeam) }}" style="align-items: center; font-size: 14px;">تأكيد الحذف &nbsp; <i class="fas fa-check"></i></a> &nbsp;
+                    <a class="btn btn-danger" href="{{ route('notice.destroyNotice', $member->id) }}" style="align-items: center; font-size: 14px;">تجاهل الحذف &nbsp; <i class="fas fa-times"></i></a> &nbsp;
                     <a href="{{ url('admin/notice/delete') }}" class="btn btn-primary" style="align-items: center;">رجوع &nbsp; <i class="fa fa-arrow-left"></i></a>
                 </div>
                 <br>
