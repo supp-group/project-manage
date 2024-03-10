@@ -29,6 +29,15 @@
 
 @section('content')
 
+@if(session()->has('Add'))
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+  <strong>{{ session()->get('Add') }}</strong>
+  <button type="button" class="close" data_dismiss="alert" aria_lable="Close">
+    <span aria_hidden="true">&times;</span>
+  </button>
+</div>
+@endif
+
 @if(session()->has('delete'))
 <div class="alert alert-danger alert-dismissible fade show" role="alert">
 	<strong>{{ session()->get('delete') }}</strong>
@@ -523,9 +532,11 @@
 												<input type="hidden" class="form-control" id="inputName" name="DateOfJoin"
 												value="{{ $memb->DateOfJoin }}" readonly>
 												<input type="hidden" name="Image" value="{{ $memb->Image }}">
+
 						<button type="submit" class="btn btn-success" style="align-items: center;">تأكيد التعديل &nbsp; <i class="fa fa-check"></i></button> &nbsp;
 					</form>
-					<a class="btn btn-sm btn-danger" href="{{ route('notice.destroyNoticeUpdate', $memb->id) }}" style="font-size: 14px;">تجاهل</a>
+
+					<a class="btn btn-danger" href="{{ route('notice.destroyNoticeUpdate', $memb->id) }}" style="font-size: 14px;">تجاهل التعديل &nbsp; <i class="fas fa-times"></i></a> &nbsp;
 
                     <a href="{{ url('admin/notice/edit') }}" class="btn btn-primary" style="align-items: center;">رجوع &nbsp; <i class="fa fa-arrow-left"></i></a>
                 </div>
