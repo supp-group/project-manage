@@ -157,14 +157,18 @@ Route::middleware(['auth', 'verified', 'admin'])-> prefix('admin')->group(functi
   //   /notice
   Route:: prefix('notice')->group(function () {
 
-    Route::get('edit', [TemporaryController::class, 'getEtidedMember']);
+    Route::get('edit', [TemporaryController::class, 'getEtidedMember'])->name('edit');
     Route::get('editDetails/{IDTeam}', [MemberController::class, 'detailsForCompare'])->name('notice.editDetails');
     Route::get('editDetailsNew/{IDTeam}', [TemporaryController::class, 'editDetails'])->name('notice.editDetailsNew');
 
-    Route::get('delete', [TemporaryController::class, 'getDeletedMember']);
+    Route::get('delete', [TemporaryController::class, 'getDeletedMember'])->name('delete');
+    
     Route::get('deleteDetails/{id}', [TemporaryController::class, 'deleteDetails'])->name('notice.deleteDetails');
+    Route::get('destroyNotice_delete/{id}', [TemporaryController::class, 'destroyNotice_delete'])->name('notice.destroyNotice_delete');
 
-    Route::delete('destroyNotice/{id}', [TemporaryController::class, 'destroyNotice'])->name('notice.destroyNotice');
+    Route::get('destroyNotice/{id}', [TemporaryController::class, 'destroyNotice'])->name('notice.destroyNotice');
+
+    Route::get('destroyNoticeUpdate/{id}', [TemporaryController::class, 'destroyNoticeUpdate'])->name('notice.destroyNoticeUpdate');
 
     // delete member from notice
     Route::delete('destroyForNotice/{IDTeam}', [MemberController::class, 'destroyForNotice'])->name('notice.destroyForNotice');

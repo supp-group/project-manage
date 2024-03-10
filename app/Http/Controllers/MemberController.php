@@ -928,5 +928,4 @@ public function GetCityWithMemberCount(Request $request)
     return view('admin.notice.editDetails',compact('member','memb'));
   }
 
-
 }

@@ -110,9 +110,19 @@ class TemporaryController extends Controller
     $member->DateOfJoin  = $request->DateOfJoin;
     $member->operation = '1';
     $member->managerEmail = $user->email;
-    $member->save();
+ 
 
-    // store image
+   
+  
+    if(Temporary::where('IDTeam', $member->IDTeam)->where('operation', '1')->exists())
+    {
+  
+        session()->flash('Edit', 'طلب التعديل قد تم إرساله مسبقا إلى المدير');
+        return back();
+    }
+    else
+    {
+           // store image
     if ($request->hasfile('Image')) {
       $img = $request->file('Image');
       $img_name = $img->getClientOriginalName();
@@ -123,8 +133,10 @@ class TemporaryController extends Controller
       ]);
     }
 
-    session()->flash('Edit', ' سيتم تعديل العضو بعد الموافقة عليه من قبل المدير');
-    return back();
+        $member->save();
+        session()->flash('Edit', 'سيتم تعديل العضو بعد الموافقة عليه من قبل المدير');
+        return back();
+    }
   }
 
   public function storeDeletedMember($id)
@@ -187,13 +199,37 @@ class TemporaryController extends Controller
     return back();
   }
 
-  public function destroyNotice($id)
-  {
-    Temporary::findOrFail($id)->delete();
+  // public function destroyNotice($id)
+  // {
+    // return($id);
+    // Temporary::find($id)->delete();
 
+    // session()->flash('delete', 'تم تجاهل الإشعار ');
+    // return back();
+  // }
+
+    public function destroyNotice_delete($id)
+{
+     Temporary::find($id)->delete();
+     session()->flash('delete', 'تم تجاهل الإشعار ');
+     return back();
+} 
+
+public function destroyNotice($id)
+{
+     Temporary::find($id)->delete();
     session()->flash('delete', 'تم تجاهل الإشعار ');
-    return back();
-  }
+    return redirect()->route('delete');
+  
+} 
+public function destroyNoticeUpdate($id)
+{
+     Temporary::find($id)->delete();
+    session()->flash('delete', 'تم تجاهل الإشعار ');
+    return redirect()->route('edit');
+  
+}  
+
 
   public function editDetails($IDTeam)
   {
