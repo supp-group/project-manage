@@ -110,9 +110,19 @@ class TemporaryController extends Controller
     $member->DateOfJoin  = $request->DateOfJoin;
     $member->operation = '1';
     $member->managerEmail = $user->email;
-    $member->save();
+ 
 
-    // store image
+   
+  
+    if(Temporary::where('IDTeam', $member->IDTeam)->where('operation', '1')->exists())
+    {
+  
+        session()->flash('Edit', 'طلب التعديل قد تم إرساله مسبقا إلى المدير');
+        return back();
+    }
+    else
+    {
+           // store image
     if ($request->hasfile('Image')) {
       $img = $request->file('Image');
       $img_name = $img->getClientOriginalName();
@@ -123,8 +133,10 @@ class TemporaryController extends Controller
       ]);
     }
 
-    session()->flash('Edit', ' سيتم تعديل العضو بعد الموافقة عليه من قبل المدير');
-    return back();
+        $member->save();
+        session()->flash('Edit', 'سيتم تعديل العضو بعد الموافقة عليه من قبل المدير');
+        return back();
+    }
   }
 
   public function storeDeletedMember($id)
@@ -187,13 +199,46 @@ class TemporaryController extends Controller
     return back();
   }
 
-  public function destroyNotice($id)
-  {
-    Temporary::findOrFail($id)->delete();
+  // public function destroyNotice($id)
+  // {
+    // return($id);
+    // Temporary::find($id)->delete();
 
+    // session()->flash('delete', 'تم تجاهل الإشعار ');
+    // return back();
+  // }
+
+    public function destroyNotice_delete($id)
+{
+     Temporary::find($id)->delete();
+     session()->flash('delete', 'تم تجاهل الإشعار ');
+     return back();
+      //  $members = Temporary::where('operation', '0')->select('id', 'FullName', 'IDTeam', 'managerEmail')
+      // ->orderBy('updated_at', 'desc')->paginate(4);
+
+    // $paginationLinks = $members->withQueryString()->links('pagination::bootstrap-4');
+ 
+    // return view('admin.notice.delete', [
+    //   'members' => $members,
+    //   'paginationLinks' => $paginationLinks
+    // ]);
+} 
+
+public function destroyNotice($id)
+{
+     Temporary::find($id)->delete();
+       $members = Temporary::where('operation', '0')->select('id', 'FullName', 'IDTeam', 'managerEmail')
+      ->orderBy('updated_at', 'desc')->paginate(4);
+
+    $paginationLinks = $members->withQueryString()->links('pagination::bootstrap-4');
     session()->flash('delete', 'تم تجاهل الإشعار ');
-    return back();
-  }
+ 
+    return view('admin.notice.delete', [
+      'members' => $members,
+      'paginationLinks' => $paginationLinks
+    ]);
+} 
+ 
 
   public function editDetails($IDTeam)
   {
@@ -206,7 +251,7 @@ class TemporaryController extends Controller
 
 public function deleteDetails($id)
 {
-   $member = Temporary::where('id',$id)->get();
+   $member = Temporary::where('id',$id)->first();
    return view('admin.notice.deleteDetails',compact('member'));
 }
 

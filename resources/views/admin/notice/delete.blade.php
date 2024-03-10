@@ -55,9 +55,14 @@
 							</div>
 
 							<div class="dash-widget-info text-left">
-								<a class="btn btn-sm btn-info" href="{{ route('notice.deleteDetails', $member->id) }}" style="font-size: 14px;">إظهار التفاصيل</a> &nbsp;
+								<a class="btn btn-sm btn-info" href="{{ route('notice.destroyNotice_delete', $member->id) }}" style="font-size: 14px;">إظهار التفاصيل</a> &nbsp;
 								<a class="btn btn-sm btn-success" href="{{ route('notice.destroyForNotice', $member->IDTeam) }}" style="font-size: 14px;">تأكيد</a> &nbsp;
-								<a class="btn btn-sm btn-danger" href="{{ route('notice.destroyNotice', $member->id) }}" style="font-size: 14px;">تجاهل</a>
+								{{-- <a class="btn btn-sm btn-danger" href="{{ route('notice.destroyNotice', $member->id) }}" style="font-size: 14px;">تجاهل</a> --}}
+								<form action="{{ route('notice.destroyNotice', $member->id) }}" method="POST">
+									@csrf
+									@method('DELETE')
+									<button class="btn btn-danger" style="align-items: center;">تجاهل الحذف &nbsp;<i class="fas fa-times"></i></button> &nbsp;
+								</form>
 							</div>
 						</div>
 						
@@ -66,7 +71,7 @@
 
 					</div>
 
-					{{-- {!! $paginationLinks !!} --}}
+					{!! $paginationLinks !!}
 
 				</div>
 				<!-- /row -->

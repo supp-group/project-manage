@@ -162,7 +162,9 @@ Route::middleware(['auth', 'verified', 'admin'])-> prefix('admin')->group(functi
     Route::get('editDetailsNew/{IDTeam}', [TemporaryController::class, 'editDetails'])->name('notice.editDetailsNew');
 
     Route::get('delete', [TemporaryController::class, 'getDeletedMember']);
+    
     Route::get('deleteDetails/{id}', [TemporaryController::class, 'deleteDetails'])->name('notice.deleteDetails');
+    Route::get('deleteDetails/{id}', [TemporaryController::class, 'destroyNotice_delete'])->name('notice.destroyNotice_delete');
 
     Route::delete('destroyNotice/{id}', [TemporaryController::class, 'destroyNotice'])->name('notice.destroyNotice');
 
