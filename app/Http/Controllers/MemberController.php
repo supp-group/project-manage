@@ -558,10 +558,11 @@ $member->update();
    if ( auth()->user()->Role == 'admin')
    {
    $members =  Member::where('FullName', 'like', '%'.$searchTerm.'%')->orderBy('FullName', 'Asc')->paginate(50);
-
+   $memberCount =  Member::where('FullName', 'like', '%'.$searchTerm.'%')->count();
     $paginationLinks = $members->withQueryString()->links('pagination::bootstrap-4');
     return view('admin.member.show', [
         'members' => $members,
+        'memberCount'=>$memberCount,
         'paginationLinks' => $paginationLinks
     ]);
 
@@ -573,9 +574,11 @@ $member->update();
         ->value('Name');
     
     $members = Member::where('City', $cityName)->where('FullName', 'like', '%'.$searchTerm.'%')->orderBy('FullName', 'Asc')->paginate(50);
+    $memberCount = Member::where('City', $cityName)->where('FullName', 'like', '%'.$searchTerm.'%')->count();
     $paginationLinks = $members->withQueryString()->links('pagination::bootstrap-4');
     return view('manager.member.show', [
         'members' => $members,
+        'memberCount'=>$memberCount,
         'paginationLinks' => $paginationLinks
     ]);
    }
@@ -586,10 +589,11 @@ $member->update();
    if ( auth()->user()->Role == 'admin')
    {
    $members =  Member::where('MobilePhone',Null)->orwhere('MobilePhone','')->orderBy('FullName', 'Asc')->paginate(50);
-
+   $memberCount =  Member::where('MobilePhone',Null)->orwhere('MobilePhone','')->count();
     $paginationLinks = $members->withQueryString()->links('pagination::bootstrap-4');
     return view('admin.member.show', [
         'members' => $members,
+        'memberCount'=>$memberCount,
         'paginationLinks' => $paginationLinks
     ]);
 
@@ -601,9 +605,11 @@ $member->update();
         ->value('Name');
     
     $members = Member::where('City', $cityName)->where('MobilePhone',Null)->orwhere('MobilePhone','')->orderBy('FullName', 'Asc')->paginate(50);
+    $memberCount = Member::where('City', $cityName)->where('MobilePhone',Null)->orwhere('MobilePhone','')->count();
     $paginationLinks = $members->withQueryString()->links('pagination::bootstrap-4');
     return view('manager.member.show', [
         'members' => $members,
+        'memberCount'=>$memberCount,
         'paginationLinks' => $paginationLinks
     ]);
    }
@@ -617,10 +623,11 @@ $member->update();
    if ( auth()->user()->Role == 'admin')
    {
     $members =  Member::where('IDTeam', 'like', '%'.$searchTerm.'%')->orderBy('IDTeam', 'Asc')->paginate(50);
-   
+    $memberCount =  Member::where('IDTeam', 'like', '%'.$searchTerm.'%')->count();
     $paginationLinks = $members->withQueryString()->links('pagination::bootstrap-4');
     return view('admin.member.show', [
         'members' => $members,
+        'memberCount'=>$memberCount,
         'paginationLinks' => $paginationLinks
     ]);
    }
@@ -630,9 +637,11 @@ $member->update();
         ->where('id', $user->city_id)
         ->value('Name');
     $members = Member::where('City', $cityName)->where('IDTeam', 'like', '%'.$searchTerm.'%')->orderBy('IDTeam', 'Asc')->paginate(50);
+    $memberCount = Member::where('City', $cityName)->where('IDTeam', 'like', '%'.$searchTerm.'%')->count();
     $paginationLinks = $members->withQueryString()->links('pagination::bootstrap-4');
     return view('manager.member.show', [
         'members' => $members,
+        'memberCount'=>$memberCount,
         'paginationLinks' => $paginationLinks
     ]);
    }
@@ -645,9 +654,11 @@ $member->update();
    if ( auth()->user()->Role == 'admin')
    {
     $members =  Member::where('Qualification', 'like', '%'.$searchTerm.'%')->orderBy('Qualification', 'Asc')->paginate(50);
+    $memberCount =  Member::where('Qualification', 'like', '%'.$searchTerm.'%')->count();
     $paginationLinks = $members->withQueryString()->links('pagination::bootstrap-4');
     return view('admin.member.show', [
         'members' => $members,
+        'memberCount'=>$memberCount,
         'paginationLinks' => $paginationLinks
     ]);
    }
@@ -657,10 +668,11 @@ $member->update();
         ->where('id', $user->city_id)
         ->value('Name');
     $members = Member::where('City', $cityName)->where('Qualification', 'like', '%'.$searchTerm.'%')->orderBy('Qualification', 'Asc')->paginate(50);
-
+    $memberCount = Member::where('City', $cityName)->where('Qualification', 'like', '%'.$searchTerm.'%')->count();
     $paginationLinks = $members->withQueryString()->links('pagination::bootstrap-4');
     return view('manager.member.show', [
         'members' => $members,
+        'memberCount'=>$memberCount,
         'paginationLinks' => $paginationLinks
     ]);
    }
@@ -673,10 +685,11 @@ $member->update();
    if ( auth()->user()->Role == 'admin')
    {
     $members =  Member::where('Specialization', 'like', '%'.$searchTerm.'%')->orderBy('Specialization', 'Asc')->paginate(50);
-
+    $memberCount =  Member::where('Specialization', 'like', '%'.$searchTerm.'%')->count();
     $paginationLinks = $members->withQueryString()->links('pagination::bootstrap-4');
     return view('admin.member.show', [
         'members' => $members,
+        'memberCount'=>$memberCount,
         'paginationLinks' => $paginationLinks
     ]);
    }
@@ -686,9 +699,11 @@ $member->update();
         ->where('id', $user->city_id)
         ->value('Name');
     $members = Member::where('City', $cityName)->where('Specialization', 'like', '%'.$searchTerm.'%')->orderBy('Specialization', 'Asc')->paginate(50);
+    $memberCount = Member::where('City', $cityName)->where('Specialization', 'like', '%'.$searchTerm.'%')->count();
     $paginationLinks = $members->withQueryString()->links('pagination::bootstrap-4');
     return view('manager.member.show', [
         'members' => $members,
+        'memberCount'=>$memberCount,
         'paginationLinks' => $paginationLinks
     ]);
    }
@@ -700,10 +715,11 @@ $member->update();
         $searchTerm = $request->input('search_City');
 
     $members =  Member::where('City', 'like', '%'.$searchTerm.'%')->paginate(50);
-
+    $memberCount =  Member::where('City', 'like', '%'.$searchTerm.'%')->count();
     $paginationLinks = $members->withQueryString()->links('pagination::bootstrap-4');
     return view('admin.member.show', [
         'members' => $members,
+        'memberCount'=>$memberCount,
         'paginationLinks' => $paginationLinks
     ]);
 }
@@ -716,10 +732,11 @@ $member->update();
    if ( auth()->user()->Role == 'admin')
    {
     $members =  Member::where('Occupation', 'like', '%'.$searchTerm.'%')->orderBy('Occupation', 'Asc')->paginate(50);
-
+    $memberCount =  Member::where('Occupation', 'like', '%'.$searchTerm.'%')->count();
     $paginationLinks = $members->withQueryString()->links('pagination::bootstrap-4');
     return view('admin.member.show', [
         'members' => $members,
+        'memberCount'=>$memberCount,
         'paginationLinks' => $paginationLinks
     ]);
    }
@@ -729,10 +746,11 @@ $member->update();
         ->where('id', $user->city_id)
         ->value('Name');
     $members = Member::where('City', $cityName)->where('Occupation', 'like', '%'.$searchTerm.'%')->orderBy('Occupation', 'Asc')->paginate(50);
-
+    $memberCount = Member::where('City', $cityName)->where('Occupation', 'like', '%'.$searchTerm.'%')->count();
     $paginationLinks = $members->withQueryString()->links('pagination::bootstrap-4');
     return view('manager.member.show', [
         'members' => $members,
+        'memberCount'=>$memberCount,
         'paginationLinks' => $paginationLinks
     ]);
    }
