@@ -205,4 +205,12 @@ public function deleteDetails($id)
    return view('admin.notice.deleteDetails',compact('member'));
 }
 
+public function GetArchive($IDTeam)
+{
+  $members = Temporary::where('IDTeam',$IDTeam)
+  ->where('operation','1')
+  ->where('AdminAgree',1)->get();
+  return view('archive.editArchive',compact('members'));
+}
+
 }
