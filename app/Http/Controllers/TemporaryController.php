@@ -26,7 +26,7 @@ class TemporaryController extends Controller
   
   public function getEtidedMember()
   {
-    $members = Temporary::where('operation', '1')->select('id', 'FullName', 'IDTeam', 'managerEmail')
+    $members = Temporary::where('operation', '1')->where('AdminAgree', 0)->select('id', 'FullName', 'IDTeam', 'managerEmail')
       ->orderBy('updated_at', 'desc')->paginate(4);
 
     $paginationLinks = $members->withQueryString()->links('pagination::bootstrap-4');
