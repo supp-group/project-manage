@@ -993,7 +993,7 @@ public function GetCityWithMemberCount(Request $request)
 
   public function detailsForCompare($IDTeam)
   {
-    $memb = Temporary::where('IDTeam',$IDTeam)->where('operation','1')->first();
+    $memb = Temporary::where('IDTeam',$IDTeam)->where('operation','1')->where('AdminAgree', 0)->first();
     $member = Member::where('IDTeam',$IDTeam)->first();
   //  $temctrlr=new TemporaryController();
  //   $temctrlr->getDeletedMember()
