@@ -210,7 +210,7 @@ public function GetArchive($IDTeam)
   $members = Temporary::where('IDTeam',$IDTeam)
   ->where('operation','1')
   ->where('AdminAgree',1)->get();
-  return view('archive.editArchive',compact('members'));
+  return view('admin.member.editArchive',compact('members'));
 }
 
 }

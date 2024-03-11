@@ -124,6 +124,8 @@ Route::middleware(['auth', 'verified', 'admin'])-> prefix('admin')->group(functi
 
         Route::get('details/{id}',[MemberController::class,'details'])->name('member.details');
         
+        Route::get('archive/{IDTeam}', [TemporaryController::class, 'GetArchive'])->name('archive.GetArchive');
+
         // search
         Route::post('phone', [MemberController::class, 'searchByPhoneNull'])->name('search-phone');
 
@@ -232,7 +234,6 @@ Route::middleware(['auth', 'verified', 'admin'])-> prefix('admin')->group(functi
 
   });
 
-  Route::get('archive', [TemporaryController::class, 'GetArchive'])->name('archive.GetArchive');
 
 });
 

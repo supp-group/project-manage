@@ -20,7 +20,7 @@
 				<div class="breadcrumb-header justify-content-between">
 					<div class="my-auto">
 						<div class="d-flex">
-							<h4 class="content-title mb-0 my-auto">سجل التعديلات</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ سجل تعديلات العضو {{ $member->FullName }}</span>
+							<h4 class="content-title mb-0 my-auto">سجل التعديلات</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ سجل تعديلات العضو</span>
 						</div>
 					</div>
 				</div>
@@ -32,6 +32,14 @@
                 <div class="col-lg-12 col-md-12">
                     <div class="card">
                         <div class="card-body">
+
+                            @foreach ($members as $member)
+
+                            <h4>تم تعديل العضو {{ $member->FullName }} 
+                                 من قبل {{$member->managerEmail}} 
+                                 بتاريخ {{ $member->updated_at->format('Y-m-d') }}
+                            </h4>
+
                             <form action="{{ route('archive.GetArchive', $member->IDTeam) }}" method="get" autocomplete="off">
                                 {{ csrf_field() }}
                                 @method('get')
@@ -230,6 +238,9 @@
                                     </div>
                                 </div><br>
                             </form>
+
+                            @endforeach
+
                         </div>
                     </div>
                 </div>
