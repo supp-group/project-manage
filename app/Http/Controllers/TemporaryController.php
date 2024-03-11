@@ -209,7 +209,8 @@ public function GetArchive($IDTeam)
 {
   $members = Temporary::where('IDTeam',$IDTeam)
   ->where('operation','1')
-  ->where('AdminAgree',1)->get();
+  ->where('AdminAgree',1)
+  ->orderBy('updated_at', 'desc')->get();
   return view('admin.member.editArchive',compact('members'));
 }
 
