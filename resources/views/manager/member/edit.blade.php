@@ -60,14 +60,10 @@
 			
 									<div class="row">
 										<div class="col">
-											<label for="inputName" class="control-label">ملاحظات</label>
-											<input type="hidden" name="NotPad" value="{{ $member->NotPad }}">
-											<input type="text" class="form-control @error('NotPad') is-invalid @enderror" 
-											id="inputName" name="NotPad" value="{{ $member->NotPad }}">
-
-											@error('NotPad')
-												<div class="alert alert-danger">{{ $message }}</div>
-											@enderror
+											<label for="inputName" class="control-label">الرقم الحزبي</label>
+											<input type="hidden" name="IDTeam" value="{{ $member->IDTeam }}">
+											<input type="text" class="form-control" id="inputName" name="IDTeam"
+											value="{{ $member->IDTeam }}" readonly>
 										</div>
 									</div><br>
 
@@ -81,15 +77,6 @@
 											@error('branch')
 												<div class="alert alert-danger">{{ $message }}</div>
 											@enderror
-										</div>
-									</div><br>
-
-									<div class="row">
-										<div class="col">
-											<label for="inputName" class="control-label">الرقم الحزبي</label>
-											<input type="hidden" name="IDTeam" value="{{ $member->IDTeam }}">
-											<input type="text" class="form-control" id="inputName" name="IDTeam"
-											value="{{ $member->IDTeam }}" readonly>
 										</div>
 									</div><br>
 
@@ -339,18 +326,24 @@
 										<div class="col">
 											<label for="inputName" class="control-label">تاريخ الانتساب</label>
 											<input type="hidden" name="DateOfJoin" value="{{ $member->DateOfJoin }}">
-											{{-- <input type="datetime-local" class="form-control @error('DateOfJoin') is-invalid @enderror" 
-											id="inputName" name="DateOfJoin" value="{{ $member->DateOfJoin }}" required> --}}
-
-											<select class="form-control select @error('DateOfJoin') is-invalid @enderror" 
-											name="DateOfJoin" id="year"></select>
-
-											@error('DateOfJoin')
-										  		<div class="alert alert-danger">{{ $message }}</div>
-									  		@enderror
+											<input type="text" class="form-control" 
+											id="inputName" name="DateOfJoin" value="{{ $member->DateOfJoin }}" readonly>
 										</div>
 									</div><br>
 					
+									<div class="row">
+										<div class="col">
+											<label for="inputName" class="control-label">ملاحظات</label>
+											<input type="hidden" name="NotPad" value="{{ $member->NotPad }}">
+											<input type="text" class="form-control @error('NotPad') is-invalid @enderror" 
+											id="inputName" name="NotPad" value="{{ $member->NotPad }}">
+
+											@error('NotPad')
+												<div class="alert alert-danger">{{ $message }}</div>
+											@enderror
+										</div>
+									</div><br>
+
 									  <div class="row">
 										<div class="col">
 										  <label for="exampleTextarea">صورة العضو المنتسب</label>

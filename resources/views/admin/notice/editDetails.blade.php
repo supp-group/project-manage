@@ -58,6 +58,15 @@
 									{{ csrf_field() }}
                                     @method('get')
 
+									<div class="row">
+										<div class="col">
+											<label for="inputName" class="control-label">الرقم الحزبي</label>
+											<input type="hidden" name="IDTeam" value="{{ $member->IDTeam }}">
+											<input type="text" class="form-control" id="inputName" name="IDTeam"
+											value="{{ $member->IDTeam }}" readonly>
+										</div>
+									</div><br>
+
                                     <div class="row">
 										<div class="col">
 											<label for="inputName" class="control-label">ملاحظات</label>
@@ -76,15 +85,6 @@
 										</div>
 									</div><br>
 
-									<div class="row">
-										<div class="col">
-											<label for="inputName" class="control-label">الرقم الحزبي</label>
-											<input type="hidden" name="IDTeam" value="{{ $member->IDTeam }}">
-											<input type="text" class="form-control" id="inputName" name="IDTeam"
-											value="{{ $member->IDTeam }}" readonly>
-										</div>
-									</div><br>
-                                    
 									<div class="row">
 										<div class="col">
 											<label for="inputName" class="control-label">الاسم الثلاثي</label>
@@ -265,12 +265,12 @@
 									{{ csrf_field() }}
                                     @method('get')
 
-                                    <div class="row">
+									<div class="row">
 										<div class="col">
-											<label for="inputName" class="control-label">ملاحظات</label>
-											<input type="hidden" name="NotPad" value="{{ $memb->NotPad }}">
-											<input type="text" class="form-control" id="inputName" name="NotPad"
-											value="{{ $memb->NotPad }}" readonly>
+											<label for="inputName" class="control-label">الرقم الحزبي</label>
+											<input type="hidden" name="IDTeam" value="{{ $memb->IDTeam }}">
+											<input type="text" class="form-control" id="inputName" name="IDTeam"
+											value="{{ $memb->IDTeam }}" readonly>
 										</div>
 									</div><br>
                                        
@@ -283,15 +283,6 @@
 										</div>
 									</div><br>
 
-									<div class="row">
-										<div class="col">
-											<label for="inputName" class="control-label">الرقم الحزبي</label>
-											<input type="hidden" name="IDTeam" value="{{ $memb->IDTeam }}">
-											<input type="text" class="form-control" id="inputName" name="IDTeam"
-											value="{{ $memb->IDTeam }}" readonly>
-										</div>
-									</div><br>
-                                    
 									<div class="row">
 										<div class="col">
 											<label for="inputName" class="control-label">الاسم الثلاثي</label>
@@ -445,6 +436,15 @@
 										</div>
 									</div><br>
                                     
+									<div class="row">
+										<div class="col">
+											<label for="inputName" class="control-label">ملاحظات</label>
+											<input type="hidden" name="NotPad" value="{{ $memb->NotPad }}">
+											<input type="text" class="form-control" id="inputName" name="NotPad"
+											value="{{ $memb->NotPad }}" readonly>
+										</div>
+									</div><br>
+
 									<div class="row">
 										<div class="col">
 											<label for="exampleTextarea">صورة العضو المنتسب</label> <br>

@@ -55,9 +55,8 @@
 										<thead>
 											<tr>
 												<th class="wd-15p border-bottom-0">#</th>
-												<th class="wd-15p border-bottom-0">ملاحظات</th>
-												<th class="wd-15p border-bottom-0">الفرع</th>
 												<th class="wd-15p border-bottom-0">الرقم الحزبي</th>
+												<th class="wd-15p border-bottom-0">الفرع</th>
 												<th class="wd-15p border-bottom-0">الاسم الثلاثي</th>
 												<th class="wd-15p border-bottom-0">اسم الأم</th>
 												<th class="wd-15p border-bottom-0">محل الولادة</th>
@@ -76,6 +75,7 @@
 												<th class="wd-15p border-bottom-0">هاتف المنزل</th>
 												<th class="wd-15p border-bottom-0">هاتف العمل</th>
 												<th class="wd-15p border-bottom-0">تاريخ الانتساب</th>
+												<th class="wd-15p border-bottom-0">ملاحظات</th>
 												<th class="wd-15p border-bottom-0">الصورة</th>
 												<th class="wd-15p border-bottom-0">تعديل</th>
 												<th class="wd-15p border-bottom-0">حذف</th>
@@ -86,9 +86,8 @@
 											@foreach($members as $member)
 											<tr>
 												<td>{{$i++}}</td>
-												<td>{{$member->NotPad}}</td>
-												<td>{{$member->branch}}</td>
 												<td>{{$member->IDTeam}}</td>
+												<td>{{$member->branch}}</td>
 												<td>{{$member->FullName}}</td>
 												<td>{{$member->MotherName}}</td>
 												<td>{{$member->PlaceOfBirth}}</td>
@@ -107,6 +106,7 @@
 												<td>{{$member->HomePhone}}</td>
 												<td>{{$member->WorkPhone}}</td>
 												<td>{{$member->DateOfJoin}}</td>
+												<td>{{$member->NotPad}}</td>
 												<td>{{$member->Image}}</td>
 
 												<td>

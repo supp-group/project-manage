@@ -275,9 +275,64 @@ integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEw
 							</tr>
 							@endforeach
 
+
+						@if(request()->input('search_IDTeam') == null)
+							<!-- لا يوجد قيمة مدخلة -->
+						@else
 							<tr>
-								<td style="font-weight: bold;">عدد نتائج البحث {{ $member->count() }}</td>
+								<td style="font-weight: bold;">عدد نتائج البحث {{ $memberCount }}</td>
 							</tr>
+						@endif
+
+						@if(request()->input('search_FullName') == null)
+							<!-- لا يوجد قيمة مدخلة -->
+						@else
+							<tr>
+								<td style="font-weight: bold;">عدد نتائج البحث {{ $memberCount }}</td>
+							</tr>
+						@endif
+
+						@if(request()->input('search_City') == null)
+							<!-- لا يوجد قيمة مدخلة -->
+						@else
+							<tr>
+								<td style="font-weight: bold;">عدد نتائج البحث {{ $memberCount }}</td>
+							</tr>
+						@endif
+				
+						@if(request()->input('search_Qualification') == null)
+							<!-- لا يوجد قيمة مدخلة -->
+						@else
+							<tr>
+								<td style="font-weight: bold;">عدد نتائج البحث {{ $memberCount }}</td>
+							</tr>
+						@endif
+
+						@if(request()->input('search_Specialization') == null)
+							<!-- لا يوجد قيمة مدخلة -->
+						@else
+							<tr>
+								<td style="font-weight: bold;">عدد نتائج البحث {{ $memberCount }}</td>
+							</tr>
+						@endif
+
+						@if(request()->input('search_Occupation') == null)
+							<!-- لا يوجد قيمة مدخلة -->
+						@else
+							<tr>
+								<td style="font-weight: bold;">عدد نتائج البحث {{ $memberCount }}</td>
+							</tr>
+						@endif
+
+						@if(request()->has('search-phone'))
+    						<tr>
+        						<td style="font-weight: bold;">عدد نتائج البحث {{ $memberCount }}</td>
+    						</tr>
+						@else
+    						<!-- لا يوجد قيمة مدخلة -->
+						@endif
+
+
 
 						 @else 
 						<tr>

@@ -30,9 +30,11 @@ public function index()
     if (optional(auth()->user())->Role == 'admin') {
         $members = Member::orderBy('updated_at', 'desc')->select('id','branch','IDTeam','FullName',
         'City')->paginate(50);
+        $memberCount = Member::count();
         $paginationLinks = $members->withQueryString()->links('pagination::bootstrap-4');
         return view('admin.member.show', [
             'members' => $members,
+            'memberCount'=>$memberCount,
             'paginationLinks' => $paginationLinks
         ]);
 
@@ -45,9 +47,11 @@ public function index()
             ->value('Name');
         
         $members = Member::where('City', $cityName)->orderBy('updated_at', 'desc')->paginate(50);
+        $memberCount = Member::where('City', $cityName)->count();
         $paginationLinks = $members->withQueryString()->links('pagination::bootstrap-4');
         return view('manager.member.show', [
             'members' => $members,
+            'memberCount'=>$memberCount,
             'paginationLinks' => $paginationLinks
         ]);
 
