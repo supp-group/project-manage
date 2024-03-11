@@ -92,7 +92,7 @@ class TemporaryController extends Controller
 
    
   
-    if(Temporary::where('IDTeam', $member->IDTeam)->where('operation', '1')->exists())
+    if(Temporary::where('IDTeam', $member->IDTeam)->where('operation', '1')->where('AdminAgree', 0)->exists())
     {
   
         session()->flash('Edit', 'طلب التعديل قد تم إرساله مسبقا إلى المدير');
