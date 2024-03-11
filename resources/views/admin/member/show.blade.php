@@ -275,6 +275,10 @@ integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEw
 							</tr>
 							@endforeach
 
+							<tr>
+								<td style="font-weight: bold;">عدد نتائج البحث {{ $member->count() }}</td>
+							</tr>
+
 						 @else 
 						<tr>
 							<td colspan="20">لم يتم العثور على نتائج</td>
