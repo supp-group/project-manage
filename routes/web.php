@@ -12,6 +12,8 @@ use App\Models\Member;
 use Illuminate\Support\Facades\Route;
 
 
+use Illuminate\Http\Request;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -36,6 +38,59 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+
+Route::get('show_session_data', function(Request $request){
+
+    // dd(session()->all());
+    // OR
+    dd($request->session()->all());
+
+
+    echo $request->session()->get('name');
+    echo '<br>';
+    echo $request->session()->get('email');
+
+    // OR
+    // echo session('name');
+    // echo '<br>';
+    // echo session('email');
+
+    
+  if($request->session()->has('mobile')){
+    echo session('mobile');
+
+  } else {
+    echo 'Mobile session is not available';
+  }
+
+
+});
+
+Route::get('store_session_data', function(Request $request){
+
+    // $request->session()->put('name', 'Hind');
+    // $request->session()->put('email', 'hndalmrshd119@gmail.com');
+
+    // OR
+    session([
+      'name' => 'rama',
+      'email' => 'rama@gmail.com',
+      'mobile' => '011111'
+    ]);
+
+    $request->session()->flash('status', 'Success is done!');
+
+});
+
+
+Route::get('delete_session_data', function(Request $request){
+
+  // $request->session()->forget('name');
+  // $request->session()->forget(['name', 'email', 'mobile']);
+  $request->session()->flush();
+
 });
 
 
@@ -176,6 +231,8 @@ Route::middleware(['auth', 'verified', 'admin'])-> prefix('admin')->group(functi
     Route::post('updateForNotice/{IDTeam}', [MemberController::class, 'updateForNotice'])->name('notice.updateForNotice');
 
   });
+
+  Route::get('archive', [TemporaryController::class, 'GetArchive'])->name('archive.GetArchive');
 
 });
 
