@@ -622,8 +622,8 @@ $member->update();
         $searchTerm = $request->input('search_IDTeam');
    if ( auth()->user()->Role == 'admin')
    {
-    $members =  Member::where('IDTeam', 'like', '%'.$searchTerm.'%')->orderBy('IDTeam', 'Asc')->paginate(50);
-    $memberCount =  Member::where('IDTeam', 'like', '%'.$searchTerm.'%')->count();
+    $members =  Member::where('IDTeam', 'like', $searchTerm)->orderBy('IDTeam', 'Asc')->paginate(50);
+    $memberCount =  Member::where('IDTeam', 'like',$searchTerm)->count();
     $paginationLinks = $members->withQueryString()->links('pagination::bootstrap-4');
     return view('admin.member.show', [
         'members' => $members,
@@ -636,8 +636,8 @@ $member->update();
     $cityName = DB::table('cities')
         ->where('id', $user->city_id)
         ->value('Name');
-    $members = Member::where('City', $cityName)->where('IDTeam', 'like', '%'.$searchTerm.'%')->orderBy('IDTeam', 'Asc')->paginate(50);
-    $memberCount = Member::where('City', $cityName)->where('IDTeam', 'like', '%'.$searchTerm.'%')->count();
+    $members = Member::where('City', $cityName)->where('IDTeam', 'like',$searchTerm)->orderBy('IDTeam', 'Asc')->paginate(50);
+    $memberCount = Member::where('City', $cityName)->where('IDTeam', 'like',$searchTerm)->count();
     $paginationLinks = $members->withQueryString()->links('pagination::bootstrap-4');
     return view('manager.member.show', [
         'members' => $members,

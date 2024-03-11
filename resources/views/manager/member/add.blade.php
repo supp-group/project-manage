@@ -151,7 +151,7 @@
 											<input type="text" class="form-control @error('IDNumber') is-invalid @enderror" 
 											id="inputName" name="IDNumber" required>
 
-											@error('IDNumber')
+												@error('IDNumber')
     											<div class="alert alert-danger">{{ $message }}</div>
 											@enderror
 										</div>
