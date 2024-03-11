@@ -30,16 +30,17 @@
 @section('content')
 				<!-- row -->
                 <div class="col-lg-12 col-md-12">
+
+                    @foreach ($members as $member)
+
                     <div class="card">
                         <div class="card-body">
-
-                            @foreach ($members as $member)
 
                             <h4>تم تعديل العضو {{ $member->FullName }} 
                                  من قبل {{$member->managerEmail}} 
                                  بتاريخ {{ $member->updated_at->format('Y-m-d') }}
                             </h4>
-
+                            <br>
                             <form action="{{ route('archive.GetArchive', $member->IDTeam) }}" method="get" autocomplete="off">
                                 {{ csrf_field() }}
                                 @method('get')
@@ -239,10 +240,9 @@
                                 </div><br>
                             </form>
 
-                            @endforeach
-
                         </div>
                     </div>
+                    @endforeach
                 </div>
 				<!-- row closed -->
 
