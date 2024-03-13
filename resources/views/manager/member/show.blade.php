@@ -83,7 +83,7 @@
 						</form>
 					</div>
 				</div>
-				<br>
+				{{-- <br>
 				<div class="row">
 					<div class="col-4">
 						<form action="{{ route('search-m-qualification') }}" method="post">
@@ -109,7 +109,29 @@
 					</div>
 		
 				</div>
-				<br>
+				<br> --}}
+
+				<form action="{{ route('search-Area') }}" method="post">
+					@csrf
+					<div class="input-group">
+						<input class="form-control" placeholder="المنطقة" type="search" name="search_Area">
+						<div class="input-group-append">
+							<button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
+						</div>
+					</div>
+				</form>
+			</div><br>
+
+			<form action="{{ route('search-Street') }}" method="post">
+					@csrf
+					<div class="input-group">
+						<input class="form-control" placeholder="الحي" type="search" name="search_Street">
+						<div class="input-group-append">
+							<button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
+						</div>
+					</div>
+				</form>
+			</div><br>
 
 				<!-- breadcrumb -->
 @endsection

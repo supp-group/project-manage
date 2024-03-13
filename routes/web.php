@@ -80,7 +80,7 @@ Route::get('store_session_data', function(Request $request){
       'mobile' => '011111'
     ]);
 
-    $request->session()->flash('status', 'Success is done!');
+    //$request->session()->flash('status', 'Success is done!');
 
 });
 
@@ -140,6 +140,9 @@ Route::middleware(['auth', 'verified', 'admin'])-> prefix('admin')->group(functi
         Route::post('team', [MemberController::class, 'searchByIDTeam'])->name('search-team');
         Route::post('name', [MemberController::class, 'searchByName'])->name('search-name');
         Route::post('city', [MemberController::class, 'searchByCity'])->name('search-city');
+
+        Route::post('city', [MemberController::class, 'searchBystreet'])->name('search-Street');
+        Route::post('city', [MemberController::class, 'searchByArea'])->name('search-Area');
 
         Route::post('qualification', [MemberController::class, 'searchByQualification'])->name('search-qualification');
         Route::post('specialization', [MemberController::class, 'searchBySpecialization'])->name('search-specialization');

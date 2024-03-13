@@ -654,67 +654,127 @@ $member->update();
     }
 
 
-    public function searchByQualification(Request $request)
-    {
-        $searchTerm = $request->input('search_Qualification');
-   if ( auth()->user()->Role == 'admin')
-   {
-    $members =  Member::where('Qualification', 'like', '%'.$searchTerm.'%')->orderBy('Qualification', 'Asc')->paginate(50);
-    $memberCount =  Member::where('Qualification', 'like', '%'.$searchTerm.'%')->count();
-    $paginationLinks = $members->withQueryString()->links('pagination::bootstrap-4');
-    return view('admin.member.show', [
-        'members' => $members,
-        'memberCount'=>$memberCount,
-        'paginationLinks' => $paginationLinks
-    ]);
-   }
-   elseif (optional(auth()->user())->Role == 'manager') {
-    $user = auth()->user();
-    $cityName = DB::table('cities')
-        ->where('id', $user->city_id)
-        ->value('Name');
-    $members = Member::where('City', $cityName)->where('Qualification', 'like', '%'.$searchTerm.'%')->orderBy('Qualification', 'Asc')->paginate(50);
-    $memberCount = Member::where('City', $cityName)->where('Qualification', 'like', '%'.$searchTerm.'%')->count();
-    $paginationLinks = $members->withQueryString()->links('pagination::bootstrap-4');
-    return view('manager.member.show', [
-        'members' => $members,
-        'memberCount'=>$memberCount,
-        'paginationLinks' => $paginationLinks
-    ]);
-   }
-    }
+//     public function searchByQualification(Request $request)
+//     {
+//         $searchTerm = $request->input('search_Qualification');
+//    if ( auth()->user()->Role == 'admin')
+//    {
+//     $members =  Member::where('Qualification', 'like', '%'.$searchTerm.'%')->orderBy('Qualification', 'Asc')->paginate(50);
+//     $memberCount =  Member::where('Qualification', 'like', '%'.$searchTerm.'%')->count();
+//     $paginationLinks = $members->withQueryString()->links('pagination::bootstrap-4');
+//     return view('admin.member.show', [
+//         'members' => $members,
+//         'memberCount'=>$memberCount,
+//         'paginationLinks' => $paginationLinks
+//     ]);
+//    }
+//    elseif (optional(auth()->user())->Role == 'manager') {
+//     $user = auth()->user();
+//     $cityName = DB::table('cities')
+//         ->where('id', $user->city_id)
+//         ->value('Name');
+//     $members = Member::where('City', $cityName)->where('Qualification', 'like', '%'.$searchTerm.'%')->orderBy('Qualification', 'Asc')->paginate(50);
+//     $memberCount = Member::where('City', $cityName)->where('Qualification', 'like', '%'.$searchTerm.'%')->count();
+//     $paginationLinks = $members->withQueryString()->links('pagination::bootstrap-4');
+//     return view('manager.member.show', [
+//         'members' => $members,
+//         'memberCount'=>$memberCount,
+//         'paginationLinks' => $paginationLinks
+//     ]);
+//    }
+//     }
 
 
-    public function searchBySpecialization(Request $request)
-    {
-        $searchTerm = $request->input('search_Specialization');
-   if ( auth()->user()->Role == 'admin')
-   {
-    $members =  Member::where('Specialization', 'like', '%'.$searchTerm.'%')->orderBy('Specialization', 'Asc')->paginate(50);
-    $memberCount =  Member::where('Specialization', 'like', '%'.$searchTerm.'%')->count();
-    $paginationLinks = $members->withQueryString()->links('pagination::bootstrap-4');
-    return view('admin.member.show', [
-        'members' => $members,
-        'memberCount'=>$memberCount,
-        'paginationLinks' => $paginationLinks
-    ]);
-   }
-   elseif (optional(auth()->user())->Role == 'manager') {
-    $user = auth()->user();
-    $cityName = DB::table('cities')
-        ->where('id', $user->city_id)
-        ->value('Name');
-    $members = Member::where('City', $cityName)->where('Specialization', 'like', '%'.$searchTerm.'%')->orderBy('Specialization', 'Asc')->paginate(50);
-    $memberCount = Member::where('City', $cityName)->where('Specialization', 'like', '%'.$searchTerm.'%')->count();
-    $paginationLinks = $members->withQueryString()->links('pagination::bootstrap-4');
-    return view('manager.member.show', [
-        'members' => $members,
-        'memberCount'=>$memberCount,
-        'paginationLinks' => $paginationLinks
-    ]);
-   }
-    }
+//     public function searchBySpecialization(Request $request)
+//     {
+//         $searchTerm = $request->input('search_Specialization');
+//    if ( auth()->user()->Role == 'admin')
+//    {
+//     $members =  Member::where('Specialization', 'like', '%'.$searchTerm.'%')->orderBy('Specialization', 'Asc')->paginate(50);
+//     $memberCount =  Member::where('Specialization', 'like', '%'.$searchTerm.'%')->count();
+//     $paginationLinks = $members->withQueryString()->links('pagination::bootstrap-4');
+//     return view('admin.member.show', [
+//         'members' => $members,
+//         'memberCount'=>$memberCount,
+//         'paginationLinks' => $paginationLinks
+//     ]);
+//    }
+//    elseif (optional(auth()->user())->Role == 'manager') {
+//     $user = auth()->user();
+//     $cityName = DB::table('cities')
+//         ->where('id', $user->city_id)
+//         ->value('Name');
+//     $members = Member::where('City', $cityName)->where('Specialization', 'like', '%'.$searchTerm.'%')->orderBy('Specialization', 'Asc')->paginate(50);
+//     $memberCount = Member::where('City', $cityName)->where('Specialization', 'like', '%'.$searchTerm.'%')->count();
+//     $paginationLinks = $members->withQueryString()->links('pagination::bootstrap-4');
+//     return view('manager.member.show', [
+//         'members' => $members,
+//         'memberCount'=>$memberCount,
+//         'paginationLinks' => $paginationLinks
+//     ]);
+//    }
+//     }
 
+
+public function searchByArea(Request $request)
+{
+    $searchTerm = $request->input('search_Area');
+if ( auth()->user()->Role == 'admin')
+{
+$members =  Member::where('area', 'like', '%'.$searchTerm.'%')->orderBy('area', 'Asc')->paginate(50);
+$memberCount =  Member::where('area', 'like', '%'.$searchTerm.'%')->count();
+$paginationLinks = $members->withQueryString()->links('pagination::bootstrap-4');
+return view('admin.member.show', [
+    'members' => $members,
+    'memberCount'=>$memberCount,
+    'paginationLinks' => $paginationLinks
+]);
+}
+elseif (optional(auth()->user())->Role == 'manager') {
+$user = auth()->user();
+$cityName = DB::table('cities')
+    ->where('id', $user->city_id)
+    ->value('Name');
+$members = Member::where('City', $cityName)->where('area', 'like', '%'.$searchTerm.'%')->orderBy('area', 'Asc')->paginate(50);
+$memberCount = Member::where('City', $cityName)->where('area', 'like', '%'.$searchTerm.'%')->count();
+$paginationLinks = $members->withQueryString()->links('pagination::bootstrap-4');
+return view('manager.member.show', [
+    'members' => $members,
+    'memberCount'=>$memberCount,
+    'paginationLinks' => $paginationLinks
+]);
+}
+}
+
+public function searchBystreet(Request $request)
+{
+    $searchTerm = $request->input('search_Street');
+if ( auth()->user()->Role == 'admin')
+{
+$members =  Member::where('street', 'like', '%'.$searchTerm.'%')->orderBy('street', 'Asc')->paginate(50);
+$memberCount =  Member::where('street', 'like', '%'.$searchTerm.'%')->count();
+$paginationLinks = $members->withQueryString()->links('pagination::bootstrap-4');
+return view('admin.member.show', [
+    'members' => $members,
+    'memberCount'=>$memberCount,
+    'paginationLinks' => $paginationLinks
+]);
+}
+elseif (optional(auth()->user())->Role == 'manager') {
+$user = auth()->user();
+$cityName = DB::table('cities')
+    ->where('id', $user->city_id)
+    ->value('Name');
+$members = Member::where('City', $cityName)->where('street', 'like', '%'.$searchTerm.'%')->orderBy('street', 'Asc')->paginate(50);
+$memberCount = Member::where('City', $cityName)->where('street', 'like', '%'.$searchTerm.'%')->count();
+$paginationLinks = $members->withQueryString()->links('pagination::bootstrap-4');
+return view('manager.member.show', [
+    'members' => $members,
+    'memberCount'=>$memberCount,
+    'paginationLinks' => $paginationLinks
+]);
+}
+}
 
     public function searchByCity(Request $request)
     {
