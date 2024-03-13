@@ -10,7 +10,11 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class City extends Model
 {
     use HasFactory;
-    protected $fillable = ['Name'];
+    
+    protected $areas = 'parent_name';
+    protected $streets = 'grand_name';
+
+    protected $fillable = ['Name', 'parentId', 'area', 'grandId', 'street'];
 
     public function users(): HasMany
     {

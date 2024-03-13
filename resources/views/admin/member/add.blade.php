@@ -351,33 +351,19 @@
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <script>
 	config = {
-    	// enableTime: true,
-    	// dateFormat: "Y-m-d",
-		// dateFormat: "Y/m/d H:i",
 		dateFormat: "Y",
-
 		altInput: true,
-		// altFormat: "F j, Y"
 		altFormat: "Y"
-
 	}
-
 	flatpickr("input[type=datetime-local]", config);
 </script>
 
 <script>
 	config = {
-    	// enableTime: true,
     	dateFormat: "Y-m-d",
-		// dateFormat: "Y/m/d H:i",
-		// dateFormat: "Y",
-
 		altInput: true,
 		altFormat: "F j, Y"
-		// altFormat: "Y"
-
 	}
-
 	flatpickr("input[type=datetime]", config);
 </script>
 

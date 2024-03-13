@@ -37,10 +37,9 @@ public function index()
             'memberCount'=>$memberCount,
             'paginationLinks' => $paginationLinks
         ]);
+    }
 
-  
-
-    } elseif (optional(auth()->user())->Role == 'manager') {
+    elseif (optional(auth()->user())->Role == 'manager') {
         $user = auth()->user();
         $cityName = DB::table('cities')
             ->where('id', $user->city_id)
@@ -49,12 +48,12 @@ public function index()
         $members = Member::where('City', $cityName)->orderBy('IDTeam', 'Acs')->paginate(50);
         $memberCount = Member::where('City', $cityName)->count();
         $paginationLinks = $members->withQueryString()->links('pagination::bootstrap-4');
+
         return view('manager.member.show', [
             'members' => $members,
             'memberCount'=>$memberCount,
             'paginationLinks' => $paginationLinks
         ]);
-
     }
 }
 
@@ -69,6 +68,7 @@ public function index()
                 'paginationLinks' => $paginationLinks
             ]);
         }
+
         elseif (optional(auth()->user())->Role == 'manager') {
             $user = auth()->user();
             $cityName = DB::table('cities')
@@ -77,6 +77,7 @@ public function index()
             
             $members = Member::where('City', $cityName)->orderBy('updated_at', 'desc')->paginate(50);
             $paginationLinks = $members->withQueryString()->links('pagination::bootstrap-4');
+
             return view('manager.member.show', [
                 'members' => $members,
                 'paginationLinks' => $paginationLinks
@@ -91,11 +92,13 @@ public function index()
         {
             $members = Member::orderBy('FullName','Asc')->paginate(50);
             $paginationLinks = $members->withQueryString()->links('pagination::bootstrap-4');
+
             return view('admin.member.show', [
                 'members' => $members,
                 'paginationLinks' => $paginationLinks
             ]);
         }
+
         elseif (optional(auth()->user())->Role == 'manager') {
             $user = auth()->user();
             $cityName = DB::table('cities')
@@ -104,12 +107,13 @@ public function index()
             
             $members = Member::where('City', $cityName)->orderBy('updated_at', 'desc')->paginate(50);
             $paginationLinks = $members->withQueryString()->links('pagination::bootstrap-4');
+
             return view('manager.member.show', [
                 'members' => $members,
                 'paginationLinks' => $paginationLinks
             ]);
+        }
     }
-}
 
     public function orderBy_IDTeam()
     { 
@@ -117,6 +121,7 @@ public function index()
         {
             $members = Member::orderBy('IDTeam','Asc')->paginate(50);
             $paginationLinks = $members->withQueryString()->links('pagination::bootstrap-4');
+
             return view('admin.member.show', [
                 'members' => $members,
                 'paginationLinks' => $paginationLinks
@@ -130,6 +135,7 @@ public function index()
             
             $members = Member::where('City', $cityName)->orderBy('updated_at', 'desc')->paginate(50);
             $paginationLinks = $members->withQueryString()->links('pagination::bootstrap-4');
+
             return view('manager.member.show', [
                 'members' => $members,
                 'paginationLinks' => $paginationLinks
@@ -144,11 +150,13 @@ public function index()
     {
         $members = Member::orderBy('DateOfJoin','desc')->paginate(50);
         $paginationLinks = $members->withQueryString()->links('pagination::bootstrap-4');
+
         return view('admin.member.show', [
             'members' => $members,
             'paginationLinks' => $paginationLinks
         ]);
     }
+
     elseif (optional(auth()->user())->Role == 'manager') {
         $user = auth()->user();
         $cityName = DB::table('cities')
@@ -157,6 +165,7 @@ public function index()
         
         $members = Member::where('City', $cityName)->orderBy('updated_at', 'desc')->paginate(50);
         $paginationLinks = $members->withQueryString()->links('pagination::bootstrap-4');
+        
         return view('manager.member.show', [
             'members' => $members,
             'paginationLinks' => $paginationLinks

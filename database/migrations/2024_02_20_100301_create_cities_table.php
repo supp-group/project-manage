@@ -14,6 +14,10 @@ return new class extends Migration
         Schema::create('cities', function (Blueprint $table) {
             $table->id();
             $table->string('Name')->nullable();
+            $table->integer('parentId')->nullable();
+            $table->string('area')->nullable();
+            $table->integer('grandId')->nullable();
+            $table->string('street')->nullable();
             $table->timestamps();
         });
     }

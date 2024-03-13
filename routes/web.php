@@ -157,7 +157,7 @@ Route::middleware(['auth', 'verified', 'admin'])-> prefix('admin')->group(functi
     Route::post('update/{id}', [UserController::class, 'update'])->name('user.update');
 
     Route::delete('delete/{id}', [UserController::class, 'destroy'])->name('user.delete');
-    });
+  });
 
    //   /city
    Route:: prefix('city')->group(function () {
@@ -172,6 +172,38 @@ Route::middleware(['auth', 'verified', 'admin'])-> prefix('admin')->group(functi
     Route::delete('delete/{id}', [CityController::class, 'destroy'])->name('city.delete');
     });
 
+   //   /area
+  Route:: prefix('area')->group(function () {
+
+    Route::get('show', [CityController::class, 'indexArea']);
+    Route::get('add', [CityController::class, 'createArea']);
+    Route::post('save', [CityController::class, 'storeArea'])->name('area.save');
+
+    Route::get('edit/{id}', [CityController::class, 'editArea'])->name('area.edit');
+    Route::post('update/{id}', [CityController::class, 'updateArea'])->name('area.update');
+
+    Route::delete('delete/{id}', [CityController::class, 'destroyArea'])->name('area.delete');
+
+  });
+
+   //   /street
+   Route:: prefix('street')->group(function () {
+
+    Route::get('show', [CityController::class, 'indexStreet']);
+    Route::get('add', [CityController::class, 'createStreet']);
+    Route::post('save', [CityController::class, 'storeStreet'])->name('street.save');
+
+    Route::get('edit/{id}', [CityController::class, 'editStreet'])->name('street.edit');
+    Route::post('update/{id}', [CityController::class, 'updateStreet'])->name('street.update');
+
+    Route::delete('delete/{id}', [CityController::class, 'destroyStreet'])->name('street.delete');
+
+
+    Route::get('/get-areas/{cityId}',[CityController::class, 'getAreas']);
+
+  });
+
+
   //   /occupation
   Route:: prefix('occupation')->group(function () {
 
@@ -183,7 +215,7 @@ Route::middleware(['auth', 'verified', 'admin'])-> prefix('admin')->group(functi
     Route::post('update/{id}', [OccupationController::class, 'update'])->name('occupation.update');
 
     Route::delete('delete/{id}', [OccupationController::class, 'destroy'])->name('occupation.delete');
-    });
+  });
 
   //   /qualification
   Route:: prefix('qualification')->group(function () {
