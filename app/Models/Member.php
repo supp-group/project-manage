@@ -14,7 +14,7 @@ class Member extends Model
     protected  $fillable =['NotPad','branch','IDTeam','FullName',
     'MotherName','PlaceOfBirth','BirthDate','Constraint',
     'City','IDNumber','Gender','Qualification','Occupation','MobilePhone','HomeAddress',
-    'WorkAddress','HomePhone','WorkPhone','DateOfJoin','Specialization','Image'];
+    'WorkAddress','HomePhone','WorkPhone','DateOfJoin','Specialization','Image','area','street'];
    
 
 // public function user(): BelongsTo
