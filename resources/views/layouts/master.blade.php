@@ -7,7 +7,7 @@
 		{{-- <meta name="Description" content=" ديمقراطية_عدالة_تنمية">
 		<meta name="image" content="{{URL::asset('assets/img/media/team.jpg')}}">
 		<meta name="Keywords" content="الحزب الديمقراطي السوري"/> --}}
-{{-- 
+         {{-- 
 		<meta property="og:title" content="">
         <meta property="og:description" content="">
         <meta property="og:image" content="{{URL::asset('assets/img/media/team.jpg')}}">

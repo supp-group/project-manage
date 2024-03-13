@@ -4,12 +4,12 @@
         <meta charset="utf-8">
         {{-- <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}"> --}}
-
+{{-- 
         <meta property="og:title" content="الحزب الديمقراطي السوري">
         <meta property="og:description" content=" ديمقراطية_عدالة_تنمية">
         <meta property="og:image" content="{{URL::asset('assets/img/media/team.jpg')}}">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+        <title>{{ config('app.name', 'Laravel') }}</title> --}}
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
