@@ -28,7 +28,7 @@ class MemberController extends Controller
 public function index()
 { 
     if (optional(auth()->user())->Role == 'admin') {
-        $members = Member::orderBy('updated_at', 'desc')->select('id','branch','IDTeam','FullName',
+        $members = Member::orderBy('IDTeam', 'Asc')->select('id','branch','IDTeam','FullName',
         'City')->paginate(50);
         $memberCount = Member::count();
         $paginationLinks = $members->withQueryString()->links('pagination::bootstrap-4');
@@ -46,7 +46,7 @@ public function index()
             ->where('id', $user->city_id)
             ->value('Name');
         
-        $members = Member::where('City', $cityName)->orderBy('updated_at', 'desc')->paginate(50);
+        $members = Member::where('City', $cityName)->orderBy('IDTeam', 'Acs')->paginate(50);
         $memberCount = Member::where('City', $cityName)->count();
         $paginationLinks = $members->withQueryString()->links('pagination::bootstrap-4');
         return view('manager.member.show', [

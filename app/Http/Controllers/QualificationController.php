@@ -116,7 +116,7 @@ class QualificationController extends Controller
 
       $specialization->update([
         'parentId'=>$request->parentId,
-        'Specialization'=>$request->Name,
+        'Specialization'=>$request->Specialization,
       ]);
 
       session()->flash('update', 'تم تعديل الاختصاص بنجاح');
