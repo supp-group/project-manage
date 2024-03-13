@@ -32,6 +32,7 @@ public function index()
         'City')->paginate(50);
         $memberCount = Member::count();
         $paginationLinks = $members->withQueryString()->links('pagination::bootstrap-4');
+
         return view('admin.member.show', [
             'members' => $members,
             'memberCount'=>$memberCount,
@@ -186,8 +187,11 @@ public function index()
             }
             else
             {
-                $cityName =City::orderBy('Name','Asc')->get();
+                $cityName =City::whereNotNull('Name')->orderBy('Name','Asc')->get();
             }
+
+        $areas = City::whereNotNull('area')->orderBy('area','Asc')->get();
+        $streets = City::whereNotNull('street')->orderBy('street','Asc')->get();
 
         $qualifications = Qualification::whereNotNull('Name')->orderBy('Name','Asc')->get();
         $specializations = Qualification::whereNotNull('specialization')->orderBy('Name','Asc')->get();
@@ -195,23 +199,12 @@ public function index()
 
         if ( auth()->user()->Role == 'admin')
         {
-            return view('admin.member.add', compact('cityName', 'qualifications', 'occupations'));
+            return view('admin.member.add', compact('cityName', 'qualifications', 'occupations', 'areas', 'streets'));
         }
        else if ( auth()->user()->Role == 'manager')
         {
-            return view('manager.member.add', compact('cityName', 'qualifications', 'occupations'));
+            return view('manager.member.add', compact('cityName', 'qualifications', 'occupations', 'areas', 'streets'));
         }
-    }
-
-
-    public function getSpecializations($qualificationId)
-    {
-        $specializations = Qualification::where('parentId', $qualificationId)
-                                        ->whereNotNull('specialization')
-                                        ->orderBy('specialization', 'Asc')
-                                        ->get();
-    
-        return response()->json($specializations);
     }
 
 
@@ -1029,6 +1022,37 @@ public function GetCityWithMemberCount(Request $request)
   //  $temctrlr=new TemporaryController();
  //   $temctrlr->getDeletedMember()
     return view('admin.notice.editDetails',compact('member','memb'));
+  }
+
+
+
+  public function getSpecializations($qualificationId)
+  {
+    $specializations = Qualification::where('parentId', $qualificationId)
+                                  ->whereNotNull('specialization')
+                                  ->orderBy('specialization', 'Asc')
+                                  ->get();
+    return response()->json($specializations);
+  }
+
+
+  public function getAreas($cityId)
+  {
+    $areas = City::where('parentId', $cityId)
+                ->whereNotNull('area')
+                ->orderBy('area', 'Asc')
+                ->get();
+    return response()->json($areas);
+  }
+
+
+  public function getStreets($areaId)
+  {
+    $streets = City::where('grandId', $areaId)
+                ->whereNotNull('street')
+                ->orderBy('street', 'Asc')
+                ->get();
+    return response()->json($streets);
   }
 
 }

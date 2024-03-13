@@ -95,15 +95,6 @@ class CityController extends Controller
 
     public function storeStreet(Request $request)
     {
-
-      // $qualificationId = $request->Qualification;
-      // $qualificationName = Qualification::where('id', $qualificationId)->first()->Name;
-      
-      // $specializationId = $request->Specialization;
-      // $specializationName = Qualification::where('id', $specializationId)->first()->specialization;
-
-
-
       $cityId = $request->parentId;
       $cityName = City::where('parentId', $cityId)->first()->Name;
       
@@ -111,8 +102,8 @@ class CityController extends Controller
       $areaName = City::where('grandId', $areaId)->first()->area;
       
       City::create([
-        'parentId'=>$request->parentId,
-        'grandId'=>$request->grandId,
+        'parentId'=>$request->Name,
+        'grandId'=>$request->area,
         'street'=>$request->street,
       ]);
 

@@ -69,7 +69,6 @@
 											@enderror
 										</div>
 									</div><br>
-
 					
 									<div class="row">
 										<div class="col">
@@ -133,9 +132,11 @@
 										</div>
 									</div><br>
 
+
+
 									<div class="form-group">
 										<label>المحافظة</label>
-										<select name="City" class="form-control select @error('City') is-invalid @enderror">
+										<select name="City" id="citySelect" class="form-control select @error('City') is-invalid @enderror">
 											
 											@foreach($cityName as $city)
 											<option >{{$city->Name}}</option>
@@ -148,12 +149,30 @@
 										@enderror
 									</div><br>
 
+									<div class="form-group">
+										<label>المنطقة</label>
+										<select name="area" class="form-control select @error('area') is-invalid @enderror" id="areaSelect">
+											<!-- Options will be loaded dynamically -->
+										</select>
+
+										@error('area')
+												<div class="alert alert-danger">{{ $message }}</div>
+											@enderror
+									</div><br>
+
+									<div class="form-group">
+										<label>الحي</label>
+										<select name="street" class="form-control select @error('street') is-invalid @enderror" id="streetSelect">
+											<!-- Options will be loaded dynamically -->
+										</select>
+
+										@error('street')
+												<div class="alert alert-danger">{{ $message }}</div>
+											@enderror
+									</div><br>
 
 
 
-
-
-									
 									<div class="row">
 										<div class="col">
 											<label for="inputName" class="control-label">الرقم الوطني</label>
@@ -228,7 +247,6 @@
 										@enderror
 									</div><br> 
 									
-
 									 <div class="row">
 										<div class="col">
 										  <label for="inputName" class="control-label">رقم الموبايل</label>
@@ -406,6 +424,68 @@
 		});
 	</script>
 		
+	{{-- Dependent Dropdown ===> city & area --}}
+	{{-- <script>
+		document.addEventListener("DOMContentLoaded", function() {
+		  const citySelect = document.querySelector('#citySelect');
+		  const areaSelect = document.querySelector('#areaSelect');
+		
+		  citySelect.addEventListener('change', function() {
+			const cityId = this.value;
+			fetch(`get-areasm/${cityId}`)  // Corrected URL format
+			  .then(response => {
+				if (!response.ok) {
+				  throw new Error('Network response was not ok');
+				}
+				return response.json();
+			  })
+			  .then(areas => {
+				areaSelect.innerHTML = '<option value="">اختر المنطقة</option>'; // Clear and add a placeholder
+				areas.forEach(area => {
+				  const option = document.createElement('option');
+				  option.value = area.id;
+				  option.textContent = area.area;
+				  areaSelect.appendChild(option);
+				});
+			  })
+			  .catch(error => {
+				console.error('There has been a problem with your fetch operation:', error);
+			  });
+		  });
+		});
+	</script> --}}
+
+	{{-- Dependent Dropdown ===> area & street --}}
+	{{-- <script>
+		document.addEventListener("DOMContentLoaded", function() {
+		  const areaSelect = document.querySelector('#areaSelect');
+		  const streetSelect = document.querySelector('#streetSelect');
+		
+		  areaSelect.addEventListener('change', function() {
+			const areaId = this.value;
+			fetch(`get-streets/${areaId}`)  // Corrected URL format
+			  .then(response => {
+				if (!response.ok) {
+				  throw new Error('Network response was not ok');
+				}
+				return response.json();
+			  })
+			  .then(streets => {
+				streetSelect.innerHTML = '<option value="">اختر الحي</option>'; // Clear and add a placeholder
+				streets.forEach(street => {
+				  const option = document.createElement('option');
+				  option.value = street.id;
+				  option.textContent = street.street;
+				  streetSelect.appendChild(option);
+				});
+			  })
+			  .catch(error => {
+				console.error('There has been a problem with your fetch operation:', error);
+			  });
+		  });
+		});
+	</script> --}}
+
 
 
 <!--Internal  Datepicker js -->

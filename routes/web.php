@@ -120,11 +120,19 @@ Route::middleware(['auth', 'verified', 'admin'])-> prefix('admin')->group(functi
 
         Route::delete('delete/{id}', [MemberController::class, 'destroy'])->name('member.delete');
 
-        Route::get('/get-specializations/{qualificationId}',[MemberController::class, 'getSpecializations']);
 
         Route::get('details/{id}',[MemberController::class,'details'])->name('member.details');
         
         Route::get('archive/{IDTeam}', [TemporaryController::class, 'GetArchive'])->name('archive.GetArchive');
+
+
+        // for code js
+        Route::get('/get-specializations/{qualificationId}',[MemberController::class, 'getSpecializations']);
+
+        Route::get('/get-areasm/{cityId}',[MemberController::class, 'getAreas']);
+
+        Route::get('/get-streets/{areaId}',[MemberController::class, 'getStreets']);
+
 
         // search
         Route::post('phone', [MemberController::class, 'searchByPhoneNull'])->name('search-phone');
