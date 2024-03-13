@@ -49,7 +49,8 @@
 									<div class="row">
 										<div class="col">
 											<label for="inputName" class="control-label">الاختصاص</label>
-											<input type="hidden" name="specialization" value="{{ $specialization->specialization }}">
+											<input type="hidden" name="parentId" value="{{ $specialization->parentId }}">
+
 											<input type="text" class="form-control @error('specialization') is-invalid @enderror" 
 											id="inputName" name="specialization" value="{{ $specialization->specialization }}" required>
 

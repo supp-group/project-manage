@@ -118,7 +118,7 @@ class QualificationController extends Controller
       'specialization'=>$request->specialization,
     ]);
 
-    session()->flash('update', 'تم تعديل الاختصاص بنجاح');
+    session()->flash('Edit', 'تم تعديل الاختصاص بنجاح');
     return back();
   }
 

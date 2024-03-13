@@ -49,7 +49,7 @@
 									<div class="row">
 										<div class="col">
 											<label for="inputName" class="control-label">المنطقة</label>
-											<input type="hidden" name="area" value="{{ $area->area }}">
+											<input type="hidden" name="parentId" value="{{ $area->parentId }}">
 											<input type="text" class="form-control @error('area') is-invalid @enderror" 
 											id="inputName" name="area" value="{{ $area->area }}" required>
 

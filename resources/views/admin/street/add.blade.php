@@ -58,7 +58,7 @@
 
 									<div class="form-group">
 										<label>المحافظة</label>
-										<select name="parentId" id="citySelect" class="form-control select @error('parentId') is-invalid @enderror" onChange="loadAreas()">
+										<select name="parentId" id="citySelect" class="form-control select @error('parentId') is-invalid @enderror">
 											<option>اختر المحافظة</option>
 											
 											@foreach($cities as $city)

@@ -49,7 +49,7 @@
 									<div class="row">
 										<div class="col">
 											<label for="inputName" class="control-label">الحي</label>
-											<input type="hidden" name="street" value="{{ $street->street }}">
+											<input type="hidden" name="grandId" value="{{ $street->grandId }}">
 											<input type="text" class="form-control @error('street') is-invalid @enderror" 
 											id="inputName" name="street" value="{{ $street->street }}" required>
 
