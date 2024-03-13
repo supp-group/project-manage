@@ -111,7 +111,9 @@
 				</div>
 				<br> --}}
 
-				<form action="{{ route('search-Area') }}" method="post">
+			<div class="row">
+					<div class="col-4">
+				<form action="{{ route('search-m-Area') }}" method="post">
 					@csrf
 					<div class="input-group">
 						<input class="form-control" placeholder="المنطقة" type="search" name="search_Area">
@@ -120,9 +122,10 @@
 						</div>
 					</div>
 				</form>
-			</div><br>
+			</div>
 
-			<form action="{{ route('search-Street') }}" method="post">
+				<div class="col-4">
+			<form action="{{ route('search-m-Street') }}" method="post">
 					@csrf
 					<div class="input-group">
 						<input class="form-control" placeholder="الحي" type="search" name="search_Street">
@@ -131,7 +134,8 @@
 						</div>
 					</div>
 				</form>
-			</div><br>
+			</div>
+			</div>
 
 				<!-- breadcrumb -->
 @endsection

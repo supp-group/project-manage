@@ -133,8 +133,8 @@ Route::middleware(['auth', 'verified', 'admin'])-> prefix('admin')->group(functi
         Route::post('name', [MemberController::class, 'searchByName'])->name('search-name');
         Route::post('city', [MemberController::class, 'searchByCity'])->name('search-city');
 
-        Route::post('city', [MemberController::class, 'searchBystreet'])->name('search-Street');
-        Route::post('city', [MemberController::class, 'searchByArea'])->name('search-Area');
+        Route::post('street', [MemberController::class, 'searchBystreet'])->name('search-Street');
+        Route::post('area', [MemberController::class, 'searchByArea'])->name('search-Area');
 
         Route::post('qualification', [MemberController::class, 'searchByQualification'])->name('search-qualification');
         Route::post('specialization', [MemberController::class, 'searchBySpecialization'])->name('search-specialization');
@@ -304,6 +304,11 @@ Route::middleware(['auth', 'verified', 'manager'])-> prefix('manager')->group(fu
         Route::post('team', [MemberController::class, 'searchByIDTeam'])->name('search-m-team');
         Route::post('name', [MemberController::class, 'searchByName'])->name('search-m-name');
 
+        
+        Route::post('street', [MemberController::class, 'searchBystreet'])->name('search-m-Street');
+        Route::post('area', [MemberController::class, 'searchByArea'])->name('search-m-Area');
+
+
         Route::post('qualification', [MemberController::class, 'searchByQualification'])->name('search-m-qualification');
         Route::post('specialization', [MemberController::class, 'searchBySpecialization'])->name('search-m-specialization');
         Route::post('occupation', [MemberController::class, 'searchByOccupation'])->name('search-m-occupation');
@@ -319,6 +324,11 @@ Route::middleware(['auth', 'verified', 'manager'])-> prefix('manager')->group(fu
 
 });
 
+// Place all other routes above this one
+// Catch-all route
+Route::get('/{any}', function() {
+  return redirect('/login');
+})->where('any', '.*');
 
 
 require __DIR__.'/auth.php';

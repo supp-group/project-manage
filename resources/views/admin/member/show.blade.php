@@ -92,8 +92,8 @@ integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEw
 					</div>
 				</div>
 				<br>
-				<div class="row">
-					<div class="col-4">
+				{{-- <div class="row">
+					<div class="col-4"> --}}
 						{{-- <form action="{{ route('search-qualification') }}" method="post">
 							@csrf
 							<div class="input-group">
@@ -116,6 +116,8 @@ integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEw
 						</form>
 					</div> --}}
 
+					<div class="row">
+						<div class="col-4">
 					<form action="{{ route('search-Area') }}" method="post">
 							@csrf
 							<div class="input-group">
@@ -126,7 +128,9 @@ integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEw
 							</div>
 						</form>
 					</div>
+				
 
+						<div class="col-4">
 					<form action="{{ route('search-Street') }}" method="post">
 							@csrf
 							<div class="input-group">
@@ -137,6 +141,7 @@ integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEw
 							</div>
 						</form>
 					</div>
+
 
 					<div class="col-4">
 						<form action="{{ route('search-occupation') }}" method="post">
