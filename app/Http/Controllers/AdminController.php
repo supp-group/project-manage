@@ -13,15 +13,16 @@ class AdminController extends Controller
      */
     public function index()
     {
-        if(auth()->user()->Role == "admin") {
+        if(auth()->user()->Role != "manager" && auth()->user()->Role != "admin"){
+            return  redirect()->route('/');
+        }
+        else if(auth()->user()->Role == "admin") {
             return view('admin.index');
         }
         else if(auth()->user()->Role == "manager") {
             return view('manager.index');
         }
-        else if(auth()->user()->Role != "manager" && auth()->user()->Role != "admin"){
-            return  redirect()->route('/');
-        }
+      
     }
 
     /**
