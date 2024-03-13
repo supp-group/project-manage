@@ -112,6 +112,7 @@ class QualificationController extends Controller
 
     $specialization = Qualification::findOrFail($id);
 
+
     $specialization->update([
       'parentId'=>$request->parentId,
       'specialization'=>$request->specialization,
