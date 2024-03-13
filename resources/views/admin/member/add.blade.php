@@ -148,6 +148,12 @@
 										@enderror
 									</div><br>
 
+
+
+
+
+
+									
 									<div class="row">
 										<div class="col">
 											<label for="inputName" class="control-label">الرقم الوطني</label>
