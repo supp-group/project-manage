@@ -9,14 +9,12 @@ use Illuminate\Support\Facades\Validator;
 
 class QualificationController extends Controller
 {
-  
     public function indexQualification()
     { 
-
-         $qualifications = Qualification::whereNotNull('Name')->orderBy('Name','Asc')->get();
-         return view('admin.qualification.show',compact('qualifications'));
-
+      $qualifications = Qualification::whereNotNull('Name')->orderBy('Name','Asc')->get();
+      return view('admin.qualification.show',compact('qualifications'));
     }
+
     public function indexSpecialization()
     { 
          $specializations = Qualification::whereNotNull('specialization')->orderBy('Name','Asc')->get();
@@ -29,20 +27,20 @@ class QualificationController extends Controller
                  $specialization->parent_name = $parent->specialization;
              }
          }
-
-         return view('admin.specialization.show',compact('specializations'));
+         
+        return view('admin.specialization.show',compact('specializations'));
     }
     
     public function createQualification()
     {
-       return view('admin.qualification.add');
+      return view('admin.qualification.add');
     }
 
     public function createSpecialization()
     {
       $qualifications = Qualification::whereNotNull('Name')->orderBy('Name','asc')->get();
-        // $qualifications = Qualification::where('parentId','=','0')->orderBy('Name','Asc')->get('Name');
-        return view('admin.specialization.add', compact('qualifications'));
+      // $qualifications = Qualification::where('parentId','=','0')->orderBy('Name','Asc')->get('Name');
+      return view('admin.specialization.add', compact('qualifications'));
     }
 
     public function storeQualification(Request $request)
@@ -105,23 +103,23 @@ class QualificationController extends Controller
     }
 
   
-    public function updateSpecialization(Request $request, $id)
+  public function updateSpecialization(Request $request, $id)
   {
     $validated = $request->validate([
-        'parentId'=>'required',
-        'Specialization' => 'required|unique:occupations|max:255',
+      'parentId'=>'required',
+      'specialization' => 'required|unique:qualifications|max:255',
     ]);
 
-      $specialization = Qualification::findOrFail($id);
+    $specialization = Qualification::findOrFail($id);
 
-      $specialization->update([
-        'parentId'=>$request->parentId,
-        'Specialization'=>$request->Name,
-      ]);
+    $specialization->update([
+      'parentId'=>$request->parentId,
+      'specialization'=>$request->specialization,
+    ]);
 
-      session()->flash('update', 'تم تعديل الاختصاص بنجاح');
-      return back();
-    }
+    session()->flash('update', 'تم تعديل الاختصاص بنجاح');
+    return back();
+  }
 
     public function destroyQualification($id)
     {
@@ -141,9 +139,9 @@ class QualificationController extends Controller
    
     public function destroySpecialization($id)
     {
-        Qualification::findOrFail($id)->delete();
+      Qualification::findOrFail($id)->delete();
 
-       session()->flash('delete', 'تم حذف الاختصاص بنجاح');
-       return back();
+      session()->flash('delete', 'تم حذف الاختصاص بنجاح');
+      return back();
     }
 }
