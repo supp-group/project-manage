@@ -335,7 +335,7 @@ Route::middleware(['auth', 'verified', 'manager'])-> prefix('manager')->group(fu
 // Place all other routes above this one
 // Catch-all route
 Route::get('/{any}', function() {
-  return redirect('/login');
+  return redirect('/');
 })->where('any', '.*');
 
 
