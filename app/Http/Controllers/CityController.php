@@ -95,12 +95,21 @@ class CityController extends Controller
 
     public function storeStreet(Request $request)
     {
-      $cityId = $request->City;
-      $cityName = City::where('id', $cityId)->first()->Name;
-      
-      $areaId = $request->Area;
-      $areaName = City::where('parentId', $areaId)->first()->area;
 
+      // $qualificationId = $request->Qualification;
+      // $qualificationName = Qualification::where('id', $qualificationId)->first()->Name;
+      
+      // $specializationId = $request->Specialization;
+      // $specializationName = Qualification::where('id', $specializationId)->first()->specialization;
+
+
+
+      $cityId = $request->parentId;
+      $cityName = City::where('parentId', $cityId)->first()->Name;
+      
+      $areaId = $request->grandId;
+      $areaName = City::where('grandId', $areaId)->first()->area;
+      
       City::create([
         'parentId'=>$request->parentId,
         'grandId'=>$request->grandId,
@@ -232,12 +241,11 @@ class CityController extends Controller
     }
 
 
-
     public function getAreas($cityId)
     {
       $areas = City::where('parentId', $cityId)
-                  ->whereNotNull('Name')
-                  ->orderBy('Name', 'Asc')
+                  ->whereNotNull('area')
+                  ->orderBy('area', 'Asc')
                   ->get();
 
       return response()->json($areas);

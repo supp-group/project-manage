@@ -58,7 +58,7 @@
 
 									<div class="form-group">
 										<label>المحافظة</label>
-										<select name="parentId" id="citySelect" class="form-control select @error('parentId') is-invalid @enderror">
+										<select name="Name" id="citySelect" class="form-control select @error('Name') is-invalid @enderror">
 											<option>اختر المحافظة</option>
 											
 											@foreach($cities as $city)
@@ -66,25 +66,18 @@
 											@endforeach 
 										</select>
 
-										@error('parentId')
+										@error('Name')
 												<div class="alert alert-danger">{{ $message }}</div>
 											@enderror
 									</div><br>
 
                                     <div class="form-group">
 										<label>المنطقة</label>
-										<select name="grandId" class="form-control select @error('grandId') is-invalid @enderror" id="areaSelect">
+										<select name="area" class="form-control select @error('area') is-invalid @enderror" id="areaSelect">
 											<!-- Options will be loaded dynamically -->
-											
-											
-											{{-- <option>اختر المنطقة</option>
-											
-											@foreach($areas as $area)
-											<option value="{{$area->id}}">{{$area->area}}</option>
-											@endforeach  --}}
 										</select>
 
-										@error('grandId')
+										@error('area')
 												<div class="alert alert-danger">{{ $message }}</div>
 											@enderror
 									</div><br>
