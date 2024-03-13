@@ -108,6 +108,8 @@ class QualificationController extends Controller
     $validated = $request->validate([
       'parentId'=>'required',
       'specialization' => 'required|unique:qualifications|max:255',
+        'parentId'=>'required',
+        'specialization' => 'required|unique:occupations|max:255',
     ]);
 
     $specialization = Qualification::findOrFail($id);
@@ -117,6 +119,10 @@ class QualificationController extends Controller
       'parentId'=>$request->parentId,
       'specialization'=>$request->specialization,
     ]);
+      $specialization->update([
+        'parentId'=>$request->parentId,
+        'specialization'=>$request->specialization,
+      ]);
 
     session()->flash('Edit', 'تم تعديل الاختصاص بنجاح');
     return back();
