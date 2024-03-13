@@ -19,6 +19,9 @@ class AdminController extends Controller
         else if(auth()->user()->Role == "manager") {
             return view('manager.index');
         }
+        else  {
+            return  redirect()->route('/');
+        }
     }
 
     /**
