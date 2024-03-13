@@ -8,10 +8,10 @@
 		<meta name="image" content="{{URL::asset('assets/img/media/team.jpg')}}">
 		<meta name="Keywords" content="الحزب الديمقراطي السوري"/> --}}
 
-		<meta property="og:title" content="الحزب الديمقراطي السوري">
+		{{-- <meta property="og:title" content="الحزب الديمقراطي السوري">
         <meta property="og:description" content=" ديمقراطية_عدالة_تنمية">
         <meta property="og:image" content="{{URL::asset('assets/img/media/team.jpg')}}">
-        
+         --}}
 		@include('layouts.head')
 	</head>
 
