@@ -34,6 +34,8 @@ return new class extends Migration
             // $table->dateTime('DateOfJoin')->nullable();
             $table->year('DateOfJoin')->nullable();
             $table->string('Specialization')->nullable();
+            $table->string('area')->nullable();
+            $table->string('street')->nullable();
             $table->string('Image')->nullable();  
             $table->timestamps();
 

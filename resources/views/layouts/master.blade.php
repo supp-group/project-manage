@@ -1,12 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<meta charset="UTF-8">
-		<meta name='viewport' content='width=device-width, initial-scale=1.0, user-scalable=0'>
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="Description" content="">
-		<meta name="Author" content="">
-		<meta name="Keywords" content=""/>
+		{{-- <meta charset="UTF-8"> --}}
+		{{-- <meta name='viewport' content='width=device-width, initial-scale=1.0, user-scalable=0'> --}}
+		{{-- <meta http-equiv="X-UA-Compatible" content="IE=edge"> --}}
+		{{-- <meta name="Description" content=" ديمقراطية_عدالة_تنمية">
+		<meta name="image" content="{{URL::asset('assets/img/media/team.jpg')}}">
+		<meta name="Keywords" content="الحزب الديمقراطي السوري"/> --}}
+         {{-- 
+		<meta property="og:title" content="">
+        <meta property="og:description" content="">
+        <meta property="og:image" content="{{URL::asset('assets/img/media/team.jpg')}}">
+         --}}
 		@include('layouts.head')
 	</head>
 
