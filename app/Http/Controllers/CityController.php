@@ -95,13 +95,11 @@ class CityController extends Controller
 
     public function storeStreet(Request $request)
     {
-
-
       $cityId = $request->City;
       $cityName = City::where('id', $cityId)->first()->Name;
       
       $areaId = $request->Area;
-      $areaName = City::where('id', $areaId)->first()->area;
+      $areaName = City::where('parentId', $areaId)->first()->area;
 
       City::create([
         'parentId'=>$request->parentId,
