@@ -14,13 +14,16 @@ class AdminController extends Controller
     public function index()
     {
           //  return  view('auth.login');
-    
-        // else if(auth()->user()->Role == "admin") {
-        //     return view('admin.index');
-        // }
-        // else if(auth()->user()->Role == "manager") {
-        //     return view('manager.index');
-        // }
+          if(!auth()->check())
+          {
+              return view('auth.login');
+          }
+          else if(auth()->user()->Role == "admin") {
+              return view('admin.home');
+          }
+          else if(auth()->user()->Role == "manager") {
+              return view('manager.home');
+          }
       
     }
 
@@ -45,16 +48,7 @@ class AdminController extends Controller
      */
     public function show()
     {
-        if(!auth()->check())
-        {
-            return view('auth.login');
-        }
-        else if(auth()->user()->Role == "admin") {
-            return view('admin.home');
-        }
-        else if(auth()->user()->Role == "manager") {
-            return view('manager.home');
-        }
+
     }
     /**
      * Show the form for editing the specified resource.
