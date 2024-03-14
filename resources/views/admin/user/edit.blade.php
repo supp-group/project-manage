@@ -63,7 +63,7 @@
 										<div class="col">
 											<label for="inputName" class="control-label">كلمة المرور</label>
 											<input type="hidden" name="password" value="{{ $user->password }}">
-											<input type="text" class="form-control @error('password') is-invalid @enderror" id="inputName" name="password" required>
+											<input type="password" class="form-control @error('password') is-invalid @enderror" id="inputName" name="password">
 
 											@error('password')
 												<div class="alert alert-danger">{{ $message }}</div>
@@ -74,14 +74,16 @@
 									<div class="form-group">
 										<label>الدور</label>
 											<select name="Role" class="form-control select">
+												<option value="{{ $user->Role }}">اختر نوع الإدارة</option>
 												<option value="admin">مدير الموقع</option>
-												<option value="manager">المدير</option>
+												<option value="manager">مدير فرعي</option>
 											</select>
 									</div><br>
 
 									<div class="form-group">
 										<label>المحافظة</label>
-										<select name="city_id" class="form-control select @error('Role') is-invalid @enderror">
+										<select name="city_id" class="form-control select @error('city_id') is-invalid @enderror">
+											<option value="{{ $user->city_id }}">اختر المحافظة</option>
 											
 											@foreach($cities as $city)
 											<option value="{{$city->id}}">{{$city->Name}}</option>

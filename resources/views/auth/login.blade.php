@@ -8,6 +8,25 @@
 @section('css')
 <!-- Sidemenu-respoansive-tabs css -->
 <link href="{{URL::asset('assets/plugins/sidemenu-responsive-tabs/css/sidemenu-responsive-tabs.css')}}" rel="stylesheet">
+
+
+
+<style>
+@media (max-width: 767px) {
+  .my-image {
+    display: block; /* عرض الصورة */
+    margin: 0 auto; /* محاذاة الصورة في الوسط */
+  }
+
+  form {
+    margin-top: 20px; /* تباعد بين الصورة وحقول الإدخال */
+  }
+}
+
+</style>
+
+
+
 @endsection
 @section('content')
 		<div class="container-fluid">
@@ -76,13 +95,13 @@
                 <div class="col-md-5 col-lg-5 col-xl-6 d-none d-md-flex bg-primary-transparent">
 					<div class="row wd-100p mx-auto text-center">
 						<div class="col-md-10 col-lg-10 col-xl-9 my-auto mx-auto wd-100p">
-							<img src="{{URL::asset('assets/img/media/team.jpg')}}" class="my-auto ht-xl-80p wd-md-100p wd-xl-80p mx-auto" alt="logo">
+							<img src="{{URL::asset('assets/img/media/team.png')}}" class="my-auto ht-xl-80p wd-md-100p wd-xl-80p mx-auto" alt="logo">
 						</div>
 					</div>
 				</div>
 
 			</div>
-		</div>
+		</div>	  
 @endsection
 @section('js')
 @endsection

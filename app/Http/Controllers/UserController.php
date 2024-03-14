@@ -60,7 +60,7 @@ class UserController extends Controller
   public function update(Request $request, $id)
   { 
     $validated = $request->validate([
-      'email' => 'required|unique:users|max:255',
+      'email' => 'required|max:255',
        'password'=>'required',
        'Role'=>'required',
        'city_id'=>'required',
@@ -75,11 +75,11 @@ class UserController extends Controller
         'city_id'=>$request->city_id,
       ]);
 
-      session()->flash('update', 'تم تعديل المدير بنجاح');
+      session()->flash('Edit', 'تم تعديل المدير بنجاح');
       return back();
     }
 
-    public function destroy( $id)
+    public function destroy($id)
     {
         User::findOrFail($id)->delete();
 
