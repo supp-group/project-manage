@@ -63,7 +63,7 @@
 										<div class="col">
 											<label for="inputName" class="control-label">كلمة المرور</label>
 											<input type="hidden" name="password" value="{{ $user->password }}">
-											<input type="password" class="form-control @error('password') is-invalid @enderror" id="inputName" name="password">
+											<input type="password" class="form-control @error('password') is-invalid @enderror" id="inputName" name="password" value="{{ bcrypt($user->password) }}">
 
 											@error('password')
 												<div class="alert alert-danger">{{ $message }}</div>

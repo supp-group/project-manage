@@ -11,19 +11,21 @@
 
 
 
-<style>
-@media (max-width: 767px) {
-  .my-image {
-    display: block; /* عرض الصورة */
-    margin: 0 auto; /* محاذاة الصورة في الوسط */
-  }
+{{-- <style>
 
-  form {
-    margin-top: 20px; /* تباعد بين الصورة وحقول الإدخال */
+@media (max-width: 767px) {
+	.my-image {
+    display: none;
+  }
+}
+				  
+@media (min-width: 768px) {
+	.my-image {
+    display: block;
   }
 }
 
-</style>
+</style> --}}
 
 
 
@@ -92,6 +94,8 @@
 					</div>
 				</div><!-- End -->
 
+				{{-- <div id="my-image"> --}}
+
                 <div class="col-md-5 col-lg-5 col-xl-6 d-none d-md-flex bg-primary-transparent">
 					<div class="row wd-100p mx-auto text-center">
 						<div class="col-md-10 col-lg-10 col-xl-9 my-auto mx-auto wd-100p">
@@ -99,6 +103,8 @@
 						</div>
 					</div>
 				</div>
+
+			{{-- </div> --}}
 
 			</div>
 		</div>	  
