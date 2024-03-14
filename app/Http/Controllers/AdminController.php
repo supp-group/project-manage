@@ -45,7 +45,11 @@ class AdminController extends Controller
      */
     public function show()
     {
-       if(auth()->user()->Role == "admin") {
+     if(!auth())
+   {
+    return redirect()->route('/');
+    }
+    else if(auth()->user()->Role == "admin") {
             return view('admin.home');
         }
         else if(auth()->user()->Role == "manager") {
