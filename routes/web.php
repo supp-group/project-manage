@@ -75,9 +75,12 @@ Route::middleware(['auth', 'verified', 'admin'])-> prefix('admin')->group(functi
         // for code js
         Route::get('/get-specializations/{qualificationId}',[MemberController::class, 'getSpecializations']);
         
-        Route::get('/get-areasm/{cityId}',[MemberController::class, 'getAreas']);
+        // Route::get('/get-areasm/{cityId}',[MemberController::class, 'getAreas']);
+        // Route::get('/get-streets/{areaId}',[MemberController::class, 'getStreets']);
 
-        Route::get('/get-streets/{areaId}',[MemberController::class, 'getStreets']);
+        // Route::get('/AreaStreets',[MemberController::class, 'AreaStreets']);
+        Route::post('/dynamicdependent/fetch',[MemberController::class, 'fetch'])->name('dynamicdependent.fetch');
+
 
 
         // search
