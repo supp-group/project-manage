@@ -1,12 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8">
-		{{-- <meta name='viewport' content='width=device-width, initial-scale=1.0, user-scalable=0'>
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="Description" content="">
-		<meta name="Author" content="">
-		<meta name="Keywords" content=""/> --}}
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:title" content="الحزب الديمقراطي السوري">
+    <meta property="og:description" content="ديمقراطية، عدالة، تنمية">
+    <meta property="og:image" content="{{ asset('assets/img/media/team.jpg') }}">
+    <title>الحزب الديمقراطي السوري</title>
+
+
 		@include('manager.layouts.head')
 	</head>
 
