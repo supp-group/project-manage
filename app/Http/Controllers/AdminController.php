@@ -13,7 +13,7 @@ class AdminController extends Controller
      */
     public function index()
     {
-            return  view('auth.login');
+          //  return  view('auth.login');
     
         // else if(auth()->user()->Role == "admin") {
         //     return view('admin.index');
