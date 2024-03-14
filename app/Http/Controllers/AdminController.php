@@ -45,11 +45,11 @@ class AdminController extends Controller
      */
     public function show()
     {
-        if(!auth()->check())
-        {
-            return view('auth.login');
-        }
-        else if(auth()->user()->Role == "admin") {
+        // if(!auth()->check())
+        // {
+        //     return view('auth.login');
+        // }
+       if(auth()->user()->Role == "admin") {
             return view('admin.home');
         }
         else if(auth()->user()->Role == "manager") {
