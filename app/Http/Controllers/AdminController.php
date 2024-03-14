@@ -45,18 +45,16 @@ class AdminController extends Controller
      */
     public function show()
     {
-     if(!auth())
-   {
-    return redirect()->route('/');
-    }
-    else if(auth()->user()->Role == "admin") {
+        if(!auth()->check())
+        {
+            return redirect()->route('/');
+        }
+        else if(auth()->user()->Role == "admin") {
             return view('admin.home');
         }
         else if(auth()->user()->Role == "manager") {
             return view('manager.home');
         }
-    }
-
     /**
      * Show the form for editing the specified resource.
      */
