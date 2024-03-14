@@ -34,6 +34,8 @@ return new class extends Migration
             $table->year('DateOfJoin')->nullable();
             $table->string('Specialization')->nullable();
             $table->string('Image')->nullable();  
+            $table->string('area')->nullable();
+            $table->string('street')->nullable();
             $table->boolean('operation')->nullable();
             $table->boolean('AdminAgree')->default(0)->nullable();
             $table->string('managerEmail')->nullable();
