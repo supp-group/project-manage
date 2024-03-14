@@ -99,7 +99,7 @@
                 <div class="col-md-5 col-lg-5 col-xl-6 d-none d-md-flex bg-primary-transparent">
 					<div class="row wd-100p mx-auto text-center">
 						<div class="col-md-10 col-lg-10 col-xl-9 my-auto mx-auto wd-100p">
-							<img src="{{URL::asset('assets/img/media/team.png')}}" class="my-auto ht-xl-80p wd-md-100p wd-xl-80p mx-auto" alt="logo">
+							<img src="{{URL::asset('assets/img/media/team1.png')}}" class="my-auto ht-xl-80p wd-md-100p wd-xl-80p mx-auto" alt="logo">
 						</div>
 					</div>
 				</div>
