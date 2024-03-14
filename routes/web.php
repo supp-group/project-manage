@@ -96,7 +96,7 @@ Route::get('delete_session_data', function(Request $request){
 
 
 // index
-Route::get('/index', [AdminController::class, 'show']);
+Route::get('/home', [AdminController::class, 'show']);
 
 
 
