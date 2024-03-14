@@ -43,7 +43,7 @@ class AdminController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show()
     {
        if(auth()->user()->Role == "admin") {
             return view('admin.index');
