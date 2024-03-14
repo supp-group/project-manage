@@ -1,14 +1,17 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        {{-- <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="csrf-token" content="{{ csrf_token() }}"> --}}
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:title" content="الحزب الديمقراطي السوري">
+    <meta property="og:description" content="ديمقراطية، عدالة، تنمية">
+    <meta property="og:image" content="{{ asset('assets/img/media/team.jpg') }}">
+    <title>الحزب الديمقراطي السوري</title>
 
-        <meta property="og:title" content="الحزب الديمقراطي السوري">
-        <meta property="og:description" content=" ديمقراطية_عدالة_تنمية">
-        <meta property="og:image" content="{{URL::asset('assets/img/media/team.jpg')}}">
-        
+
+{{-- </head> --}}
+  {{-- <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="csrf-token" content="{{ csrf_token() }}"> --}}
 
         {{-- <title>{{ config('app.name', 'Laravel') }}</title> --}}
 
