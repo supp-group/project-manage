@@ -55,6 +55,7 @@ class AdminController extends Controller
         else if(auth()->user()->Role == "manager") {
             return view('manager.home');
         }
+    }
     /**
      * Show the form for editing the specified resource.
      */
