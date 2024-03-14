@@ -1152,4 +1152,44 @@ function fetch(Request $request)
     echo $output;
 }
 
+
+  public function Advancedsearch(Request $request)
+{
+    $query = Member::query();
+
+    if ($request->has('dropdownCity')) {
+        $query->where('City', $request->input('dropdownCity'));
+    }
+
+    if ($request->has('dropdownArea')) {
+        $query->where('area', $request->input('dropdownArea'));
+    }
+
+    if ($request->has('dropdownStrret')) {
+        $query->where('street', $request->input('dropdownStrret'));
+    }
+
+
+    if ($request->has('dropdownQualification')) {
+        $query->where('Qualification', $request->input('dropdownQualification'));
+    }
+
+    if ($request->has('dropdownspecialization')) {
+        $query->where('Specialization', $request->input('dropdownspecialization'));
+    }
+
+
+    if ($request->has('dropdownOccupation')) {
+        $query->where('Occupation', $request->input('dropdownOccupation'));
+    }
+
+
+    // Add more conditions for additional dropdowns as needed
+
+    $results = $query->get();
+
+    return view('admin.member.show',compact('results'));
+}
+
+
 }
