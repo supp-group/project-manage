@@ -23,7 +23,7 @@ class UserController extends Controller
     
     public function create()
     {
-      $cities = City::orderBy('Name','Asc')->get();
+      $cities = City::whereNotNull('Name')->orderBy('Name','Asc')->get();
        return view('admin.user.add', compact('cities'));
     }
 
