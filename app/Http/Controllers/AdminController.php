@@ -45,7 +45,12 @@ class AdminController extends Controller
      */
     public function show(string $id)
     {
-        //
+       if(auth()->user()->Role == "admin") {
+            return view('admin.index');
+        }
+        else if(auth()->user()->Role == "manager") {
+            return view('manager.index');
+        }
     }
 
     /**
