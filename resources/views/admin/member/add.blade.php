@@ -139,7 +139,7 @@
 									<div class="form-group">
 										<label>المحافظة</label>
 										<select name="City" id="city" 
-										class="form-control btn btn-primary  @error('City') is-invalid @enderror" >
+										class="form-control @error('City') is-invalid @enderror" >
 											<option value="0">اختر المحافظة</option>
 											
 											@foreach($cityName as $city)
@@ -461,6 +461,62 @@
 		});
 	</script>
 		
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+
+		<script>
+		   var cityurl='{{url("admin/member/get-areasm","itemid")}}';
+		   var areaurl='{{url("admin/member/get-streets","itemid")}}';
+			$(function() {
+			$('#city').change(function(){
+				   var thiscityurl=cityurl;
+		   var cityId = $(this).find("option:selected").val();
+		   if(cityId==0){
+			   $('#area').html('<option value="0">اختر المنطقة</option>');
+		   }else{
+			   thiscityurl=thiscityurl.replace("itemid",cityId);
+		   if(cityId){
+			   $.ajax({
+				   url: thiscityurl, // Use Laravel's route name
+				   method: 'Get', // Match the method type with your route definition
+				
+				   success: function(result){
+					   $('#area').html('<option value="0">اختر المنطقة</option>');
+					   $.each(result, function(key, value) {
+					   
+			$('#area').append('<option value="'+value.id+'">'+value.area+'</option>');
+					   });
+					}
+				});
+			}
+		}
+		});
+
+
+    $('#area').change(function(){
+		var thisareaurl=areaurl;
+		var areaId = $(this).find("option:selected").val();
+		thisareaurl=thisareaurl.replace("itemid",areaId);
+		if(areaId){
+			$.ajax({
+				url: thisareaurl, // Use Laravel's route name
+				method: 'Get', // Match the method type with your route definition
+			 
+				success: function(result){
+					$('#street').html('<option value="0">اختر الحي</option>');
+					$.each(result, function(key, value) {
+         $('#street').append('<option value="'+value.id+'">'+value.street+'</option>');
+     });
+	}
+     });
+	}
+	}); 
+	}); 
+
+	</script>
+
+
 
 
 <!--Internal  Datepicker js -->
