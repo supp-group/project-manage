@@ -75,15 +75,12 @@ Route::middleware(['auth', 'verified', 'admin'])-> prefix('admin')->group(functi
         // for code js
         Route::get('/get-specializations/{qualificationId}',[MemberController::class, 'getSpecializations']);
         
-        // Route::get('/get-areasm/{cityId}',[MemberController::class, 'getAreas']);
+        
 
-        // Route::get('/get-streets/{areaId}',[MemberController::class, 'getStreets']);
-
-        Route::get('/get-areasm/{cityId}',[MemberController::class, 'getAreaForCity']);
-
-        Route::get('/get-streets/{areaId}',[MemberController::class, 'getStreetForArea']);
-
-
+        Route::get('/get-areasm/{cityId}', [CityController::class, 'getAreaForCity']);
+        Route::get('/get-streets/{areaId}', [CityController::class, 'getStreetForArea']);
+        Route::post('/dynamicdependent/fetch', [MemberController::class, 'fetch'])->name('dynamicdependent.fetch');
+       // Route::get('/dynamicdependent/fetch', [MemberController::class, 'fetch'])->name('dynamicdependent.fetch');
 
         // search
         Route::post('phone', [MemberController::class, 'searchByPhoneNull'])->name('search-phone');

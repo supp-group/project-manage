@@ -230,25 +230,15 @@ class CityController extends Controller
       session()->flash('delete', 'تم حذف الحي بنجاح');
       return back();
     }
-
-
-    public function getAreas($cityId)
-    {
-      $areas = City::where('parentId', $cityId)
-                  ->whereNotNull('area')
-                  ->orderBy('area', 'Asc')
-                  ->get();
-
-      return response()->json($areas);
-    }    
-
+ 
     public function getAreaForCity($cityId)
     {
       $areas = City::where('parentId', $cityId)
       ->whereNotNull('area')
       ->orderBy('area', 'Asc')
       ->get();
-      return view('admin.member.add',compact('areas'));
+     
+      return response()->json($areas);
     }
 
     public function getStreetForArea($areaId)
@@ -257,7 +247,7 @@ class CityController extends Controller
       ->whereNotNull('street')
       ->orderBy('area', 'Asc')
       ->get();
-      return view('admin.member.add',compact('streets'));
+      return response()->json($streets);
     }
 
 }

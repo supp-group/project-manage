@@ -136,15 +136,14 @@
 									</div><br>
 
 
-
 									<div class="form-group">
 										<label>المحافظة</label>
 										<select name="City" id="city" 
-										class="form-control select dynamic @error('City') is-invalid @enderror" data-dependent="area">
-											<option value="">اختر المحافظة</option>
+										class="form-control btn btn-primary  @error('City') is-invalid @enderror" >
+											<option value="0">اختر المحافظة</option>
 											
 											@foreach($city_list as $city)
-											<option value="{{$city->Name}}" >{{$city->Name}}</option>
+											<option value="{{$city->id}}" >{{$city->Name}}</option>
 											@endforeach 
 
 										</select>
@@ -157,26 +156,23 @@
 									<div class="form-group">
 										<label>المنطقة</label>
 										<select name="area" id="area" 
-										class="form-control select dynamic @error('area') is-invalid @enderror" data-dependent="street">
+										class="form-control btn btn-primary @error('area') is-invalid @enderror" >
 											<!-- Options will be loaded dynamically -->
 
-											<option value="">اختر المنطقة</option>
-
-											{{-- @foreach($areas as $area)
-											<option>{{$area->area}}</option>
-											@endforeach  --}}
+											<option value="">اختر المنطقة</option> -
 
 										</select>
 
+
 										@error('area')
 												<div class="alert alert-danger">{{ $message }}</div>
-											@enderror
+											@enderror 
 									</div><br>
 
 									<div class="form-group">
 										<label>الحي</label>
 										<select name="street" id="street" 
-										class="form-control select @error('street') is-invalid @enderror">
+										class="form-control btn btn-primary @error('street') is-invalid @enderror">
 											<!-- Options will be loaded dynamically -->
 
 											<option value="">اختر الحي</option>
@@ -189,7 +185,6 @@
 									</div>
 										{{ csrf_field() }}
 									<br>
-
 
 
 									<div class="row">
@@ -242,7 +237,7 @@
 
 									<div class="form-group">
 										<label>المؤهل العلمي</label>
-										<select name="Qualification" id="qualificationSelect" class="form-control select @error('Qualification') is-invalid @enderror" onChange="loadSpecializations()">
+										<select name="Qualification" id="qualificationSelect" class="form-control select @error('Qualification') is-invalid @enderror" >
 											<option>اختر المؤهل العلمي</option>
 											@foreach($qualifications as $qualification)
 												
@@ -376,66 +371,6 @@
 @section('js')
 
 
-<script>
-	$.ajaxSetup({
-  headers: {
-    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-  }
-});
-</script>
-
-
-<script>
-	$(document).ready(function() {
-  $('.dynamic').change(function() {
-    if($(this).val() != '') {
-      var select = $(this).attr("id");
-      var value = $(this).val();
-      var dependent = $(this).data('dependent');
-      var _token = $('input[name="_token"]').val();
-
-      $.ajax({
-        url: "{{ route('dynamicdependent.fetch') }}",
-        method: "POST",
-        data: { select: select, value: value, dependent: dependent, _token: _token },
-        success: function(result) {
-          $('#' + dependent).html(result);
-        }
-      });
-    }
-  });
-});
-
-</script>
-
-
-{{-- <script>
-	$(document).ready(function(){
-		$('.dynamic').change(function(){
-			if($(this).val() != '')
-			{
-				var select = $(this).attr("id");
-				var value = $(this).val();
-				var dependent = $(this).data('dependent');
-				// var _token = $('input[name="_token"]').val();
-				$.ajax({
-					url:"{{ route('dynamicdependent.fetch') }}",
-					method:"POST",
-					data:{select:select, value:value, dependent:dependent},
-					success:function(result)
-					{
-						$('#'+dependent).html(result);
-					}
-
-				});
-			}
-		});
-	});
-</script> --}}
-
-
-
-
 
 
 
@@ -508,68 +443,63 @@
 	</script>
 		
 	{{-- Dependent Dropdown ===> city & area--}}
-	 {{-- <script>
-		document.addEventListener("DOMContentLoaded", function() {
-		  const citySelect = document.querySelector('#citySelect');
-		  const areaSelect = document.querySelector('#areaSelect');
-		
-		  citySelect.addEventListener('change', function() {
-			const cityId = this.value;
-			fetch(`get-areasm/${cityId}`)  // Corrected URL format
-			  .then(response => {
-				if (!response.ok) {
-				  throw new Error('Network response was not ok');
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+
+	 <script>
+		var cityurl='{{url("admin/member/get-areasm","itemid")}}';
+		var areaurl='{{url("admin/member/get-streets","itemid")}}';
+		 $(function() {
+			$('#city').change(function(){
+				var thiscityurl=cityurl;
+		var cityId = $(this).find("option:selected").val();
+		if(cityId==0){
+			$('#area').html('<option value="0">اختر المنطقة</option>');
+		}else{
+			thiscityurl=thiscityurl.replace("itemid",cityId);
+		if(cityId){
+			$.ajax({
+				url: thiscityurl, // Use Laravel's route name
+				method: 'Get', // Match the method type with your route definition
+			 
+				success: function(result){
+					$('#area').html('<option value="0">اختر المنطقة</option>');
+					$.each(result, function(key, value) {
+					
+         $('#area').append('<option value="'+value.id+'">'+value.area+'</option>');
+     }); 
 				}
-				return response.json();
-			  })
-			  .then(areas => {
-				areaSelect.innerHTML = '<option value="">اختر المنطقة</option>'; // Clear and add a placeholder
-				areas.forEach(area => {
-				  const option = document.createElement('option');
-				  option.value = area.id;
-				  option.textContent = area.area;
-				  areaSelect.appendChild(option);
-				});
-			  })
-			  .catch(error => {
-				console.error('There has been a problem with your fetch operation:', error);
-			  });
-		  });
-		});
-	</script>  --}}
-
-	{{-- Dependent Dropdown ===> area & street --}}
-	 {{-- <script>
-		document.addEventListener("DOMContentLoaded", function() {
-		  const areaSelect = document.querySelector('#areaSelect');
-		  const streetSelect = document.querySelector('#streetSelect');
+			});
+		}
 		
-		  areaSelect.addEventListener('change', function() {
-			const areaId = this.value;
-			fetch(`get-streets/${areaId}`)  // Corrected URL format
-			  .then(response => {
-				if (!response.ok) {
-				  throw new Error('Network response was not ok');
+		}
+
+	});
+
+	$('#area').change(function(){
+		var thisareaurl=areaurl;
+		var areaId = $(this).find("option:selected").val();
+		thisareaurl=thisareaurl.replace("itemid",areaId);
+		if(areaId){
+			$.ajax({
+				url: thisareaurl, // Use Laravel's route name
+				method: 'Get', // Match the method type with your route definition
+			 
+				success: function(result){
+					$('#street').html('<option value="0">اختر الحي</option>');
+					$.each(result, function(key, value) {
+         $('#street').append('<option value="'+value.id+'">'+value.street+'</option>');
+     });
+				 
 				}
-				return response.json();
-			  })
-			  .then(streets => {
-				streetSelect.innerHTML = '<option value="">اختر الحي</option>'; // Clear and add a placeholder
-				streets.forEach(street => {
-				  const option = document.createElement('option');
-				  option.value = street.id;
-				  option.textContent = street.street;
-				  streetSelect.appendChild(option);
-				});
-			  })
-			  .catch(error => {
-				console.error('There has been a problem with your fetch operation:', error);
-			  });
-		  });
-		});
-	</script> --}}
+			});
+		}
 
+	});
 
+		 });
+	
+</script> 
 
 <!--Internal  Datepicker js -->
 <script src="{{URL::asset('assets/plugins/jquery-ui/ui/widgets/datepicker.js')}}"></script>
