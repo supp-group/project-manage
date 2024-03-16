@@ -175,7 +175,7 @@
 										class="form-control btn btn-primary @error('street') is-invalid @enderror">
 											<!-- Options will be loaded dynamically -->
 
-											<option value="">اختر الحي</option>
+											{{-- <option value="">اختر الحي</option> --}}
 
 										</select>
 
@@ -183,7 +183,7 @@
 												<div class="alert alert-danger">{{ $message }}</div>
 											@enderror
 									</div>
-										{{ csrf_field() }}
+										{{-- {{ csrf_field() }} --}}
 									<br>
 
 
