@@ -545,8 +545,8 @@ $(document).ready(function() {
 		});
 	</script>
 		
-	{{-- Dependent Dropdown ===> city & area --}}
-	{{-- <script>
+	{{-- Dependent Dropdown ===> city & area--}}
+	 {{-- <script>
 		document.addEventListener("DOMContentLoaded", function() {
 		  const citySelect = document.querySelector('#citySelect');
 		  const areaSelect = document.querySelector('#areaSelect');
@@ -574,10 +574,10 @@ $(document).ready(function() {
 			  });
 		  });
 		});
-	</script> --}}
+	</script>  --}}
 
 	{{-- Dependent Dropdown ===> area & street --}}
-	{{-- <script>
+	 {{-- <script>
 		document.addEventListener("DOMContentLoaded", function() {
 		  const areaSelect = document.querySelector('#areaSelect');
 		  const streetSelect = document.querySelector('#streetSelect');

@@ -76,6 +76,7 @@ Route::middleware(['auth', 'verified', 'admin'])-> prefix('admin')->group(functi
         Route::get('/get-specializations/{qualificationId}',[MemberController::class, 'getSpecializations']);
         
         // Route::get('/get-areasm/{cityId}',[MemberController::class, 'getAreas']);
+
         // Route::get('/get-streets/{areaId}',[MemberController::class, 'getStreets']);
 
         // Route::get('/AreaStreets',[MemberController::class, 'AreaStreets']);
@@ -86,6 +87,9 @@ Route::middleware(['auth', 'verified', 'admin'])-> prefix('admin')->group(functi
         // Route::get('/get-streets/{areaId}', [MemberController::class, 'getStreets']);
 
 
+        Route::get('/get-areasm/{cityId}',[MemberController::class, 'getAreaForCity']);
+
+        Route::get('/get-streets/{areaId}',[MemberController::class, 'getStreetForArea']);
 
 
 
