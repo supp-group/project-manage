@@ -140,10 +140,10 @@
 									<div class="form-group">
 										<label>المحافظة</label>
 										<select name="City" id="city" 
-										class="form-control select dynamic @error('City') is-invalid @enderror" data-dependent="area">
-											<option value="">اختر المحافظة</option>
+										class="form-control select @error('City') is-invalid @enderror">
+											{{-- <option value="">اختر المحافظة</option> --}}
 											
-											@foreach($city_list as $city)
+											@foreach($cityName as $city)
 											<option value="{{$city->Name}}" >{{$city->Name}}</option>
 											@endforeach 
 
@@ -157,14 +157,14 @@
 									<div class="form-group">
 										<label>المنطقة</label>
 										<select name="area" id="area" 
-										class="form-control select dynamic @error('area') is-invalid @enderror" data-dependent="street">
+										class="form-control select @error('area') is-invalid @enderror">
 											<!-- Options will be loaded dynamically -->
 
-											<option value="">اختر المنطقة</option>
+											{{-- <option value="">اختر المنطقة</option> --}}
 
-											{{-- @foreach($areas as $area)
-											<option>{{$area->area}}</option>
-											@endforeach  --}}
+											@foreach($areas as $area)
+    											<option value="{{$area->parentId}}">{{$area->area}}</option>
+											@endforeach
 
 										</select>
 
@@ -175,11 +175,11 @@
 
 									<div class="form-group">
 										<label>الحي</label>
-										<select name="street" id="street" 
+										<select name="street"
 										class="form-control select @error('street') is-invalid @enderror">
 											<!-- Options will be loaded dynamically -->
 
-											<option value="">اختر الحي</option>
+											{{-- <option value="">اختر الحي</option> --}}
 
 										</select>
 
@@ -187,7 +187,7 @@
 												<div class="alert alert-danger">{{ $message }}</div>
 											@enderror
 									</div>
-										{{ csrf_field() }}
+										{{-- {{ csrf_field() }} --}}
 									<br>
 
 
@@ -375,19 +375,58 @@
 @endsection
 @section('js')
 
+{{-- <script>
+$(document).ready(function() {
+    $('#city').change(function() {
+        var cityId = $(this).val();
 
-<script>
+        $.ajax({
+            url: '/get-areas/' + cityId,
+            type: 'GET',
+            success: function(response) {
+                $('#area').empty();
+                $('#area').append('<option value="">اختر المنطقة</option>');
+                $.each(response, function(key, value) {
+                    $('#area').append('<option value="' + key + '">' + value + '</option>');
+                });
+            }
+        });
+    });
+
+    $('#area').change(function() {
+        var areaId = $(this).val();
+
+        $.ajax({
+            url: '/get-streets/' + areaId,
+            type: 'GET',
+            success: function(response) {
+                $('#street').empty();
+                $('#street').append('<option value="">اختر الحي</option>');
+                $.each(response, function(key, value) {
+                    $('#street').append('<option value="' + key + '">' + value + '</option>');
+                });
+            }
+        });
+    });
+});
+</script> --}}
+
+
+
+
+
+{{-- <script>
 	$.ajaxSetup({
   headers: {
     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
   }
 });
-</script>
+</script> --}}
 
 
-<script>
+{{-- <script>
 	$(document).ready(function() {
-  $('.dynamic').change(function() {
+  	$('.dynamic').change(function() {
     if($(this).val() != '') {
       var select = $(this).attr("id");
       var value = $(this).val();
@@ -404,9 +443,8 @@
       });
     }
   });
-});
-
-</script>
+  });
+</script> --}}
 
 
 {{-- <script>

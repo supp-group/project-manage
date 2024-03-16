@@ -179,16 +179,16 @@ public function index()
     public function create()
     {
 
-        $city_list = DB::table('cities')->whereNotNull('Name')
-        ->groupBy('id', 'Name', 'parentId', 'area', 'grandId', 'street', 'created_at', 'updated_at')
-        ->get();
+        // $city_list = DB::table('cities')->whereNotNull('Name')
+        // ->groupBy('id', 'Name', 'parentId', 'area', 'grandId', 'street', 'created_at', 'updated_at')
+        // ->get();
 
 
         $user = auth()->user();
         $city = DB::table('cities')
             ->where('id', $user->city_id)
             ->value('Name');
-            if( $city)
+            if($city)
             {
                 $cityName = $city;
             }
@@ -206,7 +206,7 @@ public function index()
 
         if ( auth()->user()->Role == 'admin')
         {
-            return view('admin.member.add', compact('city_list', 'cityName', 'qualifications', 'occupations', 'areas', 'streets'));
+            return view('admin.member.add', compact('cityName', 'qualifications', 'occupations', 'areas', 'streets'));
         }
        else if ( auth()->user()->Role == 'manager')
         {
@@ -1134,23 +1134,43 @@ public function GetCityWithMemberCount(Request $request)
 // }
 
 
-function fetch(Request $request)
-{
-    $select = $request->get('select');
-    $value = $request->get('value');
-    $dependent = $request->get('dependent');
+// function fetch(Request $request)
+// {
+//     $select = $request->get('select');
+//     $value = $request->get('value');
+//     $dependent = $request->get('dependent');
 
-    $data = DB::table('cities')
-            ->where($select, $value)
-            ->groupBy($dependent)
-            ->get();
+//     $data = DB::table('cities')
+//             ->where($select, $value)
+//             ->groupBy($dependent)
+//             ->get();
 
-    $output = '<option value="">Select '.ucfirst($dependent).'</option>';
-    foreach($data as $row){
-        $output .= '<option value="'.$row->$dependent.'">'.$row->$dependent.'</option>';
-    }
-    echo $output;
-}
+//     $output = '<option value="">Select '.ucfirst($dependent).'</option>';
+//     foreach($data as $row){
+//         $output .= '<option value="'.$row->$dependent.'">'.$row->$dependent.'</option>';
+//     }
+//     echo $output;
+// }
+
+
+
+// public function getAreas($cityId)
+// {
+//     $areas = City::where('id', $cityId)->pluck('name', 'id');
+    
+//     return response()->json($areas);
+// }
+
+// public function getStreets($areaId)
+// {
+//     $streets = City::where('parentId', $areaId)->pluck('name', 'id');
+    
+//     return response()->json($streets);
+// }
+
+
+
+
 
 
   public function Advancedsearch(Request $request)

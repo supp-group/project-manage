@@ -79,7 +79,13 @@ Route::middleware(['auth', 'verified', 'admin'])-> prefix('admin')->group(functi
         // Route::get('/get-streets/{areaId}',[MemberController::class, 'getStreets']);
 
         // Route::get('/AreaStreets',[MemberController::class, 'AreaStreets']);
-        Route::post('/dynamicdependent/fetch',[MemberController::class, 'fetch'])->name('dynamicdependent.fetch');
+        // Route::post('/dynamicdependent/fetch',[MemberController::class, 'fetch'])->name('dynamicdependent.fetch');
+
+
+        // Route::get('/get-areas/{cityId}', [MemberController::class, 'getAreas']);
+        // Route::get('/get-streets/{areaId}', [MemberController::class, 'getStreets']);
+
+
 
 
 
