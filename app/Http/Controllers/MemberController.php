@@ -175,8 +175,15 @@ public function index()
     }
 
 
+
     public function create()
     {
+
+        $city_list = DB::table('cities')->whereNotNull('Name')
+        ->groupBy('id', 'Name', 'parentId', 'area', 'grandId', 'street', 'created_at', 'updated_at')
+        ->get();
+
+
         $user = auth()->user();
         $city = DB::table('cities')
             ->where('id', $user->city_id)
@@ -199,7 +206,7 @@ public function index()
 
         if ( auth()->user()->Role == 'admin')
         {
-            return view('admin.member.add', compact('cityName', 'qualifications', 'occupations', 'areas', 'streets'));
+            return view('admin.member.add', compact('city_list', 'cityName', 'qualifications', 'occupations', 'areas', 'streets'));
         }
        else if ( auth()->user()->Role == 'manager')
         {
@@ -1096,24 +1103,54 @@ public function GetCityWithMemberCount(Request $request)
   }
 
 
-  public function getAreas($cityId)
-  {
-    $areas = City::where('parentId', $cityId)
-                ->whereNotNull('area')
-                ->orderBy('area', 'Asc')
-                ->get();
-    return response()->json($areas);
-  }
+//   public function getAreas($cityId)
+//   {
+//     $areas = City::where('parentId', $cityId)
+//                 ->whereNotNull('area')
+//                 ->orderBy('area', 'Asc')
+//                 ->get();
+//     return response()->json($areas);
+//   }
 
 
-  public function getStreets($areaId)
-  {
-    $streets = City::where('grandId', $areaId)
-                ->whereNotNull('street')
-                ->orderBy('street', 'Asc')
-                ->get();
-    return response()->json($streets);
-  }
+//   public function getStreets($areaId)
+//   {
+//     $streets = City::where('grandId', $areaId)
+//                 ->whereNotNull('street')
+//                 ->orderBy('street', 'Asc')
+//                 ->get();
+//     return response()->json($streets);
+//   }
+
+
+
+
+// public function AreaStreets(){
+//     $city_list = DB::table('cities')
+//                     ->groupBy('Name')
+//                     ->get();
+
+//     return view('admin.member.add')->with('city_list', $city_list);
+// }
+
+
+function fetch(Request $request)
+{
+    $select = $request->get('select');
+    $value = $request->get('value');
+    $dependent = $request->get('dependent');
+
+    $data = DB::table('cities')
+            ->where($select, $value)
+            ->groupBy($dependent)
+            ->get();
+
+    $output = '<option value="">Select '.ucfirst($dependent).'</option>';
+    foreach($data as $row){
+        $output .= '<option value="'.$row->$dependent.'">'.$row->$dependent.'</option>';
+    }
+    echo $output;
+}
 
 
   public function Advancedsearch(Request $request)

@@ -1,4 +1,7 @@
 @extends('admin.layouts.master')
+
+<meta name="csrf-token" content="{{ csrf_token() }}">
+
 @section('css')
 
 {{-- flatpicker --}}
@@ -136,10 +139,12 @@
 
 									<div class="form-group">
 										<label>المحافظة</label>
-										<select name="City" id="citySelect" class="form-control select @error('City') is-invalid @enderror">
+										<select name="City" id="city" 
+										class="form-control select dynamic @error('City') is-invalid @enderror" data-dependent="area">
+											<option value="">اختر المحافظة</option>
 											
-											@foreach($cityName as $city)
-											<option >{{$city->Name}}</option>
+											@foreach($city_list as $city)
+											<option value="{{$city->Name}}" >{{$city->Name}}</option>
 											@endforeach 
 
 										</select>
@@ -151,8 +156,16 @@
 
 									<div class="form-group">
 										<label>المنطقة</label>
-										<select name="area" class="form-control select @error('area') is-invalid @enderror" id="areaSelect">
+										<select name="area" id="area" 
+										class="form-control select dynamic @error('area') is-invalid @enderror" data-dependent="street">
 											<!-- Options will be loaded dynamically -->
+
+											<option value="">اختر المنطقة</option>
+
+											{{-- @foreach($areas as $area)
+											<option>{{$area->area}}</option>
+											@endforeach  --}}
+
 										</select>
 
 										@error('area')
@@ -162,14 +175,20 @@
 
 									<div class="form-group">
 										<label>الحي</label>
-										<select name="street" class="form-control select @error('street') is-invalid @enderror" id="streetSelect">
+										<select name="street" id="street" 
+										class="form-control select @error('street') is-invalid @enderror">
 											<!-- Options will be loaded dynamically -->
+
+											<option value="">اختر الحي</option>
+
 										</select>
 
 										@error('street')
 												<div class="alert alert-danger">{{ $message }}</div>
 											@enderror
-									</div><br>
+									</div>
+										{{ csrf_field() }}
+									<br>
 
 
 
@@ -355,6 +374,70 @@
 				<!-- row closed -->
 @endsection
 @section('js')
+
+
+<script>
+	$.ajaxSetup({
+  headers: {
+    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+  }
+});
+</script>
+
+
+<script>
+	$(document).ready(function() {
+  $('.dynamic').change(function() {
+    if($(this).val() != '') {
+      var select = $(this).attr("id");
+      var value = $(this).val();
+      var dependent = $(this).data('dependent');
+      var _token = $('input[name="_token"]').val();
+
+      $.ajax({
+        url: "{{ route('dynamicdependent.fetch') }}",
+        method: "POST",
+        data: { select: select, value: value, dependent: dependent, _token: _token },
+        success: function(result) {
+          $('#' + dependent).html(result);
+        }
+      });
+    }
+  });
+});
+
+</script>
+
+
+{{-- <script>
+	$(document).ready(function(){
+		$('.dynamic').change(function(){
+			if($(this).val() != '')
+			{
+				var select = $(this).attr("id");
+				var value = $(this).val();
+				var dependent = $(this).data('dependent');
+				// var _token = $('input[name="_token"]').val();
+				$.ajax({
+					url:"{{ route('dynamicdependent.fetch') }}",
+					method:"POST",
+					data:{select:select, value:value, dependent:dependent},
+					success:function(result)
+					{
+						$('#'+dependent).html(result);
+					}
+
+				});
+			}
+		});
+	});
+</script> --}}
+
+
+
+
+
+
 
 <script>
 	const yearSelect = document.getElementById("year");
