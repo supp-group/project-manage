@@ -142,9 +142,14 @@
 										class="form-control btn btn-primary  @error('City') is-invalid @enderror" >
 											<option value="0">اختر المحافظة</option>
 											
-											@foreach($city_list as $city)
+											@foreach($cityName as $city)
 											<option value="{{$city->id}}" >{{$city->Name}}</option>
 											@endforeach 
+
+											{{-- @foreach ($city as $list)
+												<option value="{{ $list->id }}">{{ $list->Name }}</option>	
+											@endforeach --}}
+
 
 										</select>
 
@@ -156,32 +161,50 @@
 									<div class="form-group">
 										<label>المنطقة</label>
 										<select name="area" id="area" 
-										class="form-control btn btn-primary @error('area') is-invalid @enderror" >
+										class="form-control select @error('area') is-invalid @enderror">
+
+										@foreach($areas as $area)
+											<option value="{{$area->id}}">{{$area->area}}</option>
+										@endforeach
+
 											<!-- Options will be loaded dynamically -->
 
-											<option value="">اختر المنطقة</option> -
+											{{-- <option value="">اختر المنطقة</option> --}}
+
+											{{-- @foreach($areas as $area)
+    											<option value="{{$area->area}}">{{$area->area}}</option>
+											@endforeach --}}
 
 										</select>
 
 
 										@error('area')
-												<div class="alert alert-danger">{{ $message }}</div>
-											@enderror 
+											<div class="alert alert-danger">{{ $message }}</div>
+										@enderror
 									</div><br>
 
 									<div class="form-group">
 										<label>الحي</label>
-										<select name="street" id="street" 
-										class="form-control btn btn-primary @error('street') is-invalid @enderror">
+										<select name="street" id="street"
+										class="form-control select @error('street') is-invalid @enderror">
+
+										@foreach($streets as $street)
+											<option value="{{$street->id}}">{{$street->street}}</option>
+										@endforeach
+											
 											<!-- Options will be loaded dynamically -->
 
 											{{-- <option value="">اختر الحي</option> --}}
 
+											{{-- @foreach($streets as $street)
+    											<option value="{{$street->street}}">{{$street->street}}</option>
+											@endforeach --}}
+
 										</select>
 
 										@error('street')
-												<div class="alert alert-danger">{{ $message }}</div>
-											@enderror
+											<div class="alert alert-danger">{{ $message }}</div>
+										@enderror
 									</div>
 										{{-- {{ csrf_field() }} --}}
 									<br>
@@ -370,10 +393,6 @@
 @endsection
 @section('js')
 
-
-
-
-
 <script>
 	const yearSelect = document.getElementById("year");
 
@@ -442,64 +461,7 @@
 		});
 	</script>
 		
-	{{-- Dependent Dropdown ===> city & area--}}
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-
-	 <script>
-		var cityurl='{{url("admin/member/get-areasm","itemid")}}';
-		var areaurl='{{url("admin/member/get-streets","itemid")}}';
-		 $(function() {
-			$('#city').change(function(){
-				var thiscityurl=cityurl;
-		var cityId = $(this).find("option:selected").val();
-		if(cityId==0){
-			$('#area').html('<option value="0">اختر المنطقة</option>');
-		}else{
-			thiscityurl=thiscityurl.replace("itemid",cityId);
-		if(cityId){
-			$.ajax({
-				url: thiscityurl, // Use Laravel's route name
-				method: 'Get', // Match the method type with your route definition
-			 
-				success: function(result){
-					$('#area').html('<option value="0">اختر المنطقة</option>');
-					$.each(result, function(key, value) {
-					
-         $('#area').append('<option value="'+value.id+'">'+value.area+'</option>');
-     }); 
-				}
-			});
-		}
-		
-		}
-
-	});
-
-	$('#area').change(function(){
-		var thisareaurl=areaurl;
-		var areaId = $(this).find("option:selected").val();
-		thisareaurl=thisareaurl.replace("itemid",areaId);
-		if(areaId){
-			$.ajax({
-				url: thisareaurl, // Use Laravel's route name
-				method: 'Get', // Match the method type with your route definition
-			 
-				success: function(result){
-					$('#street').html('<option value="0">اختر الحي</option>');
-					$.each(result, function(key, value) {
-         $('#street').append('<option value="'+value.id+'">'+value.street+'</option>');
-     });
-				 
-				}
-			});
-		}
-
-	});
-
-		 });
-	
-</script> 
 
 <!--Internal  Datepicker js -->
 <script src="{{URL::asset('assets/plugins/jquery-ui/ui/widgets/datepicker.js')}}"></script>
