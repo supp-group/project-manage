@@ -144,8 +144,13 @@
 											{{-- <option value="">اختر المحافظة</option> --}}
 											
 											@foreach($cityName as $city)
-											<option value="{{$city->Name}}" >{{$city->Name}}</option>
+											<option value="{{$city->id}}" >{{$city->Name}}</option>
 											@endforeach 
+
+											{{-- @foreach ($city as $list)
+												<option value="{{ $list->id }}">{{ $list->Name }}</option>	
+											@endforeach --}}
+
 
 										</select>
 
@@ -158,34 +163,48 @@
 										<label>المنطقة</label>
 										<select name="area" id="area" 
 										class="form-control select @error('area') is-invalid @enderror">
+
+										@foreach($areas as $area)
+											<option value="{{$area->id}}">{{$area->area}}</option>
+										@endforeach
+
 											<!-- Options will be loaded dynamically -->
 
 											{{-- <option value="">اختر المنطقة</option> --}}
 
-											@foreach($areas as $area)
-    											<option value="{{$area->parentId}}">{{$area->area}}</option>
-											@endforeach
+											{{-- @foreach($areas as $area)
+    											<option value="{{$area->area}}">{{$area->area}}</option>
+											@endforeach --}}
 
 										</select>
 
 										@error('area')
-												<div class="alert alert-danger">{{ $message }}</div>
-											@enderror
+											<div class="alert alert-danger">{{ $message }}</div>
+										@enderror
 									</div><br>
 
 									<div class="form-group">
 										<label>الحي</label>
-										<select name="street"
+										<select name="street" id="street"
 										class="form-control select @error('street') is-invalid @enderror">
+
+										@foreach($streets as $street)
+											<option value="{{$street->id}}">{{$street->street}}</option>
+										@endforeach
+											
 											<!-- Options will be loaded dynamically -->
 
 											{{-- <option value="">اختر الحي</option> --}}
 
+											{{-- @foreach($streets as $street)
+    											<option value="{{$street->street}}">{{$street->street}}</option>
+											@endforeach --}}
+
 										</select>
 
 										@error('street')
-												<div class="alert alert-danger">{{ $message }}</div>
-											@enderror
+											<div class="alert alert-danger">{{ $message }}</div>
+										@enderror
 									</div>
 										{{-- {{ csrf_field() }} --}}
 									<br>
@@ -375,108 +394,6 @@
 @endsection
 @section('js')
 
-{{-- <script>
-$(document).ready(function() {
-    $('#city').change(function() {
-        var cityId = $(this).val();
-
-        $.ajax({
-            url: '/get-areas/' + cityId,
-            type: 'GET',
-            success: function(response) {
-                $('#area').empty();
-                $('#area').append('<option value="">اختر المنطقة</option>');
-                $.each(response, function(key, value) {
-                    $('#area').append('<option value="' + key + '">' + value + '</option>');
-                });
-            }
-        });
-    });
-
-    $('#area').change(function() {
-        var areaId = $(this).val();
-
-        $.ajax({
-            url: '/get-streets/' + areaId,
-            type: 'GET',
-            success: function(response) {
-                $('#street').empty();
-                $('#street').append('<option value="">اختر الحي</option>');
-                $.each(response, function(key, value) {
-                    $('#street').append('<option value="' + key + '">' + value + '</option>');
-                });
-            }
-        });
-    });
-});
-</script> --}}
-
-
-
-
-
-{{-- <script>
-	$.ajaxSetup({
-  headers: {
-    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-  }
-});
-</script> --}}
-
-
-{{-- <script>
-	$(document).ready(function() {
-  	$('.dynamic').change(function() {
-    if($(this).val() != '') {
-      var select = $(this).attr("id");
-      var value = $(this).val();
-      var dependent = $(this).data('dependent');
-      var _token = $('input[name="_token"]').val();
-
-      $.ajax({
-        url: "{{ route('dynamicdependent.fetch') }}",
-        method: "POST",
-        data: { select: select, value: value, dependent: dependent, _token: _token },
-        success: function(result) {
-          $('#' + dependent).html(result);
-        }
-      });
-    }
-  });
-  });
-</script> --}}
-
-
-{{-- <script>
-	$(document).ready(function(){
-		$('.dynamic').change(function(){
-			if($(this).val() != '')
-			{
-				var select = $(this).attr("id");
-				var value = $(this).val();
-				var dependent = $(this).data('dependent');
-				// var _token = $('input[name="_token"]').val();
-				$.ajax({
-					url:"{{ route('dynamicdependent.fetch') }}",
-					method:"POST",
-					data:{select:select, value:value, dependent:dependent},
-					success:function(result)
-					{
-						$('#'+dependent).html(result);
-					}
-
-				});
-			}
-		});
-	});
-</script> --}}
-
-
-
-
-
-
-
 <script>
 	const yearSelect = document.getElementById("year");
 
@@ -545,68 +462,6 @@ $(document).ready(function() {
 		});
 	</script>
 		
-	{{-- Dependent Dropdown ===> city & area--}}
-	 {{-- <script>
-		document.addEventListener("DOMContentLoaded", function() {
-		  const citySelect = document.querySelector('#citySelect');
-		  const areaSelect = document.querySelector('#areaSelect');
-		
-		  citySelect.addEventListener('change', function() {
-			const cityId = this.value;
-			fetch(`get-areasm/${cityId}`)  // Corrected URL format
-			  .then(response => {
-				if (!response.ok) {
-				  throw new Error('Network response was not ok');
-				}
-				return response.json();
-			  })
-			  .then(areas => {
-				areaSelect.innerHTML = '<option value="">اختر المنطقة</option>'; // Clear and add a placeholder
-				areas.forEach(area => {
-				  const option = document.createElement('option');
-				  option.value = area.id;
-				  option.textContent = area.area;
-				  areaSelect.appendChild(option);
-				});
-			  })
-			  .catch(error => {
-				console.error('There has been a problem with your fetch operation:', error);
-			  });
-		  });
-		});
-	</script>  --}}
-
-	{{-- Dependent Dropdown ===> area & street --}}
-	 {{-- <script>
-		document.addEventListener("DOMContentLoaded", function() {
-		  const areaSelect = document.querySelector('#areaSelect');
-		  const streetSelect = document.querySelector('#streetSelect');
-		
-		  areaSelect.addEventListener('change', function() {
-			const areaId = this.value;
-			fetch(`get-streets/${areaId}`)  // Corrected URL format
-			  .then(response => {
-				if (!response.ok) {
-				  throw new Error('Network response was not ok');
-				}
-				return response.json();
-			  })
-			  .then(streets => {
-				streetSelect.innerHTML = '<option value="">اختر الحي</option>'; // Clear and add a placeholder
-				streets.forEach(street => {
-				  const option = document.createElement('option');
-				  option.value = street.id;
-				  option.textContent = street.street;
-				  streetSelect.appendChild(option);
-				});
-			  })
-			  .catch(error => {
-				console.error('There has been a problem with your fetch operation:', error);
-			  });
-		  });
-		});
-	</script> --}}
-
 
 
 <!--Internal  Datepicker js -->

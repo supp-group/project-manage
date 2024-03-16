@@ -244,20 +244,23 @@ class CityController extends Controller
 
     public function getAreaForCity($cityId)
     {
+      // return $cityId;
       $areas = City::where('parentId', $cityId)
       ->whereNotNull('area')
       ->orderBy('area', 'Asc')
       ->get();
-      return view('admin.member.add',compact('areas'));
+      // return view('admin.member.add',compact('areas'));
+      return response()->json($areas);
     }
 
     public function getStreetForArea($areaId)
     {
-      $streets = City::where('grandId', $areaId)
+      $street = City::where('grandId', $areaId)
       ->whereNotNull('street')
       ->orderBy('area', 'Asc')
       ->get();
-      return view('admin.member.add',compact('streets'));
+      // return view('admin.member.add',compact('streets'));
+      return response()->json($street);
     }
 
 }
