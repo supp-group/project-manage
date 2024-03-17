@@ -1217,45 +1217,6 @@ public function GetCityWithMemberCount(Request $request)
   }
 
 
-
-//   public function Advancedsearch22(Request $request)
-// {
-//     $query = Member::query();
-
-//     if ($request->has('dropdownCity')) {
-//         $query->where('City', $request->input('dropdownCity'));
-//     }
-
-//     if ($request->has('dropdownArea')) {
-//         $query->where('area', $request->input('dropdownArea'));
-//     }
-
-//     if ($request->has('dropdownStrret')) {
-//         $query->where('street', $request->input('dropdownStrret'));
-//     }
-
-
-//     if ($request->has('dropdownQualification')) {
-//         $query->where('Qualification', $request->input('dropdownQualification'));
-//     }
-
-//     if ($request->has('dropdownspecialization')) {
-//         $query->where('Specialization', $request->input('dropdownspecialization'));
-//     }
-
-
-//     if ($request->has('dropdownOccupation')) {
-//         $query->where('Occupation', $request->input('dropdownOccupation'));
-//     }
-
-
-//     // Add more conditions for additional dropdowns as needed
-
-//     $results = $query->get();
-
-//     return view('admin.member.show',compact('results'));
-// }
-
 public function AdvancedIndex()
 {
     if (optional(auth()->user())->Role == 'admin') {
@@ -1291,81 +1252,130 @@ public function AdvancedIndex()
 
 
 
+// public function Advancedsearch(Request $request)
+// {
+//    if($request->City)
+//     {
+//         $cityId = $request->City;
+//         $cityName = City::where('id', $cityId)->first()->Name;
+//          $city = Member::where('City', $cityName)->first();
+//     }
+//    else
+//    {
+//         $city=City::orderBy('Name','Asc')->get();
+//    }
+
+//     if ($request->area) 
+//     {
+//         $areaId = $request->area;
+//         $areaName = City::where('id', $areaId)->first()->area;
+//         $area = Member::where('area', $areaName);
+//     }
+//     else
+//     {
+//         $area = City::whereNotNull('area')->orderBy('area','Asc')->get();
+//     }
+
+//     if ($request->strret) 
+//     {
+//         $streetId = $request->street;
+//         $streetName = City::where('id', $streetId)->first()->street;
+//         $street = Member::where('street', $streetName);
+//     }
+//     else
+//     {
+//         $street = City::whereNotNull('street')->orderBy('street','Asc')->get();
+//     }
+
+//     if ($request->Qualification) 
+//     {
+//         $qualificationId = $request->Qualification;
+//       $qualificationName = Qualification::where('id', $qualificationId)->first()->Name;
+//         $qualification = Member::where('Qualification', $qualificationName);
+//     }
+//     else
+//     {
+//         $qualification = Qualification::whereNotNull('Name')->orderBy('Name','Asc')->get();
+//     }
+
+//     if ($request->Specialization) 
+//     {
+//         $specializationId = $request->Specialization;
+//         $specializationName = Qualification::where('id', $specializationId)->first()->specialization;
+//         $specialization = Member::where('Specialization', $specializationName);
+//     }
+//     else
+//     {
+//         $specialization =  Qualification::whereNotNull('specialization')->orderBy('specialization','Asc')->get();
+//     }
+
+//     if ($request->Occupation)
+//      {
+//         $occupation = Member::where('Occupation', $request->Occupation);
+//      }
+//    else
+//    {
+//     $occupation = Occupation::orderBy('Name','Asc')->get();
+
+//    }
+//    $results = Member::where('City',$city)
+//    ->where('area',$area)
+//    ->where('street',$street)
+//    ->where('Qualification',$qualification)
+//    ->where('Specialization', $specialization)
+//    ->where('Occupation', $occupation)
+//    ->get();
+
+//    return view('admin.member.show',compact('results'));
+// }
+
 public function Advancedsearch(Request $request)
 {
-   if($request->City)
-    {
+    $results = Member::query();
+
+    if ($request->City) {
         $cityId = $request->City;
         $cityName = City::where('id', $cityId)->first()->Name;
-         $city = Member::where('City', $cityName)->first();
+        $results->where('City', $cityName);
     }
-   else
-   {
-        $city=City::orderBy('Name','Asc')->get();
-   }
 
-    if ($request->area) 
-    {
+    if ($request->area) {
         $areaId = $request->area;
         $areaName = City::where('id', $areaId)->first()->area;
-        $area = Member::where('area', $areaName);
-    }
-    else
-    {
-        $area = City::whereNotNull('area')->orderBy('area','Asc')->get();
+        $results->where('area', $areaName);
     }
 
-    if ($request->strret) 
-    {
+    if ($request->street) {
         $streetId = $request->street;
         $streetName = City::where('id', $streetId)->first()->street;
-        $street = Member::where('street', $streetName);
-    }
-    else
-    {
-        $street = City::whereNotNull('street')->orderBy('street','Asc')->get();
+        $results->where('street', $streetName);
     }
 
-    if ($request->Qualification) 
-    {
+    if ($request->Qualification) {
         $qualificationId = $request->Qualification;
-      $qualificationName = Qualification::where('id', $qualificationId)->first()->Name;
-        $qualification = Member::where('Qualification', $qualificationName);
-    }
-    else
-    {
-        $qualification = Qualification::whereNotNull('Name')->orderBy('Name','Asc')->get();
+        $qualificationName = Qualification::where('id', $qualificationId)->first()->Name;
+        $results->where('Qualification', $qualificationName);
     }
 
-    if ($request->Specialization) 
-    {
+    if ($request->Specialization) {
         $specializationId = $request->Specialization;
         $specializationName = Qualification::where('id', $specializationId)->first()->specialization;
-        $specialization = Member::where('Specialization', $specializationName);
-    }
-    else
-    {
-        $specialization =  Qualification::whereNotNull('specialization')->orderBy('specialization','Asc')->get();
+        $results->where('Specialization', $specializationName);
     }
 
-    if ($request->Occupation)
-     {
-        $occupation = Member::where('Occupation', $request->Occupation);
-     }
-   else
-   {
-    $occupation = Occupation::orderBy('Name','Asc')->get();
+    if ($request->Occupation) {
+        $results->where('Occupation', $request->Occupation);
+    }
+    $res= $results->get();
+    return view('manager.member.show',compact('res'));
 
-   }
-   $results = Member::where('City',$city)
-   ->where('area',$area)
-   ->where('street',$street)
-   ->where('Qualification',$qualification)
-   ->where('Specialization', $specialization)
-   ->where('Occupation', $occupation)
-   ->get();
+//     $res= $results->paginate(50);
+//     $paginationLinks = $res->withQueryString()->links('pagination::bootstrap-4');
 
-   return view('admin.member.show',compact('results'));
+//     return view('manager.member.show', [
+//         'res' => $res,
+//         'paginationLinks' => $paginationLinks
+//     ]);
 }
 
  
