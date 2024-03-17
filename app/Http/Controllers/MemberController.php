@@ -1241,48 +1241,48 @@ public function GetCityWithMemberCount(Request $request)
 
 public function Advancedsearch(Request $request)
 {
-   if($request->input('dropdownCity'))
+   if($request->City)
     {
-    $city = Member::where('City', $request->input('dropdownCity'))->first();
+    $city = Member::where('City', $request->City)->first();
     }
    else
    {
     $city=City::orderBy('Name','Asc')->get();
    }
 
-    if ($request->has('dropdownArea')) {
-        $area = Member::where('area', $request->input('dropdownArea'));
+    if ($request->area) {
+        $area = Member::where('area', $request->Area);
     }
     else
     {
         $area = City::whereNotNull('area')->orderBy('area','Asc')->get();
     }
 
-    if ($request->has('dropdownStrret')) {
-        $street = Member::where('street', $request->input('dropdownStrret'));
+    if ($request->strret) {
+        $street = Member::where('street', $request->strret);
     }
     else
     {
         $street = City::whereNotNull('street')->orderBy('street','Asc')->get();
     }
 
-    if ($request->has('dropdownQualification')) {
-        $qualification = Member::where('Qualification', $request->input('dropdownQualification'));
+    if ($request->Qualification) {
+        $qualification = Member::where('Qualification', $request->Qualification);
     }
     else
     {
         $qualification = Qualification::whereNotNull('Name')->orderBy('Name','Asc')->get();
     }
 
-    if ($request->has('dropdownspecialization')) {
-        $specialization = Member::where('Specialization', $request->input('dropdownspecialization'));
+    if ($request->Specialization) {
+        $specialization = Member::where('Specialization', $request->specialization);
     }
     else{
         $specialization =  Qualification::whereNotNull('specialization')->orderBy('specialization','Asc')->get();
         }
 
-    if ($request->has('dropdownOccupation')) {
-        $occupation = Member::where('Occupation', $request->input('dropdownOccupation'));
+    if ($request->Occupation) {
+        $occupation = Member::where('Occupation', $request->Occupation);
     }
    else
    {
@@ -1300,4 +1300,5 @@ public function Advancedsearch(Request $request)
    return view('admin.member.show',compact('results'));
 }
 
+ 
 }
