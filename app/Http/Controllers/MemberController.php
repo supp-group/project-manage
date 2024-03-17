@@ -399,7 +399,6 @@ public function index()
      $areas = City::whereNotNull('area')->orderBy('area','Asc')->get();
      $streets = City::whereNotNull('street')->orderBy('street','Asc')->get();
 
-
      $qualifications = Qualification::whereNotNull('Name')->orderBy('Name','Asc')->get();
      $specializations = Qualification::whereNotNull('specialization')->orderBy('Name','Asc')->get();
      $occupations = Occupation::orderBy('Name','Asc')->get();

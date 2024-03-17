@@ -46,19 +46,7 @@
 							<div class="card-body">
 								<form action="{{ route('memberm.save') }}" method="post" enctype="multipart/form-data" autocomplete="off">
 									{{ csrf_field() }}
-			
-									<div class="row">
-										<div class="col">
-											<label for="inputName" class="control-label">ملاحظات</label>
-											<input type="text" class="form-control @error('NotPad') is-invalid @enderror" 
-											id="inputName" name="NotPad" required>
-
-											@error('NotPad')
-												<div class="alert alert-danger">{{ $message }}</div>
-											@enderror
-										</div>
-									</div><br>
-			
+							
 									 <div class="row">
 										<div class="col">
 											<label for="inputName" class="control-label">الفرع</label>
@@ -296,6 +284,18 @@
 										</div>
 									  </div><br>
 					
+									  <div class="row">
+										<div class="col">
+											<label for="inputName" class="control-label">ملاحظات</label>
+											<input type="text" class="form-control @error('NotPad') is-invalid @enderror" 
+											id="inputName" name="NotPad" required>
+
+											@error('NotPad')
+												<div class="alert alert-danger">{{ $message }}</div>
+											@enderror
+										</div>
+									</div><br>
+
 									  <div class="row">
 										<div class="col">
 										  <label for="exampleTextarea">صورة العضو المنتسب</label>
