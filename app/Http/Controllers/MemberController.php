@@ -1295,7 +1295,7 @@ public function Advancedsearch(Request $request)
     {
         $cityId = $request->City;
         $cityName = City::where('id', $cityId)->first()->Name;
-         $city = Member::where('City', $cityName)->first();
+        $city = Member::where('City', $cityName)->first();
     }
    else
    {
@@ -1313,7 +1313,7 @@ public function Advancedsearch(Request $request)
         $area = City::whereNotNull('area')->orderBy('area','Asc')->get();
     }
 
-    if ($request->strret) 
+    if ($request->street) 
     {
         $streetId = $request->street;
         $streetName = City::where('id', $streetId)->first()->street;
@@ -1327,7 +1327,7 @@ public function Advancedsearch(Request $request)
     if ($request->Qualification) 
     {
         $qualificationId = $request->Qualification;
-      $qualificationName = Qualification::where('id', $qualificationId)->first()->Name;
+        $qualificationName = Qualification::where('id', $qualificationId)->first()->Name;
         $qualification = Member::where('Qualification', $qualificationName);
     }
     else
