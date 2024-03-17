@@ -37,12 +37,12 @@
 									{{ csrf_field() }}
                                     @method('get')
 
-                                    <div class="row">
+									<div class="row">
 										<div class="col">
-											<label for="inputName" class="control-label">ملاحظات</label>
-											<input type="hidden" name="NotPad" value="{{ $member->NotPad }}">
-											<input type="text" class="form-control" id="inputName" name="NotPad"
-											value="{{ $member->NotPad }}" readonly>
+											<label for="inputName" class="control-label">الرقم الحزبي</label>
+											<input type="hidden" name="IDTeam" value="{{ $member->IDTeam }}">
+											<input type="text" class="form-control" id="inputName" name="IDTeam"
+											value="{{ $member->IDTeam }}" readonly>
 										</div>
 									</div><br>
                                        
@@ -52,15 +52,6 @@
 											<input type="hidden" name="branch" value="{{ $member->branch }}">
 											<input type="text" class="form-control" id="inputName" name="branch"
 											value="{{ $member->branch }}" readonly>
-										</div>
-									</div><br>
-
-									<div class="row">
-										<div class="col">
-											<label for="inputName" class="control-label">الرقم الحزبي</label>
-											<input type="hidden" name="IDTeam" value="{{ $member->IDTeam }}">
-											<input type="text" class="form-control" id="inputName" name="IDTeam"
-											value="{{ $member->IDTeam }}" readonly>
 										</div>
 									</div><br>
                                     
@@ -118,6 +109,24 @@
 										</div>
 									</div><br>
                                     
+									<div class="row">
+										<div class="col">
+											<label for="inputName" class="control-label">المنطقة</label>
+											<input type="hidden" name="area" value="{{ $member->area }}">
+											<input type="text" class="form-control" id="inputName" name="area"
+											value="{{ $member->area }}" readonly>
+										</div>
+									</div><br>
+
+									<div class="row">
+										<div class="col">
+											<label for="inputName" class="control-label">الحي</label>
+											<input type="hidden" name="street" value="{{ $member->street }}">
+											<input type="text" class="form-control" id="inputName" name="street"
+											value="{{ $member->street }}" readonly>
+										</div>
+									</div><br>
+
 									<div class="row">
 										<div class="col">
 											<label for="inputName" class="control-label">الرقم الوطني</label>
@@ -217,6 +226,15 @@
 										</div>
 									</div><br>
                                     
+									<div class="row">
+										<div class="col">
+											<label for="inputName" class="control-label">ملاحظات</label>
+											<input type="hidden" name="NotPad" value="{{ $member->NotPad }}">
+											<input type="text" class="form-control" id="inputName" name="NotPad"
+											value="{{ $member->NotPad }}" readonly>
+										</div>
+									</div><br>
+
 									<div class="row">
 										<div class="col">
 											<label for="exampleTextarea">صورة العضو المنتسب</label> <br>
