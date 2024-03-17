@@ -48,57 +48,72 @@ integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEw
 
 				  
 				{{-- search advanced --}}
-                <div class="row">
-                    <h5>بحث متقدم</h5>
-          
-                    <div class="col-8">
-                      <div class="form-group">
-                        <label>المحافظة</label>
-                        <select name="City" id="city" 
-                        class="form-control">
-                          <option value="0">اختر المحافظة</option>
-                          @foreach($city as $cit)
-                          <option value="{{$cit->id}}" >{{$cit->Name}}</option>
-                          @endforeach 
-                        </select>
-                      </div>
-                      <div class="form-group">
-                        <label>المنطقة</label>
-                        <select name="area" id="area" class="form-control select">
-                        </select>
-                      </div>
-                      <div class="form-group">
-                        <label>الحي</label>
-                        <select name="street" id="street" class="form-control select">
-                        </select>
-                      </div>
-          
-                      <div class="form-group">
-                        <label>المؤهل العلمي</label>
-                        <select name="Qualification" id="qualificationSelect" class="form-control select">
-                          <option>اختر المؤهل العلمي</option>
-                          @foreach($qualifications as $qualification)
-                            <option value="{{$qualification->id}}">{{$qualification->Name}}</option>
-                          @endforeach 
-                        </select>
-                      </div>
-                      <div class="form-group">
-                        <label>الاختصاص</label>
-                        <select name="Specialization" class="form-control select" id="specializationSelect">
-                          <!-- Options will be loaded dynamically -->
-                        </select>
-                      </div> 
-                      <div class="form-group">
-                        <label>المهنة</label>
-                        <select name="Occupation" class="form-control select"> 
-                          <option>اختر المهنة</option>
-                          @foreach($occupations as $occupation)
-                            <option value="{{$occupation->Name}}">{{$occupation->Name}}</option>
-                          @endforeach 
-                        </select>
-                      </div>
+                <form action="{{ route('Advancedsearch') }}" method="GET">
+                    @csrf
+
+                    <div class="row">
+                        <h5>بحث متقدم</h5>
+                        <div class="col-8">
+    
+                          <div class="form-group">
+                            <label>المحافظة</label>
+                            <select name="City" id="city" 
+                            class="form-control">
+                              <option value="0">اختر المحافظة</option>
+                              @foreach($city as $cit)
+                              <option value="{{$cit->id}}" >{{$cit->Name}}</option>
+                              @endforeach 
+                            </select>
+                          </div>
+    
+                          <div class="form-group">
+                            <label>المنطقة</label>
+                            <select name="area" id="area" class="form-control select">
+                            </select>
+                          </div>
+    
+                          <div class="form-group">
+                            <label>الحي</label>
+                            <select name="street" id="street" class="form-control select">
+                            </select>
+                          </div>
+              
+                          <div class="form-group">
+                            <label>المؤهل العلمي</label>
+                            <select name="Qualification" id="qualificationSelect" class="form-control select">
+                              <option>اختر المؤهل العلمي</option>
+                              @foreach($qualifications as $qualification)
+                                <option value="{{$qualification->id}}">{{$qualification->Name}}</option>
+                              @endforeach 
+                            </select>
+                          </div>
+    
+                          <div class="form-group">
+                            <label>الاختصاص</label>
+                            <select name="Specialization" class="form-control select" id="specializationSelect">
+                              <!-- Options will be loaded dynamically -->
+                            </select>
+                          </div> 
+    
+                          <div class="form-group">
+                            <label>المهنة</label>
+                            <select name="Occupation" class="form-control select"> 
+                              <option>اختر المهنة</option>
+                              @foreach($occupations as $occupation)
+                                <option value="{{$occupation->Name}}">{{$occupation->Name}}</option>
+                              @endforeach 
+                            </select>
+                          </div>
+    
+                        </div>
                     </div>
-                </div>
+
+					<div class="d-flex justify-content-center">
+						<button type="submit" class="btn btn-primary">بحث</button>
+					  </div>
+
+                </form>
+                
 
 <style>
 .pagination {
