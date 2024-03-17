@@ -58,7 +58,7 @@
 					<div class="col-lg-12 col-md-12">
 						<div class="card">
 							<div class="card-body">
-								<form action="{{ route('member.update', $member->IDTeam) }}" method="post" autocomplete="off">
+								<form action="{{ route('member.update', $member->id) }}" method="post" autocomplete="off">
 									{{ csrf_field() }}
 
 									<div class="row">
