@@ -1367,13 +1367,13 @@ public function Advancedsearch(Request $request)
     $res= $results->get();
     return view('manager.member.show',compact('res'));
 
-//     $res= $results->paginate(50);
-//     $paginationLinks = $res->withQueryString()->links('pagination::bootstrap-4');
+    // $res= $results->paginate(50);
+    // $paginationLinks = $res->withQueryString()->links('pagination::bootstrap-4');
 
-//     return view('manager.member.show', [
-//         'res' => $res,
-//         'paginationLinks' => $paginationLinks
-//     ]);
+    // return view('manager.member.show', [
+    //     'res' => $res,
+    //     'paginationLinks' => $paginationLinks
+    // ]);
 }
 
  
