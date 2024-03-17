@@ -507,26 +507,27 @@ $member->WorkAddress  = $request->WorkAddress;
 $member->HomePhone  = $request->HomePhone;
 $member->WorkPhone  = $request->WorkPhone;
 $member->DateOfJoin  = $dateJoinFormatted;
+$member->Image = $request->Image;
 $member->update();
 
     // store image
-    if($request->hasfile('Image')){
-        $img = $request->file('Image');
-        $img_name = $img->getClientOriginalName();
-        $img->move(public_path('images'), $img_name);
+    // if($request->hasfile('Image')){
+    //     $img = $request->file('Image');
+    //     $img_name = $img->getClientOriginalName();
+    //     $img->move(public_path('images'), $img_name);
 
-      //  $member->Image  =   $img_name;
-      //  $member->save();
-        Member::find($member->id)->update([
-        'Image'=> $img_name,
-        ]);
-    }
- //Temporary::where($request->IDTeam)->get('AdminAgree')->set('1');
- Temporary::where('IDTeam', $request->IDTeam)->update(['AdminAgree' => 1]);
+    //   //  $member->Image  =   $img_name;
+    //   //  $member->save();
+    //     Member::find($member->id)->update([
+    //     'Image'=> $img_name,
+    //     ]);
+    // }
+
+    //Temporary::where($request->IDTeam)->get('AdminAgree')->set('1');
+    Temporary::where('IDTeam', $request->IDTeam)->update(['AdminAgree' => 1]);
 
     session()->flash('Add', 'تم تعديل العضو بنجاح');
     return redirect()->route('edit');
-
   }
 
   public function update(Request $request, $id)
@@ -622,21 +623,22 @@ $member->WorkAddress  = $request->WorkAddress;
 $member->HomePhone  = $request->HomePhone;
 $member->WorkPhone  = $request->WorkPhone;
 $member->DateOfJoin  = $dateJoinFormatted;
+$member->Image = $request->Image;
 $member->update();
 
 
     // store image
-    if($request->hasfile('Image')){
-        $img = $request->file('Image');
-        $img_name = $img->getClientOriginalName();
-        $img->move(public_path('images'), $img_name);
+    // if($request->hasfile('Image')){
+    //     $img = $request->file('Image');
+    //     $img_name = $img->getClientOriginalName();
+    //     $img->move(public_path('images'), $img_name);
 
-      //  $member->Image  =   $img_name;
-      //  $member->save();
-        Member::find($member->id)->update([
-        'Image'=> $img_name,
-        ]);
-    }
+    //   //  $member->Image  =   $img_name;
+    //   //  $member->save();
+    //     Member::find($member->id)->update([
+    //     'Image'=> $img_name,
+    //     ]);
+    // }
     session()->flash('Edit', 'تم تعديل العضو بنجاح');
     return back(); 
   }

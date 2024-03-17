@@ -120,6 +120,24 @@
                                     
 									<div class="row">
 										<div class="col">
+											<label for="inputName" class="control-label">المنطقة</label>
+											<input type="hidden" name="area" value="{{ $member->area }}">
+											<input type="text" class="form-control" id="inputName" name="area"
+											value="{{ $member->area }}" readonly>
+										</div>
+									</div><br>
+
+									<div class="row">
+										<div class="col">
+											<label for="inputName" class="control-label">الحي</label>
+											<input type="hidden" name="street" value="{{ $member->street }}">
+											<input type="text" class="form-control" id="inputName" name="street"
+											value="{{ $member->street }}" readonly>
+										</div>
+									</div><br>
+
+									<div class="row">
+										<div class="col">
 											<label for="inputName" class="control-label">الرقم الوطني</label>
 											<input type="hidden" name="IDNumber" value="{{ $member->IDNumber }}">
 											<input type="text" class="form-control" id="inputName" name="IDNumber"
