@@ -1199,44 +1199,103 @@ public function GetCityWithMemberCount(Request $request)
 
 
 
-  public function Advancedsearch(Request $request)
-{
-    $query = Member::query();
+//   public function Advancedsearch22(Request $request)
+// {
+//     $query = Member::query();
 
-    if ($request->has('dropdownCity')) {
-        $query->where('City', $request->input('dropdownCity'));
+//     if ($request->has('dropdownCity')) {
+//         $query->where('City', $request->input('dropdownCity'));
+//     }
+
+//     if ($request->has('dropdownArea')) {
+//         $query->where('area', $request->input('dropdownArea'));
+//     }
+
+//     if ($request->has('dropdownStrret')) {
+//         $query->where('street', $request->input('dropdownStrret'));
+//     }
+
+
+//     if ($request->has('dropdownQualification')) {
+//         $query->where('Qualification', $request->input('dropdownQualification'));
+//     }
+
+//     if ($request->has('dropdownspecialization')) {
+//         $query->where('Specialization', $request->input('dropdownspecialization'));
+//     }
+
+
+//     if ($request->has('dropdownOccupation')) {
+//         $query->where('Occupation', $request->input('dropdownOccupation'));
+//     }
+
+
+//     // Add more conditions for additional dropdowns as needed
+
+//     $results = $query->get();
+
+//     return view('admin.member.show',compact('results'));
+// }
+
+public function Advancedsearch(Request $request)
+{
+   if($request->input('dropdownCity'))
+    {
+    $city = Member::where('City', $request->input('dropdownCity'))->first();
     }
+   else
+   {
+    $city=City::orderBy('Name','Asc')->get();
+   }
 
     if ($request->has('dropdownArea')) {
-        $query->where('area', $request->input('dropdownArea'));
+        $area = Member::where('area', $request->input('dropdownArea'));
+    }
+    else
+    {
+        $area = City::whereNotNull('area')->orderBy('area','Asc')->get();
     }
 
     if ($request->has('dropdownStrret')) {
-        $query->where('street', $request->input('dropdownStrret'));
+        $street = Member::where('street', $request->input('dropdownStrret'));
+    }
+    else
+    {
+        $street = City::whereNotNull('street')->orderBy('street','Asc')->get();
     }
 
-
     if ($request->has('dropdownQualification')) {
-        $query->where('Qualification', $request->input('dropdownQualification'));
+        $qualification = Member::where('Qualification', $request->input('dropdownQualification'));
+    }
+    else
+    {
+        $qualification = Qualification::whereNotNull('Name')->orderBy('Name','Asc')->get();
     }
 
     if ($request->has('dropdownspecialization')) {
-        $query->where('Specialization', $request->input('dropdownspecialization'));
+        $specialization = Member::where('Specialization', $request->input('dropdownspecialization'));
     }
-
+    else{
+        $specialization =  Qualification::whereNotNull('specialization')->orderBy('specialization','Asc')->get();
+        }
 
     if ($request->has('dropdownOccupation')) {
-        $query->where('Occupation', $request->input('dropdownOccupation'));
+        $occupation = Member::where('Occupation', $request->input('dropdownOccupation'));
     }
+   else
+   {
+    $occupation = Occupation::orderBy('Name','Asc')->get();
 
+   }
+   $results = Member::where('City',$city)
+   ->where('area',$area)
+   ->where('street',$street)
+   ->where('Qualification',$qualification)
+   ->where('Specialization', $specialization)
+   ->where('Occupation', $occupation)
+   ->get();
 
-    // Add more conditions for additional dropdowns as needed
-
-    $results = $query->get();
-
-    return view('admin.member.show',compact('results'));
+   return view('admin.member.show',compact('results'));
 }
-
-
 
 }
