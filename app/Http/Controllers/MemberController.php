@@ -210,7 +210,7 @@ public function index()
         }
        else if ( auth()->user()->Role == 'manager')
         {
-            return view('manager.member.add', compact('cityName', 'qualifications', 'occupations', 'areas', 'streets'));
+            return view('manager.member.add', compact('cityName', 'qualifications', 'occupations'));
         }
     }
 
@@ -238,6 +238,8 @@ public function index()
             'WorkPhone' => 'required|max:10|min:9',
             'DateOfJoin' => 'required|numeric|digits:4|before_or_equal:' . date('Y'),
             'Specialization' => 'required',
+            'area' => 'required',
+            'street' => 'required',
             'Image' =>'required',
         ]);
 
@@ -315,9 +317,19 @@ public function index()
   $qualificationId = $request->Qualification;
   $qualificationName = Qualification::where('id', $qualificationId)->first()->Name;
   
-  
   $specializationId = $request->Specialization;
   $specializationName = Qualification::where('id', $specializationId)->first()->specialization;
+
+
+
+  $cityId = $request->City;
+  $cityName = City::where('id', $cityId)->first()->Name;
+
+  $areaId = $request->area;
+  $areaName = City::where('id', $areaId)->first()->area;
+
+  $streetId = $request->street;
+  $streetName = City::where('id', $streetId)->first()->street;
 
 
 
@@ -331,7 +343,10 @@ public function index()
     $member->BirthDate = $birthDateFormatted;
     // $member->BirthDate = $request->BirthDate;
     $member->Constraint = $request->Constraint;
-    $member->City = $request->City;
+    $member->City = $cityName;
+    $member->area = $areaName;
+    $member->street = $streetName;
+
     $member->IDNumber  = $request->IDNumber;
     $member->Gender  = $request->Gender == 'ذكر' ? 'ذكر' : 'أنثى';
     $member->Qualification = $qualificationName;
@@ -372,14 +387,18 @@ public function index()
      $city = DB::table('cities')
          ->where('id', $user->city_id)
          ->value('Name');
-         if( $city)
-         {
-             $cityName = $city;
-         }
-         else
-         {
-             $cityName =City::orderBy('Name','Asc')->get();
-         }
+        if( $city)
+        {
+            $cityName = $city;
+        }
+        else
+        {
+            $cityName =City::whereNotNull('Name')->orderBy('Name','Asc')->get();
+        }
+
+     $areas = City::whereNotNull('area')->orderBy('area','Asc')->get();
+     $streets = City::whereNotNull('street')->orderBy('street','Asc')->get();
+
 
      $qualifications = Qualification::whereNotNull('Name')->orderBy('Name','Asc')->get();
      $specializations = Qualification::whereNotNull('specialization')->orderBy('Name','Asc')->get();
@@ -387,7 +406,7 @@ public function index()
 
      if ( auth()->user()->Role == 'admin')
      {
-      return view('admin.member.edit',compact('member', 'cityName', 'qualifications', 'specializations', 'occupations'));
+      return view('admin.member.edit',compact('member', 'cityName', 'qualifications', 'specializations', 'occupations', 'areas', 'streets'));
      }
     else if ( auth()->user()->Role == 'manager')
      {
@@ -428,18 +447,56 @@ $specialization = $request->Specialization;
       // إذا كانت القيمة هي اسم
       $specializationName = $specialization;
   }
+
+
+  $city = $request->City;
+
+  if (is_numeric($city)) {
+      // إذا كانت القيمة هي id
+      $cityName = City::where('id', $city)->value('Name');
+  } else {
+      // إذا كانت القيمة هي اسم
+      $cityName = $city;
+  }
+  
+$area = $request->area;
+
+  if (is_numeric($area)) {
+      // إذا كانت القيمة هي id
+      $areaName = City::where('id', $area)->value('area');
+
+  } else {
+      // إذا كانت القيمة هي اسم
+      $areaName = $area;
+  }
+
+  $street = $request->street;
+
+  if (is_numeric($street)) {
+      // إذا كانت القيمة هي id
+      $streetName = City::where('id', $street)->value('street');
+
+  } else {
+      // إذا كانت القيمة هي اسم
+      $streetName = $street;
+  }
+
+
+
 $member = Member::where('IDTeam',$IDTeam)->first();
 // return($member);
 $member->NotPad = $request->NotPad;
 $member->branch = $request->branch;
- $member->IDTeam  = $IDTeam;
 $member->IDTeam  = $IDTeam;
 $member->FullName = $request->FullName;
 $member->MotherName = $request->MotherName;
 $member->PlaceOfBirth = $request->PlaceOfBirth;
 $member->BirthDate = $birthDateFormatted;
 $member->Constraint = $request->Constraint;
-$member->City = $request->City;
+$member->City = $cityName;
+$member->area = $areaName;
+$member->street = $streetName;
+
 $member->IDNumber  = $request->IDNumber;
 $member->Gender  = $request->Gender == 'ذكر' ? 'ذكر' : 'أنثى';
 $member->Qualification = $qualificationName;
@@ -505,6 +562,43 @@ $specialization = $request->Specialization;
       // إذا كانت القيمة هي اسم
       $specializationName = $specialization;
   }
+
+
+
+  $city = $request->City;
+
+  if (is_numeric($city)) {
+      // إذا كانت القيمة هي id
+      $cityName = City::where('id', $city)->value('Name');
+  } else {
+      // إذا كانت القيمة هي اسم
+      $cityName = $city;
+  }
+  
+$area = $request->area;
+
+  if (is_numeric($area)) {
+      // إذا كانت القيمة هي id
+      $areaName = City::where('id', $area)->value('area');
+
+  } else {
+      // إذا كانت القيمة هي اسم
+      $areaName = $area;
+  }
+
+  $street = $request->street;
+
+  if (is_numeric($street)) {
+      // إذا كانت القيمة هي id
+      $streetName = City::where('id', $street)->value('street');
+
+  } else {
+      // إذا كانت القيمة هي اسم
+      $streetName = $street;
+  }
+
+
+
 $member = Member::findOrFail($id);
 $member->NotPad = $request->NotPad;
 $member->branch = $request->branch;
@@ -514,7 +608,10 @@ $member->MotherName = $request->MotherName;
 $member->PlaceOfBirth = $request->PlaceOfBirth;
 $member->BirthDate = $birthDateFormatted;
 $member->Constraint = $request->Constraint;
-$member->City = $request->City;
+$member->City = $cityName;
+$member->area = $areaName;
+$member->street = $streetName;
+
 $member->IDNumber  = $request->IDNumber;
 $member->Gender  = $request->Gender == 'ذكر' ? 'ذكر' : 'أنثى';
 $member->Qualification = $qualificationName;
@@ -527,7 +624,6 @@ $member->HomePhone  = $request->HomePhone;
 $member->WorkPhone  = $request->WorkPhone;
 $member->DateOfJoin  = $dateJoinFormatted;
 $member->update();
-
 
 
     // store image

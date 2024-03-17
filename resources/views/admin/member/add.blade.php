@@ -146,11 +146,6 @@
 											<option value="{{$city->id}}" >{{$city->Name}}</option>
 											@endforeach 
 
-											{{-- @foreach ($city as $list)
-												<option value="{{ $list->id }}">{{ $list->Name }}</option>	
-											@endforeach --}}
-
-
 										</select>
 
 										@error('City')
@@ -163,20 +158,11 @@
 										<select name="area" id="area" 
 										class="form-control select @error('area') is-invalid @enderror">
 
-										@foreach($areas as $area)
+										{{-- @foreach($areas as $area)
 											<option value="{{$area->id}}">{{$area->area}}</option>
-										@endforeach
-
-											<!-- Options will be loaded dynamically -->
-
-											{{-- <option value="">اختر المنطقة</option> --}}
-
-											{{-- @foreach($areas as $area)
-    											<option value="{{$area->area}}">{{$area->area}}</option>
-											@endforeach --}}
+										@endforeach --}}
 
 										</select>
-
 
 										@error('area')
 											<div class="alert alert-danger">{{ $message }}</div>
@@ -188,27 +174,17 @@
 										<select name="street" id="street"
 										class="form-control select @error('street') is-invalid @enderror">
 
-										@foreach($streets as $street)
+										{{-- @foreach($streets as $street)
 											<option value="{{$street->id}}">{{$street->street}}</option>
-										@endforeach
+										@endforeach --}}
 											
-											<!-- Options will be loaded dynamically -->
-
-											{{-- <option value="">اختر الحي</option> --}}
-
-											{{-- @foreach($streets as $street)
-    											<option value="{{$street->street}}">{{$street->street}}</option>
-											@endforeach --}}
-
 										</select>
 
 										@error('street')
 											<div class="alert alert-danger">{{ $message }}</div>
 										@enderror
 									</div>
-										{{-- {{ csrf_field() }} --}}
 									<br>
-
 
 									<div class="row">
 										<div class="col">
@@ -462,8 +438,9 @@
 	</script>
 		
 
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
+	{{-- Dependent Dropdown ===> city & area & street --}}
+		{{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> --}}
 
 		<script>
 		   var cityurl='{{url("admin/member/get-areasm","itemid")}}';
@@ -490,11 +467,11 @@
 					}
 				});
 			}
-		}
-		});
+			}
+			});
 
 
-    $('#area').change(function(){
+   	 	$('#area').change(function(){
 		var thisareaurl=areaurl;
 		var areaId = $(this).find("option:selected").val();
 		thisareaurl=thisareaurl.replace("itemid",areaId);
@@ -507,12 +484,12 @@
 					$('#street').html('<option value="0">اختر الحي</option>');
 					$.each(result, function(key, value) {
          $('#street').append('<option value="'+value.id+'">'+value.street+'</option>');
-     });
-	}
-     });
-	}
-	}); 
-	}); 
+     	});
+		}
+     	});
+		}
+		}); 
+		}); 
 
 	</script>
 

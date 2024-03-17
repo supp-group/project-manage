@@ -151,17 +151,44 @@
 									<div class="form-group">
 										<label>المحافظة</label>
 										<input type="hidden" name="City" value="{{ $member->City }}">
-										<select name="City" class="form-control select @error('City') is-invalid @enderror">
-
+										<select name="City" id="city" 
+										class="form-control @error('City') is-invalid @enderror" >
+											<option value="0">اختر المحافظة</option>
+											
 											@foreach($cityName as $city)
-												<option >{{$city->Name}}</option>
+											<option value="{{$city->id}}" >{{$city->Name}}</option>
 											@endforeach 
+
 										</select>
 
 										@error('City')
 										<div class="alert alert-danger">{{ $message }}</div>
 										@enderror
-									</div>
+									</div><br>
+
+									<div class="form-group">
+										<label>المنطقة</label>
+										<select name="area" class="form-control select @error('area') is-invalid @enderror">
+											<option value="{{ $member->area }}">اختر المنطقة</option>
+											<!-- Options will be loaded dynamically -->
+										</select>
+										
+										@error('area')
+											<div class="alert alert-danger">{{ $message }}</div>
+										@enderror
+									</div><br> 
+
+									<div class="form-group">
+										<label>الحي</label>
+										<select name="street" class="form-control select @error('street') is-invalid @enderror">
+											<option value="{{ $member->street }}">اختر الحي</option>
+											<!-- Options will be loaded dynamically -->
+										</select>
+										
+										@error('street')
+											<div class="alert alert-danger">{{ $message }}</div>
+										@enderror
+									</div><br> 
 
 									<div class="row">
 										<div class="col">
@@ -506,6 +533,61 @@ document.addEventListener("DOMContentLoaded", function() {
   });
 });	
 </script>
+
+
+
+	{{-- Dependent Dropdown ===> city & area & street --}}
+		<script>
+			var cityurl='{{url("admin/member/get-areasm","itemid")}}';
+			var areaurl='{{url("admin/member/get-streets","itemid")}}';
+			 $(function() {
+			 $('#city').change(function(){
+					var thiscityurl=cityurl;
+			var cityId = $(this).find("option:selected").val();
+			if(cityId==0){
+				$('#area').html('<option value="0">اختر المنطقة</option>');
+			}else{
+				thiscityurl=thiscityurl.replace("itemid",cityId);
+			if(cityId){
+				$.ajax({
+					url: thiscityurl, // Use Laravel's route name
+					method: 'Get', // Match the method type with your route definition
+				 
+					success: function(result){
+						$('#area').html('<option value="0">اختر المنطقة</option>');
+						$.each(result, function(key, value) {
+						
+			 $('#area').append('<option value="'+value.id+'">'+value.area+'</option>');
+						});
+					 }
+				 });
+			 }
+			 }
+			 });
+ 
+ 
+			 $('#area').change(function(){
+		 var thisareaurl=areaurl;
+		 var areaId = $(this).find("option:selected").val();
+		 thisareaurl=thisareaurl.replace("itemid",areaId);
+		 if(areaId){
+			 $.ajax({
+				 url: thisareaurl, // Use Laravel's route name
+				 method: 'Get', // Match the method type with your route definition
+			  
+				 success: function(result){
+					 $('#street').html('<option value="0">اختر الحي</option>');
+					 $.each(result, function(key, value) {
+		  $('#street').append('<option value="'+value.id+'">'+value.street+'</option>');
+		  });
+		 }
+		  });
+		 }
+		 }); 
+		 }); 
+ 
+	 </script>
+
 
 
 
