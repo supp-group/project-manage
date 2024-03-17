@@ -59,7 +59,6 @@
 										</div>
 									</div><br>
 
-					
 									<div class="row">
 										<div class="col">
 											<label for="inputName" class="control-label">الاسم الثلاثي</label>
@@ -206,7 +205,6 @@
 											<div class="alert alert-danger">{{ $message }}</div>
 										@enderror
 									</div><br> 
-									
 
 									 <div class="row">
 										<div class="col">
