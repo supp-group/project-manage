@@ -1220,9 +1220,8 @@ public function GetCityWithMemberCount(Request $request)
 public function AdvancedIndex()
 {
     if (optional(auth()->user())->Role == 'admin') {
-
   
-     $city =City::whereNotNull('Name')->orderBy('Name','Asc')->get();
+    $city =City::whereNotNull('Name')->orderBy('Name','Asc')->get();
     $areas = City::whereNotNull('area')->orderBy('area','Asc')->get();
     $streets = City::whereNotNull('street')->orderBy('street','Asc')->get();
 
@@ -1230,13 +1229,12 @@ public function AdvancedIndex()
     $specializations = Qualification::whereNotNull('specialization')->orderBy('Name','Asc')->get();
     $occupations = Occupation::orderBy('Name','Asc')->get();
 
-
         $members = Member::orderBy('IDTeam', 'Asc')->select('id','branch','IDTeam','FullName',
         'City')->paginate(50);
         $memberCount = Member::count();
         $paginationLinks = $members->withQueryString()->links('pagination::bootstrap-4');
 
-        return view('admin.member.show', [
+        return view('admin.member.Advancedsearch', [
             'members' => $members,
             'memberCount'=>$memberCount,
             'city'=>$city,

@@ -52,6 +52,16 @@ integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEw
 								</div>
 							</div>
 						</form>
+
+						<form action="{{ route('AdvancedIndex') }}" method="GET">
+							@csrf
+							<div class="input-group">
+								<div class="input-group-append">
+									<span style="font-size: 16px; padding-top: 8px; background-color: #fff;">بحث متقدم</span> &nbsp;
+									<button name="search" type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
+								</div>
+							</div>
+						</form>
 				</div>
 
 				<style>

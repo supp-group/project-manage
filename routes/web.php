@@ -94,7 +94,8 @@ Route::middleware(['auth', 'verified', 'admin'])-> prefix('admin')->group(functi
         Route::post('occupation', [MemberController::class, 'searchByOccupation'])->name('search-occupation');
 
         //Advanced search
-        Route::get('Advancedsearch', [MemberController::class, 'Advancedsearch']);
+        Route::get('Advancedsearch', [MemberController::class, 'Advancedsearch'])->name('Advancedsearch');
+        Route::get('AdvancedIndex', [MemberController::class, 'AdvancedIndex'])->name('AdvancedIndex');
 
         //order
         Route::get('last', [MemberController::class, 'orderBy_Last'])->name('order-last');
