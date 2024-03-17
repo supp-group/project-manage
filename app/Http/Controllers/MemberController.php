@@ -1295,47 +1295,63 @@ public function Advancedsearch(Request $request)
 {
    if($request->City)
     {
-    $city = Member::where('City', $request->City)->first();
+        $cityId = $request->City;
+        $cityName = City::where('id', $cityId)->first()->Name;
+         $city = Member::where('City', $cityName)->first();
     }
    else
    {
-    $city=City::orderBy('Name','Asc')->get();
+        $city=City::orderBy('Name','Asc')->get();
    }
 
-    if ($request->area) {
-        $area = Member::where('area', $request->Area);
+    if ($request->area) 
+    {
+        $areaId = $request->area;
+        $areaName = City::where('id', $areaId)->first()->area;
+        $area = Member::where('area', $areaName);
     }
     else
     {
         $area = City::whereNotNull('area')->orderBy('area','Asc')->get();
     }
 
-    if ($request->strret) {
-        $street = Member::where('street', $request->strret);
+    if ($request->strret) 
+    {
+        $streetId = $request->street;
+        $streetName = City::where('id', $streetId)->first()->street;
+        $street = Member::where('street', $streetName);
     }
     else
     {
         $street = City::whereNotNull('street')->orderBy('street','Asc')->get();
     }
 
-    if ($request->Qualification) {
-        $qualification = Member::where('Qualification', $request->Qualification);
+    if ($request->Qualification) 
+    {
+        $qualificationId = $request->Qualification;
+      $qualificationName = Qualification::where('id', $qualificationId)->first()->Name;
+        $qualification = Member::where('Qualification', $qualificationName);
     }
     else
     {
         $qualification = Qualification::whereNotNull('Name')->orderBy('Name','Asc')->get();
     }
 
-    if ($request->Specialization) {
-        $specialization = Member::where('Specialization', $request->specialization);
+    if ($request->Specialization) 
+    {
+        $specializationId = $request->Specialization;
+        $specializationName = Qualification::where('id', $specializationId)->first()->specialization;
+        $specialization = Member::where('Specialization', $specializationName);
     }
-    else{
+    else
+    {
         $specialization =  Qualification::whereNotNull('specialization')->orderBy('specialization','Asc')->get();
-        }
-
-    if ($request->Occupation) {
-        $occupation = Member::where('Occupation', $request->Occupation);
     }
+
+    if ($request->Occupation)
+     {
+        $occupation = Member::where('Occupation', $request->Occupation);
+     }
    else
    {
     $occupation = Occupation::orderBy('Name','Asc')->get();
