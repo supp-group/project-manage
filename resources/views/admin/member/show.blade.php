@@ -47,7 +47,7 @@ integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEw
 							@csrf
 							<div class="input-group">
 								<div class="input-group-append">
-									<span style="font-size: 16px; padding-top: 8px;">عدم وجود رقم موبايل</span> &nbsp;
+									<span style="font-size: 16px; padding-top: 8px; background-color: #fff;">عدم وجود رقم موبايل</span> &nbsp;
 									<button name="search-phone" type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
 								</div>
 							</div>
@@ -74,8 +74,6 @@ integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEw
 					}
 				  </style>
 				  
-
-
 				{{-- search --}}
 				<div class="row">
 					<div class="col-4">
@@ -111,7 +109,6 @@ integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEw
 							</div>
 						</form>
 					</div>
-
 
 
 					<div class="col-12">
@@ -171,11 +168,11 @@ integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEw
 								</div>
 							</div>
 						</form>
-					</div> --}}
+				</div> --}}
 
-					<div class="row">
-						<div class="col-4">
-					<form action="{{ route('search-Area') }}" method="post">
+				<div class="row">
+					<div class="col-4">
+						<form action="{{ route('search-Area') }}" method="post">
 							@csrf
 							<div class="input-group">
 								<input class="form-control" placeholder="المنطقة" type="search" name="search_Area">
@@ -185,10 +182,8 @@ integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEw
 							</div>
 						</form>
 					</div>
-				
-
-						<div class="col-4">
-					<form action="{{ route('search-Street') }}" method="post">
+					<div class="col-4">
+						<form action="{{ route('search-Street') }}" method="post">
 							@csrf
 							<div class="input-group">
 								<input class="form-control" placeholder="الحي" type="search" name="search_Street">
@@ -198,8 +193,6 @@ integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEw
 							</div>
 						</form>
 					</div>
-
-
 					<div class="col-4">
 						<form action="{{ route('search-occupation') }}" method="post">
 							@csrf
@@ -214,7 +207,7 @@ integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEw
 
 
 
-					{{-- <div class="col-12">
+				{{-- <div class="col-12">
 						<form action="{{ route('search-qualification') }}" method="post">
 							@csrf
 							<div class="input-group">
@@ -235,7 +228,7 @@ integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEw
 								</div>
 							</div>
 						</form>
-					</div>&nbsp; --}}
+				</div>&nbsp; --}}
 
 					<div class="col-12">
 						<form action="{{ route('search-Area') }}" method="post">
@@ -272,7 +265,6 @@ integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEw
 					</div>
 				</div>
 				<br>
-
 
  <style>
 
@@ -521,6 +513,96 @@ integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEw
 	}
 
 </script> --}}
+
+
+
+	{{-- Dependent Dropdown ===> qualification & specialization --}}
+	<script>
+		document.addEventListener("DOMContentLoaded", function() {
+		  const qualificationSelect = document.querySelector('#qualificationSelect');
+		  const specializationSelect = document.querySelector('#specializationSelect');
+		
+		  qualificationSelect.addEventListener('change', function() {
+			const qualificationId = this.value;
+			fetch(`get-specializations/${qualificationId}`)  // Corrected URL format
+			  .then(response => {
+				if (!response.ok) {
+				  throw new Error('Network response was not ok');
+				}
+				return response.json();
+			  })
+			  .then(specializations => {
+				specializationSelect.innerHTML = '<option value="">اختر الاختصاص</option>'; // Clear and add a placeholder
+				specializations.forEach(specialization => {
+				  const option = document.createElement('option');
+				  option.value = specialization.id;
+				  option.textContent = specialization.specialization;
+				  specializationSelect.appendChild(option);
+				});
+			  })
+			  .catch(error => {
+				console.error('There has been a problem with your fetch operation:', error);
+			  });
+		  });
+		});
+	</script>
+
+
+
+	{{-- Dependent Dropdown ===> city & area & street --}}
+		<script>
+			var cityurl='{{url("admin/member/get-areasm","itemid")}}';
+			var areaurl='{{url("admin/member/get-streets","itemid")}}';
+			 $(function() {
+			 $('#city').change(function(){
+					var thiscityurl=cityurl;
+			var cityId = $(this).find("option:selected").val();
+			if(cityId==0){
+				$('#area').html('<option value="0">اختر المنطقة</option>');
+			}else{
+				thiscityurl=thiscityurl.replace("itemid",cityId);
+			if(cityId){
+				$.ajax({
+					url: thiscityurl, // Use Laravel's route name
+					method: 'Get', // Match the method type with your route definition
+				 
+					success: function(result){
+						$('#area').html('<option value="0">اختر المنطقة</option>');
+						$.each(result, function(key, value) {
+						
+			 $('#area').append('<option value="'+value.id+'">'+value.area+'</option>');
+						});
+					 }
+				 });
+			 }
+			 }
+			 });
+ 
+ 
+			 $('#area').change(function(){
+		 var thisareaurl=areaurl;
+		 var areaId = $(this).find("option:selected").val();
+		 thisareaurl=thisareaurl.replace("itemid",areaId);
+		 if(areaId){
+			 $.ajax({
+				 url: thisareaurl, // Use Laravel's route name
+				 method: 'Get', // Match the method type with your route definition
+			  
+				 success: function(result){
+					 $('#street').html('<option value="0">اختر الحي</option>');
+					 $.each(result, function(key, value) {
+		  $('#street').append('<option value="'+value.id+'">'+value.street+'</option>');
+		  });
+		 }
+		  });
+		 }
+		 }); 
+		 }); 
+ 
+	 </script>
+
+
+
 
 <!-- Internal Data tables -->
 <script src="{{URL::asset('assets/plugins/datatable/js/jquery.dataTables.min.js')}}"></script>

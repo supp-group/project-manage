@@ -28,12 +28,29 @@ class MemberController extends Controller
 public function index()
 { 
     if (optional(auth()->user())->Role == 'admin') {
+        $city = City::whereNotNull('Name')->orderBy('Name','Asc')->get();
+        $areas = City::whereNotNull('area')->orderBy('area','Asc')->get();
+        $streets = City::whereNotNull('street')->orderBy('street','Asc')->get();
+
+        $qualifications = Qualification::whereNotNull('Name')->orderBy('Name','Asc')->get();
+        $specializations = Qualification::whereNotNull('specialization')->orderBy('Name','Asc')->get();
+        $occupations = Occupation::orderBy('Name','Asc')->get();
+
+
         $members = Member::orderBy('IDTeam', 'Asc')->select('id','branch','IDTeam','FullName',
         'City')->paginate(50);
         $memberCount = Member::count();
         $paginationLinks = $members->withQueryString()->links('pagination::bootstrap-4');
 
         return view('admin.member.show', [
+            'city' => $city,
+            'areas' => $areas,
+            'streets' => $streets,
+
+            'qualifications' => $qualifications,
+            'specializations' => $specializations,
+            'occupations' => $occupations,
+
             'members' => $members,
             'memberCount'=>$memberCount,
             'paginationLinks' => $paginationLinks
@@ -147,8 +164,8 @@ public function index()
 
     public function orderBy_DateOfJoin()
     { 
-    if (optional(auth()->user())->Role == 'admin') 
-    {
+        if (optional(auth()->user())->Role == 'admin') 
+        {
         $members = Member::orderBy('DateOfJoin','desc')->paginate(50);
         $paginationLinks = $members->withQueryString()->links('pagination::bootstrap-4');
 
@@ -156,9 +173,9 @@ public function index()
             'members' => $members,
             'paginationLinks' => $paginationLinks
         ]);
-    }
+        }
 
-    elseif (optional(auth()->user())->Role == 'manager') {
+        elseif (optional(auth()->user())->Role == 'manager') {
         $user = auth()->user();
         $cityName = DB::table('cities')
             ->where('id', $user->city_id)
@@ -171,7 +188,7 @@ public function index()
             'members' => $members,
             'paginationLinks' => $paginationLinks
         ]);
-    }
+        }
     }
 
 
