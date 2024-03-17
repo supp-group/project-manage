@@ -145,7 +145,6 @@
 										</div>
 									</div><br>
 
-
 									<div class="form-group">
 										<label>المحافظة</label>
 										<select name="City" class="form-control select">
