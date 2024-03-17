@@ -153,10 +153,10 @@
 										<input type="hidden" name="City" value="{{ $member->City }}">
 										<select name="City" id="city" 
 										class="form-control @error('City') is-invalid @enderror" >
-											<option value="0">اختر المحافظة</option>
+											<option value="{{ $member->City }}">اختر المحافظة</option>
 											
 											@foreach($cityName as $city)
-											<option value="{{$city->id}}" >{{$city->Name}}</option>
+											<option value="{{$city->id}}" @selected(old('City')==$city->id)>{{$city->Name}}</option>
 											@endforeach 
 
 										</select>
