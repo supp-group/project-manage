@@ -43,6 +43,16 @@ integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEw
 						<button type="submit" class="btn btn-primary" style="color: white">&nbsp; استيراد &nbsp;<i class="fas fa-file-download"></i></button>
 					</form> --}}
 
+					<form action="{{ route('search-phone') }}" method="post">
+						@csrf
+						<div class="input-group">
+							<div class="input-group-append">
+								<span style="font-size: 16px; padding-top: 8px; background-color: #fff;">عدم وجود رقم موبايل</span> &nbsp;
+								<button name="search-phone" type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
+							</div>
+						</div>
+					</form>
+
 				</div>
                 <!-- breadcrumb -->
 
@@ -52,8 +62,8 @@ integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEw
                     @csrf
 
                     <div class="row">
-                        <h5>بحث متقدم</h5>
-                        <div class="col-8">
+                        <h5>بحث متقدم</h5> <br><br>
+                        <div class="col-12">
     
                           <div class="form-group">
                             <label>المحافظة</label>
@@ -109,11 +119,11 @@ integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEw
                     </div>
 
 					<div class="d-flex justify-content-center">
-						<button type="submit" class="btn btn-primary">بحث</button>
+						<button type="submit" class="btn btn-primary">بحث متقدم</button>
 					  </div>
 
                 </form>
-                
+                <br>
 
 <style>
 .pagination {
@@ -214,6 +224,15 @@ integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEw
 								</td>
 							</tr>
 							@endforeach
+
+							@if(request()->has('search-phone'))
+    						<tr>
+        						<td style="font-weight: bold;">عدد نتائج البحث {{ $memberCount }}</td>
+    						</tr>
+						@else
+    						<!-- لا يوجد قيمة مدخلة -->
+						@endif
+
 						@else 
 						<tr>
 							<td colspan="20">لم يتم العثور على نتائج</td>
