@@ -15,18 +15,12 @@ integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEw
 				<div class="breadcrumb-header justify-content-between">
 					<div class="my-auto">
 						<div class="d-flex">
-							<h4 class="content-title mb-0 my-auto">الأعضاء</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ جميع الأعضاء</span>
+							<h4 class="content-title mb-0 my-auto">الأعضاء</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ بحث متقدم</span>
 						</div>
 					</div>
 					
-					<div class="form-group">
-						<select class="form-control form-control-xl" onchange="window.location.href=this.value">
-							<option>فرز حسب </option>
-							<option value="{{ route('order-last') }}">الأحدث</option>
-							<option value="{{ route('order-name') }}">الاسم</option>
-							<option value="{{ route('order-team') }}">الرقم الحزبي</option>
-							<option value="{{ route('order-join') }}">تاريخ الانتساب</option>
-						</select>               
+					<div class="d-flex my-xl-auto right-content">
+						<a href="{{ url('admin/member/show') }}" type="button" class="btn btn-primary" style="color: white">&nbsp; رجوع &nbsp;<i class="fa fa-arrow-left"></i></a>
 					</div>
 
 					{{-- <div class="d-flex my-xl-auto right-content">
@@ -42,16 +36,6 @@ integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEw
 						<input type="file" name="file" accept=".csv">
 						<button type="submit" class="btn btn-primary" style="color: white">&nbsp; استيراد &nbsp;<i class="fas fa-file-download"></i></button>
 					</form> --}}
-
-					<form action="{{ route('search-phone') }}" method="post">
-						@csrf
-						<div class="input-group">
-							<div class="input-group-append">
-								<span style="font-size: 16px; padding-top: 8px; background-color: #fff;">عدم وجود رقم موبايل</span> &nbsp;
-								<button name="search-phone" type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
-							</div>
-						</div>
-					</form>
 
 				</div>
                 <!-- breadcrumb -->
@@ -225,14 +209,6 @@ integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEw
 							</tr>
 							@endforeach
 
-							@if(request()->has('search-phone'))
-    						<tr>
-        						<td style="font-weight: bold;">عدد نتائج البحث {{ $memberCount }}</td>
-    						</tr>
-						@else
-    						<!-- لا يوجد قيمة مدخلة -->
-						@endif
-
 						@else 
 						<tr>
 							<td colspan="20">لم يتم العثور على نتائج</td>
@@ -240,7 +216,7 @@ integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEw
 						@endif
 						</tbody>
                     </table>
-					{!! $paginationLinks !!}
+					{{-- {!! $paginationLinks !!} --}}
                 </div>
             </div>
         </div>
