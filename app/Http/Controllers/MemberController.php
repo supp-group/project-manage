@@ -63,7 +63,7 @@ public function index()
             ->where('id', $user->city_id)
             ->value('Name');
         
-        $members = Member::where('City', $cityName)->orderBy('IDTeam', 'Acs')->paginate(50);
+        $members = Member::where('City', $cityName)->orderBy('IDTeam', 'Asc')->paginate(50);
         $memberCount = Member::where('City', $cityName)->count();
         $paginationLinks = $members->withQueryString()->links('pagination::bootstrap-4');
 

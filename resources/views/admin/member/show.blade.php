@@ -51,7 +51,7 @@ integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEw
 									<button name="search-phone" type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
 								</div>
 							</div>
-						</form>
+						</form> 
 
 						<form action="{{ route('AdvancedIndex') }}" method="GET">
 							@csrf
@@ -61,7 +61,7 @@ integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEw
 									<button name="search" type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
 								</div>
 							</div>
-						</form>
+						</form>						
 				</div>
 
 				<style>
@@ -69,6 +69,7 @@ integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEw
 					  .col-4 {
 						display: none;
 					  }
+				
 					  .col-12 {
 						display: block;
 					  }
@@ -78,6 +79,7 @@ integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEw
 					  .col-4 {
 						display: block;
 					  }
+					
 					  .col-12 {
 						display: none;
 					  }

@@ -11,24 +11,6 @@
 
 
 
-{{-- <style>
-
-@media (max-width: 767px) {
-	.my-image {
-    display: none;
-  }
-}
-				  
-@media (min-width: 768px) {
-	.my-image {
-    display: block;
-  }
-}
-
-</style> --}}
-
-
-
 @endsection
 @section('content')
 		<div class="container-fluid">
