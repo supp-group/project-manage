@@ -321,7 +321,7 @@ public function index()
     if($request->hasfile('Image')){
         $img = $request->file('Image');
         $img_name = $img->getClientOriginalName();
-        $img->move(public_path('assets/images/'), $img_name);
+        $img->move(public_path('assets/img/media/'), $img_name);
 
       //  $member->Image  =   $img_name;
       //  $member->save();
@@ -596,7 +596,7 @@ $member->WorkPhone  = $request->WorkPhone;
 $member->DateOfJoin  = $dateJoinFormatted;
    // store image
 if($request->hasfile('Image')){
-    $oldpath = public_path('assets/images/').'/'.$oldimagename;
+    $oldpath = public_path('assets/img/media/').'/'.$oldimagename;
     
     // حذف الصورة القديمة إذا كانت موجودة
     if(file_exists($oldpath)) {
@@ -605,7 +605,7 @@ if($request->hasfile('Image')){
 
     $img = $request->file('Image');
     $img_name = $img->getClientOriginalName();
-    $img->move(public_path('assets/images/'), $img_name);
+    $img->move(public_path('assets/img/media/'), $img_name);
     
     Member::find($member->id)->update([
         'Image' => $img_name,
