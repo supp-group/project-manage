@@ -14,7 +14,7 @@ use Auth;
 use DateTime;
 
 use Illuminate\Http\RedirectResponse;
-use Intervention\Image\ImageManagerStatic as Image;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
@@ -391,19 +391,22 @@ public function index()
     //     ]);
 
 
-    // store image
-    if($request->hasFile('Image')){
-        $img = $request->file('Image');
-        $img_extension = 'webp'; // تحديد امتداد الصورة كـ WebP
-        $img_name = 'image_' . $member->id . '.' . $img_extension; // اسم ملف الصورة مع ترقيم تصاعدي
-        Image::make($img)->save(public_path('images/' . $img_name)); // حفظ الصورة بامتداد WebP
-    
-        // تحديث الصورة للعضو
+
+        // store image
+  if($request->hasFile('Image')){
+    $img = $request->file('Image');
+    $img_extension = $img->getClientOriginalExtension();
+    $img_name = 'image_' . $member->id . '.' . $img_extension; // اسم ملف الصورة مع ترقيم تصاعدي
+    $img->storeAs('images', $img_name); // حفظ الصورة بالاسم الجديد
+
+    // تحديث الصورة للعضو
         Member::find($member->id)->update([
-                'Image'=> $img_name,
-            ]);
-    }
-    
+        'Image'=> $img_name,
+        ]);
+
+}
+
+
 
     session()->flash('Add', ' تم إضافة العضو بنجاح ورقمه الحزبي هو '.$IDTeam);
     return back();
@@ -1328,7 +1331,6 @@ public function AdvancedIndex()
 //    else
 //    {
 //     $occupation = Occupation::orderBy('Name','Asc')->get();
-
 //    }
 //    $results = Member::where('City',$city)
 //    ->where('area',$area)
@@ -1378,8 +1380,10 @@ public function Advancedsearch(Request $request)
     if ($request->Occupation) {
         $results->where('Occupation', $request->Occupation);
     }
-    $res= $results->get();
-    return view('manager.member.show',compact('res'));
+    $res = $results->get();
+
+    return response()->json($res);
+    return redirect()->route('AdvancedIndex',compact('res'));
 
     // $res= $results->paginate(50);
     // $paginationLinks = $res->withQueryString()->links('pagination::bootstrap-4');
