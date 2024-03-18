@@ -14,7 +14,7 @@ use Auth;
 use DateTime;
 
 use Illuminate\Http\RedirectResponse;
-
+use Intervention\Image\ImageManagerStatic as Image;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
@@ -378,18 +378,32 @@ public function index()
     // $member->DateOfJoin  = $request->DateOfJoin;
     $member->save();
 
-    // store image
-    if($request->hasfile('Image')){
-        $img = $request->file('Image');
-        $img_name = $img->getClientOriginalName();
-        $img->move(public_path('images'), $img_name);
+    // // store image
+    // if($request->hasfile('Image')){
+    //     $img = $request->file('Image');
+    //     $img_name = $img->getClientOriginalName();
+    //     $img->move(public_path('images'), $img_name);
 
-      //  $member->Image  =   $img_name;
-      //  $member->save();
+    //   //  $member->Image  =   $img_name;
+    //   //  $member->save();
+    //     Member::find($member->id)->update([
+    //     'Image'=> $img_name,
+    //     ]);
+
+
+    // store image
+    if($request->hasFile('Image')){
+        $img = $request->file('Image');
+        $img_extension = 'webp'; // تحديد امتداد الصورة كـ WebP
+        $img_name = 'image_' . $member->id . '.' . $img_extension; // اسم ملف الصورة مع ترقيم تصاعدي
+        Image::make($img)->save(public_path('images/' . $img_name)); // حفظ الصورة بامتداد WebP
+    
+        // تحديث الصورة للعضو
         Member::find($member->id)->update([
-        'Image'=> $img_name,
-        ]);
+                'Image'=> $img_name,
+            ]);
     }
+    
 
     session()->flash('Add', ' تم إضافة العضو بنجاح ورقمه الحزبي هو '.$IDTeam);
     return back();
