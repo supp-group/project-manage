@@ -14,7 +14,7 @@ use Auth;
 use DateTime;
 
 use Illuminate\Http\RedirectResponse;
-
+// use Intervention\Image\ImageManagerStatic as Image;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
@@ -379,34 +379,31 @@ public function index()
     $member->save();
 
     // // store image
-    // if($request->hasfile('Image')){
-    //     $img = $request->file('Image');
-    //     $img_name = $img->getClientOriginalName();
-    //     $img->move(public_path('images'), $img_name);
+    if($request->hasfile('Image')){
+        $img = $request->file('Image');
+        $img_name = $img->getClientOriginalName();
+        $img->move(public_path('images'), $img_name);
 
-    //   //  $member->Image  =   $img_name;
-    //   //  $member->save();
-    //     Member::find($member->id)->update([
-    //     'Image'=> $img_name,
-    //     ]);
-
-
-
-        // store image
-  if($request->hasFile('Image')){
-    $img = $request->file('Image');
-    $img_extension = $img->getClientOriginalExtension();
-    $img_name = 'image_' . $member->id . '.' . $img_extension; // اسم ملف الصورة مع ترقيم تصاعدي
-    $img->storeAs('images', $img_name); // حفظ الصورة بالاسم الجديد
-
-    // تحديث الصورة للعضو
+      //  $member->Image  =   $img_name;
+      //  $member->save();
         Member::find($member->id)->update([
         'Image'=> $img_name,
         ]);
+    }
 
-}
-
-
+    // store image
+    // if($request->hasFile('Image')){
+    //     $img = $request->file('Image');
+    //     $img_extension = 'webp'; // تحديد امتداد الصورة كـ WebP
+    //     $img_name = 'image_' . $member->id . '.' . $img_extension; // اسم ملف الصورة مع ترقيم تصاعدي
+    //     Image::make($img)->save(public_path('images/' . $img_name)); // حفظ الصورة بامتداد WebP
+    
+    //     // تحديث الصورة للعضو
+    //     Member::find($member->id)->update([
+    //             'Image'=> $img_name,
+    //         ]);
+    // }
+    
 
     session()->flash('Add', ' تم إضافة العضو بنجاح ورقمه الحزبي هو '.$IDTeam);
     return back();
@@ -634,6 +631,7 @@ $area = $request->area;
 
 
 $member = Member::findOrFail($id);
+$oldimagename=$member->Image;
 $member->NotPad = $request->NotPad;
 $member->branch = $request->branch;
 // $member->IDTeam  = $IDTeam;
@@ -657,23 +655,26 @@ $member->WorkAddress  = $request->WorkAddress;
 $member->HomePhone  = $request->HomePhone;
 $member->WorkPhone  = $request->WorkPhone;
 $member->DateOfJoin  = $dateJoinFormatted;
-// $member->Image = $request->Image;
+   // store image
+if($request->hasfile('Image')){
+    $oldpath = public_path('images').'/'.$oldimagename;
+    
+    // حذف الصورة القديمة إذا كانت موجودة
+    if(file_exists($oldpath)) {
+        unlink($oldpath);
+    }
+
+    $img = $request->file('Image');
+    $img_name = $img->getClientOriginalName();
+    $img->move(public_path('images'), $img_name);
+    
+    Member::find($member->id)->update([
+        'Image' => $img_name,
+    ]);
+   
+}
+
 $member->update();
-
-
-    // store image
-    // if($request->hasfile('Image')){
-    //     $img = $request->file('Image');
-    //     $img_name = $img->getClientOriginalName();
-    //     $img->move(public_path('images'), $img_name);
-
-    //   //  $member->Image  =   $img_name;
-    //   //  $member->save();
-    //     Member::find($member->id)->update([
-    //     'Image'=> $img_name,
-    //     ]);
-    // }
-
 
 // store image
 // if($request->hasFile('Image')){
@@ -1301,131 +1302,74 @@ public function AdvancedIndex()
 }
 
 
-
-// public function Advancedsearch(Request $request)
-// {
-//    if($request->City)
-//     {
-//         $cityId = $request->City;
-//         $cityName = City::where('id', $cityId)->first()->Name;
-//          $city = Member::where('City', $cityName)->first();
-//     }
-//    else
-//    {
-//         $city=City::orderBy('Name','Asc')->get();
-//    }
-
-//     if ($request->area) 
-//     {
-//         $areaId = $request->area;
-//         $areaName = City::where('id', $areaId)->first()->area;
-//         $area = Member::where('area', $areaName);
-//     }
-//     else
-//     {
-//         $area = City::whereNotNull('area')->orderBy('area','Asc')->get();
-//     }
-
-//     if ($request->strret) 
-//     {
-//         $streetId = $request->street;
-//         $streetName = City::where('id', $streetId)->first()->street;
-//         $street = Member::where('street', $streetName);
-//     }
-//     else
-//     {
-//         $street = City::whereNotNull('street')->orderBy('street','Asc')->get();
-//     }
-
-//     if ($request->Qualification) 
-//     {
-//         $qualificationId = $request->Qualification;
-//       $qualificationName = Qualification::where('id', $qualificationId)->first()->Name;
-//         $qualification = Member::where('Qualification', $qualificationName);
-//     }
-//     else
-//     {
-//         $qualification = Qualification::whereNotNull('Name')->orderBy('Name','Asc')->get();
-//     }
-
-//     if ($request->Specialization) 
-//     {
-//         $specializationId = $request->Specialization;
-//         $specializationName = Qualification::where('id', $specializationId)->first()->specialization;
-//         $specialization = Member::where('Specialization', $specializationName);
-//     }
-//     else
-//     {
-//         $specialization =  Qualification::whereNotNull('specialization')->orderBy('specialization','Asc')->get();
-//     }
-
-//     if ($request->Occupation)
-//      {
-//         $occupation = Member::where('Occupation', $request->Occupation);
-//      }
-//    else
-//    {
-//     $occupation = Occupation::orderBy('Name','Asc')->get();
-//    }
-//    $results = Member::where('City',$city)
-//    ->where('area',$area)
-//    ->where('street',$street)
-//    ->where('Qualification',$qualification)
-//    ->where('Specialization', $specialization)
-//    ->where('Occupation', $occupation)
-//    ->get();
-
-//    return view('admin.member.show',compact('results'));
-// }
-
 public function Advancedsearch(Request $request)
 {
     $results = Member::query();
+    $city =City::whereNotNull('Name')->orderBy('Name','Asc')->get();
+    $areas = City::whereNotNull('area')->orderBy('area','Asc')->get();
+    $streets = City::whereNotNull('street')->orderBy('street','Asc')->get();
 
-    if ($request->City) {
+    $qualifications = Qualification::whereNotNull('Name')->orderBy('Name','Asc')->get();
+    $specializations = Qualification::whereNotNull('specialization')->orderBy('Name','Asc')->get();
+    $occupations = Occupation::orderBy('Name','Asc')->get();
+
+        $members = Member::orderBy('IDTeam', 'Asc')->select('id','branch','IDTeam','FullName',
+        'City')->paginate(50);
+        $memberCount = Member::count();
+        $paginationLinks = $members->withQueryString()->links('pagination::bootstrap-4');
+
+
+
+
+    if ($request->City != 0) {
         $cityId = $request->City;
         $cityName = City::where('id', $cityId)->first()->Name;
         $results->where('City', $cityName);
     }
 
-    if ($request->area) {
+    if ($request->area != 0) {
         $areaId = $request->area;
         $areaName = City::where('id', $areaId)->first()->area;
         $results->where('area', $areaName);
     }
 
-    if ($request->street) {
+    if ($request->street != 0) {
         $streetId = $request->street;
         $streetName = City::where('id', $streetId)->first()->street;
         $results->where('street', $streetName);
     }
 
-    if ($request->Qualification) {
+    if ($request->Qualification != 0) {
         $qualificationId = $request->Qualification;
         $qualificationName = Qualification::where('id', $qualificationId)->first()->Name;
         $results->where('Qualification', $qualificationName);
     }
 
-    if ($request->Specialization) {
+    if ($request->Specialization != 0) {
         $specializationId = $request->Specialization;
         $specializationName = Qualification::where('id', $specializationId)->first()->specialization;
         $results->where('Specialization', $specializationName);
     }
 
-    if ($request->Occupation) {
+    if ($request->Occupation != 0) {
         $results->where('Occupation', $request->Occupation);
     }
-    $members= $results->get();
-    return view('admin.member.Advancedsearch',compact('members'));
 
-    // $res= $results->paginate(50);
-    // $paginationLinks = $res->withQueryString()->links('pagination::bootstrap-4');
+    $members = $results->get();
 
-    // return view('manager.member.show', [
-    //     'res' => $res,
-    //     'paginationLinks' => $paginationLinks
-    // ]);
+    return view('admin.member.Advancedsearch', [
+        'members' => $members,
+        'memberCount'=>$memberCount,
+        'city'=>$city,
+        'areas'=>$areas,
+        'streets'=>$streets,
+        
+        'qualifications'=>$qualifications,
+        'specializations'=>$specializations,
+        'occupations'=>$occupations,
+        'paginationLinks' => $paginationLinks
+        // 'paginationLinks' => $paginationLinks
+    ]);
 }
 
- 
 }

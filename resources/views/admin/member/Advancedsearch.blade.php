@@ -72,19 +72,21 @@ integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEw
                             </select>
                           </div>
               
+						  {{-- id="qualificationSelect" --}}
                           <div class="form-group">
                             <label>المؤهل العلمي</label>
-                            <select name="Qualification" id="qualificationSelect" class="form-control select">
-                              <option>اختر المؤهل العلمي</option>
+                            <select name="Qualification" id="q" class="form-control select">
+                              <option value="0">اختر المؤهل العلمي</option>
                               @foreach($qualifications as $qualification)
                                 <option value="{{$qualification->id}}">{{$qualification->Name}}</option>
                               @endforeach 
                             </select>
                           </div>
     
+						  {{-- id="specializationSelect" --}}
                           <div class="form-group">
                             <label>الاختصاص</label>
-                            <select name="Specialization" class="form-control select" id="specializationSelect">
+                            <select name="Specialization" class="form-control select" id="s">
                               <!-- Options will be loaded dynamically -->
                             </select>
                           </div> 
@@ -92,7 +94,7 @@ integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEw
                           <div class="form-group">
                             <label>المهنة</label>
                             <select name="Occupation" class="form-control select"> 
-                              <option>اختر المهنة</option>
+                              <option value="0">اختر المهنة</option>
                               @foreach($occupations as $occupation)
                                 <option value="{{$occupation->Name}}">{{$occupation->Name}}</option>
                               @endforeach 
@@ -227,7 +229,7 @@ integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEw
 @section('js')
 
 	{{-- Dependent Dropdown ===> qualification & specialization --}}
-	<script>
+	{{-- <script>
 		document.addEventListener("DOMContentLoaded", function() {
 		  const qualificationSelect = document.querySelector('#qualificationSelect');
 		  const specializationSelect = document.querySelector('#specializationSelect');
@@ -255,7 +257,39 @@ integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEw
 			  });
 		  });
 		});
+	</script> --}}
+
+
+		<script>
+			var qurl='{{url("admin/member/get-specializations","itemid")}}';
+			 $(function() {
+			 $('#q').change(function(){
+					var thisqurl=qurl;
+			var qId = $(this).find("option:selected").val();
+			if(qId==0){
+				$('#s').html('<option value="0">اختر الاختصاص</option>');
+			}else{
+				thisqurl=thisqurl.replace("itemid",qId);
+			if(qId){
+				$.ajax({
+					url: thisqurl, // Use Laravel's route name
+					method: 'Get', // Match the method type with your route definition
+				 
+					success: function(result){
+						$('#s').html('<option value="0">اختر الاختصاص</option>');
+						$.each(result, function(key, value) {
+						
+			 $('#s').append('<option value="'+value.id+'">'+value.specialization+'</option>');
+						});
+					 }
+				 });
+			 }
+			 }
+			 });
+			 });
 	</script>
+
+
 
 
 	{{-- Dependent Dropdown ===> city & area & street --}}
