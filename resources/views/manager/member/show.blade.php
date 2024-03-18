@@ -39,12 +39,35 @@
 						@csrf
 						<div class="input-group">
 							<div class="input-group-append">
-								<span style="font-size: 16px; padding-top: 8px;">عدم وجود رقم موبايل</span> &nbsp;
+								<span style="font-size: 16px; padding-top: 8px; background-color: #fff;">عدم وجود رقم موبايل</span> &nbsp;
 								<button name="search-phone" type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
 							</div>
 						</div>
 					</form>
 				</div>
+
+
+				<style>
+					@media (max-width: 767px) {
+					  .col-4 {
+						display: none;
+					  }
+				
+					  .col-12 {
+						display: block;
+					  }
+					}
+				  
+					@media (min-width: 768px) {
+					  .col-4 {
+						display: block;
+					  }
+					
+					  .col-12 {
+						display: none;
+					  }
+					}
+				  </style>
 
 
 				{{-- search --}}
@@ -82,7 +105,44 @@
 							</div>
 						</form>
 					</div>
-				</div>
+
+
+
+					<div class="col-12">
+						<form action="{{ route('search-m-team') }}" method="post">
+							@csrf
+							<div class="input-group">
+								<input class="form-control" placeholder="الرقم الحزبي" type="search" name="search_IDTeam">
+								<div class="input-group-append">
+									<button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
+								</div>
+							</div>
+						</form>
+					</div>&nbsp;
+					<div class="col-12">
+						<form action="{{ route('search-m-name') }}" method="post">
+							@csrf
+							<div class="input-group">
+								<input class="form-control" placeholder="الاسم" type="search" name="search_FullName">
+								<div class="input-group-append">
+									<button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
+								</div>
+							</div>
+						</form>
+					</div>&nbsp;
+					<div class="col-12">
+						<form action="{{ route('search-m-occupation') }}" method="post">
+							@csrf
+							<div class="input-group">
+								<input class="form-control" placeholder="المهنة" type="search" name="search_Occupation">
+								<div class="input-group-append">
+									<button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>&nbsp;
+
 				{{-- <br>
 				<div class="row">
 					<div class="col-4">
@@ -135,7 +195,34 @@
 					</div>
 				</form>
 			</div>
+
+
+
+			<div class="col-12">
+				<form action="{{ route('search-m-Area') }}" method="post">
+					@csrf
+					<div class="input-group">
+						<input class="form-control" placeholder="المنطقة" type="search" name="search_Area">
+						<div class="input-group-append">
+							<button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
+						</div>
+					</div>
+				</form>
+			</div>&nbsp;
+
+				<div class="col-12">
+			<form action="{{ route('search-m-Street') }}" method="post">
+					@csrf
+					<div class="input-group">
+						<input class="form-control" placeholder="الحي" type="search" name="search_Street">
+						<div class="input-group-append">
+							<button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
+						</div>
+					</div>
+				</form>
+			</div>&nbsp;
 			</div>
+			<br>
 
 				<!-- breadcrumb -->
 @endsection

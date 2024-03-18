@@ -45,8 +45,6 @@
 
 @endsection
 @section('content')
-
-
 <!-- row -->
 <div class="row">
 	<div class="col-md-6 col-sm-6 col-lg-6 col-xl-6">
@@ -162,50 +160,6 @@
 	</div>
 </div>
 <!-- row closed -->
-
-
-
-
-
-			<!-- row -->
-			{{-- <div class="row">
-				
-
-        <div class="col-lg-8 single-list-page">
-			
-          <div class="single-list-slider owl-carousel" id="sl-slider">
-
-            <div class="sl-item set-bg" data-setbg="img/single-list-slider/1.jpg">
-              <div class="sale-notic">FOR SALE</div>
-            </div>
-            <div class="sl-item set-bg" data-setbg="img/single-list-slider/2.jpg">
-              <div class="rent-notic">FOR Rent</div>
-            </div>
-            <div class="sl-item set-bg" data-setbg="img/single-list-slider/3.jpg">
-              <div class="sale-notic">FOR SALE</div>
-            </div>
-            <div class="sl-item set-bg" data-setbg="img/single-list-slider/4.jpg">
-              <div class="rent-notic">FOR Rent</div>
-            </div>
-            <div class="sl-item set-bg" data-setbg="img/single-list-slider/5.jpg">
-              <div class="sale-notic">FOR SALE</div>
-            </div>
-          </div>
-          <div class="owl-carousel sl-thumb-slider" id="sl-slider-thumb">
-            <div class="sl-thumb set-bg" data-setbg="img/single-list-slider/1.jpg"></div>
-            <div class="sl-thumb set-bg" data-setbg="img/single-list-slider/2.jpg"></div>
-            <div class="sl-thumb set-bg" data-setbg="img/single-list-slider/3.jpg"></div>
-            <div class="sl-thumb set-bg" data-setbg="img/single-list-slider/4.jpg"></div>
-            <div class="sl-thumb set-bg" data-setbg="img/single-list-slider/5.jpg"></div>
-          </div>
-          
-		</div>
-			 --}}
-			<!-- row closed -->
-
-
-
-
 
 @endsection
 @section('js')
