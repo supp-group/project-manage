@@ -640,7 +640,7 @@ $member->WorkAddress  = $request->WorkAddress;
 $member->HomePhone  = $request->HomePhone;
 $member->WorkPhone  = $request->WorkPhone;
 $member->DateOfJoin  = $dateJoinFormatted;
-$member->Image = $request->Image;
+// $member->Image = $request->Image;
 $member->update();
 
 
@@ -656,6 +656,40 @@ $member->update();
     //     'Image'=> $img_name,
     //     ]);
     // }
+
+
+// store image
+// if($request->hasFile('Image')){
+//     $img = $request->file('Image');
+//     $img_name = $img->getClientOriginalName();
+//     $img->move(public_path('images'), $img_name);
+
+//     // تحديث الصورة للعضو
+//     $member->Image = $img_name;
+// }
+
+// $member->save();
+
+
+// if($request->hasfile('Image')) {
+//     $img = $request->file('Image');
+//     $img_name = $img->getClientOriginalName();
+    
+//     // Validate the image
+//     $request->validate([
+//         'Image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+//     ]);
+    
+//     // Move the image
+//     $img->move(public_path('images'), $img_name);
+    
+//     // Update the member
+//     $member = Member::find($member->id);
+//     $member->Image = $img_name;
+//     $member->save();
+// }
+
+
     session()->flash('Edit', 'تم تعديل العضو بنجاح');
     return back(); 
   }
@@ -1240,6 +1274,7 @@ public function AdvancedIndex()
             'city'=>$city,
             'areas'=>$areas,
             'streets'=>$streets,
+            
             'qualifications'=>$qualifications,
             'specializations'=>$specializations,
             'occupations'=>$occupations,
@@ -1364,8 +1399,8 @@ public function Advancedsearch(Request $request)
     if ($request->Occupation) {
         $results->where('Occupation', $request->Occupation);
     }
-    $res= $results->get();
-    return view('manager.member.show',compact('res'));
+    $members= $results->get();
+    return view('admin.member.Advancedsearch',compact('members'));
 
 //     $res= $results->paginate(50);
 //     $paginationLinks = $res->withQueryString()->links('pagination::bootstrap-4');
