@@ -150,15 +150,15 @@
 
 									<div class="form-group">
 										<label>المحافظة</label>
-										<input type="hidden" name="City" value="{{ $member->City }}">
+										{{-- <input type="hidden" name="City" value="{{ $member->City }}"> --}}
 										<select name="City" id="city" 
 										class="form-control @error('City') is-invalid @enderror" >
-											<option value="{{ $member->City }}">اختر المحافظة</option>
+											<option value="{{ $member->City }}">{{ $member->City }}</option>
 											
 											@foreach($cityName as $city)
-											<option value="{{$city->id}}" @selected(old('City')==$city->id)>{{$city->Name}}</option>
+												{{-- <option value="{{$city->id}}" @selected(old('City')==$city->id)>{{$city->Name}}</option> --}}
+												<option value="{{ $city->id }}" {{ old('City') == $city->id ? 'selected' : '' }}>{{ $city->Name }}</option>
 											@endforeach 
-
 										</select>
 
 										@error('City')
@@ -168,11 +168,10 @@
 
 									<div class="form-group">
 										<label>المنطقة</label>
-										<select name="area" class="form-control select @error('area') is-invalid @enderror">
-											<option value="{{ $member->area }}">اختر المنطقة</option>
+										<select name="area" id="area" class="form-control select @error('area') is-invalid @enderror">
+											<option value="{{ $member->area }}">{{ $member->area }}</option>
 											<!-- Options will be loaded dynamically -->
 										</select>
-										
 										@error('area')
 											<div class="alert alert-danger">{{ $message }}</div>
 										@enderror
@@ -180,11 +179,10 @@
 
 									<div class="form-group">
 										<label>الحي</label>
-										<select name="street" class="form-control select @error('street') is-invalid @enderror">
-											<option value="{{ $member->street }}">اختر الحي</option>
+										<select name="street" id="street" class="form-control select @error('street') is-invalid @enderror">
+											<option value="{{ $member->street }}">{{ $member->street }}</option>
 											<!-- Options will be loaded dynamically -->
 										</select>
-										
 										@error('street')
 											<div class="alert alert-danger">{{ $message }}</div>
 										@enderror
@@ -242,7 +240,6 @@
 											</label>
 										</div>
 										@endif
-
 									</div><br>
 
 
@@ -250,10 +247,10 @@
 										<label>المهنة</label>
 										<input type="hidden" name="Occupation" value="{{ $member->Occupation }}">
 										<select name="Occupation" class="form-control select @error('Occupation') is-invalid @enderror">
-											<option value="{{ $member->Occupation }}">اختر المهنة</option>
+											<option value="{{ $member->Occupation }}">{{ $member->Occupation }}</option>
 											
 											@foreach($occupations as $occupation)
-											<option value="{{$occupation->Name}}" @selected(old('Occupation')==$occupation->Name)>{{$occupation->Name}}</option>
+											<option value="{{ $occupation->id }}" {{ old('Occupation') == $occupation->id ? 'selected' : '' }}>{{ $occupation->Name }}</option>
 											@endforeach 
 										</select>
 
@@ -262,7 +259,7 @@
 										@enderror
 									</div>
 
-									<div class="form-group">
+									{{-- <div class="form-group">
 										<label>المؤهل العلمي</label>
 										<select name="Qualification" id="qualificationSelect" class="form-control select @error('Qualification') is-invalid @enderror" onChange="loadSpecializations()">
 											<option value="{{ $member->Qualification }}">اختر المؤهل العلمي</option>
@@ -275,13 +272,26 @@
 										@error('Qualification')
 											<div class="alert alert-danger">{{ $message }}</div>
 										@enderror
+									</div><br> --}}
+
+									<div class="form-group">
+										<label>المؤهل العلمي</label>
+										<select name="Qualification" id="qualificationSelect" class="form-control select @error('Qualification') is-invalid @enderror" onChange="loadSpecializations()">
+											<option value="{{ $member->Qualification }}">{{ $member->Qualification }}</option>
+											@foreach($qualifications as $qualification)  
+												<option value="{{ $qualification->id }}" {{ old('Qualification') == $qualification->id ? 'selected' : '' }}>{{ $qualification->Name }}</option>
+											@endforeach 
+										</select>
+										@error('Qualification')
+											<div class="alert alert-danger">{{ $message }}</div>
+										@enderror
 									</div><br>
 
 									<div class="form-group">
 										<label>الاختصاص</label>
 										<select name="Specialization" id="specializationSelect"
 										class="form-control select @error('Specialization') is-invalid @enderror">
-											<option value="{{ $member->Specialization }}">اختر الاختصاص</option>
+											<option value="{{ $member->Specialization }}">{{ $member->Specialization }}</option>
 											<!-- Options will be loaded dynamically -->
 										</select>
 										
@@ -460,46 +470,7 @@
 </script>
 
 
-
 {{-- Dependent Dropdown ===> qualification & specialization --}}
-{{-- <script>
-	document.addEventListener("DOMContentLoaded", function() {
-	  const qualificationSelect = document.querySelector('#qualificationSelect');
-	  const specializationSelect = document.querySelector('#specializationSelect');
-	
-	  qualificationSelect.addEventListener('change', function() {
-		const qualificationId = this.value;
-
-
-		var url="{{ url('admin/member/get-specializations/[itemid]') }}";
-		url = url.replace('[itemid]',qualificationId);
-
-
-		fetch(url)  // Corrected URL format
-		  .then(response => {
-			if (!response.ok) {
-			  throw new Error('Network response was not ok');
-			}
-			return response.json();
-		  })
-		  .then(specializations => {
-			specializationSelect.innerHTML = '<option value="">اختر الاختصاص</option>'; // Clear and add a placeholder
-			specializations.forEach(specialization => {
-			  const option = document.createElement('option');
-			  option.value = specialization.id;
-			  option.textContent = specialization.specialization;
-			  specializationSelect.appendChild(option);
-			});
-		  })
-		  .catch(error => {
-			console.error('There has been a problem with your fetch operation:', error);
-		  });
-	  });
-	});
-</script> --}}
-
-
-
 <script>
 document.addEventListener("DOMContentLoaded", function() {
   const qualificationSelect = document.querySelector('#qualificationSelect');

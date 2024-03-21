@@ -594,30 +594,33 @@ $member->WorkAddress  = $request->WorkAddress;
 $member->HomePhone  = $request->HomePhone;
 $member->WorkPhone  = $request->WorkPhone;
 $member->DateOfJoin  = $dateJoinFormatted;
-   // store image
-if($request->hasfile('Image')){
-    $oldpath = public_path('assets/img/media/').'/'.$oldimagename;
-    
-    // حذف الصورة القديمة إذا كانت موجودة
-    if(file_exists($oldpath)) {
-        unlink($oldpath);
-    }
 
-    $img = $request->file('Image');
-    $img_name = $img->getClientOriginalName();
-    $img->move(public_path('assets/img/media/'), $img_name);
+$member->Image  = $request->Image;
+
+
+//    // store image
+// if($request->hasfile('Image')){
+//     $oldpath = public_path('assets/img/media/').'/'.$oldimagename;
     
-    Member::find($member->id)->update([
-        'Image' => $img_name,
-    ]);
-   
-}
+//     // حذف الصورة القديمة إذا كانت موجودة
+//     if(file_exists($oldpath)) {
+//         unlink($oldpath);
+//     }
+
+//     $img = $request->file('Image');
+//     $img_name = $img->getClientOriginalName();
+//     $img->move(public_path('assets/img/media/'), $img_name);
+    
+//     Member::find($member->id)->update([
+//         'Image' => $img_name,
+//     ]);  
+// }
 
 $member->update();
 
     session()->flash('Edit', 'تم تعديل العضو بنجاح');
     return back(); 
-  }
+}
 
 
   public function destroy($id)
