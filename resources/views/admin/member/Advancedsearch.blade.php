@@ -134,6 +134,7 @@ integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEw
 @endsection
 @section('content')
 
+@if(isset($members) && !$members->isEmpty()) 
 <div class="row row-sm">
     <div class="col-xl-12">
         <div class="card">
@@ -225,40 +226,13 @@ integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEw
     </div>
 </div>
 
+{{-- @else 
+			
+<h3 style="background-color: white ; text-align: center"  colspan="20">لا توجد نتائج</h3>
+		 --}}
+@endif
 @endsection
 @section('js')
-
-	{{-- Dependent Dropdown ===> qualification & specialization --}}
-	{{-- <script>
-		document.addEventListener("DOMContentLoaded", function() {
-		  const qualificationSelect = document.querySelector('#qualificationSelect');
-		  const specializationSelect = document.querySelector('#specializationSelect');
-		
-		  qualificationSelect.addEventListener('change', function() {
-			const qualificationId = this.value;
-			fetch(`get-specializations/${qualificationId}`)  // Corrected URL format
-			  .then(response => {
-				if (!response.ok) {
-				  throw new Error('Network response was not ok');
-				}
-				return response.json();
-			  })
-			  .then(specializations => {
-				specializationSelect.innerHTML = '<option value="">اختر الاختصاص</option>'; // Clear and add a placeholder
-				specializations.forEach(specialization => {
-				  const option = document.createElement('option');
-				  option.value = specialization.id;
-				  option.textContent = specialization.specialization;
-				  specializationSelect.appendChild(option);
-				});
-			  })
-			  .catch(error => {
-				console.error('There has been a problem with your fetch operation:', error);
-			  });
-		  });
-		});
-	</script> --}}
-
 
 		<script>
 			var qurl='{{url("admin/member/get-specializations","itemid")}}';
