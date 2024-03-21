@@ -384,16 +384,18 @@
 											<br>
 											
 											@if ($member->Image)
-												<td><img src="{{URL::asset('assets/img/media/'.$member->Image)}}" style="width: 100px;"></td>
+												<img src="{{ URL::asset('assets/img/media/' . $member->Image) }}" style="width: 100px;">
 											@else
-												<td><img src="{{URL::asset('assets/img/media/user.jpg')}}"  style="width: 100px;"></td>
+												<img src="{{ URL::asset('assets/img/media/user.jpg') }}" style="width: 100px;">
 											@endif
 											
-											<br>											
-											<input type="file" name="Image" value="{{ $member->Image }}" class="dropify" accept=".jpg, .png, image/jpeg, image/png"
-											data-height="70" />
+											<br>    
+											{{-- <input id="Image" name="Image" type="file" class="upload form-control  @error('Image') is-invalid @enderror" value="{{ old('Image') }}">                   --}}
+											<input type="File"  id="Img" name="Image" class="dropify" accept=".jpg, .png, image/jpeg, image/png" data-height="70" />
 										</div>
 									</div><br>
+
+									
 
 									<div class="d-flex justify-content-center">
 										<button type="submit" class="btn btn-primary">حفظ البيانات</button>
