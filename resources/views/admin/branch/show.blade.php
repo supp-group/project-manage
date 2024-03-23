@@ -61,14 +61,20 @@
 												<th class="wd-15p border-bottom-0">حذف</th>
 											</tr>
 										</thead>
-										<tbody>
+                                        <tbody>
 											<?php $i = 1 ?>
-											@foreach($cities as $city)
+											@foreach($branchs as $branch)
 											<tr>
 												<td>{{$i++}}</td>
-												<td>{{$city->Name}}</td>
-												<td>{{$city->branch}}</td>
-												
+												<td>{{$branch->branch}}</td>
+
+												<td>
+											    @if($cit = App\Models\City::find($branch->parentId))
+												    {{ $cit->branch }}
+											    @else
+												    {{-- this is a city --}}
+											    @endif
+											    </td>
 												<td>
 													<a class="btn btn-sm btn-info" href="{{ route('branch.edit', $branch->id) }}" title="تعديل"><i class="las la-pen"></i></a>
 												</td>
@@ -83,7 +89,7 @@
 																<div class="modal-content">
 			
 																	<div class="modal-header">
-																		<h6 class="modal-title">حذف الفرع: &nbsp; {{$branch->branch}}</h6><button aria-label="Close" class="close" data-dismiss="modal"
+																		<h6 class="modal-title">حذف المنطقة: &nbsp; {{$branch->branch}}</h6><button aria-label="Close" class="close" data-dismiss="modal"
 																			type="button"><span aria-hidden="true">&times;</span></button>
 																	</div>
 			
