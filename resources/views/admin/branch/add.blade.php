@@ -56,6 +56,21 @@
 										</div>
 									</div><br>
 
+                                    <div class="form-group">
+										<label>المحافظة</label>
+										<select name="parentId" class="form-control select @error('parentId') is-invalid @enderror">
+											<option>اختر المحافظة</option>
+											
+											@foreach($cities as $city)
+											<option value="{{$city->id}}">{{$city->Name}}</option>
+											@endforeach 
+										</select>
+
+										@error('parentId')
+												<div class="alert alert-danger">{{ $message }}</div>
+											@enderror
+									</div><br>
+
 									<div class="d-flex justify-content-center">
 										<button type="submit" class="btn btn-primary">حفظ البيانات</button>
 									</div>
