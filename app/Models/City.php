@@ -13,8 +13,11 @@ class City extends Model
     
     protected $areas = 'parent_name';
     protected $streets = 'grand_name';
+    protected $branch_name = 'branch_name';
 
-    protected $fillable = ['Name', 'parentId', 'area', 'grandId', 'street'];
+    
+
+    protected $fillable = ['Name', 'parentId', 'area', 'grandId', 'street','branch'];
 
     public function users(): HasMany
     {
