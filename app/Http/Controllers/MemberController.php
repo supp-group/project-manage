@@ -492,7 +492,7 @@ public function updateForNotice(Request $request, $IDTeam)
 
 public function update(Request $request, $id)
 {
-    // Convert Birthdate format
+  // Convert Birthdate format
   $birthDate = DateTime::createFromFormat('m/d/Y',$request->BirthDate);
   $birthDateFormatted = $birthDate ? $birthDate->format('Y-m-d') : $request->BirthDate;
 
@@ -595,6 +595,7 @@ public function update(Request $request, $id)
     $member->update(['Image' => $newImageName]);
   }
 
+  
     session()->flash('Edit', 'تم تعديل العضو بنجاح');
     return back(); 
 }

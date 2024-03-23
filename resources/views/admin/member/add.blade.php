@@ -65,7 +65,7 @@
 										<div class="col">
 											<label for="inputName" class="control-label">الفرع</label>
 											<input type="text" class="form-control @error('branch') is-invalid @enderror" 
-											id="inputName" name="branch" required>
+											id="inputName" name="branch">
 										
 											@error('branch')
 												<div class="alert alert-danger">{{ $message }}</div>
@@ -77,7 +77,7 @@
 										<div class="col">
 											<label for="inputName" class="control-label">الاسم الثلاثي</label>
 											<input type="text" class="form-control @error('FullName') is-invalid @enderror" 
-											id="inputName" name="FullName" required>
+											id="inputName" name="FullName">
 										
 											@error('FullName')
 												<div class="alert alert-danger">{{ $message }}</div>
@@ -89,7 +89,7 @@
 										<div class="col">
 											<label for="inputName" class="control-label">اسم الأم</label>
 											<input type="text" class="form-control @error('MotherName') is-invalid @enderror" 
-											id="inputName" name="MotherName" required>
+											id="inputName" name="MotherName">
 
 											@error('MotherName')
 												<div class="alert alert-danger">{{ $message }}</div>
@@ -101,7 +101,7 @@
 										<div class="col">
 											<label for="inputName" class="control-label">محل الولادة</label>
 											<input type="text" class="form-control @error('PlaceOfBirth') is-invalid @enderror" 
-											id="inputName" name="PlaceOfBirth" required>
+											id="inputName" name="PlaceOfBirth">
 
 											@error('PlaceOfBirth')
 												<div class="alert alert-danger">{{ $message }}</div>
@@ -114,7 +114,7 @@
 											<div class="form-group">
 												<label>تاريخ الولادة</label>
 													<input type="datetime" class="form-control @error('BirthDate') is-invalid @enderror" 
-													name="BirthDate" required>
+													name="BirthDate">
 
 													@error('BirthDate')
 														<div class="alert alert-danger">{{ $message }}</div>
@@ -127,7 +127,7 @@
 										<div class="col">
 											<label for="inputName" class="control-label">محل ورقم القيد</label>
 											<input type="text" class="form-control @error('Constraint') is-invalid @enderror" 
-											id="inputName" name="Constraint" required>
+											id="inputName" name="Constraint">
 
 											@error('Constraint')
 												<div class="alert alert-danger">{{ $message }}</div>
@@ -139,7 +139,7 @@
 									<div class="form-group">
 										<label>المحافظة</label>
 										<select name="City" id="city" 
-										class="form-control @error('City') is-invalid @enderror" >
+										class="form-control @error('City') is-invalid @enderror">
 											<option value="0">اختر المحافظة</option>
 											
 											@foreach($cityName as $city)
@@ -190,7 +190,7 @@
 										<div class="col">
 											<label for="inputName" class="control-label">الرقم الوطني</label>
 											<input type="text" class="form-control @error('IDNumber') is-invalid @enderror" 
-											id="inputName" name="IDNumber" required>
+											id="inputName" name="IDNumber">
 
 											@error('IDNumber')
     											<div class="alert alert-danger">{{ $message }}</div>
@@ -264,7 +264,7 @@
 										<div class="col">
 										  <label for="inputName" class="control-label">رقم الموبايل</label>
 										  <input type="text" class="form-control @error('MobilePhone') is-invalid @enderror" 
-										  id="inputName" name="MobilePhone" required>
+										  id="inputName" name="MobilePhone">
 
 										@error('MobilePhone')
 											<div class="alert alert-danger">{{ $message }}</div>
@@ -276,7 +276,7 @@
 										<div class="col">
 										  <label for="inputName" class="control-label">عنوان المنزل</label>
 										  <input type="text" class="form-control @error('HomeAddress') is-invalid @enderror" 
-										  id="inputName" name="HomeAddress" required>
+										  id="inputName" name="HomeAddress">
 
 										    @error('HomeAddress')
 										  		<div class="alert alert-danger">{{ $message }}</div>
@@ -288,7 +288,7 @@
 										<div class="col">
 										  <label for="inputName" class="control-label">عنوان العمل</label>
 										  <input type="text" class="form-control @error('WorkAddress') is-invalid @enderror" 
-										  id="inputName" name="WorkAddress" required>
+										  id="inputName" name="WorkAddress">
 										
 										    @error('WorkAddress')
 										  		<div class="alert alert-danger">{{ $message }}</div>
@@ -300,7 +300,7 @@
 										<div class="col">
 										  <label for="inputName" class="control-label">هاتف المنزل</label>
 										  <input type="text" class="form-control @error('HomePhone') is-invalid @enderror" 
-										  id="inputName" name="HomePhone" required>
+										  id="inputName" name="HomePhone">
 										
 										  	@error('HomePhone')
 										  		<div class="alert alert-danger">{{ $message }}</div>
@@ -312,7 +312,7 @@
 										<div class="col">
 										  <label for="inputName" class="control-label">هاتف العمل</label>
 										  <input type="text" class="form-control @error('WorkPhone') is-invalid @enderror" 
-										  id="inputName" name="WorkPhone" required>
+										  id="inputName" name="WorkPhone">
 
 										  	@error('WorkPhone')
 										  		<div class="alert alert-danger">{{ $message }}</div>
