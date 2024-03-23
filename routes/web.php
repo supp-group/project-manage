@@ -158,7 +158,7 @@ Route::middleware(['auth', 'verified', 'admin'])-> prefix('admin')->group(functi
     Route::delete('delete/{id}', [CityController::class, 'destroyStreet'])->name('street.delete');
 
 
-    Route::get('/get-areas/{cityId}',[CityController::class, 'getAreas']);
+    Route::get('/get-areas/{cityId}',[CityController::class, 'getAreaForCity']);
 
   });
 
