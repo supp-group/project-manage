@@ -118,6 +118,21 @@ Route::middleware(['auth', 'verified', 'admin'])-> prefix('admin')->group(functi
     Route::delete('delete/{id}', [UserController::class, 'destroy'])->name('user.delete');
   });
 
+
+   //   /branch
+  Route:: prefix('branch')->group(function () {
+
+    Route::get('show', [CityController::class, 'indexBranch']);
+    Route::get('add', [CityController::class, 'createBranch']);
+    Route::post('save', [CityController::class, 'storeBranch'])->name('branch.save');
+
+    Route::get('edit/{id}', [CityController::class, 'editBranch'])->name('branch.edit');
+    Route::post('update/{id}', [CityController::class, 'updateBranch'])->name('branch.update');
+
+    Route::delete('delete/{id}', [CityController::class, 'destroyBranch'])->name('branch.delete');
+    });
+
+
    //   /city
    Route:: prefix('city')->group(function () {
 

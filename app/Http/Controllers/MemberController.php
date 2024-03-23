@@ -324,7 +324,7 @@ public function store(Request $request): RedirectResponse
         $newImage->move(public_path('assets/img/media/'), $newImageName);
         Member::find($member->id)->update([
                 'Image'=> $newImageName,
-            ]);
+    ]);
    }
     
 
@@ -595,7 +595,8 @@ public function update(Request $request, $id)
     $member->update(['Image' => $newImageName]);
   }
 
-  
+
+
     session()->flash('Edit', 'تم تعديل العضو بنجاح');
     return back(); 
 }
