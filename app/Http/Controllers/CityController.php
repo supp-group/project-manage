@@ -324,7 +324,6 @@ class CityController extends Controller
 
     public function getBranchForCity($branchId)
     {
-      // return $cityId;
       $branchs = City::where('id', $branchId)
                   ->whereNotNull('branch')
                   ->orderBy('branch', 'Asc')

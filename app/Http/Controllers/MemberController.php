@@ -32,7 +32,7 @@ public function index()
         $city = City::whereNotNull('Name')->orderBy('Name','Asc')->get();
         $areas = City::whereNotNull('area')->orderBy('area','Asc')->get();
         $streets = City::whereNotNull('street')->orderBy('street','Asc')->get();
-        $branch =Member::select('branch')->get();
+        $branch =City::whereNotNull('branch')->orderBy('branch','Asc')->get();
         $qualifications = Qualification::whereNotNull('Name')->orderBy('Name','Asc')->get();
         $specializations = Qualification::whereNotNull('specialization')->orderBy('Name','Asc')->get();
         $occupations = Occupation::orderBy('Name','Asc')->get();
@@ -65,7 +65,7 @@ public function index()
             ->value('Name');
         
         $members = Member::where('City', $cityName)->orderBy('IDTeam', 'Asc')->paginate(50);
-        $branch =Member::here('branch', 'like', '%'.$cityName.'%')->first();
+        $branch =Member::where('branch', 'like', '%'.$cityName.'%')->first();
         $memberCount = Member::where('City', $cityName)->count();
         $paginationLinks = $members->withQueryString()->links('pagination::bootstrap-4');
 
@@ -203,12 +203,15 @@ public function create()
             if($city)
             {
                 $cityName = $city;
+               $branch =City::where('branch','like', '%'.$cityName.'%')->first();
+               
             }
             else
             {
                 $cityName =City::whereNotNull('Name')->orderBy('Name','Asc')->get();
-            }
+                $branch =City::whereNotNull('branch')->orderBy('branch','Asc')->get();
 
+            }
         $areas = City::whereNotNull('area')->orderBy('area','Asc')->get();
         $streets = City::whereNotNull('street')->orderBy('street','Asc')->get();
 
@@ -218,11 +221,11 @@ public function create()
 
         if ( auth()->user()->Role == 'admin')
         {
-            return view('admin.member.add', compact('cityName', 'qualifications', 'occupations', 'areas', 'streets'));
+            return view('admin.member.add', compact('cityName', 'qualifications', 'occupations', 'areas', 'streets','branch'));
         }
        else if ( auth()->user()->Role == 'manager')
         {
-            return view('manager.member.add', compact('cityName', 'qualifications', 'occupations'));
+            return view('manager.member.add', compact('cityName', 'qualifications', 'occupations','branch'));
         }
 }
 
