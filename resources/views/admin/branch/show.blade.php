@@ -55,8 +55,8 @@
 										<thead>
 											<tr>
 												<th class="wd-15p border-bottom-0">#</th>
-												<th class="wd-15p border-bottom-0">المحافظة</th>
 												<th class="wd-15p border-bottom-0">الفرع</th>
+												<th class="wd-15p border-bottom-0">المحافظة</th>
 												<th class="wd-15p border-bottom-0">تعديل</th>
 												<th class="wd-15p border-bottom-0">حذف</th>
 											</tr>
@@ -70,7 +70,7 @@
 
 												<td>
 											    @if($cit = App\Models\City::find($branch->parentId))
-												    {{ $cit->branch }}
+												    {{ $cit->Name }}
 											    @else
 												    {{-- this is a city --}}
 											    @endif
