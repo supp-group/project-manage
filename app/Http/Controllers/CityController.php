@@ -23,7 +23,7 @@ class CityController extends Controller
         if($branch->grandId>0)
         {
           $parent = City::find( $branch->grandId);
-          $branch->grand_name = $parent->branch;
+          $branch->branch_name = $parent->branch;
         }
       }
       return view('admin.branch.show',compact('branchs'));
