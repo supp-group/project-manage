@@ -14,6 +14,21 @@ class CityController extends Controller
       return view('admin.city.show',compact('cities'));
     }
 
+    public function indexBranch()
+    { 
+      $branchs = City::whereNotNull('branch')->orderBy('branch','Asc')->get();
+
+      foreach($branchs as  $branch)
+      {
+        if($branch->grandId>0)
+        {
+          $parent = City::find( $branch->grandId);
+          $branch->grand_name = $parent->branch;
+        }
+      }
+      return view('admin.branch.show',compact('branchs'));
+    }
+
     public function indexArea()
     { 
       $areas = City::whereNotNull('area')->orderBy('Name','Asc')->get();
@@ -51,6 +66,12 @@ class CityController extends Controller
       return view('admin.city.add');
     }
 
+    public function createBranch()
+    {
+      $cities = City::whereNotNull('Name')->orderBy('Name','asc')->get();
+      return view('admin.branch.add', compact('cities'));
+    }
+
     public function createArea()
     {
       $cities = City::whereNotNull('Name')->orderBy('Name','asc')->get();
@@ -82,6 +103,19 @@ class CityController extends Controller
       return back();
     }
 
+    
+    public function storeBranch(Request $request)
+    {
+      City::create([
+        'parentId'=>$request->parentId,
+        'branch'=>$request->branch,
+      ]);
+
+      session()->flash('Add', 'تم إضافة الفرع بنجاح');
+      return redirect()->back();
+    }
+
+
     public function storeArea(Request $request)
     {
       City::create([
@@ -92,6 +126,7 @@ class CityController extends Controller
       session()->flash('Add', 'تم إضافة المنطقة بنجاح');
       return redirect()->back();
     }
+
 
     public function storeStreet(Request $request)
     {
@@ -117,6 +152,12 @@ class CityController extends Controller
   {
     $city = City::findOrFail($id);
     return view('admin.city.edit',compact('city'));
+  }
+
+  public function editBranch($id)
+  {
+    $branch = City::findOrFail($id);
+    return view('admin.branch.edit',compact('branch'));
   }
 
   public function editArea($id)
@@ -145,6 +186,24 @@ class CityController extends Controller
       ]);
 
       session()->flash('Edit', 'تم تعديل المحافظة بنجاح');
+      return back();
+    }
+
+    public function updateBranch(Request $request, $id)
+    {
+      $validated = $request->validate([
+        'parentId'=>'required',
+        'branch' => 'required|unique:cities|max:255',
+      ]);
+  
+      $branch = City::findOrFail($id);
+  
+      $branch->update([
+        'parentId'=>$request->parentId,
+        'branch'=>$request->branch,
+      ]);
+  
+      session()->flash('Edit', 'تم تعديل الفرع بنجاح');
       return back();
     }
 
@@ -208,6 +267,16 @@ class CityController extends Controller
       return back();
     }
 
+    public function destroyBranch($id)
+    {
+      $branch = City::findOrFail($id);
+      $branch->delete();
+    
+      session()->flash('delete', 'تم حذف الفرع بنجاح');
+      return back();
+    }
+
+
     public function destroyArea($id)
     {
       $area = City::findOrFail($id);
@@ -252,5 +321,17 @@ class CityController extends Controller
       // return view('admin.member.add',compact('streets'));
       return response()->json($street);
     }
+
+    public function getBranchForCity($branchId)
+    {
+      // return $cityId;
+      $branchs = City::where('id', $branchId)
+                  ->whereNotNull('branch')
+                  ->orderBy('branch', 'Asc')
+                  ->get();
+
+      return response()->json($branchs);
+    }    
+
 
 }

@@ -61,7 +61,7 @@
 								<form action="{{ url('admin/member/save') }}" method="post" enctype="multipart/form-data" autocomplete="off">
 									{{ csrf_field() }}
 		
-									 <div class="row">
+									 {{-- <div class="row">
 										<div class="col">
 											<label for="inputName" class="control-label">الفرع</label>
 											<input type="text" class="form-control @error('branch') is-invalid @enderror" 
@@ -71,6 +71,23 @@
 												<div class="alert alert-danger">{{ $message }}</div>
 											@enderror
 										</div>
+									</div><br> --}}
+
+									<div class="form-group">
+										<label>الفرع</label>
+										<select name="branch" id="br" 
+										class="form-control @error('branch') is-invalid @enderror">
+											<option value="0">اختر الفرع</option>
+											
+											@foreach($branch as $br)
+											<option value="{{$br->id}}" >{{$br->Name}}</option>
+											@endforeach 
+
+										</select>
+
+										@error('branch')
+										<div class="alert alert-danger">{{ $message }}</div>
+										@enderror
 									</div><br>
 					
 									<div class="row">

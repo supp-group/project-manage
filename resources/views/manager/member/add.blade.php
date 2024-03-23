@@ -47,16 +47,17 @@
 								<form action="{{ route('memberm.save') }}" method="post" enctype="multipart/form-data" autocomplete="off">
 									{{ csrf_field() }}
 							
-									 <div class="row">
-										<div class="col">
-											<label for="inputName" class="control-label">الفرع</label>
-											<input type="text" class="form-control @error('branch') is-invalid @enderror" 
-											id="inputName" name="branch" required>
-										
-											@error('branch')
-												<div class="alert alert-danger">{{ $message }}</div>
-											@enderror
-										</div>
+								
+									
+									<div class="form-group">
+										<label>الفرع</label>
+										<select name="branch" id="br" 
+										class="form-control @error('branch') is-invalid @enderror">
+										<option >{{$branch}}</option>
+										</select>
+										@error('branch')
+										<div class="alert alert-danger">{{ $message }}</div>
+										@enderror
 									</div><br>
 
 									<div class="row">
