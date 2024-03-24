@@ -585,26 +585,25 @@ public function update(Request $request, $id)
   $member->HomePhone  = $request->HomePhone;
   $member->WorkPhone  = $request->WorkPhone;
   $member->DateOfJoin  = $dateJoinFormatted;
-  $member->update();
+//   $member->update();
 
-  // store newImage
+  // Store newImage
   if ($request->hasFile('Image')) {
-    // Delete the old image from server
+    // Delete the old image from the server
     if ($oldImageName) {
-       // Storage::delete('public/assets/img/media/' . $oldImageName);
-       File::delete(public_path('assets/img/media/'). $oldImageName);
+         // Storage::delete('public/assets/img/media/' . $oldImageName);
+         File::delete(public_path('assets/img/media/' . $oldImageName));
     }
-
     // Upload new image
     $newImage = $request->file('Image');
     $newImageName = 'image_' . $member->id . '.' . $newImage->getClientOriginalExtension();
     $newImage->move(public_path('assets/img/media/'), $newImageName);
 
     // Update the image record with the new image name
-    $member->update(['Image' => $newImageName]);
-  }
-
-
+    // $member->update(['Image' => $newImageName]);
+    $member->Image = $newImageName;
+}
+    $member->update();
 
     session()->flash('Edit', 'تم تعديل العضو بنجاح');
     return back(); 
