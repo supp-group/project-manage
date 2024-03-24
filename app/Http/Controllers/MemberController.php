@@ -203,7 +203,7 @@ public function create()
             if($city)
             {
                 $cityName = $city;
-               $branch =City::where('branch','like', '%'.$cityName.'%')->whereNotNull('branch')->orderBy('branch','Asc')->get();
+               $branch =City::where('branch','like', '%'.$cityName.'%')->whereNotNull('branch')->value('branch');
                $areas = City::where('parentId', $user->city_id)->whereNotNull('area')->orderBy('area','Asc')->get();
                $streets = City::where('grandId', $user->city_id)->whereNotNull('street')->orderBy('street','Asc')->get();
             }
