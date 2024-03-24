@@ -77,7 +77,7 @@
 											<option value="0">اختر الفرع</option>
 											
 											@foreach($branch as $br)
-											<option value="{{$br->id}}" >{{$br->Name}}</option>
+											<option value="{{$br->branch}}" >{{$br->branch}}</option>
 											@endforeach 
 
 										</select>
