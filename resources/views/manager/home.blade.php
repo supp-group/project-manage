@@ -76,35 +76,63 @@
 	
 	<div class="row">
 		<div class="col-md-6 col-sm-6 col-lg-6 col-xl-6">
-
+			
 				<div class="dash-widget">
-					<span class="dash-widget-bg1"><i class="fa fa-home" aria-hidden="true"></i></span>
+					<span class="dash-widget-bg1"><i class="fa fa-map-marker-alt" aria-hidden="true"></i></span>
 					<div class="dash-widget-info text-right">
 						<br>
 							<h3 style="color: black;">المحافظات</h3>
 						  <br>
 					</div>
 				</div>
-
+			
 		</div>
 	
 		<div class="col-md-6 col-sm-6 col-lg-6 col-xl-6">
-
-				<div class="dash-widget">
-					<span class="dash-widget-bg1"><i class="fa fa-university" aria-hidden="true"></i></span>
-					<div class="dash-widget-info text-right">
-						<br>
-							<h3 style="color: black;">المؤهلات العلمية</h3>
-						  <br>
-					</div>
+			<div class="dash-widget">
+				<span class="dash-widget-bg1"><i class="fa fa-home" aria-hidden="true"></i></span>
+				<div class="dash-widget-info text-right">
+					<br>
+						<h3 style="color: black;">المناطق</h3>
+					  <br>
 				</div>
+			</div>
+	</div>
 
-		</div>
+		
 	</div>
 	
 	<div class="row">
+
+		<div class="col-md-6 col-sm-6 col-lg-6 col-xl-6">
+			
+				<div class="dash-widget">
+					<span class="dash-widget-bg1"><i class="fa fa-building" aria-hidden="true"></i></span>
+					<div class="dash-widget-info text-right">
+						<br>
+							<h3 style="color: black;">الأحياء</h3>
+						  <br>
+					</div>
+				</div>
+			
+		</div>
+
 		<div class="col-md-6 col-sm-6 col-lg-6 col-xl-6">
 
+			<div class="dash-widget">
+				<span class="dash-widget-bg1"><i class="fa fa-university" aria-hidden="true"></i></span>
+				<div class="dash-widget-info text-right">
+					<br>
+						<h3 style="color: black;">المؤهلات العلمية</h3>
+					  <br>
+				</div>
+			</div>
+
+	</div>
+</div>
+
+		<div class="row">
+		<div class="col-md-6 col-sm-6 col-lg-6 col-xl-6">
 				<div class="dash-widget">
 					<span class="dash-widget-bg1"><i class="fa fa-graduation-cap" aria-hidden="true"></i></span>
 					<div class="dash-widget-info text-right">
@@ -113,11 +141,9 @@
 						  <br>
 					</div>
 				</div>
-
 		</div>
 	
 		<div class="col-md-6 col-sm-6 col-lg-6 col-xl-6">
-
 				<div class="dash-widget">
 					<span class="dash-widget-bg1"><i class="fa fa-gavel" aria-hidden="true"></i></span>
 					<div class="dash-widget-info text-right">
@@ -126,7 +152,6 @@
 						  <br>
 					</div>
 				</div>
-
 		</div>
 	</div>
 	<!-- row closed -->
