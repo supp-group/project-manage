@@ -202,8 +202,10 @@ public function create()
             ->value('Name');
             if($city)
             {
-                $cityName = $city;
-               $branch =City::where('branch','like', '%'.$cityName.'%')->whereNotNull('branch')->value('branch');
+               $cityName = $city;
+               $branch = City::where('branch', 'like', '%' . $cityName . '%')->pluck('branch')->first();
+
+            //    $branch =City::where('branch','like', '%'.$cityName.'%')->select('branch')->get();
                $areas = City::where('parentId', $user->city_id)->whereNotNull('area')->orderBy('area','Asc')->get();
                $streets = City::where('grandId', $user->city_id)->whereNotNull('street')->orderBy('street','Asc')->get();
             }
@@ -216,7 +218,6 @@ public function create()
 
             }
       
-
         $qualifications = Qualification::whereNotNull('Name')->orderBy('Name','Asc')->get();
         $specializations = Qualification::whereNotNull('specialization')->orderBy('Name','Asc')->get();
         $occupations = Occupation::orderBy('Name','Asc')->get();
@@ -227,7 +228,7 @@ public function create()
         }
        else if ( auth()->user()->Role == 'manager')
         {
-            return view('manager.member.add', compact('cityName', 'qualifications', 'occupations','branch'));
+            return view('manager.member.add', compact('cityName', 'qualifications', 'occupations','branch', 'areas', 'streets'));
         }
 }
 
