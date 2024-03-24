@@ -266,7 +266,6 @@ Route::middleware(['auth', 'verified', 'manager'])-> prefix('manager')->group(fu
         Route::get('details/{id}',[MemberController::class,'details'])->name('memberm.details');
 
 
-        Route::get('/get-areasm/{cityId}', [CityController::class, 'getAreaForCity']);
         Route::get('/get-streets/{areaId}', [CityController::class, 'getStreetForArea']);
 
 

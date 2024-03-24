@@ -285,8 +285,22 @@ public function store(Request $request): RedirectResponse
   $specializationName = Qualification::where('id', $specializationId)->first()->specialization;
 
 
+
   $cityId = $request->City;
-  $cityName = City::where('id', $cityId)->first()->Name;
+
+  if (is_numeric($cityId)) {
+      // إذا كانت القيمة هي id
+      $cityName = City::where('id', $cityId)->value('Name');
+  } else {
+      // إذا كانت القيمة هي اسم
+      $cityName = $cityId;
+  }
+
+
+//   $cityId = $request->City;
+//   $cityName = City::where('id', $cityId)->first()->Name;
+
+
 
   $areaId = $request->area;
   $areaName = City::where('id', $areaId)->first()->area;

@@ -123,7 +123,7 @@
 										<label>المحافظة</label>
 										<select name="City" class="form-control select">
 											{{-- @foreach($cityName as $city) --}}
-												<option value="{{ $cityName }}">{{ $cityName }}</option>
+												<option>{{ $cityName }}</option>
 											{{-- @endforeach --}}
 										</select>
 									</div><br>
@@ -132,6 +132,12 @@
 										<label>المنطقة</label>
 										<select name="area" id="area" 
 										class="form-control select @error('area') is-invalid @enderror">
+
+										<option value="0">اختر المنطقة</option>
+											@foreach ($areas as $area)
+												<option value="{{ $area->id }}">{{ $area->area }}</option>
+											@endforeach
+
 										</select>
 
 										@error('area')
@@ -184,8 +190,9 @@
 
 									<div class="form-group">
 										<label>المهنة</label>
-										<select name="Occupation" class="form-control select @error('Occupation') is-invalid @enderror" id="Occupation"> 
-											<option>اختر المهنة</option>
+										<select name="Occupation" id="Occupation" 
+										class="form-control select @error('Occupation') is-invalid @enderror"> 
+											<option value="لايوجد">اختر المهنة</option>
 											
 											@foreach($occupations as $occupation)
 											<option value="{{$occupation->Name}}">{{$occupation->Name}}</option>
@@ -417,58 +424,33 @@
 		
 
 
-	{{-- Dependent Dropdown ===> city & area & street --}}
-		<script>
-			var cityurl='{{url("manager/memberm/get-areasm","itemid")}}';
-			var areaurl='{{url("manager/memberm/get-streets","itemid")}}';
+{{-- Dependent Dropdown ===> area & street --}}
+<script>
+	var areaurl='{{url("manager/memberm/get-streets","itemid")}}';
 
-			 $(function() {
-			 $('#city').change(function(){
-					var thiscityurl=cityurl;
-			var cityId = $(this).find("option:selected").val();
-			if(cityId==0){
-				$('#area').html('<option value="0">اختر المنطقة</option>');
-			}else{
-				thiscityurl=thiscityurl.replace("itemid",cityId);
-			if(cityId){
-				$.ajax({
-					url: thiscityurl, // Use Laravel's route name
-					method: 'Get', // Match the method type with your route definition
-				 
-					success: function(result){
-						$('#area').html('<option value="0">اختر المنطقة</option>');
-						$.each(result, function(key, value) {
-						
-			 $('#area').append('<option value="'+value.id+'">'+value.area+'</option>');
-						});
-					 }
-				 });
-			 }
-			 }
-			 });
- 
- 
+	$(function() {
+			
 		$('#area').change(function(){
-		 var thisareaurl=areaurl;
-		 var areaId = $(this).find("option:selected").val();
-		 thisareaurl=thisareaurl.replace("itemid",areaId);
-		 if(areaId){
-			 $.ajax({
+		var thisareaurl=areaurl;
+		var areaId = $(this).find("option:selected").val();
+		thisareaurl=thisareaurl.replace("itemid",areaId);
+		if(areaId){
+			$.ajax({
 				 url: thisareaurl, // Use Laravel's route name
 				 method: 'Get', // Match the method type with your route definition
 			  
 				 success: function(result){
-					 $('#street').html('<option value="0">اختر الحي</option>');
-					 $.each(result, function(key, value) {
-		  $('#street').append('<option value="'+value.id+'">'+value.street+'</option>');
-		  });
-		 }
-		  });
-		 }
-		 }); 
-		 }); 
+					$('#street').html('<option value="0">اختر الحي</option>');
+					$.each(result, function(key, value) {
+		  			$('#street').append('<option value="'+value.id+'">'+value.street+'</option>');
+		  			});
+				}
+			});
+		}
+		}); 
+	}); 
  
-	 </script>
+</script>
 
 
 
