@@ -343,7 +343,7 @@ public function store(Request $request): RedirectResponse
         //$newImageName = $img->getClientOriginalName();
         //for change image name
         $newImageName = 'image_' . $member->id . '.' . $newImage->getClientOriginalExtension();
-        $newImage->move(public_path('assets/img/media/'), $newImageName);
+        $newImage->move(('assets/img/media/'), $newImageName);
         Member::find($member->id)->update([
                 'Image'=> $newImageName,
     ]);
