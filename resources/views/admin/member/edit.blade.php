@@ -74,7 +74,7 @@
 										<label>الفرع</label>
 										<select name="branch" id="br" 
 										class="form-control @error('branch') is-invalid @enderror">
-											<option value="0">اختر الفرع</option>
+											<option value="{{$member->branch}}">{{$member->branch}} </option>
 											
 											@foreach($branch as $br)
 											<option value="{{$br->branch}}" >{{$br->branch}}</option>

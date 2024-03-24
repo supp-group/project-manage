@@ -204,16 +204,18 @@ public function create()
             {
                 $cityName = $city;
                $branch =City::where('branch','like', '%'.$cityName.'%')->first();
-               
+               $areas = City::where('parentId', $user->city_id)->whereNotNull('area')->orderBy('area','Asc')->get();
+               $streets = City::where('grandId', $user->city_id)->whereNotNull('street')->orderBy('street','Asc')->get();
             }
             else
             {
                 $cityName =City::whereNotNull('Name')->orderBy('Name','Asc')->get();
                 $branch =City::whereNotNull('branch')->orderBy('branch','Asc')->get();
+                $areas = City::whereNotNull('area')->orderBy('area','Asc')->get();
+                $streets = City::whereNotNull('street')->orderBy('street','Asc')->get();
 
             }
-        $areas = City::whereNotNull('area')->orderBy('area','Asc')->get();
-        $streets = City::whereNotNull('street')->orderBy('street','Asc')->get();
+      
 
         $qualifications = Qualification::whereNotNull('Name')->orderBy('Name','Asc')->get();
         $specializations = Qualification::whereNotNull('specialization')->orderBy('Name','Asc')->get();
