@@ -357,6 +357,7 @@ public function edit($id)
 
      $areas = City::whereNotNull('area')->orderBy('area','Asc')->get();
      $streets = City::whereNotNull('street')->orderBy('street','Asc')->get();
+     $branch =City::whereNotNull('branch')->orderBy('branch','Asc')->get();
 
      $qualifications = Qualification::whereNotNull('Name')->orderBy('Name','Asc')->get();
      $specializations = Qualification::whereNotNull('specialization')->orderBy('Name','Asc')->get();
@@ -364,11 +365,11 @@ public function edit($id)
 
      if ( auth()->user()->Role == 'admin')
      {
-      return view('admin.member.edit',compact('member', 'cityName', 'qualifications', 'specializations', 'occupations', 'areas', 'streets'));
+      return view('admin.member.edit',compact('member', 'cityName', 'qualifications', 'specializations', 'occupations', 'areas', 'streets','branch'));
      }
     else if ( auth()->user()->Role == 'manager')
      {
-      return view('manager.member.edit',compact('member', 'cityName', 'qualifications', 'specializations', 'occupations'));
+      return view('manager.member.edit',compact('member', 'cityName', 'qualifications', 'specializations', 'occupations','branch'));
      }
 }
 
