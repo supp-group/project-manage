@@ -273,7 +273,9 @@
 											</tr>
 										</thead>
 										<tbody>
-											<?php $i = 1 ?>
+											
+											<?php $i = $members->firstItem(); ?>
+
 											@if(isset($members) && !$members->isEmpty()) 
 											@foreach($members as $member)
 											<tr>
