@@ -46,9 +46,7 @@
 							<div class="card-body">
 								<form action="{{ route('memberm.save') }}" method="post" enctype="multipart/form-data" autocomplete="off">
 									{{ csrf_field() }}
-							
-								
-									
+															
 									<div class="form-group">
 										<label>الفرع</label>
 										<select name="branch" id="br" class="form-control @error('branch') is-invalid @enderror">
@@ -128,6 +126,28 @@
 												<option value="{{ $cityName }}">{{ $cityName }}</option>
 											{{-- @endforeach --}}
 										</select>
+									</div><br>
+
+									<div class="form-group">
+										<label>المنطقة</label>
+										<select name="area" id="area" 
+										class="form-control select @error('area') is-invalid @enderror">
+										</select>
+
+										@error('area')
+											<div class="alert alert-danger">{{ $message }}</div>
+										@enderror
+									</div><br>
+
+									<div class="form-group">
+										<label>الحي</label>
+										<select name="street" id="street"
+										class="form-control select @error('street') is-invalid @enderror">
+										</select>
+
+										@error('street')
+											<div class="alert alert-danger">{{ $message }}</div>
+										@enderror
 									</div><br>
 
 									<div class="row">
@@ -365,7 +385,7 @@
 
 
 	{{-- Dependent Dropdown ===> qualification & specialization --}}
-	 <script>
+	<script>
 		document.addEventListener("DOMContentLoaded", function() {
 		  const qualificationSelect = document.querySelector('#qualificationSelect');
 		  const specializationSelect = document.querySelector('#specializationSelect');
@@ -393,8 +413,64 @@
 			  });
 		  });
 		});
-		</script>
+	</script>
 		
+
+
+	{{-- Dependent Dropdown ===> city & area & street --}}
+		<script>
+			var cityurl='{{url("manager/memberm/get-areasm","itemid")}}';
+			var areaurl='{{url("manager/memberm/get-streets","itemid")}}';
+
+			 $(function() {
+			 $('#city').change(function(){
+					var thiscityurl=cityurl;
+			var cityId = $(this).find("option:selected").val();
+			if(cityId==0){
+				$('#area').html('<option value="0">اختر المنطقة</option>');
+			}else{
+				thiscityurl=thiscityurl.replace("itemid",cityId);
+			if(cityId){
+				$.ajax({
+					url: thiscityurl, // Use Laravel's route name
+					method: 'Get', // Match the method type with your route definition
+				 
+					success: function(result){
+						$('#area').html('<option value="0">اختر المنطقة</option>');
+						$.each(result, function(key, value) {
+						
+			 $('#area').append('<option value="'+value.id+'">'+value.area+'</option>');
+						});
+					 }
+				 });
+			 }
+			 }
+			 });
+ 
+ 
+		$('#area').change(function(){
+		 var thisareaurl=areaurl;
+		 var areaId = $(this).find("option:selected").val();
+		 thisareaurl=thisareaurl.replace("itemid",areaId);
+		 if(areaId){
+			 $.ajax({
+				 url: thisareaurl, // Use Laravel's route name
+				 method: 'Get', // Match the method type with your route definition
+			  
+				 success: function(result){
+					 $('#street').html('<option value="0">اختر الحي</option>');
+					 $.each(result, function(key, value) {
+		  $('#street').append('<option value="'+value.id+'">'+value.street+'</option>');
+		  });
+		 }
+		  });
+		 }
+		 }); 
+		 }); 
+ 
+	 </script>
+
+
 
 
 <!--Internal  Datepicker js -->

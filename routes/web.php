@@ -172,9 +172,6 @@ Route::middleware(['auth', 'verified', 'admin'])-> prefix('admin')->group(functi
 
     Route::delete('delete/{id}', [CityController::class, 'destroyStreet'])->name('street.delete');
 
-
-    Route::get('/get-areas/{cityId}',[CityController::class, 'getAreaForCity']);
-
   });
 
 
@@ -267,6 +264,10 @@ Route::middleware(['auth', 'verified', 'manager'])-> prefix('manager')->group(fu
         Route::get('/get-specializations/{qualificationId}',[MemberController::class, 'getSpecializations']);
 
         Route::get('details/{id}',[MemberController::class,'details'])->name('memberm.details');
+
+
+        Route::get('/get-areasm/{cityId}', [CityController::class, 'getAreaForCity']);
+        Route::get('/get-streets/{areaId}', [CityController::class, 'getStreetForArea']);
 
 
         // search
