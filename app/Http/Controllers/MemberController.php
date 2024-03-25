@@ -343,10 +343,11 @@ public function store(Request $request): RedirectResponse
         //$newImageName = $img->getClientOriginalName();
         //for change image name
         $newImageName = 'image_' . $member->id . '.' . $newImage->getClientOriginalExtension();
-        $newImage->move(public_path('assets/img/media/'), $newImageName);
+        $newImage->move('assets/img/media/', $newImageName);
+
         Member::find($member->id)->update([
-                'Image'=> $newImageName,
-    ]);
+            'Image'=> $newImageName,
+        ]);
    }
     
 
@@ -493,13 +494,13 @@ public function updateForNotice(Request $request, $IDTeam)
     // Delete the old image from server
     if ($oldImageName) {
        // Storage::delete('public/assets/img/media/' . $oldImageName);
-       File::delete(public_path('assets/img/media/'). $oldImageName);
+       File::delete('assets/img/media/'. $oldImageName);
     }
 
     // Upload new image
     $newImage = $request->file('Image');
     $newImageName = 'image_' . $member->id . '.' . $newImage->getClientOriginalExtension();
-    $newImage->move(public_path('assets/img/media/'), $newImageName);
+    $newImage->move('assets/img/media/', $newImageName);
 
     // Update the image record with the new image name
     $member->update(['Image' => $newImageName]);
@@ -606,12 +607,12 @@ public function update(Request $request, $id)
     // Delete the old image from the server
     if ($oldImageName) {
          // Storage::delete('public/assets/img/media/' . $oldImageName);
-         File::delete(public_path('assets/img/media/' . $oldImageName));
+         File::delete('assets/img/media/' . $oldImageName);
     }
     // Upload new image
     $newImage = $request->file('Image');
     $newImageName = 'image_' . $member->id . '.' . $newImage->getClientOriginalExtension();
-    $newImage->move(public_path('assets/img/media/'), $newImageName);
+    $newImage->move('assets/img/media/', $newImageName);
 
     // Update the image record with the new image name
     // $member->update(['Image' => $newImageName]);
