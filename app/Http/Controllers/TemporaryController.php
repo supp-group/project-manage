@@ -100,7 +100,9 @@ class TemporaryController extends Controller
     }
     else
     {
-      return dd($request->all());
+      $member->save();
+
+      // return dd($request->all());
     // store image
     if ($request->hasfile('Image')) {
       $img = $request->file('Image');
@@ -112,7 +114,6 @@ class TemporaryController extends Controller
       ]);
     }
 
-        $member->save();
         session()->flash('Edit', 'سيتم تعديل العضو بعد الموافقة عليه من قبل المدير');
         return back();
     }

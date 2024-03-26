@@ -66,15 +66,6 @@
 											value="{{ $member->IDTeam }}" readonly>
 										</div>
 									</div><br>
-
-                                    <div class="row">
-										<div class="col">
-											<label for="inputName" class="control-label">ملاحظات</label>
-											<input type="hidden" name="NotPad" value="{{ $member->NotPad }}">
-											<input type="text" class="form-control" id="inputName" name="NotPad"
-											value="{{ $member->NotPad }}" readonly>
-										</div>
-									</div><br>
                                        
                                     <div class="row">
 										<div class="col">
@@ -240,14 +231,23 @@
                                     
 									<div class="row">
 										<div class="col">
+											<label for="inputName" class="control-label">ملاحظات</label>
+											<input type="hidden" name="NotPad" value="{{ $member->NotPad }}">
+											<input type="text" class="form-control" id="inputName" name="NotPad"
+											value="{{ $member->NotPad }}" readonly>
+										</div>
+									</div><br>
+
+									<div class="row">
+										<div class="col">
 											<label for="exampleTextarea">صورة العضو المنتسب</label> <br>
 											<input type="hidden" name="Image" value="{{ $member->Image }}">
 											<br>
 											
 											@if ($member->Image)
-												<td><img src="{{asset('images/'.$member->Image)}}" style="width: 100px;"></td>
+												<img src="{{asset('assets/img/media/'.$member->Image)}}" style="width: 100px;">
 											@else
-												<td><img src="{{URL::asset('assets/img/media/user.jpg')}}"  style="width: 100px;"></td>
+												<img src="{{URL::asset('assets/img/media/user.jpg')}}"  style="width: 100px;">
 											@endif
 										</div>
 									</div><br>
@@ -452,9 +452,9 @@
 											<br>
 											
 											@if ($memb->Image)
-												<td><img src="{{asset('images/'.$memb->Image)}}" style="width: 100px;"></td>
+												<img src="{{asset('assets/img/media/'.$memb->Image)}}" style="width: 100px;">
 											@else
-												<td><img src="{{URL::asset('assets/img/media/user.jpg')}}"  style="width: 100px;"></td>
+												<img src="{{URL::asset('assets/img/media/user.jpg')}}"  style="width: 100px;">
 											@endif
 										</div>
 									</div><br>
