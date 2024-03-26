@@ -38,7 +38,7 @@ public function index()
         $occupations = Occupation::orderBy('Name','Asc')->get();
 
 
-        $members = Member::orderBy('IDTeam', 'Asc')->select('id','branch','IDTeam','FullName',
+        $members = Member::orderBy('IDTeam', 'Asc')->select('id','branch','IDTeam','FirstName','LastName',
         'City')->paginate(50);
         $memberCount = Member::count();
         $paginationLinks = $members->withQueryString()->links('pagination::bootstrap-4');
@@ -111,7 +111,7 @@ public function orderBy_Name()
 { 
         if (optional(auth()->user())->Role == 'admin') 
         {
-            $members = Member::orderBy('FullName','Asc')->paginate(50);
+            $members = Member::orderBy('FirstName','Asc')->paginate(50);
             $paginationLinks = $members->withQueryString()->links('pagination::bootstrap-4');
 
             return view('admin.member.show', [
@@ -135,6 +135,36 @@ public function orderBy_Name()
             ]);
         }
 }
+
+public function orderBy_LastName()
+{ 
+        if (optional(auth()->user())->Role == 'admin') 
+        {
+            $members = Member::orderBy('LastName','Asc')->paginate(50);
+            $paginationLinks = $members->withQueryString()->links('pagination::bootstrap-4');
+
+            return view('admin.member.show', [
+                'members' => $members,
+                'paginationLinks' => $paginationLinks
+            ]);
+        }
+
+        elseif (optional(auth()->user())->Role == 'manager') {
+            $user = auth()->user();
+            $cityName = DB::table('cities')
+                ->where('id', $user->city_id)
+                ->value('Name');
+            
+            $members = Member::where('City', $cityName)->orderBy('updated_at', 'desc')->paginate(50);
+            $paginationLinks = $members->withQueryString()->links('pagination::bootstrap-4');
+
+            return view('manager.member.show', [
+                'members' => $members,
+                'paginationLinks' => $paginationLinks
+            ]);
+        }
+}
+
 
 public function orderBy_IDTeam()
 { 
@@ -238,7 +268,9 @@ public function store(Request $request): RedirectResponse
             'NotPad' => 'required|max:255',
             'branch' => 'required',
             'IDTeam' => 'required|unique:members|max:255',
-            'FullName' => 'required',
+            'FirstName' => 'required',
+            'LastName' => 'required',
+            'FatherName' => 'required',
             'MotherName' => 'required',
             'PlaceOfBirth' => 'required',
             'BirthDate' => 'required|date|before:today',
@@ -297,8 +329,8 @@ public function store(Request $request): RedirectResponse
   }
 
 
-//   $cityId = $request->City;
-//   $cityName = City::where('id', $cityId)->first()->Name;
+  //   $cityId = $request->City;
+  //   $cityName = City::where('id', $cityId)->first()->Name;
 
 
 
@@ -314,7 +346,10 @@ public function store(Request $request): RedirectResponse
     $member->branch = $request->branch;
     $member->IDTeam  = $request->IDTeam;
    // $member->IDTeam  = $IDTeam;
-    $member->FullName = $request->FullName;
+    $member->FirstName = $request->FirstName;
+    $member->LastName = $request->LastName;
+    $member->FatherName = $request->FatherName;
+
     $member->MotherName = $request->MotherName;
     $member->PlaceOfBirth = $request->PlaceOfBirth;
     $member->BirthDate = $birthDateFormatted;
@@ -351,7 +386,7 @@ public function store(Request $request): RedirectResponse
         ]);
    }
     
-//    session()->flash('Add', ' تم إضافة العضو بنجاح ورقمه الحزبي هو '.$IDTeam);
+ //    session()->flash('Add', ' تم إضافة العضو بنجاح ورقمه الحزبي هو '.$IDTeam);
 
     session()->flash('Add', ' تم إضافة العضو بنجاح ورقمه الحزبي هو '.$request->IDTeam);
     return back();
@@ -470,7 +505,9 @@ public function updateForNotice(Request $request, $IDTeam)
   $member->NotPad = $request->NotPad;
   $member->branch = $request->branch;
   $member->IDTeam  = $IDTeam;
-  $member->FullName = $request->FullName;
+  $member->FirstName = $request->FirstName;
+  $member->LastName = $request->LastName;
+  $member->FatherName = $request->FatherName;
   $member->MotherName = $request->MotherName;
   $member->PlaceOfBirth = $request->PlaceOfBirth;
   $member->BirthDate = $birthDateFormatted;
@@ -585,7 +622,9 @@ public function update(Request $request, $id)
   $oldImageName=$member->Image;
   $member->NotPad = $request->NotPad;
   $member->branch = $request->branch;
-  $member->FullName = $request->FullName;
+  $member->FirstName = $request->FirstName;
+  $member->LastName = $request->LastName;
+  $member->FatherName = $request->FatherName;
   $member->MotherName = $request->MotherName;
   $member->PlaceOfBirth = $request->PlaceOfBirth;
   $member->BirthDate = $birthDateFormatted;
@@ -604,7 +643,7 @@ public function update(Request $request, $id)
   $member->HomePhone  = $request->HomePhone;
   $member->WorkPhone  = $request->WorkPhone;
   $member->DateOfJoin  = $dateJoinFormatted;
-//   $member->update();
+ //   $member->update();
 
   // Store newImage
   if ($request->hasFile('Image')) {
@@ -621,7 +660,7 @@ public function update(Request $request, $id)
     // Update the image record with the new image name
     // $member->update(['Image' => $newImageName]);
     $member->Image = $newImageName;
-}
+  }
     $member->update();
 
     session()->flash('Edit', 'تم تعديل العضو بنجاح');
@@ -648,12 +687,12 @@ public function destroyForNotice($IDTeam)
 
 public function searchByName(Request $request)
 {
-        $searchTerm = $request->input('search_FullName');
+        $searchTerm = $request->input('search_FirstName');
 
    if ( auth()->user()->Role == 'admin')
    {
-    $members =  Member::where('FullName', 'like', '%'.$searchTerm.'%')->orderBy('FullName', 'Asc')->paginate(50);
-    $memberCount =  Member::where('FullName', 'like', '%'.$searchTerm.'%')->count();
+    $members =  Member::where('FirstName', 'like', '%'.$searchTerm.'%')->orderBy('FirstName', 'Asc')->paginate(50);
+    $memberCount =  Member::where('FirstName', 'like', '%'.$searchTerm.'%')->count();
     $paginationLinks = $members->withQueryString()->links('pagination::bootstrap-4');
     
     return view('admin.member.show', [
@@ -668,8 +707,42 @@ public function searchByName(Request $request)
         ->where('id', $user->city_id)
         ->value('Name');
     
-    $members = Member::where('City', $cityName)->where('FullName', 'like', '%'.$searchTerm.'%')->orderBy('FullName', 'Asc')->paginate(50);
-    $memberCount = Member::where('City', $cityName)->where('FullName', 'like', '%'.$searchTerm.'%')->count();
+    $members = Member::where('City', $cityName)->where('FirstName', 'like', '%'.$searchTerm.'%')->orderBy('FirstName', 'Asc')->paginate(50);
+    $memberCount = Member::where('City', $cityName)->where('FirstName', 'like', '%'.$searchTerm.'%')->count();
+    $paginationLinks = $members->withQueryString()->links('pagination::bootstrap-4');
+    
+    return view('manager.member.show', [
+        'members' => $members,
+        'memberCount'=>$memberCount,
+        'paginationLinks' => $paginationLinks
+    ]);
+   }
+}
+
+public function searchByLastName(Request $request)
+{
+        $searchTerm = $request->input('search_LastName');
+
+   if ( auth()->user()->Role == 'admin')
+   {
+    $members =  Member::where('LastName', 'like', '%'.$searchTerm.'%')->orderBy('LastName', 'Asc')->paginate(50);
+    $memberCount =  Member::where('LastName', 'like', '%'.$searchTerm.'%')->count();
+    $paginationLinks = $members->withQueryString()->links('pagination::bootstrap-4');
+    
+    return view('admin.member.show', [
+        'members' => $members,
+        'memberCount'=>$memberCount,
+        'paginationLinks' => $paginationLinks
+    ]);
+   }
+   elseif (optional(auth()->user())->Role == 'manager') {
+    $user = auth()->user();
+    $cityName = DB::table('cities')
+        ->where('id', $user->city_id)
+        ->value('Name');
+    
+    $members = Member::where('City', $cityName)->where('LastName', 'like', '%'.$searchTerm.'%')->orderBy('LastName', 'Asc')->paginate(50);
+    $memberCount = Member::where('City', $cityName)->where('LastName', 'like', '%'.$searchTerm.'%')->count();
     $paginationLinks = $members->withQueryString()->links('pagination::bootstrap-4');
     
     return view('manager.member.show', [
@@ -684,7 +757,7 @@ public function searchByPhoneNull()
 {
    if ( auth()->user()->Role == 'admin')
    {
-    $members =  Member::where('MobilePhone',Null)->orwhere('MobilePhone','')->orderBy('FullName', 'Asc')->paginate(50);
+    $members =  Member::where('MobilePhone',Null)->orwhere('MobilePhone','')->orderBy('FirstName', 'Asc')->paginate(50);
     $memberCount =  Member::where('MobilePhone',Null)->orwhere('MobilePhone','')->count();
     $paginationLinks = $members->withQueryString()->links('pagination::bootstrap-4');
     
@@ -701,7 +774,7 @@ public function searchByPhoneNull()
         ->where('id', $user->city_id)
         ->value('Name');
     
-    $members = Member::where('City', $cityName)->where('MobilePhone',Null)->orwhere('MobilePhone','')->orderBy('FullName', 'Asc')->paginate(50);
+    $members = Member::where('City', $cityName)->where('MobilePhone',Null)->orwhere('MobilePhone','')->orderBy('FirstName', 'Asc')->paginate(50);
     $memberCount = Member::where('City', $cityName)->where('MobilePhone',Null)->orwhere('MobilePhone','')->count();
     $paginationLinks = $members->withQueryString()->links('pagination::bootstrap-4');
     
@@ -939,24 +1012,26 @@ public function searchByOccupation(Request $request)
                 'NotPad' => $data[0],
                 'branch' => $data[1],
                 'IDTeam' => $data[2],
-                'FullName' => $data[3],
-                'MotherName' => $data[4],
-                'PlaceOfBirth' => $data[5],
-                'BirthDate' => $data[6],
-                'Constraint' => $data[7],
-                'City' => $data[8],
-                'IDNumber' => $data[9],
-                'Gender' => $data[10],
-                'Qualification' => $data[11],
-                'Occupation' => $data[12],
-                'MobilePhone' => $data[13],
-                'HomeAddress' => $data[14],
-                'WorkAddress' => $data[15],
-                'HomePhone' => $data[16],
-                'WorkPhone' => $data[17],
-                'DateOfJoin' => $data[18],
-                'Specialization' => $data[19],
-                'Image' => $data[20],
+                'FirstName' => $data[3],
+                'LastName' => $data[4],
+                'FatherName' => $data[5],
+                'MotherName' => $data[6],
+                'PlaceOfBirth' => $data[7],
+                'BirthDate' => $data[8],
+                'Constraint' => $data[9],
+                'City' => $data[10],
+                'IDNumber' => $data[11],
+                'Gender' => $data[12],
+                'Qualification' => $data[13],
+                'Occupation' => $data[14],
+                'MobilePhone' => $data[15],
+                'HomeAddress' => $data[16],
+                'WorkAddress' => $data[17],
+                'HomePhone' => $data[18],
+                'WorkPhone' => $data[19],
+                'DateOfJoin' => $data[20],
+                'Specialization' => $data[21],
+                'Image' => $data[22],
             ]);
         }
         session()->flash('Add', 'تم إستيراد البيانات بنجاح');
@@ -967,7 +1042,8 @@ public function searchByOccupation(Request $request)
 public function exportDataToCSV(Request $request)
 {
 
-        $searchName = $request->input('search_FullName');
+        $searchFirstName = $request->input('search_FirstName');
+        $searchLastName = $request->input('search_LastName');
         $searchIDTeam = $request->input('search_IDTeam');
         $searchQualification = $request->input('search_Qualification');
         $searchSpecialization = $request->input('search_Specialization');
@@ -975,10 +1051,14 @@ public function exportDataToCSV(Request $request)
         $searchOccupation = $request->input('search_Occupation');
 
 
-  if($request->input('search_FullName') )
+  if($request->input('search_FirstName') )
   {
-    $data = Member::where('FullName', 'like', '%' . $searchName . '%')->get();
+    $data = Member::where('FirstName', 'like', '%' . $searchFirstName . '%')->get();
   }
+  elseif($searchLastName)
+   {
+    $data = Member::where('LastName', 'like', '%' . $searchLastName . '%')->get();
+   }
   elseif($searchIDTeam)
    {
     $data = Member::where('IDTeam', 'like', '%' . $searchIDTeam . '%')->get();
@@ -1214,7 +1294,7 @@ public function Advancedsearch(Request $request)
     $specializations = Qualification::whereNotNull('specialization')->orderBy('Name','Asc')->get();
     $occupations = Occupation::orderBy('Name','Asc')->get();
 
-        $members = Member::orderBy('IDTeam', 'Asc')->select('id','branch','IDTeam','FullName',
+        $members = Member::orderBy('IDTeam', 'Asc')->select('id','branch','IDTeam','FirstName','LastName',
         'City')->paginate(50);
         $memberCount = Member::count();
         $paginationLinks = $members->withQueryString()->links('pagination::bootstrap-4');
