@@ -115,17 +115,6 @@ integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEw
 						<form action="{{ route('search-LastName') }}" method="post">
 							@csrf
 							<div class="input-group">
-								<input class="form-control" placeholder="الاسم" type="search" name="search_LastName">
-								<div class="input-group-append">
-									<button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
-								</div>
-							</div>
-						</form>
-					</div>
-					<div class="col-4">
-						<form action="{{ route('search-LastName') }}" method="post">
-							@csrf
-							<div class="input-group">
 								<input class="form-control" placeholder="النسبة" type="search" name="search_LastName">
 								<div class="input-group-append">
 									<button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
@@ -133,6 +122,7 @@ integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEw
 							</div>
 						</form>
 					</div>
+				
 
 
 					<div class="col-12">
