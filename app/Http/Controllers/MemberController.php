@@ -212,7 +212,7 @@ public function create()
             else
             {
                 $cityName =City::whereNotNull('Name')->orderBy('Name','Asc')->get();
-                $branch =City::whereNotNull('branch')->orderBy('branch','Asc')->pluck('branch')->first();
+                $branch =City::whereNotNull('branch')->orderBy('branch','Asc')->get();
                 $areas = City::whereNotNull('area')->orderBy('area','Asc')->get();
                 $streets = City::whereNotNull('street')->orderBy('street','Asc')->get();
 
@@ -376,7 +376,7 @@ public function edit($id)
         else
         {
             $cityName =City::whereNotNull('Name')->orderBy('Name','Asc')->get();
-            $branch =City::whereNotNull('branch')->orderBy('branch','Asc')->pluck('branch')->first();
+            $branch =City::whereNotNull('branch')->orderBy('branch','Asc')->get();
             $areas = City::whereNotNull('area')->orderBy('area','Asc')->get();
             $streets = City::whereNotNull('street')->orderBy('street','Asc')->get();
         }

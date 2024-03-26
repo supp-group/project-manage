@@ -61,7 +61,7 @@ Route::middleware(['auth', 'verified', 'admin'])-> prefix('admin')->group(functi
         Route::get('add', [MemberController::class, 'create']);
         Route::post('save', [MemberController::class, 'store'])->name('member.save');
     
-        Route::get('edit/{IDTeam}', [MemberController::class, 'edit'])->name('member.edit');
+        Route::get('edit/{id}', [MemberController::class, 'edit'])->name('member.edit');
         Route::post('update/{id}', [MemberController::class, 'update'])->name('member.update');
 
         Route::delete('delete/{id}', [MemberController::class, 'destroy'])->name('member.delete');
