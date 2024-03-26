@@ -89,12 +89,37 @@
 
 									<div class="row">
 										<div class="col">
-											<label for="inputName" class="control-label">الاسم الثلاثي</label>
-											<input type="hidden" name="FullName" value="{{ $member->FullName }}">
-											<input type="text" class="form-control @error('FullName') is-invalid @enderror" 
-											id="inputName" name="FullName" value="{{ $member->FullName }}">
+											<label for="inputName" class="control-label">الاسم </label>
+											<input type="text" class="form-control @error('FirstName') is-invalid @enderror" 
+											id="inputName" name="FirstName">
+										
+											@error('FirstName')
+												<div class="alert alert-danger">{{ $message }}</div>
+											@enderror
+										</div>
+									</div><br>
 
-											@error('FullName')
+									
+									<div class="row">
+										<div class="col">
+											<label for="inputName" class="control-label"> النسبة</label>
+											<input type="text" class="form-control @error('LastName') is-invalid @enderror" 
+											id="inputName" name="LastName">
+										
+											@error('LastName')
+												<div class="alert alert-danger">{{ $message }}</div>
+											@enderror
+										</div>
+									</div><br>
+
+									
+									<div class="row">
+										<div class="col">
+											<label for="inputName" class="control-label"> اسم الأب</label>
+											<input type="text" class="form-control @error('FatherName') is-invalid @enderror" 
+											id="inputName" name="FatherName">
+										
+											@error('FatherName')
 												<div class="alert alert-danger">{{ $message }}</div>
 											@enderror
 										</div>

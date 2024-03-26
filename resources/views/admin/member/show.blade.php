@@ -103,7 +103,18 @@ integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEw
 						<form action="{{ route('search-name') }}" method="post">
 							@csrf
 							<div class="input-group">
-								<input class="form-control" placeholder="الاسم" type="search" name="search_FullName">
+								<input class="form-control" placeholder="الاسم" type="search" name="search_FirstName">
+								<div class="input-group-append">
+									<button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
+								</div>
+							</div>
+						</form>
+					</div>
+					<div class="col-4">
+						<form action="{{ route('search-LastName') }}" method="post">
+							@csrf
+							<div class="input-group">
+								<input class="form-control" placeholder="الاسم" type="search" name="search_LastName">
 								<div class="input-group-append">
 									<button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
 								</div>
@@ -138,7 +149,7 @@ integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEw
 						<form action="{{ route('search-name') }}" method="post">
 							@csrf
 							<div class="input-group">
-								<input class="form-control" placeholder="الاسم" type="search" name="search_FullName">
+								<input class="form-control" placeholder="الاسم" type="search" name="search_FirstName">
 								<div class="input-group-append">
 									<button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
 								</div>
@@ -336,7 +347,6 @@ integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEw
 @endif
 
 
-
 <div class="row row-sm">
     <div class="col-xl-12">
         <div class="card">
@@ -372,7 +382,8 @@ integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEw
 								<td>{{$i++}}</td>
 								<td>{{$member->branch}}</td>
 								<td>{{$member->IDTeam}}</td>
-								<td>{{$member->FullName}}</td>
+								<td>{{$member->FirstName}}</td>
+								<td>{{$member->LastName}}</td>
 								<td>{{$member->City}}</td>
 								
 
@@ -433,7 +444,15 @@ integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEw
 							</tr>
 						@endif
 
-						@if(request()->input('search_FullName') == null)
+						@if(request()->input('search_FirstName') == null)
+							<!-- لا يوجد قيمة مدخلة -->
+						@else
+							<tr>
+								<td style="font-weight: bold;">عدد نتائج البحث {{ $memberCount }}</td>
+							</tr>
+						@endif
+
+						@if(request()->input('search_LastName') == null)
 							<!-- لا يوجد قيمة مدخلة -->
 						@else
 							<tr>
