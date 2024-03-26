@@ -24,6 +24,7 @@ integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEw
 							<option>فرز حسب </option>
 							<option value="{{ route('order-last') }}">الأحدث</option>
 							<option value="{{ route('order-name') }}">الاسم</option>
+							<option value="{{ route('order-lastName') }}">النسبة</option>
 							<option value="{{ route('order-team') }}">الرقم الحزبي</option>
 							<option value="{{ route('order-join') }}">تاريخ الانتساب</option>
 						</select>               
@@ -111,10 +112,10 @@ integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEw
 						</form>
 					</div>
 					<div class="col-4">
-						<form action="{{ route('search-city') }}" method="post">
+						<form action="{{ route('search-LastName') }}" method="post">
 							@csrf
 							<div class="input-group">
-								<input class="form-control" placeholder="المحافظة" type="search" name="search_City">
+								<input class="form-control" placeholder="النسبة" type="search" name="search_LastName">
 								<div class="input-group-append">
 									<button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
 								</div>
@@ -146,10 +147,10 @@ integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEw
 						</form>
 					</div>&nbsp;
 					<div class="col-12">
-						<form action="{{ route('search-city') }}" method="post">
+						<form action="{{ route('search-LastName') }}" method="post">
 							@csrf
 							<div class="input-group">
-								<input class="form-control" placeholder="المحافظة" type="search" name="search_City">
+								<input class="form-control" placeholder="النسبة" type="search" name="search_LastName">
 								<div class="input-group-append">
 									<button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
 								</div>
@@ -184,6 +185,17 @@ integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEw
 
 				<div class="row">
 					<div class="col-4">
+						<form action="{{ route('search-city') }}" method="post">
+							@csrf
+							<div class="input-group">
+								<input class="form-control" placeholder="المحافظة" type="search" name="search_City">
+								<div class="input-group-append">
+									<button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
+								</div>
+							</div>
+						</form>
+					</div>
+					<div class="col-4">
 						<form action="{{ route('search-Area') }}" method="post">
 							@csrf
 							<div class="input-group">
@@ -205,19 +217,7 @@ integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEw
 							</div>
 						</form>
 					</div>
-					<div class="col-4">
-						<form action="{{ route('search-occupation') }}" method="post">
-							@csrf
-							<div class="input-group">
-								<input class="form-control" placeholder="المهنة" type="search" name="search_Occupation">
-								<div class="input-group-append">
-									<button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
-								</div>
-							</div>
-						</form>
-					</div>
-
-
+					
 
 				{{-- <div class="col-12">
 						<form action="{{ route('search-qualification') }}" method="post">
@@ -242,6 +242,17 @@ integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEw
 						</form>
 				</div>&nbsp; --}}
 
+				<div class="col-12">
+					<form action="{{ route('search-city') }}" method="post">
+						@csrf
+						<div class="input-group">
+							<input class="form-control" placeholder="المحافظة" type="search" name="search_City">
+							<div class="input-group-append">
+								<button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
+							</div>
+						</div>
+					</form>
+				</div>
 					<div class="col-12">
 						<form action="{{ route('search-Area') }}" method="post">
 								@csrf
@@ -264,6 +275,21 @@ integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEw
 									</div>
 								</form>
 							</div>&nbsp;
+				</div>&nbsp;
+
+				<div class="row">
+					<div class="col-4">
+						<form action="{{ route('search-occupation') }}" method="post">
+							@csrf
+							<div class="input-group">
+								<input class="form-control" placeholder="المهنة" type="search" name="search_Occupation">
+								<div class="input-group-append">
+									<button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
+								</div>
+							</div>
+						</form>
+					</div>&nbsp;
+
 					<div class="col-12">
 						<form action="{{ route('search-occupation') }}" method="post">
 							@csrf
@@ -274,7 +300,7 @@ integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEw
 								</div>
 							</div>
 						</form>
-					</div>
+					</div>&nbsp;
 				</div>
 				<br>
 

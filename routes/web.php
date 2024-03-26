@@ -71,6 +71,8 @@ Route::middleware(['auth', 'verified', 'admin'])-> prefix('admin')->group(functi
         
         Route::get('archive/{IDTeam}', [TemporaryController::class, 'GetArchive'])->name('archive.GetArchive');
 
+        Route::get('print-details/{id}', [MemberController::class, 'printDetails'])->name('printDetails');
+
 
         // for code js
         Route::get('/get-specializations/{qualificationId}',[MemberController::class, 'getSpecializations']);
@@ -84,8 +86,9 @@ Route::middleware(['auth', 'verified', 'admin'])-> prefix('admin')->group(functi
 
         Route::post('team', [MemberController::class, 'searchByIDTeam'])->name('search-team');
         Route::post('name', [MemberController::class, 'searchByName'])->name('search-name');
-        Route::post('city', [MemberController::class, 'searchByCity'])->name('search-city');
+        Route::post('lastName', [MemberController::class, 'searchByLastName'])->name('search-LastName');
 
+        Route::post('city', [MemberController::class, 'searchByCity'])->name('search-city');
         Route::post('street', [MemberController::class, 'searchBystreet'])->name('search-Street');
         Route::post('area', [MemberController::class, 'searchByArea'])->name('search-Area');
 
@@ -100,6 +103,7 @@ Route::middleware(['auth', 'verified', 'admin'])-> prefix('admin')->group(functi
         //order
         Route::get('last', [MemberController::class, 'orderBy_Last'])->name('order-last');
         Route::get('name', [MemberController::class, 'orderBy_Name'])->name('order-name');
+        Route::get('lastName', [MemberController::class, 'orderBy_LastName'])->name('order-lastName');
         Route::get('team', [MemberController::class, 'orderBy_IDTeam'])->name('order-team');
         Route::get('join', [MemberController::class, 'orderBy_DateOfJoin'])->name('order-join');
 
@@ -267,6 +271,8 @@ Route::middleware(['auth', 'verified', 'manager'])-> prefix('manager')->group(fu
 
 
         Route::get('/get-streets/{areaId}', [CityController::class, 'getStreetForArea']);
+
+
 
 
         // search
