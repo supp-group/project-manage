@@ -240,9 +240,9 @@
 											<label for="exampleTextarea">صورة العضو المنتسب</label> <br>
 											<input type="hidden" name="Image" value="{{ $member->Image }}">
 											<br>
-											
+											<img src="{{URL::asset('assets/img/media/'.$member->Image)}}" alt="image" style="width: 100px;">
 											@if ($member->Image)
-												<td><img src="{{URL::asset('assets/img/media/'.$member->Image)}}" style="width: 100px;"></td>
+											
 											@else
 												<td><img src="{{URL::asset('assets/img/media/user.jpg')}}"  style="width: 100px;"></td>
 											@endif
