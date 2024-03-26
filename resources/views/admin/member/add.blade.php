@@ -61,17 +61,18 @@
 								<form action="{{ url('admin/member/save') }}" method="post" enctype="multipart/form-data" autocomplete="off">
 									{{ csrf_field() }}
 		
-									 {{-- <div class="row">
+									<div class="row">
 										<div class="col">
-											<label for="inputName" class="control-label">الفرع</label>
-											<input type="text" class="form-control @error('branch') is-invalid @enderror" 
-											id="inputName" name="branch">
+											<label for="inputName" class="control-label">الرقم الحزبي </label>
+											<input type="text" class="form-control @error('IDTeam') is-invalid @enderror" 
+											id="inputName" name="IDTeam" required>
 										
-											@error('branch')
+											@error('IDTeam')
 												<div class="alert alert-danger">{{ $message }}</div>
 											@enderror
 										</div>
-									</div><br> --}}
+									</div><br>
+
 
 									<div class="form-group">
 										<label>الفرع</label>
