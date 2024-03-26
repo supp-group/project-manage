@@ -58,7 +58,7 @@
 					<div class="col-lg-12 col-md-12">
 						<div class="card">
 							<div class="card-body">
-								<form action="{{ route('member.update', $member->id) }}" method="post" autocomplete="off">
+								<form action="{{ route('member.update', $member->id) }}" method="post" enctype="multipart/form-data" autocomplete="off">
 									{{ csrf_field() }}
 
 									<div class="row">
@@ -394,7 +394,7 @@
 									<div class="row">
 										<div class="col">
 											<label for="exampleTextarea">صورة العضو المنتسب</label> <br>
-											<input type="hidden" name="Image" value="{{ $member->Image }}">
+											{{-- <input type="hidden" name="Image" value="{{ $member->Image }}"> --}}
 											<br>
 											
 											@if ($member->Image)

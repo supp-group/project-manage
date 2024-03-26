@@ -201,8 +201,7 @@
 										@error('street')
 											<div class="alert alert-danger">{{ $message }}</div>
 										@enderror
-									</div>
-									<br>
+									</div><br>
 
 									<div class="row">
 										<div class="col">
@@ -239,7 +238,7 @@
 									<div class="form-group">
 										<label>المهنة</label>
 										<select name="Occupation" class="form-control select @error('Occupation') is-invalid @enderror" id="Occupation"> 
-											<option>اختر المهنة</option>
+											<option value="لايوجد">اختر المهنة</option>
 											
 											@foreach($occupations as $occupation)
 											<option value="{{$occupation->Name}}">{{$occupation->Name}}</option>

@@ -244,7 +244,7 @@
 											@if ($member->Image)
 											
 											@else
-												<td><img src="{{URL::asset('assets/img/media/user.jpg')}}"  style="width: 100px;"></td>
+												<img src="{{URL::asset('assets/img/media/user.jpg')}}"  style="width: 100px;"></td>
 											@endif
 											
 											{{-- <br>											

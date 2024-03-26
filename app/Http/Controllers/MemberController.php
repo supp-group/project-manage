@@ -344,10 +344,11 @@ public function store(Request $request): RedirectResponse
         //$newImageName = $img->getClientOriginalName();
         //for change image name
         $newImageName = 'image_' . $member->id . '.' . $newImage->getClientOriginalExtension();
-        $newImage->move(('assets/img/media/'), $newImageName);
+        $newImage->move('assets/img/media/', $newImageName);
+
         Member::find($member->id)->update([
-                'Image'=> $newImageName,
-    ]);
+            'Image'=> $newImageName,
+        ]);
    }
     
 //    session()->flash('Add', ' تم إضافة العضو بنجاح ورقمه الحزبي هو '.$IDTeam);
@@ -376,7 +377,7 @@ public function edit($id)
 
      $areas = City::whereNotNull('area')->orderBy('area','Asc')->get();
      $streets = City::whereNotNull('street')->orderBy('street','Asc')->get();
-     $branch =City::whereNotNull('branch')->orderBy('branch','Asc')->get();
+     $branch = City::where('branch', 'like', '%' . $cityName . '%')->pluck('branch')->first();
 
      $qualifications = Qualification::whereNotNull('Name')->orderBy('Name','Asc')->get();
      $specializations = Qualification::whereNotNull('specialization')->orderBy('Name','Asc')->get();
@@ -495,13 +496,13 @@ public function updateForNotice(Request $request, $IDTeam)
     // Delete the old image from server
     if ($oldImageName) {
        // Storage::delete('public/assets/img/media/' . $oldImageName);
-       File::delete(public_path('assets/img/media/'). $oldImageName);
+       File::delete('assets/img/media/'. $oldImageName);
     }
 
     // Upload new image
     $newImage = $request->file('Image');
     $newImageName = 'image_' . $member->id . '.' . $newImage->getClientOriginalExtension();
-    $newImage->move(public_path('assets/img/media/'), $newImageName);
+    $newImage->move('assets/img/media/', $newImageName);
 
     // Update the image record with the new image name
     $member->update(['Image' => $newImageName]);
@@ -608,12 +609,12 @@ public function update(Request $request, $id)
     // Delete the old image from the server
     if ($oldImageName) {
          // Storage::delete('public/assets/img/media/' . $oldImageName);
-         File::delete(public_path('assets/img/media/' . $oldImageName));
+         File::delete('assets/img/media/' . $oldImageName);
     }
     // Upload new image
     $newImage = $request->file('Image');
     $newImageName = 'image_' . $member->id . '.' . $newImage->getClientOriginalExtension();
-    $newImage->move(public_path('assets/img/media/'), $newImageName);
+    $newImage->move('assets/img/media/', $newImageName);
 
     // Update the image record with the new image name
     // $member->update(['Image' => $newImageName]);

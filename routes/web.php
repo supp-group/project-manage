@@ -130,11 +130,11 @@ Route::middleware(['auth', 'verified', 'admin'])-> prefix('admin')->group(functi
     Route::post('update/{id}', [CityController::class, 'updateBranch'])->name('branch.update');
 
     Route::delete('delete/{id}', [CityController::class, 'destroyBranch'])->name('branch.delete');
-    });
+  });
 
 
    //   /city
-   Route:: prefix('city')->group(function () {
+  Route:: prefix('city')->group(function () {
 
     Route::get('show', [CityController::class, 'index']);
     Route::get('add', [CityController::class, 'create']);
@@ -144,7 +144,7 @@ Route::middleware(['auth', 'verified', 'admin'])-> prefix('admin')->group(functi
     Route::post('update/{id}', [CityController::class, 'update'])->name('city.update');
 
     Route::delete('delete/{id}', [CityController::class, 'destroy'])->name('city.delete');
-    });
+  });
 
    //   /area
   Route:: prefix('area')->group(function () {

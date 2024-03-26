@@ -100,11 +100,12 @@ class TemporaryController extends Controller
     }
     else
     {
-           // store image
+      return dd($request->all());
+    // store image
     if ($request->hasfile('Image')) {
       $img = $request->file('Image');
       $img_name = $img->getClientOriginalName();
-      $img->move(public_path('images'), $img_name);
+      $img->move('assets/img/media/', $img_name);
 
       Temporary::find($member->id)->update([
         'Image' => $img_name,
