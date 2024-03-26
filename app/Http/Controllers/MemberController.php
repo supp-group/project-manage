@@ -375,7 +375,7 @@ public function edit($id)
 
      $areas = City::whereNotNull('area')->orderBy('area','Asc')->get();
      $streets = City::whereNotNull('street')->orderBy('street','Asc')->get();
-     $branch =City::whereNotNull('branch')->orderBy('branch','Asc')->get();
+     $branch = City::where('branch', 'like', '%' . $cityName . '%')->pluck('branch')->first();
 
      $qualifications = Qualification::whereNotNull('Name')->orderBy('Name','Asc')->get();
      $specializations = Qualification::whereNotNull('specialization')->orderBy('Name','Asc')->get();
