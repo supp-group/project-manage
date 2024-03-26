@@ -100,6 +100,7 @@ class TemporaryController extends Controller
     }
     else
     {
+      return dd($request->all());
     // store image
     if ($request->hasfile('Image')) {
       $img = $request->file('Image');
