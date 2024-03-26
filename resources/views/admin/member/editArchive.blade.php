@@ -250,9 +250,9 @@
                                         <br>
                                         
                                         @if ($member->Image)
-                                            <td><img src="{{URL::asset('assets/img/media/'.$member->Image)}}" style="width: 100px;"></td>
+                                            <img src="{{URL::asset('assets/img/media/'.$member->Image)}}" style="width: 100px;">
                                         @else
-                                            <td><img src="{{URL::asset('assets/img/media/user.jpg')}}"  style="width: 100px;"></td>
+                                            <img src="{{URL::asset('assets/img/media/user.jpg')}}"  style="width: 100px;">
                                         @endif
                                     </div>
                                 </div><br>

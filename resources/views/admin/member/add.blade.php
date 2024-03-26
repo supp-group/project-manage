@@ -60,18 +60,6 @@
 							<div class="card-body">
 								<form action="{{ url('admin/member/save') }}" method="post" enctype="multipart/form-data" autocomplete="off">
 									{{ csrf_field() }}
-		
-									 {{-- <div class="row">
-										<div class="col">
-											<label for="inputName" class="control-label">الفرع</label>
-											<input type="text" class="form-control @error('branch') is-invalid @enderror" 
-											id="inputName" name="branch">
-										
-											@error('branch')
-												<div class="alert alert-danger">{{ $message }}</div>
-											@enderror
-										</div>
-									</div><br> --}}
 
 									<div class="form-group">
 										<label>الفرع</label>
@@ -200,8 +188,7 @@
 										@error('street')
 											<div class="alert alert-danger">{{ $message }}</div>
 										@enderror
-									</div>
-									<br>
+									</div><br>
 
 									<div class="row">
 										<div class="col">
@@ -238,7 +225,7 @@
 									<div class="form-group">
 										<label>المهنة</label>
 										<select name="Occupation" class="form-control select @error('Occupation') is-invalid @enderror" id="Occupation"> 
-											<option>اختر المهنة</option>
+											<option value="لايوجد">اختر المهنة</option>
 											
 											@foreach($occupations as $occupation)
 											<option value="{{$occupation->Name}}">{{$occupation->Name}}</option>
