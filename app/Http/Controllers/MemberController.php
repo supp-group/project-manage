@@ -237,7 +237,7 @@ public function store(Request $request): RedirectResponse
         $validated = $request->validate([
             'NotPad' => 'required|max:255',
             'branch' => 'required',
-            // 'IDTeam' => 'required|unique:members|max:255',
+            'IDTeam' => 'required|unique:members|max:255',
             'FullName' => 'required',
             'MotherName' => 'required',
             'PlaceOfBirth' => 'required',
@@ -261,13 +261,13 @@ public function store(Request $request): RedirectResponse
         ]);
 
     // for increment IDTeam automatically when adding a new member
-    $latestIDTeam = DB::table('members')->orderBy('IDTeam', 'desc')->first();
-    if($latestIDTeam){
-        $IDTeam = $latestIDTeam->IDTeam + 1;
-    }
-    else{
-        $IDTeam = 1;
-    }
+    // $latestIDTeam = DB::table('members')->orderBy('IDTeam', 'desc')->first();
+    // if($latestIDTeam){
+    //     $IDTeam = $latestIDTeam->IDTeam + 1;
+    // }
+    // else{
+    //     $IDTeam = 1;
+    // }
     
   // Convert Birthdate format
   $birthDate = DateTime::createFromFormat('m/d/Y',$request->BirthDate);
@@ -312,7 +312,8 @@ public function store(Request $request): RedirectResponse
     $member = new Member(); 
     $member->NotPad = $request->NotPad;
     $member->branch = $request->branch;
-    $member->IDTeam  = $IDTeam;
+    $member->IDTeam  = $request->IDTeam;
+   // $member->IDTeam  = $IDTeam;
     $member->FullName = $request->FullName;
     $member->MotherName = $request->MotherName;
     $member->PlaceOfBirth = $request->PlaceOfBirth;
@@ -350,8 +351,9 @@ public function store(Request $request): RedirectResponse
         ]);
    }
     
+//    session()->flash('Add', ' تم إضافة العضو بنجاح ورقمه الحزبي هو '.$IDTeam);
 
-    session()->flash('Add', ' تم إضافة العضو بنجاح ورقمه الحزبي هو '.$IDTeam);
+    session()->flash('Add', ' تم إضافة العضو بنجاح ورقمه الحزبي هو '.$request->IDTeam);
     return back();
 }
 
