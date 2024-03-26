@@ -77,7 +77,7 @@
 											<option value="{{$member->branch}}">{{$member->branch}} </option>
 											
 											@foreach($branch as $br)
-											<option value="{{$br->branch}}" >{{$br->branch}}</option>
+												<option value="{{$br->branch}}" >{{$br->branch}}</option>
 											@endforeach 
 
 										</select>
