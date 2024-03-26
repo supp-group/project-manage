@@ -16,7 +16,9 @@ return new class extends Migration
             $table->string('NotPad')->nullable();
             $table->string('branch')->nullable();
             $table->bigInteger('IDTeam')->unique()->nullable();
-            $table->string('FullName')->nullable();
+            $table->string('FirstName')->nullable();
+            $table->string('LastName')->nullable();
+            $table->string('FatherName')->nullable();
             $table->string('MotherName')->nullable();
             $table->string('PlaceOfBirth')->nullable();
             $table->date('BirthDate')->nullable();
