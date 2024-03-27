@@ -100,6 +100,7 @@ integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEw
 							</div>
 						</form>
 					</div>
+					
 					<div class="col-4">
 						<form action="{{ route('search-name') }}" method="post">
 							@csrf

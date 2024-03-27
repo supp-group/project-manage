@@ -22,8 +22,10 @@
 							<option>فرز حسب </option>
 							<option value="{{ route('order-m-last') }}">الأحدث</option>
 							<option value="{{ route('order-m-name') }}">الاسم</option>
+							<option value="{{ route('order-m-lastName') }}">النسبة</option>
 							<option value="{{ route('order-m-team') }}">الرقم الحزبي</option>
 							<option value="{{ route('order-m-join') }}">تاريخ الانتساب</option>
+
 						</select>               
 					</div>
 
@@ -84,10 +86,10 @@
 						</form>
 					</div>
 					<div class="col-4">
-						<form action="{{ route('search-m-name') }}" method="post">
+						<form action="{{ route('search-name') }}" method="post">
 							@csrf
 							<div class="input-group">
-								<input class="form-control" placeholder="الاسم" type="search" name="search_FullName">
+								<input class="form-control" placeholder="الاسم" type="search" name="search_FirstName">
 								<div class="input-group-append">
 									<button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
 								</div>
@@ -95,16 +97,18 @@
 						</form>
 					</div>
 					<div class="col-4">
-						<form action="{{ route('search-m-occupation') }}" method="post">
+						<form action="{{ route('search-LastName') }}" method="post">
 							@csrf
 							<div class="input-group">
-								<input class="form-control" placeholder="المهنة" type="search" name="search_Occupation">
+								<input class="form-control" placeholder="النسبة" type="search" name="search_LastName">
 								<div class="input-group-append">
 									<button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
 								</div>
 							</div>
 						</form>
 					</div>
+				
+
 
 
 
@@ -120,10 +124,10 @@
 						</form>
 					</div>&nbsp;
 					<div class="col-12">
-						<form action="{{ route('search-m-name') }}" method="post">
+						<form action="{{ route('search-name') }}" method="post">
 							@csrf
 							<div class="input-group">
-								<input class="form-control" placeholder="الاسم" type="search" name="search_FullName">
+								<input class="form-control" placeholder="الاسم" type="search" name="search_FirstName">
 								<div class="input-group-append">
 									<button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
 								</div>
@@ -131,16 +135,17 @@
 						</form>
 					</div>&nbsp;
 					<div class="col-12">
-						<form action="{{ route('search-m-occupation') }}" method="post">
+						<form action="{{ route('search-LastName') }}" method="post">
 							@csrf
 							<div class="input-group">
-								<input class="form-control" placeholder="المهنة" type="search" name="search_Occupation">
+								<input class="form-control" placeholder="النسبة" type="search" name="search_LastName">
 								<div class="input-group-append">
 									<button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
 								</div>
 							</div>
 						</form>
 					</div>
+				
 				</div>&nbsp;
 
 				{{-- <br>
@@ -196,6 +201,19 @@
 				</form>
 			</div>
 
+				<div class="col-4">
+					<form action="{{ route('search-m-occupation') }}" method="post">
+						@csrf
+						<div class="input-group">
+							<input class="form-control" placeholder="المهنة" type="search" name="search_Occupation">
+							<div class="input-group-append">
+								<button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
+							</div>
+						</div>
+					</form>
+				</div>
+
+
 
 
 			<div class="col-12">
@@ -221,6 +239,17 @@
 					</div>
 				</form>
 			</div>&nbsp;
+			<div class="col-12">
+				<form action="{{ route('search-m-occupation') }}" method="post">
+					@csrf
+					<div class="input-group">
+						<input class="form-control" placeholder="المهنة" type="search" name="search_Occupation">
+						<div class="input-group-append">
+							<button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
+						</div>
+					</div>
+				</form>
+			</div>
 			</div>
 			<br>
 
@@ -265,7 +294,8 @@
 												<th class="wd-15p border-bottom-0">#</th>
 												<th class="wd-15p border-bottom-0">الفرع</th>
 												<th class="wd-15p border-bottom-0">الرقم الحزبي</th>
-												<th class="wd-15p border-bottom-0">الاسم الثلاثي</th>
+												<th class="wd-15p border-bottom-0">الاسم</th>
+												<th class="wd-15p border-bottom-0">النسبة</th>
 												<th class="wd-15p border-bottom-0">المحافظة</th>
 												<th class="wd-15p border-bottom-0">التفاصيل</th>
 												<th class="wd-15p border-bottom-0">تعديل</th>
@@ -282,7 +312,8 @@
 												<td>{{$i++}}</td>
 												<td>{{$member->branch}}</td>
 												<td>{{$member->IDTeam}}</td>
-												<td>{{$member->FullName}}</td>
+												<td>{{$member->FirstName}}</td>
+												<td>{{$member->LastName}}</td>
 												<td>{{$member->City}}</td>
 
 												{{-- @if ($member->Image)
@@ -308,7 +339,7 @@
 																<div class="modal-content">
 			
 																	<div class="modal-header">
-																		<h6 class="modal-title">حذف العضو: &nbsp; {{$member->FullName}}</h6><button aria-label="Close" class="close" data-dismiss="modal"
+																		<h6 class="modal-title">حذف العضو: &nbsp; {{$member->FirstName}}{{$member->LastName}}</h6><button aria-label="Close" class="close" data-dismiss="modal"
 																			type="button"><span aria-hidden="true">&times;</span></button>
 																	</div>
 			

@@ -78,10 +78,28 @@
 
 									<div class="row">
 										<div class="col">
-											<label for="inputName" class="control-label">الاسم الثلاثي</label>
-											<input type="hidden" name="FullName" value="{{ $member->FullName }}">
-											<input type="text" class="form-control" id="inputName" name="FullName"
-											value="{{ $member->FullName }}" readonly>
+											<label for="inputName" class="control-label">الاسم </label>
+											<input type="hidden" name="FirstName" value="{{ $member->FirstName }}">
+											<input type="text" class="form-control" id="inputName" name="FirstName"
+											value="{{ $member->FirstName }}" readonly>
+										</div>
+									</div><br>
+
+									<div class="row">
+										<div class="col">
+											<label for="inputName" class="control-label">  النسبة</label>
+											<input type="hidden" name="LastName" value="{{ $member->LastName }}">
+											<input type="text" class="form-control" id="inputName" name="LastName"
+											value="{{ $member->LastName }}" readonly>
+										</div>
+									</div><br>
+
+									<div class="row">
+										<div class="col">
+											<label for="inputName" class="control-label"> اسم الأب</label>
+											<input type="hidden" name="FatherName" value="{{ $member->FatherName }}">
+											<input type="text" class="form-control" id="inputName" name="FatherName"
+											value="{{ $member->FatherName }}" readonly>
 										</div>
 									</div><br>
                                     
@@ -282,15 +300,33 @@
 											value="{{ $memb->branch }}" readonly>
 										</div>
 									</div><br>
+									<div class="row">
+										<div class="col">
+											<label for="inputName" class="control-label">الاسم </label>
+											<input type="hidden" name="FirstName" value="{{ $memb->FirstName }}">
+											<input type="text" class="form-control" id="inputName" name="FirstName"
+											value="{{ $memb->FirstName }}" readonly>
+										</div>
+									</div><br>
 
 									<div class="row">
 										<div class="col">
-											<label for="inputName" class="control-label">الاسم الثلاثي</label>
-											<input type="hidden" name="FullName" value="{{ $memb->FullName }}">
-											<input type="text" class="form-control" id="inputName" name="FullName"
-											value="{{ $memb->FullName }}" readonly>
+											<label for="inputName" class="control-label">  النسبة</label>
+											<input type="hidden" name="LastName" value="{{ $memb->LastName }}">
+											<input type="text" class="form-control" id="inputName" name="LastName"
+											value="{{ $memb->LastName }}" readonly>
 										</div>
 									</div><br>
+
+									<div class="row">
+										<div class="col">
+											<label for="inputName" class="control-label"> اسم الأب</label>
+											<input type="hidden" name="FatherName" value="{{ $memb->FatherName }}">
+											<input type="text" class="form-control" id="inputName" name="FatherName"
+											value="{{ $memb->FatherName }}" readonly>
+										</div>
+									</div><br>
+                                    
                                     
 									<div class="row">
 										<div class="col">

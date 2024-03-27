@@ -61,40 +61,31 @@
 									<div class="row">
 										<div class="col">
 											<label for="inputName" class="control-label">الاسم </label>
-											<input type="text" class="form-control @error('FirstName') is-invalid @enderror" 
-											id="inputName" name="FirstName">
-										
-											@error('FirstName')
-												<div class="alert alert-danger">{{ $message }}</div>
-											@enderror
+											<input type="hidden" name="FirstName" value="{{ $member->FirstName }}">
+											<input type="text" class="form-control" id="inputName" name="FirstName"
+											value="{{ $member->FirstName }}" readonly>
 										</div>
-									</div><br>
+									</div><br><br>
 
 									
 									<div class="row">
 										<div class="col">
 											<label for="inputName" class="control-label"> النسبة</label>
-											<input type="text" class="form-control @error('LastName') is-invalid @enderror" 
-											id="inputName" name="LastName">
-										
-											@error('LastName')
-												<div class="alert alert-danger">{{ $message }}</div>
-											@enderror
+											<input type="hidden" name="LastName" value="{{ $member->LastName }}">
+											<input type="text" class="form-control" id="inputName" name="LastName"
+											value="{{ $member->LastName }}" readonly>
 										</div>
-									</div><br>
+									</div><br><br>
 
 									
 									<div class="row">
 										<div class="col">
-											<label for="inputName" class="control-label"> اسم الأب</label>
-											<input type="text" class="form-control @error('FatherName') is-invalid @enderror" 
-											id="inputName" name="FatherName">
-										
-											@error('FatherName')
-												<div class="alert alert-danger">{{ $message }}</div>
-											@enderror
+											<label for="inputName" class="control-label">اسم الأب </label>
+											<input type="hidden" name="FatherName" value="{{ $member->FatherName }}">
+											<input type="text" class="form-control" id="inputName" name="FatherName"
+											value="{{ $member->FatherName }}" readonly>
 										</div>
-									</div><br>
+									</div><br><br>
                                     
 									<div class="row">
 										<div class="col">
