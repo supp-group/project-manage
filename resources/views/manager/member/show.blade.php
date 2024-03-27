@@ -86,7 +86,7 @@
 						</form>
 					</div>
 					<div class="col-4">
-						<form action="{{ route('search-name') }}" method="post">
+						<form action="{{ route('search-m-name') }}" method="post">
 							@csrf
 							<div class="input-group">
 								<input class="form-control" placeholder="الاسم" type="search" name="search_FirstName">
@@ -97,7 +97,7 @@
 						</form>
 					</div>
 					<div class="col-4">
-						<form action="{{ route('search-LastName') }}" method="post">
+						<form action="{{ route('search-m-LastName') }}" method="post">
 							@csrf
 							<div class="input-group">
 								<input class="form-control" placeholder="النسبة" type="search" name="search_LastName">
@@ -124,7 +124,7 @@
 						</form>
 					</div>&nbsp;
 					<div class="col-12">
-						<form action="{{ route('search-name') }}" method="post">
+						<form action="{{ route('search-m-name') }}" method="post">
 							@csrf
 							<div class="input-group">
 								<input class="form-control" placeholder="الاسم" type="search" name="search_FirstName">
@@ -135,7 +135,7 @@
 						</form>
 					</div>&nbsp;
 					<div class="col-12">
-						<form action="{{ route('search-LastName') }}" method="post">
+						<form action="{{ route('search-m-LastName') }}" method="post">
 							@csrf
 							<div class="input-group">
 								<input class="form-control" placeholder="النسبة" type="search" name="search_LastName">
