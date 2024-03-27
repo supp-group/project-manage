@@ -30,9 +30,10 @@ integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEw
 						</select>               
 					</div>
 
-					{{-- <div class="d-flex my-xl-auto right-content">
-						<a href="{{ route('export') }}" type="button" class="btn btn-primary" style="color: white">&nbsp; تصدير &nbsp;<i class="fas fa-file-upload"></i></a>
-					</div> --}}
+					<div class="d-flex my-xl-auto right-content">
+						<a href="{{ route('export') }}" type="button" class="btn btn-primary" style="color: white">&nbsp; 
+							تصدير &nbsp;<i class="fas fa-file-upload"></i></a>
+					</div>
 
                     {{-- <div class="d-flex my-xl-auto right-content">
 						<a href="{{ route('import') }}" type="button" class="btn btn-primary" style="color: white">&nbsp; استيراد &nbsp;<i class="fas fa-file-download"></i></a>
