@@ -23,6 +23,7 @@ use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\Session;
 class MemberController extends Controller
 {
 
@@ -333,22 +334,22 @@ public function store(Request $request): RedirectResponse
   }
 
 
-//   $qualificationId = $request->Qualification;
-//   if($qualificationId){
-//     $qualificationName = Qualification::where('id', $qualificationId)->first()->Name;
-//   }
-//   else{
-//     $qualificationName = $qualificationId;
-//   }
+  //   $qualificationId = $request->Qualification;
+ //   if($qualificationId){
+ //     $qualificationName = Qualification::where('id', $qualificationId)->first()->Name;
+ //   }
+ //   else{
+ //     $qualificationName = $qualificationId;
+ //   }
   
 
-//   $specializationId = $request->Specialization;
-//   if($specializationId){
-//     $specializationName = Qualification::where('id', $specializationId)->first()->specialization;
-//   }
-//   else{
-//     $specializationName = $specializationId;
-//   }
+ //   $specializationId = $request->Specialization;
+ //   if($specializationId){
+ //     $specializationName = Qualification::where('id', $specializationId)->first()->specialization;
+ //   }
+ //   else{
+ //     $specializationName = $specializationId;
+ //   }
 
 
 
@@ -387,11 +388,11 @@ public function store(Request $request): RedirectResponse
   //   $cityId = $request->City;
   //   $cityName = City::where('id', $cityId)->first()->Name;
 
-//   $areaId = $request->area;
-//   $areaName = City::where('id', $areaId)->first()->area;
+ //   $areaId = $request->area;
+ //   $areaName = City::where('id', $areaId)->first()->area;
 
-//   $streetId = $request->street;
-//   $streetName = City::where('id', $streetId)->first()->street;
+ //   $streetId = $request->street;
+ //   $streetName = City::where('id', $streetId)->first()->street;
 
 
     $member = new Member(); 
@@ -772,6 +773,44 @@ public function searchByName(Request $request)
    }
 }
 
+
+// public function searchByName(Request $request)
+// {
+//     $searchTerm = $request->input('search_FirstName');
+
+//     if (auth()->user()->Role == 'admin')
+//     {
+//         $members = Member::where('FirstName', 'like', '%'.$searchTerm.'%')->orderBy('FirstName', 'Asc')->paginate(50);
+//         $memberCount = Member::where('FirstName', 'like', '%'.$searchTerm.'%')->count();
+//         $paginationLinks = $members->withQueryString()->links('pagination::bootstrap-4');
+
+//         return view('admin.member.show', [
+//             'members' => $members,
+//             'memberCount' => $memberCount,
+//             'paginationLinks' => $paginationLinks,
+//             'searchTerm' => $searchTerm // إرسال كلمة البحث لعرضها في حقل البحث
+//         ]);
+//     }
+//     elseif (optional(auth()->user())->Role == 'manager') {
+//         $user = auth()->user();
+//         $cityName = DB::table('cities')
+//             ->where('id', $user->city_id)
+//             ->value('Name');
+
+//         $members = Member::where('City', $cityName)->where('FirstName', 'like', '%'.$searchTerm.'%')->orderBy('FirstName', 'Asc')->paginate(50);
+//         $memberCount = Member::where('City', $cityName)->where('FirstName', 'like', '%'.$searchTerm.'%')->count();
+//         $paginationLinks = $members->withQueryString()->links('pagination::bootstrap-4');
+
+//         return view('manager.member.show', [
+//             'members' => $members,
+//             'memberCount' => $memberCount,
+//             'paginationLinks' => $paginationLinks,
+//             'searchTerm' => $searchTerm // إرسال كلمة البحث لعرضها في حقل البحث
+//         ]);
+//     }
+// }
+
+
 public function searchByLastName(Request $request)
 {
         $searchTerm = $request->input('search_LastName');
@@ -1135,48 +1174,7 @@ public function exportDataToCSV(Request $request)
     else{
     $data = Member::get();
        }
-        // $data = Member::query()
-        //     ->when($searchName, function ($query) use ($searchName) {
-        //         $query->where('FullName', 'like', '%' . $searchName . '%');
-        //     })
-        //     ->when($searchIDTeam, function ($query) use ($searchIDTeam) {
-        //         $query->where('IDTeam', 'like', '%' . $searchIDTeam . '%');
-        //     })
-        //     ->when($searchQualification, function ($query) use ($searchQualification) {
-        //         $query->where('Qualification', 'like', '%' . $searchQualification . '%');
-        //     })
-        //     ->when($searchSpecialization, function ($query) use ($searchSpecialization) {
-        //         $query->where('Specialization', 'like', '%' . $searchSpecialization . '%');
-        //     })
-        //     ->when($searchCity, function ($query) use ($searchCity) {
-        //         $query->where('City', 'like', '%' . $searchCity . '%');
-        //     })
-        //     ->when($searchOccupation, function ($query) use ($searchOccupation) {
-        //         $query->where('Occupation', 'like', '%' . $searchOccupation . '%');
-        //     })
-        //     ->get();
-           
-    //  return dd($data);
 
-        // $data = $request->input('searchTerm');
-
-        // $query = Member::query(); // Start with a base query
-    
-        // // Only apply filters if $data is not null or not empty
-        // if (!empty($data)) {
-        //     $query->where(function ($q) use ($data) {
-        //         $q->where('FullName', 'like', '%' . $data . '%')
-        //             ->orWhere('IDTeam', 'like', '%' . $data . '%')
-        //             ->orWhere('Qualification', 'like', '%' . $data . '%')
-        //             ->orWhere('Specialization', 'like', '%' . $data . '%')
-        //             ->orWhere('City', 'like', '%' . $data . '%')
-        //             ->orWhere('Occupation', 'like', '%' . $data . '%');
-        //     });
-        // }
-    
-        // $members = $query->get(); // Execute the query
-    
-    
         $csvFileName = 'members.csv';
         $headers = [
             'Content-Type' => 'text/csv; charset=UTF-8',
@@ -1189,7 +1187,9 @@ public function exportDataToCSV(Request $request)
             'الملاحظات',
             'الفرع',
             'الرقم الحزبي',
-            'الاسم الثلاثي',
+            'الاسم ',
+            'النسبة',
+            'اسم الأب',
             'اسم الأم',
             'مكان الولادة',
             'تاريخ الولادة',
@@ -1214,7 +1214,9 @@ public function exportDataToCSV(Request $request)
                 $member->NotPad,
                 $member->branch,
                 $member->IDTeam,
-                $member->FullName,
+                $member->FirstName,
+                $member->LastName,
+                $member->FatherName,
                 $member->MotherName,
                 $member->PlaceOfBirth,
                 $member->BirthDate,
@@ -1234,9 +1236,7 @@ public function exportDataToCSV(Request $request)
                 $member->Image
             ]);
         }
-    
         fclose($handle);
-    
         return response()->make('', 200, $headers);
 }
   

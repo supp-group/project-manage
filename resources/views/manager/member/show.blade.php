@@ -89,13 +89,20 @@
 						<form action="{{ route('search-m-name') }}" method="post">
 							@csrf
 							<div class="input-group">
-								<input class="form-control" placeholder="الاسم" type="search" name="search_FirstName">
+								<input class="form-control" placeholder="الاسم" type="search" name="search_FirstName" value="{{ old('search_FirstName') }}">
 								<div class="input-group-append">
 									<button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
 								</div>
 							</div>
 						</form>
 					</div>
+					
+					
+					@if(isset($members) && $members->count() > 0)
+						<!-- عرض نتائج البحث هنا -->
+					@endif
+					
+
 					<div class="col-4">
 						<form action="{{ route('search-m-LastName') }}" method="post">
 							@csrf
