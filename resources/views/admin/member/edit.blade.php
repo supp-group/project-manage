@@ -89,7 +89,7 @@
 
 									<div class="row">
 										<div class="col">
-											<label for="inputName" class="control-label">الاسم </label>
+											<label for="inputName" class="control-label">الاسم</label>
 											<input type="text" class="form-control @error('FirstName') is-invalid @enderror" 
 											id="inputName" name="FirstName">
 										
@@ -102,7 +102,7 @@
 									
 									<div class="row">
 										<div class="col">
-											<label for="inputName" class="control-label"> النسبة</label>
+											<label for="inputName" class="control-label">النسبة</label>
 											<input type="text" class="form-control @error('LastName') is-invalid @enderror" 
 											id="inputName" name="LastName">
 										
@@ -407,8 +407,8 @@
 										<div class="col">
 											<label for="inputName" class="control-label">ملاحظات</label>
 											<input type="hidden" name="NotPad" value="{{ $member->NotPad }}">
-											<input type="text" class="form-control @error('NotPad') is-invalid @enderror" 
-											id="inputName" name="NotPad" value="{{ $member->NotPad }}">
+											<textarea type="text" class="form-control @error('NotPad') is-invalid @enderror" 
+											id="inputName" name="NotPad" rows="3" cols="30" value="{{ $member->NotPad }}"></textarea>
 
 											@error('NotPad')
 												<div class="alert alert-danger">{{ $message }}</div>

@@ -332,8 +332,8 @@
 										<div class="col">
 											<label for="inputName" class="control-label">ملاحظات</label>
 											<input type="hidden" name="NotPad" value="{{ $member->NotPad }}">
-											<input type="text" class="form-control @error('NotPad') is-invalid @enderror" 
-											id="inputName" name="NotPad" value="{{ $member->NotPad }}">
+											<textarea type="text" class="form-control @error('NotPad') is-invalid @enderror" 
+											id="inputName" name="NotPad" rows="3" cols="30" value="{{ $member->NotPad }}"></textarea>
 
 											@error('NotPad')
 												<div class="alert alert-danger">{{ $message }}</div>
