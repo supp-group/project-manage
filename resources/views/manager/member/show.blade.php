@@ -86,7 +86,7 @@
 						</form>
 					</div>
 					<div class="col-4">
-						<form action="{{ route('search-name') }}" method="post">
+						<form action="{{ route('search-m-name') }}" method="post">
 							@csrf
 							<div class="input-group">
 								<input class="form-control" placeholder="الاسم" type="search" name="search_FirstName">
@@ -97,7 +97,7 @@
 						</form>
 					</div>
 					<div class="col-4">
-						<form action="{{ route('search-LastName') }}" method="post">
+						<form action="{{ route('search-m-LastName') }}" method="post">
 							@csrf
 							<div class="input-group">
 								<input class="form-control" placeholder="النسبة" type="search" name="search_LastName">
@@ -124,7 +124,7 @@
 						</form>
 					</div>&nbsp;
 					<div class="col-12">
-						<form action="{{ route('search-name') }}" method="post">
+						<form action="{{ route('search-m-name') }}" method="post">
 							@csrf
 							<div class="input-group">
 								<input class="form-control" placeholder="الاسم" type="search" name="search_FirstName">
@@ -135,7 +135,7 @@
 						</form>
 					</div>&nbsp;
 					<div class="col-12">
-						<form action="{{ route('search-LastName') }}" method="post">
+						<form action="{{ route('search-m-LastName') }}" method="post">
 							@csrf
 							<div class="input-group">
 								<input class="form-control" placeholder="النسبة" type="search" name="search_LastName">
@@ -362,6 +362,62 @@
 											</tr>
 											@endforeach
 											
+											@if(request()->input('search_IDTeam') == null)
+											<!-- لا يوجد قيمة مدخلة -->
+										@else
+											<tr>
+												<td style="font-weight: bold;">عدد نتائج البحث {{ $memberCount }}</td>
+											</tr>
+										@endif
+				
+										@if(request()->input('search_FirstName') == null)
+											<!-- لا يوجد قيمة مدخلة -->
+										@else
+											<tr>
+												<td style="font-weight: bold;">عدد نتائج البحث {{ $memberCount }}</td>
+											</tr>
+										@endif
+				
+										@if(request()->input('search_LastName') == null)
+											<!-- لا يوجد قيمة مدخلة -->
+										@else
+											<tr>
+												<td style="font-weight: bold;">عدد نتائج البحث {{ $memberCount }}</td>
+											</tr>
+										@endif
+								
+										@if(request()->input('search_Qualification') == null)
+											<!-- لا يوجد قيمة مدخلة -->
+										@else
+											<tr>
+												<td style="font-weight: bold;">عدد نتائج البحث {{ $memberCount }}</td>
+											</tr>
+										@endif
+				
+										@if(request()->input('search_Specialization') == null)
+											<!-- لا يوجد قيمة مدخلة -->
+										@else
+											<tr>
+												<td style="font-weight: bold;">عدد نتائج البحث {{ $memberCount }}</td>
+											</tr>
+										@endif
+				
+										@if(request()->input('search_Occupation') == null)
+											<!-- لا يوجد قيمة مدخلة -->
+										@else
+											<tr>
+												<td style="font-weight: bold;">عدد نتائج البحث {{ $memberCount }}</td>
+											</tr>
+										@endif
+				
+										@if(request()->has('search-phone'))
+											<tr>
+												<td style="font-weight: bold;">عدد نتائج البحث {{ $memberCount }}</td>
+											</tr>
+										@else
+											<!-- لا يوجد قيمة مدخلة -->
+										@endif
+
 										@else 
 										<tr>
 											<td colspan="20">لم يتم العثور على نتائج</td>
