@@ -362,6 +362,62 @@
 											</tr>
 											@endforeach
 											
+											@if(request()->input('search_IDTeam') == null)
+											<!-- لا يوجد قيمة مدخلة -->
+										@else
+											<tr>
+												<td style="font-weight: bold;">عدد نتائج البحث {{ $memberCount }}</td>
+											</tr>
+										@endif
+				
+										@if(request()->input('search_FirstName') == null)
+											<!-- لا يوجد قيمة مدخلة -->
+										@else
+											<tr>
+												<td style="font-weight: bold;">عدد نتائج البحث {{ $memberCount }}</td>
+											</tr>
+										@endif
+				
+										@if(request()->input('search_LastName') == null)
+											<!-- لا يوجد قيمة مدخلة -->
+										@else
+											<tr>
+												<td style="font-weight: bold;">عدد نتائج البحث {{ $memberCount }}</td>
+											</tr>
+										@endif
+								
+										@if(request()->input('search_Qualification') == null)
+											<!-- لا يوجد قيمة مدخلة -->
+										@else
+											<tr>
+												<td style="font-weight: bold;">عدد نتائج البحث {{ $memberCount }}</td>
+											</tr>
+										@endif
+				
+										@if(request()->input('search_Specialization') == null)
+											<!-- لا يوجد قيمة مدخلة -->
+										@else
+											<tr>
+												<td style="font-weight: bold;">عدد نتائج البحث {{ $memberCount }}</td>
+											</tr>
+										@endif
+				
+										@if(request()->input('search_Occupation') == null)
+											<!-- لا يوجد قيمة مدخلة -->
+										@else
+											<tr>
+												<td style="font-weight: bold;">عدد نتائج البحث {{ $memberCount }}</td>
+											</tr>
+										@endif
+				
+										@if(request()->has('search-phone'))
+											<tr>
+												<td style="font-weight: bold;">عدد نتائج البحث {{ $memberCount }}</td>
+											</tr>
+										@else
+											<!-- لا يوجد قيمة مدخلة -->
+										@endif
+
 										@else 
 										<tr>
 											<td colspan="20">لم يتم العثور على نتائج</td>

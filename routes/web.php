@@ -30,6 +30,11 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
+Route::get('print', function () {
+  return view('admin.member.print');
+});
+
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -71,7 +76,7 @@ Route::middleware(['auth', 'verified', 'admin'])-> prefix('admin')->group(functi
         
         Route::get('archive/{IDTeam}', [TemporaryController::class, 'GetArchive'])->name('archive.GetArchive');
 
-        Route::get('print-details/{id}', [MemberController::class, 'printDetails'])->name('printDetails');
+        Route::get('print/{id}', [MemberController::class, 'printDetails'])->name('printDetails');
 
 
         // for code js
