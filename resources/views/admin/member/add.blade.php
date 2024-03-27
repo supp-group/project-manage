@@ -43,7 +43,7 @@
 @endif
 
 
-@if ($errors->any())
+{{-- @if ($errors->any())
     <div class="alert alert-danger">
         <ul>
             @foreach ($errors->all() as $error)
@@ -51,7 +51,7 @@
             @endforeach
         </ul>
     </div>
-@endif
+@endif --}}
 
 				<!-- row -->
 				<div class="row">
@@ -280,28 +280,20 @@
 
 									<div class="form-group">
 										<label>المؤهل العلمي</label>
-										<select name="Qualification" id="qualificationSelect" class="form-control select @error('Qualification') is-invalid @enderror" >
-											<option>اختر المؤهل العلمي</option>
+										<select name="Qualification" id="qualificationSelect" class="form-control select" >
+											<option value="لايوجد">اختر المؤهل العلمي</option>
 											@foreach($qualifications as $qualification)
 												
 												<option value="{{$qualification->id}}">{{$qualification->Name}}</option>
 											@endforeach 
 										</select>
-
-										@error('Qualification')
-											<div class="alert alert-danger">{{ $message }}</div>
-										@enderror
 									</div><br>
 
 									<div class="form-group">
 										<label>الاختصاص</label>
-										<select name="Specialization" class="form-control select @error('Specialization') is-invalid @enderror" id="specializationSelect">
+										<select name="Specialization" class="form-control select" id="specializationSelect">
 											<!-- Options will be loaded dynamically -->
 										</select>
-
-										@error('Specialization')
-											<div class="alert alert-danger">{{ $message }}</div>
-										@enderror
 									</div><br> 
 									
 									 <div class="row">

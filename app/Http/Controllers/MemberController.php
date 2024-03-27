@@ -265,7 +265,7 @@ public function create()
 public function store(Request $request): RedirectResponse
 {
         $validated = $request->validate([
-            'NotPad' => 'required|max:255',
+           // 'NotPad' => 'required|max:255',
             'branch' => 'required',
             'IDTeam' => 'required|unique:members|max:255',
             'FirstName' => 'required',
@@ -278,18 +278,18 @@ public function store(Request $request): RedirectResponse
             'City' => 'required',
             'IDNumber' => 'required|unique:members|min:10|max:11',
             'Gender' => 'required',
-            'Qualification' =>'required',
-            'Occupation' => 'required',
+          //  'Qualification' =>'required',
+            // 'Occupation' => 'required',
             'MobilePhone' => 'required|max:10|min:9',
-            'HomeAddress' => 'required',
-            'WorkAddress' => 'required',
-            'HomePhone' => 'required|max:10|min:9',
-            'WorkPhone' => 'required|max:10|min:9',
+            // 'HomeAddress' => 'required',
+            // 'WorkAddress' => 'required',
+            // 'HomePhone' => 'required|max:10|min:9',
+            // 'WorkPhone' => 'required|max:10|min:9',
             'DateOfJoin' => 'required|numeric|digits:4|before_or_equal:' . date('Y'),
-            'Specialization' => 'required',
-            'area' => 'required',
-            'street' => 'required',
-            'Image' =>'required',
+            // 'Specialization' => 'required',
+            // 'area' => 'required',
+            // 'street' => 'required',
+            // 'Image' =>'required',
         ]);
 
     // for increment IDTeam automatically when adding a new member
@@ -310,11 +310,45 @@ public function store(Request $request): RedirectResponse
   $dateJoinFormatted = $dateJoin ? $dateJoin->format('Y') : null;
 
 
+
   $qualificationId = $request->Qualification;
-  $qualificationName = Qualification::where('id', $qualificationId)->first()->Name;
-  
+
+  if (is_numeric($qualificationId)) {
+      // إذا كانت القيمة هي id
+      $qualificationName = Qualification::where('id', $qualificationId)->value('Name');
+  } else {
+      // إذا كانت القيمة هي اسم
+      $qualificationName = $qualificationId;
+  }
+
+
   $specializationId = $request->Specialization;
-  $specializationName = Qualification::where('id', $specializationId)->first()->specialization;
+
+  if (is_numeric($specializationId)) {
+      // إذا كانت القيمة هي id
+      $specializationName = Qualification::where('id', $specializationId)->value('specialization');
+  } else {
+      // إذا كانت القيمة هي اسم
+      $specializationName = $specializationId;
+  }
+
+
+//   $qualificationId = $request->Qualification;
+//   if($qualificationId){
+//     $qualificationName = Qualification::where('id', $qualificationId)->first()->Name;
+//   }
+//   else{
+//     $qualificationName = $qualificationId;
+//   }
+  
+
+//   $specializationId = $request->Specialization;
+//   if($specializationId){
+//     $specializationName = Qualification::where('id', $specializationId)->first()->specialization;
+//   }
+//   else{
+//     $specializationName = $specializationId;
+//   }
 
 
 
@@ -329,16 +363,35 @@ public function store(Request $request): RedirectResponse
   }
 
 
+  $areaId = $request->area;
+
+  if (is_numeric($areaId)) {
+      // إذا كانت القيمة هي id
+      $areaName = City::where('id', $areaId)->value('area');
+  } else {
+      // إذا كانت القيمة هي اسم
+      $areaName = $areaId;
+  }
+
+
+  $streetId = $request->street;
+
+  if (is_numeric($streetId)) {
+      // إذا كانت القيمة هي id
+      $streetName = City::where('id', $streetId)->value('street');
+  } else {
+      // إذا كانت القيمة هي اسم
+      $streetName = $streetId;
+  }
+
   //   $cityId = $request->City;
   //   $cityName = City::where('id', $cityId)->first()->Name;
 
+//   $areaId = $request->area;
+//   $areaName = City::where('id', $areaId)->first()->area;
 
-
-  $areaId = $request->area;
-  $areaName = City::where('id', $areaId)->first()->area;
-
-  $streetId = $request->street;
-  $streetName = City::where('id', $streetId)->first()->street;
+//   $streetId = $request->street;
+//   $streetName = City::where('id', $streetId)->first()->street;
 
 
     $member = new Member(); 
