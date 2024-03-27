@@ -96,7 +96,7 @@ public function orderBy_Last()
                 ->where('id', $user->city_id)
                 ->value('Name');
             
-            $members = Member::where('City', $cityName)->orderBy('updated_at', 'desc')->paginate(50);
+            $members = Member::where('City', $cityName)->orderBy('created_at', 'desc')->paginate(50);
             $paginationLinks = $members->withQueryString()->links('pagination::bootstrap-4');
 
             return view('manager.member.show', [
@@ -126,7 +126,7 @@ public function orderBy_Name()
                 ->where('id', $user->city_id)
                 ->value('Name');
             
-            $members = Member::where('City', $cityName)->orderBy('updated_at', 'desc')->paginate(50);
+            $members = Member::where('City', $cityName)->orderBy('FirstName', 'Asc')->paginate(50);
             $paginationLinks = $members->withQueryString()->links('pagination::bootstrap-4');
 
             return view('manager.member.show', [
@@ -155,7 +155,7 @@ public function orderBy_LastName()
                 ->where('id', $user->city_id)
                 ->value('Name');
             
-            $members = Member::where('City', $cityName)->orderBy('updated_at', 'desc')->paginate(50);
+            $members = Member::where('City', $cityName)->orderBy('LastName', 'Asc')->paginate(50);
             $paginationLinks = $members->withQueryString()->links('pagination::bootstrap-4');
 
             return view('manager.member.show', [
@@ -184,7 +184,7 @@ public function orderBy_IDTeam()
                 ->where('id', $user->city_id)
                 ->value('Name');
             
-            $members = Member::where('City', $cityName)->orderBy('updated_at', 'desc')->paginate(50);
+            $members = Member::where('City', $cityName)->orderBy('IDTeam','Asc')->paginate(50);
             $paginationLinks = $members->withQueryString()->links('pagination::bootstrap-4');
 
             return view('manager.member.show', [
@@ -214,7 +214,7 @@ public function orderBy_DateOfJoin()
             ->where('id', $user->city_id)
             ->value('Name');
         
-        $members = Member::where('City', $cityName)->orderBy('updated_at', 'desc')->paginate(50);
+        $members = Member::where('City', $cityName)->orderBy('DateOfJoin', 'desc')->paginate(50);
         $paginationLinks = $members->withQueryString()->links('pagination::bootstrap-4');
         
         return view('manager.member.show', [
