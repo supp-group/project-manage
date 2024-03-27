@@ -1407,9 +1407,10 @@ public function Advancedsearch(Request $request)
 
 
 
-public function printDetails($id) {
-    $members = Member::where('id', $id)->first();
-    return view('admin.member.print', compact('members'));
+public function print($id) {
+    $member = Member::where('id', $id)->first();
+    return view('admin.member.print', compact('member'));
 }
+
 
 }

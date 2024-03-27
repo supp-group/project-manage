@@ -38,8 +38,8 @@
 									{{ csrf_field() }}
                                     @method('get')
 
-									<a href="{{ route('printDetails', $member->id) }}" type="button" class="btn btn-primary" style="color: white; float: left;">&nbsp; طباعة &nbsp;<i class="fas fa-print"></i></a>
-									<br><br>
+									{{-- <a href="{{ route('print', $member->id) }}" type="button" class="btn btn-primary" style="color: white; float: left;">&nbsp; طباعة &nbsp;<i class="fas fa-print"></i></a>
+									<br><br> --}}
 									<div class="row">
 										<div class="col">
 											<label for="inputName" class="control-label">الرقم الحزبي</label>

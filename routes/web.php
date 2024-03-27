@@ -76,7 +76,7 @@ Route::middleware(['auth', 'verified', 'admin'])-> prefix('admin')->group(functi
         
         Route::get('archive/{IDTeam}', [TemporaryController::class, 'GetArchive'])->name('archive.GetArchive');
 
-        Route::get('print/{id}', [MemberController::class, 'printDetails'])->name('printDetails');
+        Route::get('print/{id}', [MemberController::class, 'print'])->name('print');
 
 
         // for code js

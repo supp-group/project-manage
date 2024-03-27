@@ -387,6 +387,7 @@ integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEw
 								<th class="wd-15p border-bottom-0">المحافظة</th>
 								<th class="wd-15p border-bottom-0">التفاصيل</th>
 								<th class="wd-15p border-bottom-0">سجل التعديل</th>
+								<th class="wd-15p border-bottom-0">طباعة</th>
 								<th class="wd-15p border-bottom-0">تعديل</th>
 								<th class="wd-15p border-bottom-0">حذف</th>
 							</tr>
@@ -417,6 +418,9 @@ integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEw
 								</td>
 								<td>
 									<a class="btn btn-sm btn-primary" href="{{ route('archive.GetArchive', $member->IDTeam)}}" title="سجل التعديل"><i class="la la-archive"></i></a>
+								</td>
+								<td>
+									<a class="btn btn-sm btn-warning" href="{{ route('print', $member->id) }}" title="طباعة"><i class="fas fa-print"></i></a>
 								</td>
 								<td>
 									<a class="btn btn-sm btn-info" href="{{ route('member.edit', $member->id) }}" title="تعديل"><i class="las la-pen"></i></a>
