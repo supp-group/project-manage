@@ -274,17 +274,15 @@ Route::middleware(['auth', 'verified', 'manager'])-> prefix('manager')->group(fu
 
 
 
-
         // search
         Route::post('phone', [MemberController::class, 'searchByPhoneNull'])->name('search-m-phone');
 
         Route::post('team', [MemberController::class, 'searchByIDTeam'])->name('search-m-team');
         Route::post('name', [MemberController::class, 'searchByName'])->name('search-m-name');
-
+        Route::post('lastName', [MemberController::class, 'searchByLastName'])->name('search-m-LastName');
         
         Route::post('street', [MemberController::class, 'searchBystreet'])->name('search-m-Street');
         Route::post('area', [MemberController::class, 'searchByArea'])->name('search-m-Area');
-
 
         Route::post('qualification', [MemberController::class, 'searchByQualification'])->name('search-m-qualification');
         Route::post('specialization', [MemberController::class, 'searchBySpecialization'])->name('search-m-specialization');
@@ -294,6 +292,7 @@ Route::middleware(['auth', 'verified', 'manager'])-> prefix('manager')->group(fu
         //order
         Route::get('last', [MemberController::class, 'orderBy_Last'])->name('order-m-last');
         Route::get('name', [MemberController::class, 'orderBy_Name'])->name('order-m-name');
+        Route::get('lastName', [MemberController::class, 'orderBy_LastName'])->name('order-m-lastName');
         Route::get('team', [MemberController::class, 'orderBy_IDTeam'])->name('order-m-team');
         Route::get('join', [MemberController::class, 'orderBy_DateOfJoin'])->name('order-m-join');
 

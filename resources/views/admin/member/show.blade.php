@@ -431,7 +431,7 @@ integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEw
 												<div class="modal-content">
 
 													<div class="modal-header">
-														<h6 class="modal-title">حذف العضو: &nbsp; {{$member->FullName}}</h6><button aria-label="Close" class="close" data-dismiss="modal"
+														<h6 class="modal-title">حذف العضو: &nbsp; {{$member->FirstName}} {{$member->LastName}}</h6><button aria-label="Close" class="close" data-dismiss="modal"
 															type="button"><span aria-hidden="true">&times;</span></button>
 													</div>
 
