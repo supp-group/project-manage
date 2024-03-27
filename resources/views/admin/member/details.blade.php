@@ -253,8 +253,8 @@
 										<div class="col">
 											<label for="inputName" class="control-label">ملاحظات</label>
 											<input type="hidden" name="NotPad" value="{{ $member->NotPad }}">
-											<input type="text" class="form-control" id="inputName" name="NotPad"
-											value="{{ $member->NotPad }}" readonly>
+											<textarea type="text" class="form-control" id="inputName" name="NotPad"
+											value="{{ $member->NotPad }}" rows="3" cols="30" readonly></textarea>
 										</div>
 									</div><br>
 

@@ -254,7 +254,7 @@ integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEw
 							</div>
 						</div>
 					</form>
-				</div>
+				</div>&nbsp;
 					<div class="col-12">
 						<form action="{{ route('search-Area') }}" method="post">
 								@csrf
@@ -276,9 +276,9 @@ integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEw
 										</div>
 									</div>
 								</form>
-							</div>&nbsp;
-				</div>&nbsp;
-
+							</div>
+				</div>
+				&nbsp;
 				<div class="row">
 					<div class="col-4">
 						<form action="{{ route('search-occupation') }}" method="post">
