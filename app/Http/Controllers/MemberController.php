@@ -23,6 +23,7 @@ use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\Session;
 class MemberController extends Controller
 {
 
@@ -771,6 +772,44 @@ public function searchByName(Request $request)
     ]);
    }
 }
+
+
+// public function searchByName(Request $request)
+// {
+//     $searchTerm = $request->input('search_FirstName');
+
+//     if (auth()->user()->Role == 'admin')
+//     {
+//         $members = Member::where('FirstName', 'like', '%'.$searchTerm.'%')->orderBy('FirstName', 'Asc')->paginate(50);
+//         $memberCount = Member::where('FirstName', 'like', '%'.$searchTerm.'%')->count();
+//         $paginationLinks = $members->withQueryString()->links('pagination::bootstrap-4');
+
+//         return view('admin.member.show', [
+//             'members' => $members,
+//             'memberCount' => $memberCount,
+//             'paginationLinks' => $paginationLinks,
+//             'searchTerm' => $searchTerm // إرسال كلمة البحث لعرضها في حقل البحث
+//         ]);
+//     }
+//     elseif (optional(auth()->user())->Role == 'manager') {
+//         $user = auth()->user();
+//         $cityName = DB::table('cities')
+//             ->where('id', $user->city_id)
+//             ->value('Name');
+
+//         $members = Member::where('City', $cityName)->where('FirstName', 'like', '%'.$searchTerm.'%')->orderBy('FirstName', 'Asc')->paginate(50);
+//         $memberCount = Member::where('City', $cityName)->where('FirstName', 'like', '%'.$searchTerm.'%')->count();
+//         $paginationLinks = $members->withQueryString()->links('pagination::bootstrap-4');
+
+//         return view('manager.member.show', [
+//             'members' => $members,
+//             'memberCount' => $memberCount,
+//             'paginationLinks' => $paginationLinks,
+//             'searchTerm' => $searchTerm // إرسال كلمة البحث لعرضها في حقل البحث
+//         ]);
+//     }
+// }
+
 
 public function searchByLastName(Request $request)
 {
