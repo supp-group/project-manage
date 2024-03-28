@@ -18,7 +18,6 @@ return new class extends Migration
             $table->string('area')->nullable();
             $table->integer('grandId')->nullable();
             $table->string('street')->nullable();
-            $table->string('branch')->nullable();
             $table->timestamps();
         });
     }

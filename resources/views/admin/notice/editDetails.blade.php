@@ -66,15 +66,6 @@
 											value="{{ $member->IDTeam }}" readonly>
 										</div>
 									</div><br>
-                                       
-                                    <div class="row">
-										<div class="col">
-											<label for="inputName" class="control-label">الفرع</label>
-											<input type="hidden" name="branch" value="{{ $member->branch }}">
-											<input type="text" class="form-control" id="inputName" name="branch"
-											value="{{ $member->branch }}" readonly>
-										</div>
-									</div><br>
 
 									<div class="row">
 										<div class="col">
@@ -292,14 +283,6 @@
 										</div>
 									</div><br>
                                        
-                                    <div class="row">
-										<div class="col">
-											<label for="inputName" class="control-label">الفرع</label>
-											<input type="hidden" name="branch" value="{{ $memb->branch }}">
-											<input type="text" class="form-control" id="inputName" name="branch"
-											value="{{ $memb->branch }}" readonly>
-										</div>
-									</div><br>
 									<div class="row">
 										<div class="col">
 											<label for="inputName" class="control-label">الاسم </label>
@@ -509,15 +492,18 @@
 												<input type="hidden" name="NotPad" value="{{ $memb->NotPad }}">
 												<input type="hidden" class="form-control" id="inputName" name="NotPad"
 												value="{{ $memb->NotPad }}" readonly>
-												<input type="hidden" name="branch" value="{{ $memb->branch }}">
-												<input type="hidden" class="form-control" id="inputName" name="branch"
-												value="{{ $memb->branch }}" readonly>
 												<input type="hidden" name="IDTeam" value="{{ $memb->IDTeam }}">
 												<input type="hidden" class="form-control" id="inputName" name="IDTeam"
 												value="{{ $memb->IDTeam }}" readonly>
-												<input type="hidden" name="FullName" value="{{ $memb->FullName }}">
-												<input type="hidden" class="form-control" id="inputName" name="FullName"
-												value="{{ $memb->FullName }}" readonly>
+												<input type="hidden" name="FirstName" value="{{ $memb->FirstName }}">
+												<input type="hidden" class="form-control" id="inputName" name="FirstName"
+												value="{{ $memb->FirstName }}" readonly>
+												<input type="hidden" name="LastName" value="{{ $memb->LastName }}">
+												<input type="hidden" class="form-control" id="inputName" name="LastName"
+												value="{{ $memb->LastName }}" readonly>
+												<input type="hidden" name="FatherName" value="{{ $memb->FatherName }}">
+												<input type="hidden" class="form-control" id="inputName" name="FatherName"
+												value="{{ $memb->FatherName }}" readonly>
 												<input type="hidden" name="MotherName" value="{{ $memb->MotherName }}">
 												<input type="hidden" class="form-control" id="inputName" name="MotherName"
 												value="{{ $memb->MotherName }}" readonly>

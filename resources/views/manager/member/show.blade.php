@@ -299,7 +299,6 @@
 										<thead>
 											<tr>
 												<th class="wd-15p border-bottom-0">#</th>
-												<th class="wd-15p border-bottom-0">الفرع</th>
 												<th class="wd-15p border-bottom-0">الرقم الحزبي</th>
 												<th class="wd-15p border-bottom-0">الاسم</th>
 												<th class="wd-15p border-bottom-0">النسبة</th>
@@ -317,7 +316,6 @@
 											@foreach($members as $member)
 											<tr>
 												<td>{{$i++}}</td>
-												<td>{{$member->branch}}</td>
 												<td>{{$member->IDTeam}}</td>
 												<td>{{$member->FirstName}}</td>
 												<td>{{$member->LastName}}</td>

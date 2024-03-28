@@ -33,13 +33,12 @@ public function index()
         $city = City::whereNotNull('Name')->orderBy('Name','Asc')->get();
         $areas = City::whereNotNull('area')->orderBy('area','Asc')->get();
         $streets = City::whereNotNull('street')->orderBy('street','Asc')->get();
-        $branch =City::whereNotNull('branch')->orderBy('branch','Asc')->get();
         $qualifications = Qualification::whereNotNull('Name')->orderBy('Name','Asc')->get();
         $specializations = Qualification::whereNotNull('specialization')->orderBy('Name','Asc')->get();
         $occupations = Occupation::orderBy('Name','Asc')->get();
 
 
-        $members = Member::orderBy('IDTeam', 'Asc')->select('id','branch','IDTeam','FirstName','LastName',
+        $members = Member::orderBy('IDTeam', 'Asc')->select('id','IDTeam','FirstName','LastName',
         'City')->paginate(50);
         $memberCount = Member::count();
         $paginationLinks = $members->withQueryString()->links('pagination::bootstrap-4');
@@ -48,7 +47,6 @@ public function index()
             'city' => $city,
             'areas' => $areas,
             'streets' => $streets,
-             'branch'=>$branch,
             'qualifications' => $qualifications,
             'specializations' => $specializations,
             'occupations' => $occupations,
@@ -66,14 +64,12 @@ public function index()
             ->value('Name');
         
         $members = Member::where('City', $cityName)->orderBy('IDTeam', 'Asc')->paginate(50);
-        $branch =Member::where('branch', 'like', '%'.$cityName.'%')->first();
         $memberCount = Member::where('City', $cityName)->count();
         $paginationLinks = $members->withQueryString()->links('pagination::bootstrap-4');
 
         return view('manager.member.show', [
             'members' => $members,
             'memberCount'=>$memberCount,
-             'branch'=>$branch,
             'paginationLinks' => $paginationLinks
         ]);
     }
@@ -234,16 +230,13 @@ public function create()
             if($city)
             {
                $cityName = $city;
-               $branch = City::where('branch', 'like', '%' . $cityName . '%')->pluck('branch')->first();
-
-            //    $branch =City::where('branch','like', '%'.$cityName.'%')->select('branch')->get();
+             //  $branch = City::where('branch', 'like', '%' . $cityName . '%')->pluck('branch')->first();
                $areas = City::where('parentId', $user->city_id)->whereNotNull('area')->orderBy('area','Asc')->get();
                $streets = City::where('grandId', $user->city_id)->whereNotNull('street')->orderBy('street','Asc')->get();
             }
             else
             {
                 $cityName =City::whereNotNull('Name')->orderBy('Name','Asc')->get();
-                $branch =City::whereNotNull('branch')->orderBy('branch','Asc')->get();
                 $areas = City::whereNotNull('area')->orderBy('area','Asc')->get();
                 $streets = City::whereNotNull('street')->orderBy('street','Asc')->get();
 
@@ -255,11 +248,11 @@ public function create()
 
         if ( auth()->user()->Role == 'admin')
         {
-            return view('admin.member.add', compact('cityName', 'qualifications', 'occupations', 'areas', 'streets','branch'));
+            return view('admin.member.add', compact('cityName', 'qualifications', 'occupations', 'areas', 'streets'));
         }
        else if ( auth()->user()->Role == 'manager')
         {
-            return view('manager.member.add', compact('cityName', 'qualifications', 'occupations','branch', 'areas', 'streets'));
+            return view('manager.member.add', compact('cityName', 'qualifications', 'occupations', 'areas', 'streets'));
         }
 }
 
@@ -267,7 +260,6 @@ public function store(Request $request): RedirectResponse
 {
         $validated = $request->validate([
            // 'NotPad' => 'required|max:255',
-            'branch' => 'required',
             'IDTeam' => 'required|unique:members|max:255',
             'FirstName' => 'required',
             'LastName' => 'required',
@@ -397,7 +389,6 @@ public function store(Request $request): RedirectResponse
 
     $member = new Member(); 
     $member->NotPad = $request->NotPad;
-    $member->branch = $request->branch;
     $member->IDTeam  = $request->IDTeam;
    // $member->IDTeam  = $IDTeam;
     $member->FirstName = $request->FirstName;
@@ -458,14 +449,12 @@ public function edit($id)
         if( $city)
         {
             $cityName = $city;
-            $branch = City::where('branch', 'like', '%' . $cityName . '%')->pluck('branch')->first();
             $areas = City::where('parentId', $user->city_id)->whereNotNull('area')->orderBy('area','Asc')->get();
             $streets = City::where('grandId', $user->city_id)->whereNotNull('street')->orderBy('street','Asc')->get();
         }
         else
         {
             $cityName =City::whereNotNull('Name')->orderBy('Name','Asc')->get();
-            $branch =City::whereNotNull('branch')->orderBy('branch','Asc')->get();
             $areas = City::whereNotNull('area')->orderBy('area','Asc')->get();
             $streets = City::whereNotNull('street')->orderBy('street','Asc')->get();
         }
@@ -476,11 +465,11 @@ public function edit($id)
 
      if ( auth()->user()->Role == 'admin')
      {
-      return view('admin.member.edit',compact('member', 'cityName', 'qualifications', 'specializations', 'occupations', 'areas', 'streets','branch'));
+      return view('admin.member.edit',compact('member', 'cityName', 'qualifications', 'specializations', 'occupations', 'areas', 'streets'));
      }
     else if ( auth()->user()->Role == 'manager')
      {
-      return view('manager.member.edit',compact('member', 'cityName', 'qualifications', 'specializations', 'occupations','branch'));
+      return view('manager.member.edit',compact('member', 'cityName', 'qualifications', 'specializations', 'occupations'));
      }
 }
 
@@ -557,7 +546,6 @@ public function updateForNotice(Request $request, $IDTeam)
   // return($member);
   $oldImageName=$member->Image;
   $member->NotPad = $request->NotPad;
-  $member->branch = $request->branch;
   $member->IDTeam  = $IDTeam;
   $member->FirstName = $request->FirstName;
   $member->LastName = $request->LastName;
@@ -675,7 +663,6 @@ public function update(Request $request, $id)
   $member = Member::findOrFail($id);
   $oldImageName=$member->Image;
   $member->NotPad = $request->NotPad;
-  $member->branch = $request->branch;
   $member->FirstName = $request->FirstName;
   $member->LastName = $request->LastName;
   $member->FatherName = $request->FatherName;
@@ -1102,7 +1089,6 @@ public function searchByOccupation(Request $request)
 
             Member::create([
                 'NotPad' => $data[0],
-                'branch' => $data[1],
                 'IDTeam' => $data[2],
                 'FirstName' => $data[3],
                 'LastName' => $data[4],
@@ -1184,8 +1170,6 @@ public function exportDataToCSV(Request $request)
         $handle = fopen('php://output', 'w');
         fputs($handle, chr(0xEF) . chr(0xBB) . chr(0xBF)); // UTF-8 BOM for Excel
         fputcsv($handle, [
-            'الملاحظات',
-            'الفرع',
             'الرقم الحزبي',
             'الاسم ',
             'النسبة',
@@ -1206,13 +1190,13 @@ public function exportDataToCSV(Request $request)
             'هاتف العمل',
             'تاريخ الإنتساب',
             'الاختصاص',
+            'الملاحظات',
             'رابط الصورة',
         ]);
     
         foreach ($data as $member) {
             fputcsv($handle, [
                 $member->NotPad,
-                $member->branch,
                 $member->IDTeam,
                 $member->FirstName,
                 $member->LastName,
@@ -1347,7 +1331,7 @@ public function Advancedsearch(Request $request)
     $specializations = Qualification::whereNotNull('specialization')->orderBy('Name','Asc')->get();
     $occupations = Occupation::orderBy('Name','Asc')->get();
 
-        $members = Member::orderBy('IDTeam', 'Asc')->select('id','branch','IDTeam','FirstName','LastName',
+        $members = Member::orderBy('IDTeam', 'Asc')->select('id','IDTeam','FirstName','LastName',
         'City')->paginate(50);
         $memberCount = Member::count();
         $paginationLinks = $members->withQueryString()->links('pagination::bootstrap-4');

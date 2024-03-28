@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('temporaries', function (Blueprint $table) {
             $table->id();
             $table->string('NotPad')->nullable();
-            $table->string('branch')->nullable();
             $table->bigInteger('IDTeam')->nullable();
             $table->string('FullName')->nullable();
             $table->string('MotherName')->nullable();

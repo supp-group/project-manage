@@ -401,7 +401,6 @@ integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEw
 							@foreach($members as $member)
 							<tr>
 								<td>{{$i++}}</td>
-								<td>{{$member->branch}}</td>
 								<td>{{$member->IDTeam}}</td>
 								<td>{{$member->FirstName}}</td>
 								<td>{{$member->LastName}}</td>

@@ -36,7 +36,7 @@
                     <div class="card">
                         <div class="card-body">
 
-                            <h4>تم تعديل العضو {{ $member->FullName }} 
+                            <h4>تم تعديل العضو {{ $member->FirstName }} {{ $member->LastName }} 
                                  من قبل {{$member->managerEmail}} 
                                  بتاريخ {{ $member->updated_at->format('Y-m-d') }}
                             </h4>
@@ -53,17 +53,7 @@
                                         value="{{ $member->IDTeam }}" readonly>
                                     </div>
                                 </div><br>
-                                   
-                                <div class="row">
-                                    <div class="col">
-                                        <label for="inputName" class="control-label">الفرع</label>
-                                        <input type="hidden" name="branch" value="{{ $member->branch }}">
-                                        <input type="text" class="form-control" id="inputName" name="branch"
-                                        value="{{ $member->branch }}" readonly>
-                                    </div>
-                                </div><br>
-                              
-
+                       
                                 <div class="row">
                                     <div class="col">
                                         <label for="inputName" class="control-label">الاسم</label>
@@ -73,8 +63,6 @@
                                     </div>
                                 </div><br>
                                 
-                                
-
                                 <div class="row">
                                     <div class="col">
                                         <label for="inputName" class="control-label">النسبة</label>
@@ -84,7 +72,6 @@
                                     </div>
                                 </div><br>
                                 
-
                                 <div class="row">
                                     <div class="col">
                                         <label for="inputName" class="control-label">اسم الأب</label>
