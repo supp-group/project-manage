@@ -729,7 +729,7 @@ public function destroyForNotice($IDTeam)
 public function searchByName(Request $request)
 {
         $searchTerm = $request->input('search_FirstName');
-
+        $request->session()->put('search_FirstName', $searchTerm);
    if ( auth()->user()->Role == 'admin')
    {
     $members =  Member::where('FirstName', 'like', '%'.$searchTerm.'%')->orderBy('FirstName', 'Asc')->paginate(50);
@@ -747,11 +747,9 @@ public function searchByName(Request $request)
     $cityName = DB::table('cities')
         ->where('id', $user->city_id)
         ->value('Name');
-    
     $members = Member::where('City', $cityName)->where('FirstName', 'like', '%'.$searchTerm.'%')->orderBy('FirstName', 'Asc')->paginate(50);
     $memberCount = Member::where('City', $cityName)->where('FirstName', 'like', '%'.$searchTerm.'%')->count();
-    $paginationLinks = $members->withQueryString()->links('pagination::bootstrap-4');
-    
+    $paginationLinks = $members->withQueryString()->links('pagination::bootstrap-4'); 
     return view('manager.member.show', [
         'members' => $members,
         'memberCount'=>$memberCount,
@@ -801,6 +799,7 @@ public function searchByName(Request $request)
 public function searchByLastName(Request $request)
 {
         $searchTerm = $request->input('search_LastName');
+        $request->session()->put('search_LastName', $searchTerm);
 
    if ( auth()->user()->Role == 'admin')
    {
@@ -868,6 +867,8 @@ public function searchByPhoneNull()
     public function searchByIDTeam(Request $request)
 {
         $searchTerm = $request->input('search_IDTeam');
+        $request->session()->put('search_IDTeam', $searchTerm);
+
    if ( auth()->user()->Role == 'admin')
    {
     $members =  Member::where('IDTeam', 'like', $searchTerm)->orderBy('IDTeam', 'Asc')->paginate(50);
@@ -898,6 +899,8 @@ public function searchByPhoneNull()
  public function searchByQualification(Request $request)
 {
       $searchTerm = $request->input('search_Qualification');
+      $request->session()->put('search_Qualification', $searchTerm);
+
        if ( auth()->user()->Role == 'admin')
         {
           $members =  Member::where('Qualification', 'like', '%'.$searchTerm.'%')->orderBy('Qualification', 'Asc')->paginate(50);
@@ -928,6 +931,8 @@ public function searchByPhoneNull()
 public function searchBySpecialization(Request $request)
 {
         $searchTerm = $request->input('search_Specialization');
+      $request->session()->put('search_Specialization', $searchTerm);
+
    if ( auth()->user()->Role == 'admin')
    {
     $members =  Member::where('Specialization', 'like', '%'.$searchTerm.'%')->orderBy('Specialization', 'Asc')->paginate(50);
@@ -958,6 +963,8 @@ public function searchBySpecialization(Request $request)
 public function searchByArea(Request $request)
 {
     $searchTerm = $request->input('search_Area');
+    $request->session()->put('search_Area', $searchTerm);
+
     if ( auth()->user()->Role == 'admin')
     {
         $members =  Member::where('area', 'like', '%'.$searchTerm.'%')->orderBy('area', 'Asc')->paginate(50);
@@ -990,6 +997,8 @@ public function searchByArea(Request $request)
 public function searchBystreet(Request $request)
 {
     $searchTerm = $request->input('search_Street');
+    $request->session()->put('search_Street', $searchTerm);
+    
     if ( auth()->user()->Role == 'admin')
     {
         $members =  Member::where('street', 'like', '%'.$searchTerm.'%')->orderBy('street', 'Asc')->paginate(50);
@@ -1022,6 +1031,7 @@ public function searchBystreet(Request $request)
 public function searchByCity(Request $request)
 {
         $searchTerm = $request->input('search_City');
+        $request->session()->put('search_City', $searchTerm);
 
     $members =  Member::where('City', 'like', '%'.$searchTerm.'%')->paginate(50);
     $memberCount =  Member::where('City', 'like', '%'.$searchTerm.'%')->count();
@@ -1036,6 +1046,7 @@ public function searchByCity(Request $request)
 public function searchByOccupation(Request $request)
 {
         $searchTerm = $request->input('search_Occupation');
+        $request->session()->put('search_Occupation', $searchTerm);
 
     if ( auth()->user()->Role == 'admin')
      {
@@ -1119,41 +1130,40 @@ public function searchByOccupation(Request $request)
 
 public function exportDataToCSV(Request $request)
 {
+       $searchFirstName = $request->session()->get('search_FirstName');
+        $searchLastName = $request->session()->get('search_LastName');
+        $searchIDTeam = $request->session()->get('search_IDTeam');
+        $searchQualification = $request->session()->get('search_Qualification');
+        $searchSpecialization = $request->session()->get('search_Specialization');
+        $searchCity = $request->session()->get('search_City');
+        $searchOccupation =$request->session()->get('search_Occupation');
 
-        $searchFirstName = $request->input('search_FirstName');
-        $searchLastName = $request->input('search_LastName');
-        $searchIDTeam = $request->input('search_IDTeam');
-        $searchQualification = $request->input('search_Qualification');
-        $searchSpecialization = $request->input('search_Specialization');
-        $searchCity = $request->input('search_City');
-        $searchOccupation = $request->input('search_Occupation');
-
-
-  if($request->input('search_FirstName') )
+  // return dd($searchFirstName);
+  if(!empty($searchFirstName) )
   {
     $data = Member::where('FirstName', 'like', '%' . $searchFirstName . '%')->get();
   }
-  elseif($searchLastName)
+  elseif(!empty($searchLastName))
    {
     $data = Member::where('LastName', 'like', '%' . $searchLastName . '%')->get();
    }
-  elseif($searchIDTeam)
+  elseif(!empty($searchIDTeam))
    {
     $data = Member::where('IDTeam', 'like', '%' . $searchIDTeam . '%')->get();
    }
-   elseif($searchQualification)
+   elseif(!empty($searchQualification))
    {
     $data = Member::where('Qualification', 'like', '%' . $searchQualification . '%')->get();
    }
-   elseif($searchSpecialization)
+   elseif(!empty($searchSpecialization))
    {
     $data = Member::where('Specialization', 'like', '%' . $searchSpecialization . '%')->get();
     }
-   elseif($searchCity)
+   elseif(!empty($searchCity))
    {
     $data = Member::where('City', 'like', '%' . $searchCity . '%')->get();
     }
-   elseif($searchOccupation)
+   elseif(!empty($searchOccupation))
    {
     $data = Member::where('Occupation', 'like', '%' . $searchOccupation . '%')->get();
     }
@@ -1171,32 +1181,33 @@ public function exportDataToCSV(Request $request)
         fputs($handle, chr(0xEF) . chr(0xBB) . chr(0xBF)); // UTF-8 BOM for Excel
         fputcsv($handle, [
             'الرقم الحزبي',
-            'الاسم ',
-            'النسبة',
-            'اسم الأب',
-            'اسم الأم',
-            'مكان الولادة',
-            'تاريخ الولادة',
-            'محل ورقم القيد',
-            'المحافظة',
-            'الرقم الوطني',
-            'الجنس',
-            'الؤهل العلمي',
-            'المهنة',
-            'موبايل',
-            'عنوان المنزل',
-            'عنوان العمل',
-            'هاتف المنزل',
-            'هاتف العمل',
-            'تاريخ الإنتساب',
-            'الاختصاص',
-            'الملاحظات',
-            'رابط الصورة',
-        ]);
+                'الاسم ',
+                'النسبة',
+                'اسم الأب',
+                'اسم الأم',
+                'مكان الولادة',
+                'تاريخ الولادة',
+                'محل ورقم القيد',
+                'المحافظة',
+                'الرقم الوطني',
+                'الجنس',
+                'الؤهل العلمي',
+                'المهنة',
+                'موبايل',
+                'عنوان المنزل',
+                'عنوان العمل',
+                'هاتف المنزل',
+                'هاتف العمل',
+                'تاريخ الإنتساب',
+                'الاختصاص',
+                'المنطقة',
+                'الحي',
+                'الملاحظات',
+                'رابط الصورة',
+            ]);
     
         foreach ($data as $member) {
             fputcsv($handle, [
-                $member->NotPad,
                 $member->IDTeam,
                 $member->FirstName,
                 $member->LastName,
@@ -1219,6 +1230,7 @@ public function exportDataToCSV(Request $request)
                 $member->Specialization,
                 $member->area,
                 $member->street,
+                $member->NotPad,
                 $member->Image
             ]);
         }
