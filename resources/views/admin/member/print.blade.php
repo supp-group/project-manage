@@ -8,6 +8,12 @@
             display: none;
         }
     }
+
+	@media (max-width: 767px) {
+    	#div1 img{
+        	display: none;
+		}
+	} 
 </style>
 
 <!--- Internal Select2 css-->
@@ -31,9 +37,9 @@
 							<h4 class="content-title mb-0 my-auto">الأعضاء</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ معاينة طباعة تفاصيل العضو</span>
 						</div>
 					</div>
-
 				</div>
 				<!-- breadcrumb -->
+
 @endsection
 
 @section('content')
@@ -42,21 +48,15 @@
 					<div class="col-lg-12 col-md-12">
                         <div class="card">
 							<div class="card-body">
-{{-- 
-                                <div style="border: solid;">
-                                    <h4>الحزب الديمقراطي السوري</h4>
-                                    <h6>تأسس عام 2012</h6>
 
-                                    <div class="col-md-4 col-lg-4 col-xl-4" style="">
-                                        <img src="{{URL::asset('assets/img/media/team.png')}}"  style="float: left; height: 80px;" alt="logo">                                
-                                    </div>
+								<div id="div1" style="border: solid; display: flex; align-items: center;">
+									<div style="display: flex; flex-direction: column; align-self: flex-end; margin-right: 5%;">
+										<h4>الحزب الديمقراطي السوري</h4>
+										<h6>تأسس عام 2012</h6>
+									</div>
+									<img src="{{URL::asset('assets/img/media/team.png')}}" style="height: 80px; margin-right: 60%;" alt="logo">
+								</div><br><br>
 
-                                </div> --}}
-                               
-
-				                {{-- <div class="col-md-5 col-lg-5 col-xl-5">
-                                    <img src="{{URL::asset('assets/img/media/team.png')}}"  style="float: left; height: 100px;" alt="logo">                                
-                                </div> --}}
 
 									<div class="row">
 										<div class="col-6">
