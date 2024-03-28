@@ -51,15 +51,7 @@
 							<li><a class="slide-item" href="{{ url('/admin/user/add') }}">إضافة مدير</a></li>
 						</ul>
 					</li>
-					
-					<li class="slide">						
-						<a class="side-menu__item" data-toggle="slide" href="{{ url('/' . $page='#') }}"><svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24" ><path d="M0 0h24v24H0V0z" fill="none"/><path d="M5 5h15v3H5zm12 5h3v9h-3zm-7 0h5v9h-5zm-5 0h3v9H5z" opacity=".3"/><path d="M20 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h15c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM8 19H5v-9h3v9zm7 0h-5v-9h5v9zm5 0h-3v-9h3v9zm0-11H5V5h15v3z"/></svg><span class="side-menu__label">الفروع</span><i class="angle fe fe-chevron-down"></i></a>
-						<ul class="slide-menu">
-							<li><a class="slide-item" href="{{ url('/admin/branch/show') }}">جميع الفروع</a></li>
-							<li><a class="slide-item" href="{{ url('/admin/branch/add') }}">إضافة فرع</a></li>
-						</ul>
-					</li>
-
+				
 					<li class="slide">
 						<a class="side-menu__item" data-toggle="slide" href="{{ url('/' . $page='#') }}"><svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M6.26 9L12 13.47 17.74 9 12 4.53z" opacity=".3"/><path d="M19.37 12.8l-7.38 5.74-7.37-5.73L3 14.07l9 7 9-7zM12 2L3 9l1.63 1.27L12 16l7.36-5.73L21 9l-9-7zm0 11.47L6.26 9 12 4.53 17.74 9 12 13.47z"/></svg><span class="side-menu__label">المحافظات</span><i class="angle fe fe-chevron-down"></i></a>
 						<ul class="slide-menu">

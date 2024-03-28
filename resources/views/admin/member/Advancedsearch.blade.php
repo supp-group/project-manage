@@ -150,9 +150,9 @@ integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEw
                         <thead>
                             <tr>
 								<th class="wd-15p border-bottom-0">#</th>
-								<th class="wd-15p border-bottom-0">الفرع</th>
 								<th class="wd-15p border-bottom-0">الرقم الحزبي</th>
-								<th class="wd-15p border-bottom-0">الاسم الثلاثي</th>
+								<th class="wd-15p border-bottom-0">الاسم</th>
+								<th class="wd-15p border-bottom-0"> النسبة</th>
 								<th class="wd-15p border-bottom-0">المحافظة</th>
 								<th class="wd-15p border-bottom-0">التفاصيل</th>
 								<th class="wd-15p border-bottom-0">سجل التعديل</th>
@@ -166,9 +166,9 @@ integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEw
 							@foreach($members as $member)
 							<tr>
 								<td>{{$i++}}</td>
-								<td>{{$member->branch}}</td>
 								<td>{{$member->IDTeam}}</td>
-								<td>{{$member->FullName}}</td>
+								<td>{{$member->FirstName}}</td>
+								<td>{{$member->LastName}}</td>
 								<td>{{$member->City}}</td>
 								<td>
 									<a class="btn btn-sm btn-success" href="{{ route('member.details', $member->id)}}" title="التفاصيل"><i class="las la-user"></i></a>
@@ -190,7 +190,7 @@ integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEw
 												<div class="modal-content">
 
 													<div class="modal-header">
-														<h6 class="modal-title">حذف العضو: &nbsp; {{$member->FullName}}</h6><button aria-label="Close" class="close" data-dismiss="modal"
+														<h6 class="modal-title">حذف العضو: &nbsp; {{$member->FirstName}}{{$member->LastName}}</h6><button aria-label="Close" class="close" data-dismiss="modal"
 															type="button"><span aria-hidden="true">&times;</span></button>
 													</div>
 

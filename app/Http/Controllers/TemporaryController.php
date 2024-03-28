@@ -67,7 +67,6 @@ class TemporaryController extends Controller
 
     $member = new Temporary();
     $member->NotPad = $request->NotPad;
-    $member->branch = $request->branch;
     $member->IDTeam  = $request->IDTeam;
     $member->FullName = $request->FullName;
     $member->MotherName = $request->MotherName;
@@ -129,7 +128,6 @@ class TemporaryController extends Controller
     //return   $Oldmember;
     $member = new Temporary();
     $member->NotPad = $Oldmember->NotPad;
-    $member->branch = $Oldmember->branch;
     $member->IDTeam  = $Oldmember->IDTeam;
     $member->FullName = $Oldmember->FullName;
     $member->MotherName = $Oldmember->MotherName;

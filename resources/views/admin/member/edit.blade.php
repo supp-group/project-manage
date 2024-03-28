@@ -70,25 +70,6 @@
 										</div>
 									</div><br>
 
-									<div class="form-group">
-										<label>الفرع</label>
-										<select name="branch" id="br" 
-										class="form-control @error('branch') is-invalid @enderror">
-											<option value="{{$member->branch}}">{{$member->branch}} </option>
-											
-											@foreach($branch as $br)
-												<option value="{{$br->branch}}" >{{$br->branch}}</option>
-											@endforeach 
-
-										</select>
-
-										@error('branch')
-										<div class="alert alert-danger">{{ $message }}</div>
-										@enderror
-									</div><br>
-
-							
-	
 									<div class="row">
 										<div class="col">
 											<label for="inputName" class="control-label">الاسم</label>

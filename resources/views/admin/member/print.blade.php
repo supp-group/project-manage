@@ -65,14 +65,13 @@
 											<input type="text" class="form-control" id="inputName" name="IDTeam"
 											value="{{ $member->IDTeam }}" readonly>
 										</div>
-                                        <div class="col-6">
-											<label for="inputName" class="control-label">الفرع</label>
-											<input type="hidden" name="branch" value="{{ $member->branch }}">
-											<input type="text" class="form-control" id="inputName" name="branch"
-											value="{{ $member->branch }}" readonly>
+										<div class="col-6">
+											<label for="inputName" class="control-label">تاريخ الانتساب</label>
+											<input type="hidden" name="DateOfJoin" value="{{ $member->DateOfJoin }}">
+											<input type="text" class="form-control" id="inputName" name="DateOfJoin"
+											value="{{ $member->DateOfJoin }}" readonly>
 										</div>
 									</div><br>
-                                       
 									<div class="row">
 										<div class="col-6">
 											<label for="inputName" class="control-label">الاسم </label>
@@ -225,22 +224,8 @@
 									</div><br>
                            
 									<div class="row">
+										
 										<div class="col-6">
-											<label for="inputName" class="control-label">تاريخ الانتساب</label>
-											<input type="hidden" name="DateOfJoin" value="{{ $member->DateOfJoin }}">
-											<input type="text" class="form-control" id="inputName" name="DateOfJoin"
-											value="{{ $member->DateOfJoin }}" readonly>
-										</div>
-                                        <div class="col-6">
-											<label for="inputName" class="control-label">ملاحظات</label>
-											<input type="hidden" name="NotPad" value="{{ $member->NotPad }}">
-											<textarea type="text" class="form-control" id="inputName" name="NotPad"
-											value="{{ $member->NotPad }}" rows="3" cols="30" readonly></textarea>
-										</div>
-									</div>
-                                    
-									<div class="row">
-										<div class="col">
 											<label for="exampleTextarea">صورة العضو المنتسب</label> <br>
 											<input type="hidden" name="Image" value="{{ $member->Image }}">
 											
@@ -251,7 +236,17 @@
 											@endif
 							
 										</div>
+
+                                        <div class="col-6">
+											<label for="inputName" class="control-label">ملاحظات</label>
+											<input type="hidden" name="NotPad" value="{{ $member->NotPad }}">
+											<textarea type="text" class="form-control" id="inputName" name="NotPad"
+											value="{{ $member->NotPad }}" rows="3" cols="30" readonly></textarea>
+										</div>
+
+
 									</div><br>
+
                          
                                     <div class="d-flex justify-content-center">
                                         <button class="btn btn-primary" id="print_Button" onclick="printDiv()">

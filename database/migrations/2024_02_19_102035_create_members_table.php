@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('members', function (Blueprint $table) {
             $table->id();
             $table->string('NotPad')->nullable();
-            $table->string('branch')->nullable();
             $table->bigInteger('IDTeam')->unique()->nullable();
             $table->string('FirstName')->nullable();
             $table->string('LastName')->nullable();

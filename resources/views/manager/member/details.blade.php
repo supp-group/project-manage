@@ -45,15 +45,6 @@
 											value="{{ $member->IDTeam }}" readonly>
 										</div>
 									</div><br>
-
-                                    <div class="row">
-										<div class="col">
-											<label for="inputName" class="control-label">الفرع</label>
-											<input type="hidden" name="branch" value="{{ $member->branch }}">
-											<input type="text" class="form-control" id="inputName" name="branch"
-											value="{{ $member->branch }}" readonly>
-										</div>
-									</div><br>
                                     
 									<div class="row">
 										<div class="col">
