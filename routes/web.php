@@ -277,6 +277,7 @@ Route::middleware(['auth', 'verified', 'manager'])-> prefix('manager')->group(fu
 
         Route::get('/get-streets/{areaId}', [CityController::class, 'getStreetForArea']);
 
+        Route::get('print/{id}', [MemberController::class, 'print'])->name('print-m');
 
 
         // search

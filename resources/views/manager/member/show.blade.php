@@ -304,6 +304,7 @@
 												<th class="wd-15p border-bottom-0">النسبة</th>
 												<th class="wd-15p border-bottom-0">المحافظة</th>
 												<th class="wd-15p border-bottom-0">التفاصيل</th>
+												<th class="wd-15p border-bottom-0">طباعة</th>
 												<th class="wd-15p border-bottom-0">تعديل</th>
 												 <th class="wd-15p border-bottom-0">حذف</th>
 											</tr>
@@ -326,9 +327,12 @@
 												@else
 													<td><img src="{{URL::asset('assets/img/media/user.jpg')}}"  style="width: 50px;"></td>
 												@endif --}}
-
+											
 												<td>
 													<a class="btn btn-sm btn-success" href="{{ route('memberm.details', $member->id)}}" title="التفاصيل"><i class="las la-user"></i></a>
+												</td>
+												<td>
+													<a class="btn btn-sm btn-warning" href="{{ route('print-m', $member->id) }}" title="طباعة"><i class="fas fa-print"></i></a>
 												</td>
 												<td>
 													<a class="btn btn-sm btn-info" href="{{ route('memberm.edit', $member->id) }}" title="تعديل"><i class="las la-pen"></i></a>
