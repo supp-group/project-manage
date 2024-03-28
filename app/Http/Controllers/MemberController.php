@@ -1217,6 +1217,8 @@ public function exportDataToCSV(Request $request)
                 $member->WorkPhone,
                 $member->DateOfJoin,
                 $member->Specialization,
+                $member->area,
+                $member->street,
                 $member->Image
             ]);
         }
@@ -1230,7 +1232,7 @@ public function exportDataToCSV(Request $request)
     //     $membersCount = Member::where('City', 'like', $searchTerm)->count();
         
     //     return view('admin.index', compact('membersCount'));
-// }
+  // }
 
 public function GetCityWithMemberCount(Request $request)
 {
