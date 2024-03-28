@@ -380,7 +380,6 @@ integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEw
                         <thead>
                             <tr>
 								<th class="wd-15p border-bottom-0">#</th>
-								<th class="wd-15p border-bottom-0">الفرع</th>
 								<th class="wd-15p border-bottom-0">الرقم الحزبي</th>
 								<th class="wd-15p border-bottom-0">الاسم</th>
 								<th class="wd-15p border-bottom-0">النسبة</th>
