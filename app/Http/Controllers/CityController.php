@@ -46,6 +46,12 @@ class CityController extends Controller
     }
 
 
+    public function create()
+    {
+       return view('admin.city.add');
+    }
+
+
     public function createArea()
     {
       $cities = City::whereNotNull('Name')->orderBy('Name','asc')->get();
