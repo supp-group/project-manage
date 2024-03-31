@@ -30,12 +30,12 @@ class MemberController extends Controller
 public function index()
 { 
     if (optional(auth()->user())->Role == 'admin') {
-        $city = City::whereNotNull('Name')->orderBy('Name','Desc')->get();
-        $areas = City::whereNotNull('area')->orderBy('area','Desc')->get();
-        $streets = City::whereNotNull('street')->orderBy('street','Desc')->get();
-        $qualifications = Qualification::whereNotNull('Name')->orderBy('Name','Desc')->get();
-        $specializations = Qualification::whereNotNull('specialization')->orderBy('Name','Desc')->get();
-        $occupations = Occupation::orderBy('Name','Desc')->get();
+        $city = City::whereNotNull('Name')->orderBy('created_at','Asc')->get();
+        $areas = City::whereNotNull('area')->orderBy('created_at','Asc')->get();
+        $streets = City::whereNotNull('street')->orderBy('created_at','Asc')->get();
+        $qualifications = Qualification::whereNotNull('Name')->orderBy('created_at','Asc')->get();
+        $specializations = Qualification::whereNotNull('specialization')->orderBy('created_at','Asc')->get();
+        $occupations = Occupation::orderBy('created_at','Asc')->get();
 
 
         $members = Member::orderBy('IDTeam', 'Asc')->select('id','IDTeam','FirstName','LastName',
@@ -231,26 +231,26 @@ public function create()
             {
                $cityName = $city;
              //  $branch = City::where('branch', 'like', '%' . $cityName . '%')->pluck('branch')->first();
-               $areas = City::where('parentId', $user->city_id)->whereNotNull('area')->orderBy('area','Desc')->get();
-               $streets = City::where('grandId', $user->city_id)->whereNotNull('street')->orderBy('street','Desc')->get();
+               $areas = City::where('parentId', $user->city_id)->whereNotNull('area')->orderBy('created_at','Asc')->get();
+               $streets = City::where('grandId', $user->city_id)->whereNotNull('street')->orderBy('created_at','Asc')->get();
             }
             else
             {
-                $cityName =City::whereNotNull('Name')->orderBy('Name','Desc')->get();
-                $areas = City::whereNotNull('area')->orderBy('area','Desc')->get();
-                $streets = City::whereNotNull('street')->orderBy('street','Desc')->get();
+                $cityName =City::whereNotNull('Name')->orderBy('created_at','Asc')->get();
+                $areas = City::whereNotNull('area')->orderBy('created_at','Asc')->get();
+                $streets = City::whereNotNull('street')->orderBy('created_at','Asc')->get();
 
             }
       
-        $qualifications = Qualification::whereNotNull('Name')->orderBy('Name','Asc')->get();
-        $specializations = Qualification::whereNotNull('specialization')->orderBy('Name','Asc')->get();
-        $occupations = Occupation::orderBy('Name','Asc')->get();
+        $qualifications = Qualification::whereNotNull('Name')->orderBy('created_at','Asc')->get();
+        $specializations = Qualification::whereNotNull('specialization')->orderBy('created_at','Asc')->get();
+        $occupations = Occupation::orderBy('created_at','Asc')->get();
 
         if ( auth()->user()->Role == 'admin')
         {
             return view('admin.member.add', compact('cityName', 'qualifications', 'occupations', 'areas', 'streets'));
         }
-       else if ( auth()->user()->Role == 'manager')
+        else if ( auth()->user()->Role == 'manager')
         {
             return view('manager.member.add', compact('cityName', 'qualifications', 'occupations', 'areas', 'streets'));
         }
@@ -449,19 +449,19 @@ public function edit($id)
         if( $city)
         {
             $cityName = $city;
-            $areas = City::where('parentId', $user->city_id)->whereNotNull('area')->orderBy('area','Desc')->get();
-            $streets = City::where('grandId', $user->city_id)->whereNotNull('street')->orderBy('street','Desc')->get();
+            $areas = City::where('parentId', $user->city_id)->whereNotNull('area')->orderBy('created_at','Asc')->get();
+            $streets = City::where('grandId', $user->city_id)->whereNotNull('street')->orderBy('created_at','Asc')->get();
         }
         else
         {
-            $cityName =City::whereNotNull('Name')->orderBy('Name','Desc')->get();
-            $areas = City::whereNotNull('area')->orderBy('area','Desc')->get();
-            $streets = City::whereNotNull('street')->orderBy('street','Desc')->get();
+            $cityName =City::whereNotNull('Name')->orderBy('created_at','Asc')->get();
+            $areas = City::whereNotNull('area')->orderBy('created_at','Asc')->get();
+            $streets = City::whereNotNull('street')->orderBy('created_at','Asc')->get();
         }
 
-     $qualifications = Qualification::whereNotNull('Name')->orderBy('Name','Desc')->get();
-     $specializations = Qualification::whereNotNull('specialization')->orderBy('Name','Desc')->get();
-     $occupations = Occupation::orderBy('Name','Desc')->get();
+     $qualifications = Qualification::whereNotNull('Name')->orderBy('created_at','Asc')->get();
+     $specializations = Qualification::whereNotNull('specialization')->orderBy('created_at','Asc')->get();
+     $occupations = Occupation::orderBy('created_at','Asc')->get();
 
      if ( auth()->user()->Role == 'admin')
      {
@@ -1326,13 +1326,13 @@ public function AdvancedIndex()
 {
     if (optional(auth()->user())->Role == 'admin') {
   
-    $city =City::whereNotNull('Name')->orderBy('Name','Asc')->get();
-    $areas = City::whereNotNull('area')->orderBy('area','Asc')->get();
-    $streets = City::whereNotNull('street')->orderBy('street','Asc')->get();
+    $city =City::whereNotNull('Name')->orderBy('created_at','Asc')->get();
+    $areas = City::whereNotNull('area')->orderBy('created_at','Asc')->get();
+    $streets = City::whereNotNull('street')->orderBy('created_at','Asc')->get();
 
-    $qualifications = Qualification::whereNotNull('Name')->orderBy('Name','Asc')->get();
-    $specializations = Qualification::whereNotNull('specialization')->orderBy('Name','Asc')->get();
-    $occupations = Occupation::orderBy('Name','Asc')->get();
+    $qualifications = Qualification::whereNotNull('Name')->orderBy('created_at','Asc')->get();
+    $specializations = Qualification::whereNotNull('specialization')->orderBy('created_at','Asc')->get();
+    $occupations = Occupation::orderBy('created_at','Asc')->get();
 
         
         return view('admin.member.Advancedsearch', [
@@ -1350,19 +1350,18 @@ public function AdvancedIndex()
 public function Advancedsearch(Request $request)
 {
     $results = Member::query();
-    $city =City::whereNotNull('Name')->orderBy('Name','Asc')->get();
-    $areas = City::whereNotNull('area')->orderBy('area','Asc')->get();
-    $streets = City::whereNotNull('street')->orderBy('street','Asc')->get();
+    $city =City::whereNotNull('Name')->orderBy('created_at','Asc')->get();
+    $areas = City::whereNotNull('area')->orderBy('created_at','Asc')->get();
+    $streets = City::whereNotNull('street')->orderBy('created_at','Asc')->get();
 
-    $qualifications = Qualification::whereNotNull('Name')->orderBy('Name','Asc')->get();
-    $specializations = Qualification::whereNotNull('specialization')->orderBy('Name','Asc')->get();
-    $occupations = Occupation::orderBy('Name','Asc')->get();
+    $qualifications = Qualification::whereNotNull('Name')->orderBy('created_at','Asc')->get();
+    $specializations = Qualification::whereNotNull('specialization')->orderBy('created_at','Asc')->get();
+    $occupations = Occupation::orderBy('created_at','Asc')->get();
 
-        $members = Member::orderBy('IDTeam', 'Asc')->select('id','IDTeam','FirstName','LastName',
-        'City')->paginate(50);
-        $memberCount = Member::count();
-        $paginationLinks = $members->withQueryString()->links('pagination::bootstrap-4');
-
+    $members = Member::orderBy('IDTeam', 'Asc')->select('id','IDTeam','FirstName','LastName',
+    'City')->paginate(50);
+    $memberCount = Member::count();
+    $paginationLinks = $members->withQueryString()->links('pagination::bootstrap-4');
 
 
 

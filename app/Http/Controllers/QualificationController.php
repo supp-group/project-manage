@@ -17,7 +17,7 @@ class QualificationController extends Controller
 
     public function indexSpecialization()
     { 
-         $specializations = Qualification::whereNotNull('specialization')->orderBy('Name','Desc')->get();
+         $specializations = Qualification::whereNotNull('specialization')->orderBy('created_at','Asc')->get();
 
          foreach($specializations as  $specialization)
          {
@@ -38,7 +38,7 @@ class QualificationController extends Controller
 
     public function createSpecialization()
     {
-      $qualifications = Qualification::whereNotNull('Name')->orderBy('Name','Asc')->get();
+      $qualifications = Qualification::whereNotNull('Name')->orderBy('created_at','Asc')->get();
       // $qualifications = Qualification::where('parentId','=','0')->orderBy('Name','Asc')->get('Name');
       return view('admin.specialization.add', compact('qualifications'));
     }

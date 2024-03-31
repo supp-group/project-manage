@@ -23,7 +23,7 @@ class UserController extends Controller
     
     public function create()
     {
-      $cities = City::whereNotNull('Name')->orderBy('Name','Asc')->get();
+      $cities = City::whereNotNull('Name')->orderBy('created_at','Asc')->get();
        return view('admin.user.add', compact('cities'));
     }
 
@@ -51,7 +51,7 @@ class UserController extends Controller
     
   public function edit( $id)
   {
-    $cities = City::orderBy('Name','Asc')->get();
+    $cities = City::orderBy('created_at','Asc')->get();
     $user = User::findOrFail($id);
     return view('admin.user.edit',compact('user', 'cities'));
   }
@@ -81,10 +81,10 @@ class UserController extends Controller
 
     public function destroy($id)
     {
-        User::findOrFail($id)->delete();
+      User::findOrFail($id)->delete();
 
-        session()->flash('delete', 'تم حذف المدير بنجاح');
-        return back();
+      session()->flash('delete', 'تم حذف المدير بنجاح');
+      return back();
     }
 
 

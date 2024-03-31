@@ -11,7 +11,7 @@ class OccupationController extends Controller
 {
     public function index()
     { 
-         $occupations = Occupation::orderBy('Name','Asc')->get();
+         $occupations = Occupation::orderBy('created_at','Asc')->get();
          return view('admin.occupation.show',compact('occupations'));
     }
 

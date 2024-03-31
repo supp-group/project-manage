@@ -169,21 +169,21 @@ class TemporaryController extends Controller
 
     public function destroyNotice_delete($id)
 {
-     Temporary::find($id)->delete();
-     session()->flash('delete', 'تم تجاهل الإشعار ');
-     return back();
+    Temporary::find($id)->delete();
+    session()->flash('delete', 'تم تجاهل الإشعار ');
+    return back();
 } 
 
 public function destroyNotice($id)
 {
-     Temporary::find($id)->delete();
+    Temporary::find($id)->delete();
     session()->flash('delete', 'تم تجاهل الإشعار ');
     return redirect()->route('delete');
   
 } 
 public function destroyNoticeUpdate($id)
 {
-     Temporary::find($id)->delete();
+    Temporary::find($id)->delete();
     session()->flash('delete', 'تم تجاهل الإشعار ');
     return redirect()->route('edit');
   
