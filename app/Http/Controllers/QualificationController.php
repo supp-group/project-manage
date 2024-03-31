@@ -17,7 +17,7 @@ class QualificationController extends Controller
 
     public function indexSpecialization()
     { 
-         $specializations = Qualification::whereNotNull('specialization')->orderBy('Name','Asc')->get();
+         $specializations = Qualification::whereNotNull('specialization')->orderBy('Name','Desc')->get();
 
          foreach($specializations as  $specialization)
          {
