@@ -168,7 +168,7 @@
 										{{-- <input type="hidden" name="City" value="{{ $member->City }}"> --}}
 										<select name="City" id="city" 
 										class="form-control @error('City') is-invalid @enderror" >
-											<option value="{{ $member->City }}">{{ $member->City }}</option>
+											<option value="{{ $member->City }}">اختر المحافظة</option>
 											
 											@foreach($cityName as $city)
 												{{-- <option value="{{$city->id}}" @selected(old('City')==$city->id)>{{$city->Name}}</option> --}}
@@ -184,7 +184,7 @@
 									<div class="form-group">
 										<label>المنطقة</label>
 										<select name="area" id="area" class="form-control select @error('area') is-invalid @enderror">
-											<option value="{{ $member->area }}">{{ $member->area }}</option>
+											<option value="{{ $member->area }}">اختر المنطقة</option>
 											<!-- Options will be loaded dynamically -->
 										</select>
 										@error('area')
@@ -195,7 +195,7 @@
 									<div class="form-group">
 										<label>الحي</label>
 										<select name="street" id="street" class="form-control select @error('street') is-invalid @enderror">
-											<option value="{{ $member->street }}">{{ $member->street }}</option>
+											<option value="{{ $member->street }}">اختر الحي</option>
 											<!-- Options will be loaded dynamically -->
 										</select>
 										@error('street')
@@ -262,7 +262,7 @@
 										<label>المهنة</label>
 										<input type="hidden" name="Occupation" value="{{ $member->Occupation }}">
 										<select name="Occupation" class="form-control select @error('Occupation') is-invalid @enderror">
-											<option value="{{ $member->Occupation }}">{{ $member->Occupation }}</option>
+											<option value="{{ $member->Occupation }}">اختر المهنة</option>
 											
 											@foreach($occupations as $occupation)
 											<option value="{{ $occupation->id }}" {{ old('Occupation') == $occupation->id ? 'selected' : '' }}>{{ $occupation->Name }}</option>
@@ -292,7 +292,7 @@
 									<div class="form-group">
 										<label>المؤهل العلمي</label>
 										<select name="Qualification" id="qualificationSelect" class="form-control select @error('Qualification') is-invalid @enderror" onChange="loadSpecializations()">
-											<option value="{{ $member->Qualification }}">{{ $member->Qualification }}</option>
+											<option value="{{ $member->Qualification }}">اختر المؤهل العلمي</option>
 											@foreach($qualifications as $qualification)  
 												<option value="{{ $qualification->id }}" {{ old('Qualification') == $qualification->id ? 'selected' : '' }}>{{ $qualification->Name }}</option>
 											@endforeach 
@@ -306,7 +306,7 @@
 										<label>الاختصاص</label>
 										<select name="Specialization" id="specializationSelect"
 										class="form-control select @error('Specialization') is-invalid @enderror">
-											<option value="{{ $member->Specialization }}">{{ $member->Specialization }}</option>
+											<option value="{{ $member->Specialization }}">اختر الاختصاص</option>
 											<!-- Options will be loaded dynamically -->
 										</select>
 										

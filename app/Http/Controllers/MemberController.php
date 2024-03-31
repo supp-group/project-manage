@@ -30,12 +30,12 @@ class MemberController extends Controller
 public function index()
 { 
     if (optional(auth()->user())->Role == 'admin') {
-        $city = City::whereNotNull('Name')->orderBy('Name','Asc')->get();
-        $areas = City::whereNotNull('area')->orderBy('area','Asc')->get();
-        $streets = City::whereNotNull('street')->orderBy('street','Asc')->get();
-        $qualifications = Qualification::whereNotNull('Name')->orderBy('Name','Asc')->get();
-        $specializations = Qualification::whereNotNull('specialization')->orderBy('Name','Asc')->get();
-        $occupations = Occupation::orderBy('Name','Asc')->get();
+        $city = City::whereNotNull('Name')->orderBy('Name','Desc')->get();
+        $areas = City::whereNotNull('area')->orderBy('area','Desc')->get();
+        $streets = City::whereNotNull('street')->orderBy('street','Desc')->get();
+        $qualifications = Qualification::whereNotNull('Name')->orderBy('Name','Desc')->get();
+        $specializations = Qualification::whereNotNull('specialization')->orderBy('Name','Desc')->get();
+        $occupations = Occupation::orderBy('Name','Desc')->get();
 
 
         $members = Member::orderBy('IDTeam', 'Asc')->select('id','IDTeam','FirstName','LastName',
@@ -79,7 +79,7 @@ public function orderBy_Last()
 { 
         if (optional(auth()->user())->Role == 'admin') 
         {
-            $members = Member::orderBy('created_at','desc')->paginate(50);
+            $members = Member::orderBy('created_at','Desc')->paginate(50);
             $paginationLinks = $members->withQueryString()->links('pagination::bootstrap-4');
             return view('admin.member.show', [
                 'members' => $members,
@@ -93,7 +93,7 @@ public function orderBy_Last()
                 ->where('id', $user->city_id)
                 ->value('Name');
             
-            $members = Member::where('City', $cityName)->orderBy('created_at', 'desc')->paginate(50);
+            $members = Member::where('City', $cityName)->orderBy('created_at', 'Desc')->paginate(50);
             $paginationLinks = $members->withQueryString()->links('pagination::bootstrap-4');
 
             return view('manager.member.show', [
@@ -196,7 +196,7 @@ public function orderBy_DateOfJoin()
 { 
         if (optional(auth()->user())->Role == 'admin') 
         {
-        $members = Member::orderBy('DateOfJoin','desc')->paginate(50);
+        $members = Member::orderBy('DateOfJoin','Desc')->paginate(50);
         $paginationLinks = $members->withQueryString()->links('pagination::bootstrap-4');
 
         return view('admin.member.show', [
@@ -211,7 +211,7 @@ public function orderBy_DateOfJoin()
             ->where('id', $user->city_id)
             ->value('Name');
         
-        $members = Member::where('City', $cityName)->orderBy('DateOfJoin', 'desc')->paginate(50);
+        $members = Member::where('City', $cityName)->orderBy('DateOfJoin', 'Desc')->paginate(50);
         $paginationLinks = $members->withQueryString()->links('pagination::bootstrap-4');
         
         return view('manager.member.show', [
@@ -231,14 +231,14 @@ public function create()
             {
                $cityName = $city;
              //  $branch = City::where('branch', 'like', '%' . $cityName . '%')->pluck('branch')->first();
-               $areas = City::where('parentId', $user->city_id)->whereNotNull('area')->orderBy('area','Asc')->get();
-               $streets = City::where('grandId', $user->city_id)->whereNotNull('street')->orderBy('street','Asc')->get();
+               $areas = City::where('parentId', $user->city_id)->whereNotNull('area')->orderBy('area','Desc')->get();
+               $streets = City::where('grandId', $user->city_id)->whereNotNull('street')->orderBy('street','Desc')->get();
             }
             else
             {
-                $cityName =City::whereNotNull('Name')->orderBy('Name','Asc')->get();
-                $areas = City::whereNotNull('area')->orderBy('area','Asc')->get();
-                $streets = City::whereNotNull('street')->orderBy('street','Asc')->get();
+                $cityName =City::whereNotNull('Name')->orderBy('Name','Desc')->get();
+                $areas = City::whereNotNull('area')->orderBy('area','Desc')->get();
+                $streets = City::whereNotNull('street')->orderBy('street','Desc')->get();
 
             }
       
@@ -449,19 +449,19 @@ public function edit($id)
         if( $city)
         {
             $cityName = $city;
-            $areas = City::where('parentId', $user->city_id)->whereNotNull('area')->orderBy('area','Asc')->get();
-            $streets = City::where('grandId', $user->city_id)->whereNotNull('street')->orderBy('street','Asc')->get();
+            $areas = City::where('parentId', $user->city_id)->whereNotNull('area')->orderBy('area','Desc')->get();
+            $streets = City::where('grandId', $user->city_id)->whereNotNull('street')->orderBy('street','Desc')->get();
         }
         else
         {
-            $cityName =City::whereNotNull('Name')->orderBy('Name','Asc')->get();
-            $areas = City::whereNotNull('area')->orderBy('area','Asc')->get();
-            $streets = City::whereNotNull('street')->orderBy('street','Asc')->get();
+            $cityName =City::whereNotNull('Name')->orderBy('Name','Desc')->get();
+            $areas = City::whereNotNull('area')->orderBy('area','Desc')->get();
+            $streets = City::whereNotNull('street')->orderBy('street','Desc')->get();
         }
 
-     $qualifications = Qualification::whereNotNull('Name')->orderBy('Name','Asc')->get();
-     $specializations = Qualification::whereNotNull('specialization')->orderBy('Name','Asc')->get();
-     $occupations = Occupation::orderBy('Name','Asc')->get();
+     $qualifications = Qualification::whereNotNull('Name')->orderBy('Name','Desc')->get();
+     $specializations = Qualification::whereNotNull('specialization')->orderBy('Name','Desc')->get();
+     $occupations = Occupation::orderBy('Name','Desc')->get();
 
      if ( auth()->user()->Role == 'admin')
      {
@@ -747,6 +747,7 @@ public function searchByName(Request $request)
     $cityName = DB::table('cities')
         ->where('id', $user->city_id)
         ->value('Name');
+
     $members = Member::where('City', $cityName)->where('FirstName', 'like', '%'.$searchTerm.'%')->orderBy('FirstName', 'Asc')->paginate(50);
     $memberCount = Member::where('City', $cityName)->where('FirstName', 'like', '%'.$searchTerm.'%')->count();
     $paginationLinks = $members->withQueryString()->links('pagination::bootstrap-4'); 
@@ -866,8 +867,8 @@ public function searchByPhoneNull()
 
     public function searchByIDTeam(Request $request)
 {
-        $searchTerm = $request->input('search_IDTeam');
-        $request->session()->put('search_IDTeam', $searchTerm);
+    $searchTerm = $request->input('search_IDTeam');
+    $request->session()->put('search_IDTeam', $searchTerm);
 
    if ( auth()->user()->Role == 'admin')
    {
@@ -885,9 +886,11 @@ public function searchByPhoneNull()
     $cityName = DB::table('cities')
         ->where('id', $user->city_id)
         ->value('Name');
+
     $members = Member::where('City', $cityName)->where('IDTeam', 'like',$searchTerm)->orderBy('IDTeam', 'Asc')->paginate(50);
     $memberCount = Member::where('City', $cityName)->where('IDTeam', 'like',$searchTerm)->count();
     $paginationLinks = $members->withQueryString()->links('pagination::bootstrap-4');
+    
     return view('manager.member.show', [
         'members' => $members,
         'memberCount'=>$memberCount,
@@ -906,20 +909,23 @@ public function searchByPhoneNull()
           $members =  Member::where('Qualification', 'like', '%'.$searchTerm.'%')->orderBy('Qualification', 'Asc')->paginate(50);
           $memberCount =  Member::where('Qualification', 'like', '%'.$searchTerm.'%')->count();
           $paginationLinks = $members->withQueryString()->links('pagination::bootstrap-4');
-           return view('admin.member.show', [
+           
+        return view('admin.member.show', [
         'members' => $members,
         'memberCount'=>$memberCount,
         'paginationLinks' => $paginationLinks
-          ]);
+        ]);
         }
       elseif (optional(auth()->user())->Role == 'manager') {
       $user = auth()->user();
       $cityName = DB::table('cities')
         ->where('id', $user->city_id)
         ->value('Name');
+
     $members = Member::where('City', $cityName)->where('Qualification', 'like', '%'.$searchTerm.'%')->orderBy('Qualification', 'Asc')->paginate(50);
     $memberCount = Member::where('City', $cityName)->where('Qualification', 'like', '%'.$searchTerm.'%')->count();
     $paginationLinks = $members->withQueryString()->links('pagination::bootstrap-4');
+    
     return view('manager.member.show', [
         'members' => $members,
         'memberCount'=>$memberCount,
@@ -977,6 +983,7 @@ public function searchByArea(Request $request)
     'paginationLinks' => $paginationLinks
     ]);
     }
+
     elseif (optional(auth()->user())->Role == 'manager') {
         $user = auth()->user();
         $cityName = DB::table('cities')
@@ -1011,11 +1018,13 @@ public function searchBystreet(Request $request)
     'paginationLinks' => $paginationLinks
     ]);
     }
+
     elseif (optional(auth()->user())->Role == 'manager') {
     $user = auth()->user();
     $cityName = DB::table('cities')
     ->where('id', $user->city_id)
     ->value('Name');
+
     $members = Member::where('City', $cityName)->where('street', 'like', '%'.$searchTerm.'%')->orderBy('street', 'Asc')->paginate(50);
     $memberCount = Member::where('City', $cityName)->where('street', 'like', '%'.$searchTerm.'%')->count();
     $paginationLinks = $members->withQueryString()->links('pagination::bootstrap-4');
@@ -1030,12 +1039,13 @@ public function searchBystreet(Request $request)
 
 public function searchByCity(Request $request)
 {
-        $searchTerm = $request->input('search_City');
-        $request->session()->put('search_City', $searchTerm);
+    $searchTerm = $request->input('search_City');
+    $request->session()->put('search_City', $searchTerm);
 
     $members =  Member::where('City', 'like', '%'.$searchTerm.'%')->paginate(50);
     $memberCount =  Member::where('City', 'like', '%'.$searchTerm.'%')->count();
     $paginationLinks = $members->withQueryString()->links('pagination::bootstrap-4');
+
     return view('admin.member.show', [
         'members' => $members,
         'memberCount'=>$memberCount,
@@ -1045,14 +1055,15 @@ public function searchByCity(Request $request)
     
 public function searchByOccupation(Request $request)
 {
-        $searchTerm = $request->input('search_Occupation');
-        $request->session()->put('search_Occupation', $searchTerm);
+    $searchTerm = $request->input('search_Occupation');
+    $request->session()->put('search_Occupation', $searchTerm);
 
     if ( auth()->user()->Role == 'admin')
      {
       $members =  Member::where('Occupation', 'like', '%'.$searchTerm.'%')->orderBy('Occupation', 'Asc')->paginate(50);
       $memberCount =  Member::where('Occupation', 'like', '%'.$searchTerm.'%')->count();
       $paginationLinks = $members->withQueryString()->links('pagination::bootstrap-4');
+
         return view('admin.member.show', [
         'members' => $members,
         'memberCount'=>$memberCount,
@@ -1064,9 +1075,11 @@ public function searchByOccupation(Request $request)
     $cityName = DB::table('cities')
         ->where('id', $user->city_id)
         ->value('Name');
+
     $members = Member::where('City', $cityName)->where('Occupation', 'like', '%'.$searchTerm.'%')->orderBy('Occupation', 'Asc')->paginate(50);
     $memberCount = Member::where('City', $cityName)->where('Occupation', 'like', '%'.$searchTerm.'%')->count();
     $paginationLinks = $members->withQueryString()->links('pagination::bootstrap-4');
+    
     return view('manager.member.show', [
         'members' => $members,
         'memberCount'=>$memberCount,

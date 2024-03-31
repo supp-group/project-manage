@@ -51,7 +51,7 @@ class UserController extends Controller
     
   public function edit( $id)
   {
-    $cities = City::orderBy('Name','asc')->get();
+    $cities = City::orderBy('Name','Asc')->get();
     $user = User::findOrFail($id);
     return view('admin.user.edit',compact('user', 'cities'));
   }

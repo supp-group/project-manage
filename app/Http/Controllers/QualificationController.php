@@ -38,7 +38,7 @@ class QualificationController extends Controller
 
     public function createSpecialization()
     {
-      $qualifications = Qualification::whereNotNull('Name')->orderBy('Name','asc')->get();
+      $qualifications = Qualification::whereNotNull('Name')->orderBy('Name','Asc')->get();
       // $qualifications = Qualification::where('parentId','=','0')->orderBy('Name','Asc')->get('Name');
       return view('admin.specialization.add', compact('qualifications'));
     }

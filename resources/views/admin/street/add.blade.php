@@ -58,7 +58,7 @@
 
 									<div class="form-group">
 										<label>المحافظة</label>
-										<select name="Name" id="citySelect" class="form-control select @error('Name') is-invalid @enderror">
+										<select name="Name" id="city" class="form-control select @error('Name') is-invalid @enderror">
 											<option>اختر المحافظة</option>
 											
 											@foreach($cities as $city)
@@ -73,7 +73,7 @@
 
                                     <div class="form-group">
 										<label>المنطقة</label>
-										<select name="area" class="form-control select @error('area') is-invalid @enderror" id="areaSelect">
+										<select name="area" class="form-control select @error('area') is-invalid @enderror" id="area">
 											<!-- Options will be loaded dynamically -->
 										</select>
 
@@ -101,7 +101,40 @@
 
 
 	{{-- Dependent Dropdown ===> city & area --}}
+
 	<script>
+		var cityurl='{{url("admin/member/get-areasm","itemid")}}';
+		var areaurl='{{url("admin/member/get-streets","itemid")}}';
+		 $(function() {
+		 $('#city').change(function(){
+				var thiscityurl=cityurl;
+		var cityId = $(this).find("option:selected").val();
+		if(cityId==0){
+			$('#area').html('<option value="0">اختر المنطقة</option>');
+		}else{
+			thiscityurl=thiscityurl.replace("itemid",cityId);
+		if(cityId){
+			$.ajax({
+				url: thiscityurl, // Use Laravel's route name
+				method: 'Get', // Match the method type with your route definition
+			 
+				success: function(result){
+					$('#area').html('<option value="0">اختر المنطقة</option>');
+					$.each(result, function(key, value) {
+					
+		 $('#area').append('<option value="'+value.id+'">'+value.area+'</option>');
+					});
+				 }
+			 });
+		 }
+		 }
+		 });
+
+	 });  
+
+ </script>
+
+	{{-- <script>
 		document.addEventListener("DOMContentLoaded", function() {
 		  const citySelect = document.querySelector('#citySelect');
 		  const areaSelect = document.querySelector('#areaSelect');
@@ -129,7 +162,7 @@
 			  });
 		  });
 		});
-	</script>
+	</script> --}}
 
 
 

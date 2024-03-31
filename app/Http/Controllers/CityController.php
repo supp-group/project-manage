@@ -10,14 +10,14 @@ class CityController extends Controller
 {
     public function index()
     { 
-      $cities = City::whereNotNull('Name')->orderBy('Name','Asc')->get();
+      $cities = City::whereNotNull('Name')->orderBy('Name','Desc')->get();
       return view('admin.city.show',compact('cities'));
     }
 
 
     public function indexArea()
     { 
-      $areas = City::whereNotNull('area')->orderBy('Name','Asc')->get();
+      $areas = City::whereNotNull('area')->orderBy('Name','Desc')->get();
 
       foreach($areas as  $area)
       {
@@ -32,7 +32,7 @@ class CityController extends Controller
     
     public function indexStreet()
     { 
-      $streets = City::whereNotNull('street')->orderBy('area','Asc')->get();
+      $streets = City::whereNotNull('street')->orderBy('area','Desc')->get();
 
       foreach($streets as  $street)
       {
@@ -54,15 +54,15 @@ class CityController extends Controller
 
     public function createArea()
     {
-      $cities = City::whereNotNull('Name')->orderBy('Name','asc')->get();
+      $cities = City::whereNotNull('Name')->orderBy('Name','Desc')->get();
       return view('admin.area.add', compact('cities'));
     }
 
     public function createStreet()
     {
-      $cities = City::whereNotNull('Name')->orderBy('Name','Asc')->get();
-      $areas = City::whereNotNull('area')->orderBy('Name','Asc')->get();
-      $streets = City::whereNotNull('area')->orderBy('area','asc')->get();
+      $cities = City::whereNotNull('Name')->orderBy('Name','Desc')->get();
+      $areas = City::whereNotNull('area')->orderBy('Name','Desc')->get();
+      $streets = City::whereNotNull('area')->orderBy('area','Desc')->get();
 
       return view('admin.street.add', compact('cities', 'areas', 'streets'));
     }
