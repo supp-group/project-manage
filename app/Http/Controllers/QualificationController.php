@@ -11,7 +11,7 @@ class QualificationController extends Controller
 {
     public function indexQualification()
     { 
-      $qualifications = Qualification::whereNotNull('Name')->orderBy('Name','created_at')->get();
+      $qualifications = Qualification::whereNotNull('Name')->orderBy('Name','Asc')->get();
       return view('admin.qualification.show',compact('qualifications'));
     }
 
