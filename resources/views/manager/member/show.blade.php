@@ -49,6 +49,28 @@
 				</div>
 
 
+				<form action="{{ route('search-ActiveMember') }}" method="post">
+					@csrf
+					<div class="input-group">
+						<div class="input-group-append">
+							<span style="font-size: 16px; padding-top: 8px; background-color: #fff;">الأعضاء الفعالة</span> &nbsp;
+							<button name="search-phone" type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
+						</div>
+					</div>
+				</form> 
+
+				<form action="{{ route('search-disActiveMember') }}" method="post">
+					@csrf
+					<div class="input-group">
+						<div class="input-group-append">
+							<span style="font-size: 16px; padding-top: 8px; background-color: #fff;">الأعضاء غير الفعالة</span> &nbsp;
+							<button name="search-phone" type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
+						</div>
+					</div>
+				</form> 
+
+
+
 				<style>
 					@media (max-width: 767px) {
 					  .col-4 {
@@ -426,6 +448,23 @@
 										@else
 											<!-- لا يوجد قيمة مدخلة -->
 										@endif
+
+										@if(request()->has('search-disActiveMember'))
+    						<tr>
+        						<td style="font-weight: bold;">عدد نتائج البحث {{ $memberCount }}</td>
+    						</tr>
+						@else
+    						<!-- لا يوجد قيمة مدخلة -->
+						@endif
+						
+
+						@if(request()->has('search-ActiveMember'))
+    						<tr>
+        						<td style="font-weight: bold;">عدد نتائج البحث {{ $memberCount }}</td>
+    						</tr>
+						@else
+    						<!-- لا يوجد قيمة مدخلة -->
+						@endif
 
 										@else 
 										<tr>

@@ -875,7 +875,7 @@ public function searchForActiveMember()
 {
     if ( auth()->user()->Role == 'admin')
     {
-     $members =  Member::where('status','فعال')->orderBy('FirstName', 'Asc')->paginate(50);
+     $members =  Member::where('status','فعال')->orderBy('IDTeam', 'Asc')->paginate(50);
      $memberCount =  Member::where('status','فعال')->count();
      $paginationLinks = $members->withQueryString()->links('pagination::bootstrap-4');
      
@@ -907,7 +907,7 @@ public function searchForDisActiveMember()
 {
    if ( auth()->user()->Role == 'admin')
    {
-    $members =  Member::where('status','غير فعال')->orderBy('FirstName', 'Asc')->paginate(50);
+    $members =  Member::where('status','غير فعال')->orderBy('IDTeam', 'Asc')->paginate(50);
     $memberCount =  Member::where('status','غير فعال')->count();
     $paginationLinks = $members->withQueryString()->links('pagination::bootstrap-4');
     

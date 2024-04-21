@@ -402,7 +402,7 @@
 										</div>
 									</div><br>
 
-
+{{-- 
 									<div class="row">
 										<div class="col">
 											@if($member->status =='فعال')
@@ -417,7 +417,51 @@
 									  </div>
 									  @endif
 									</div>
+								</div><br> --}}
+
+
+
+								<div class="form-group">
+									<label class="display-block"></label> <br>
+
+									@if ($member->status == 'فعال')
+										
+									<div class="form-check form-check-inline">
+										<input class="form-check-input" type="radio" value="فعال" name="status" id="status_active" checked>
+										<label class="form-check-label" for="status_active">
+											&nbsp; فعال 
+										</label>
+									</div> 
+
+									@else
+									<div class="form-check form-check-inline">
+										<input class="form-check-input" type="radio" value="فعال" name="status" id="status_active">
+										<label class="form-check-label" for="status_active">
+											&nbsp; فعال 
+										</label>
+									</div> 
+
+									@endif
+
+									@if ($member->status == 'غير فعال')
+
+									<div class="form-check form-check-inline">
+										<input class="form-check-input" type="radio" value="غير فعال" name="status" id="status_inactive" checked>
+										<label class="form-check-label" for="status_inactive">
+											&nbsp; غير فعال
+										</label>
+									</div>
+
+									@else
+									<div class="form-check form-check-inline">
+										<input class="form-check-input" type="radio" value="غير فعال" name="status" id="status_inactive">
+										<label class="form-check-label" for="status_inactive">
+											&nbsp; غير فعال
+										</label>
+									</div>
+									@endif
 								</div><br>
+
 
 									<div class="row">
 										<div class="col">

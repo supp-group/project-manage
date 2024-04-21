@@ -248,6 +248,15 @@
 
 									<div class="row">
 										<div class="col">
+											<label for="inputName" class="control-label">حالة العضو</label>
+											<input type="hidden" name="status" value="{{ $member->status }}">
+											<input type="text" class="form-control" id="inputName" name="Gender"
+											value="{{ $member->status }}" readonly>
+										</div>
+									</div><br>
+
+									<div class="row">
+										<div class="col">
 											<label for="exampleTextarea">صورة العضو المنتسب</label> <br>
 											<input type="hidden" name="Image" value="{{ $member->Image }}">
 											<br>

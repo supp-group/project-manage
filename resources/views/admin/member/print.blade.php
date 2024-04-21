@@ -223,21 +223,21 @@
 										</div>
 									</div><br>
 
-									<div class="row">
-										<div class="col">
-											@if($member->status =='فعال')
-									<div class="custom-control custom-switch">
-										<input type="checkbox"  name="status" value="{{ $member->status }}" class="custom-control-input" checked id="customSwitch1" >
-										<label class="custom-control-label" for="customSwitch1">  حالة العضو  : {{ $member->status }} </label>
-									  </div>
-									  @else
-									  <div class="custom-control custom-switch">
-										<input type="checkbox"  name="status" value="{{ $member->status }}" class="custom-control-input" id="customSwitch1" >
-										<label class="custom-control-label" for="customSwitch1">  حالة العضو  : {{ $member->status }} </label>
-									  </div>
-									  @endif
+								<div class="row">
+									<div class="col-6">
+										<label for="inputName" class="control-label">حالة العضو</label>
+										<input type="hidden" name="status" value="{{ $member->status }}">
+										<input type="text" class="form-control" id="inputName" name="Gender"
+										value="{{ $member->status }}" readonly>
 									</div>
-								</div><br>
+
+									<div class="col-6">
+										<label for="inputName" class="control-label">ملاحظات</label>
+										<input type="hidden" name="NotPad" value="{{ $member->NotPad }}">
+										<textarea type="text" class="form-control" id="inputName" name="NotPad"
+										value="{{ $member->NotPad }}" rows="3" cols="30" readonly></textarea>
+									 </div>
+									</div><br>
                            
 									<div class="row">
 										
@@ -252,15 +252,7 @@
 											@endif
 							
 										</div>
-
-                                        <div class="col-6">
-											<label for="inputName" class="control-label">ملاحظات</label>
-											<input type="hidden" name="NotPad" value="{{ $member->NotPad }}">
-											<textarea type="text" class="form-control" id="inputName" name="NotPad"
-											value="{{ $member->NotPad }}" rows="3" cols="30" readonly></textarea>
-										</div>
-
-
+                                        
 									</div><br>
 
                          

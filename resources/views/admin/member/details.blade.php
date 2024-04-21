@@ -250,7 +250,7 @@
 									</div><br>
 
 
-									<div class="row">
+									{{-- <div class="row">
 										<div class="col">
 											@if($member->status =='فعال')
 									<div class="custom-control custom-switch">
@@ -264,7 +264,17 @@
 									  </div>
 									  @endif
 									</div>
+								</div><br> --}}
+
+								<div class="row">
+									<div class="col">
+										<label for="inputName" class="control-label">حالة العضو</label>
+										<input type="hidden" name="status" value="{{ $member->status }}">
+										<input type="text" class="form-control" id="inputName" name="Gender"
+										value="{{ $member->status }}" readonly>
+									</div>
 								</div><br>
+								
 
 									<div class="row">
 										<div class="col">

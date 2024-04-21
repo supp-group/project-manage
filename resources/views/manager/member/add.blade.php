@@ -350,6 +350,26 @@
 										</div>
 									</div><br>
 
+									<div class="form-group">
+										<label class="display-block"> حالة العضو</label> <br>
+										<div class="form-check form-check-inline">
+											<input class="form-check-input" 
+											type="radio" name="Gender" id="status_active" value="فعال" checked>
+
+											<label class="form-check-label" for="status_active">
+												&nbsp; فعال 
+											</label>
+										</div> 
+										<div class="form-check form-check-inline">
+											<input class="form-check-input" 
+											type="radio" name="Gender" id="status_inactive" value="غير فعال">
+
+											<label class="form-check-label" for="status_inactive">
+												&nbsp; غير فعال
+											</label>
+										</div>
+									</div><br>
+
 									  <div class="row">
 										<div class="col">
 										  <label for="exampleTextarea">صورة العضو المنتسب</label>

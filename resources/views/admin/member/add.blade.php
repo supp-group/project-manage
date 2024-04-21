@@ -366,26 +366,38 @@
 										</div>
 									</div><br>
 
-									
+								
+
 									{{-- <div class="row">
 										<div class="col">
 											<div class="custom-control custom-switch">
 												<label class="custom-control-label" for="customSwitch1">حالة العضو</label>
-												<input type="checkbox" name="status" class="custom-control-input" id="customSwitch1" onchange="updateStatus(this)">
-												<span id="statusDisplay"></span>
+
+												<input type="checkbox" name="status"  class="custom-control-input" id="customSwitch1" onchange="updateStatus(this)">
+												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="statusDisplay"></span>
 											</div>
 										</div>
 									</div> --}}
 
-									<div class="row">
-										<div class="col">
-											<div class="custom-control custom-switch">
-												<label class="custom-control-label" for="customSwitch1">حالة العضو</label>
-												<input type="checkbox" name="status" chacked class="custom-control-input" id="customSwitch1" onchange="updateStatus(this)">
-												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="statusDisplay"></span>
-											</div>
+									<div class="form-group">
+										<label class="display-block"> حالة العضو</label> <br>
+										<div class="form-check form-check-inline">
+											<input class="form-check-input" 
+											type="radio" name="Gender" id="status_active" value="فعال" checked>
+
+											<label class="form-check-label" for="status_active">
+												&nbsp; فعال 
+											</label>
+										</div> 
+										<div class="form-check form-check-inline">
+											<input class="form-check-input" 
+											type="radio" name="Gender" id="status_inactive" value="غير فعال">
+
+											<label class="form-check-label" for="status_inactive">
+												&nbsp; غير فعال
+											</label>
 										</div>
-									</div>
+									</div><br>
 
 									  <div class="row">
 										<div class="col">
@@ -532,43 +544,7 @@
 
 	</script>
 
-	{{-- <script>
-function updateStatus(checkbox) {
-    if (checkbox.checked) {
-        checkbox.value = "فعال";
-    } else {
-        checkbox.value = "غير فعال";
-    }
-}
-</script> --}}
 
-{{-- <script>
-	function updateStatus(checkbox) {
-		var statusDisplay = document.getElementById('statusDisplay');
-		if (checkbox.checked) {
-			checkbox.value = "فعال";
-			statusDisplay.textContent = "فعال";
-		} else {
-			checkbox.value = "غير فعال";
-			statusDisplay.textContent = "غير فعال";
-		}
-	}
-	</script> --}}
-
-<script>
-	function updateStatus(checkbox) {
-		var statusDisplay = document.getElementById('statusDisplay');
-		var status = checkbox.checked ? "فعال" : "غير فعال";
-		checkbox.value = status;
-		statusDisplay.textContent = status;
-	
-		// Send the status to the server
-		var xhr = new XMLHttpRequest();
-		xhr.open("POST", "/updateStatus", true);
-		xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-		xhr.send("status=" + encodeURIComponent(status));
-	}
-	</script>
 
 
 <!--Internal  Datepicker js -->

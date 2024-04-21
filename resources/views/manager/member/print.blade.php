@@ -219,30 +219,37 @@
 											value="{{ $member->WorkPhone }}" readonly>
 										</div>
 									</div><br>
-                           
 									<div class="row">
-										
 										<div class="col-6">
-											<label for="exampleTextarea">صورة العضو المنتسب</label> <br>
-											<input type="hidden" name="Image" value="{{ $member->Image }}">
-											
-											@if ($member->Image)
-												<img src="{{URL::asset('/assets/img/media/'.$member->Image)}}" style="width: 150px;">
-											@else	
-												<img src="{{URL::asset('assets/img/media/user.jpg')}}"  style="width: 150px;">
-											@endif
-							
+											<label for="inputName" class="control-label">حالة العضو</label>
+											<input type="hidden" name="status" value="{{ $member->status }}">
+											<input type="text" class="form-control" id="inputName" name="Gender"
+											value="{{ $member->status }}" readonly>
 										</div>
-
-                                        <div class="col-6">
+	
+										<div class="col-6">
 											<label for="inputName" class="control-label">ملاحظات</label>
 											<input type="hidden" name="NotPad" value="{{ $member->NotPad }}">
 											<textarea type="text" class="form-control" id="inputName" name="NotPad"
 											value="{{ $member->NotPad }}" rows="3" cols="30" readonly></textarea>
-										</div>
-
-
-									</div><br>
+										 </div>
+										</div><br>
+							   
+										<div class="row">
+											
+											<div class="col-6">
+												<label for="exampleTextarea">صورة العضو المنتسب</label> <br>
+												<input type="hidden" name="Image" value="{{ $member->Image }}">
+												
+												@if ($member->Image)
+													<img src="{{URL::asset('/assets/img/media/'.$member->Image)}}" style="width: 150px;">
+												@else	
+													<img src="{{URL::asset('assets/img/media/user.jpg')}}"  style="width: 150px;">
+												@endif
+								
+											</div>
+											
+										</div><br>
 
                          
                                     <div class="d-flex justify-content-center">

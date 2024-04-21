@@ -252,21 +252,47 @@
                                     </div>
                                 </div><br>
                                 
-                                <div class="row">
-                                    <div class="col">
-                                        @if($member->status =='فعال')
-                                <div class="custom-control custom-switch">
-                                    <input type="checkbox"  name="status" value="{{ $member->status }}" class="custom-control-input" checked id="customSwitch1" >
-                                    <label class="custom-control-label" for="customSwitch1">  حالة العضو  : {{ $member->status }} </label>
-                                  </div>
-                                  @else
-                                  <div class="custom-control custom-switch">
-                                    <input type="checkbox"  name="status" value="{{ $member->status }}" class="custom-control-input" id="customSwitch1" >
-                                    <label class="custom-control-label" for="customSwitch1">  حالة العضو  : {{ $member->status }} </label>
-                                  </div>
-                                  @endif
-                                </div>
-                            </div><br>
+                                <div class="form-group">
+									<label class="display-block"></label> <br>
+
+									@if ($member->status == 'فعال')
+										
+									<div class="form-check form-check-inline">
+										<input class="form-check-input" type="radio" value="فعال" name="status" id="status_active" checked>
+										<label class="form-check-label" for="status_active">
+											&nbsp; فعال 
+										</label>
+									</div> 
+
+									@else
+									<div class="form-check form-check-inline">
+										<input class="form-check-input" type="radio" value="فعال" name="status" id="status_active">
+										<label class="form-check-label" for="status_active">
+											&nbsp; فعال 
+										</label>
+									</div> 
+
+									@endif
+
+									@if ($member->status == 'غير فعال')
+
+									<div class="form-check form-check-inline">
+										<input class="form-check-input" type="radio" value="غير فعال" name="status" id="status_inactive" checked>
+										<label class="form-check-label" for="status_inactive">
+											&nbsp; غير فعال
+										</label>
+									</div>
+
+									@else
+									<div class="form-check form-check-inline">
+										<input class="form-check-input" type="radio" value="غير فعال" name="status" id="status_inactive">
+										<label class="form-check-label" for="status_inactive">
+											&nbsp; غير فعال
+										</label>
+									</div>
+									@endif
+								</div><br>
+
 
                                 <div class="row">
                                     <div class="col">
