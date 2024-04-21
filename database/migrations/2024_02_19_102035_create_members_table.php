@@ -37,6 +37,7 @@ return new class extends Migration
             $table->string('Specialization')->nullable();
             $table->string('area')->nullable();
             $table->string('street')->nullable();
+            $table->string('status')->default('فعال')->nullable();
             $table->string('Image')->nullable();  
             $table->timestamps();
 

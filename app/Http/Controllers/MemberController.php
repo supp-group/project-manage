@@ -39,7 +39,7 @@ public function index()
 
 
         $members = Member::orderBy('IDTeam', 'Asc')->select('id','IDTeam','FirstName','LastName',
-        'City')->paginate(50);
+        'City','status')->paginate(50);
         $memberCount = Member::count();
         $paginationLinks = $members->withQueryString()->links('pagination::bootstrap-4');
 
@@ -415,6 +415,8 @@ public function store(Request $request): RedirectResponse
     $member->HomePhone  = $request->HomePhone;
     $member->WorkPhone  = $request->WorkPhone;
     $member->DateOfJoin  = $dateJoinFormatted;
+    $member->status  = $request->status;
+
     // $member->DateOfJoin  = $request->DateOfJoin;
     $member->save();
 
@@ -569,6 +571,8 @@ public function updateForNotice(Request $request, $IDTeam)
   $member->HomePhone  = $request->HomePhone;
   $member->WorkPhone  = $request->WorkPhone;
   $member->DateOfJoin  = $dateJoinFormatted;
+  $member->status  = $request->status;
+
   $member->update();
 
     // store image
@@ -684,6 +688,8 @@ public function update(Request $request, $id)
   $member->HomePhone  = $request->HomePhone;
   $member->WorkPhone  = $request->WorkPhone;
   $member->DateOfJoin  = $dateJoinFormatted;
+  $member->status  = $request->status;
+
  //   $member->update();
 
   // Store newImage
@@ -855,6 +861,71 @@ public function searchByPhoneNull()
     
     $members = Member::where('City', $cityName)->where('MobilePhone',Null)->orwhere('MobilePhone','')->orderBy('FirstName', 'Asc')->paginate(50);
     $memberCount = Member::where('City', $cityName)->where('MobilePhone',Null)->orwhere('MobilePhone','')->count();
+    $paginationLinks = $members->withQueryString()->links('pagination::bootstrap-4');
+    
+    return view('manager.member.show', [
+        'members' => $members,
+        'memberCount'=>$memberCount,
+        'paginationLinks' => $paginationLinks
+    ]);
+   }
+}
+
+public function searchForActiveMember()
+{
+    if ( auth()->user()->Role == 'admin')
+    {
+     $members =  Member::where('status','فعال')->orderBy('FirstName', 'Asc')->paginate(50);
+     $memberCount =  Member::where('status','فعال')->count();
+     $paginationLinks = $members->withQueryString()->links('pagination::bootstrap-4');
+     
+     return view('admin.member.show', [
+         'members' => $members,
+         'memberCount'=>$memberCount,
+         'paginationLinks' => $paginationLinks
+     ]);
+ 
+    }
+    elseif (optional(auth()->user())->Role == 'manager') {
+     $user = auth()->user();
+     $cityName = DB::table('cities')
+         ->where('id', $user->city_id)
+         ->value('Name');
+     
+     $members = Member::where('City', $cityName)->where('status','فعال')->orderBy('FirstName', 'Asc')->paginate(50);
+     $memberCount = Member::where('City', $cityName)->where('status','فعال')->count();
+     $paginationLinks = $members->withQueryString()->links('pagination::bootstrap-4');
+     
+     return view('manager.member.show', [
+         'members' => $members,
+         'memberCount'=>$memberCount,
+         'paginationLinks' => $paginationLinks
+     ]);
+    }
+}
+public function searchForDisActiveMember()
+{
+   if ( auth()->user()->Role == 'admin')
+   {
+    $members =  Member::where('status','غير فعال')->orderBy('FirstName', 'Asc')->paginate(50);
+    $memberCount =  Member::where('status','غير فعال')->count();
+    $paginationLinks = $members->withQueryString()->links('pagination::bootstrap-4');
+    
+    return view('admin.member.show', [
+        'members' => $members,
+        'memberCount'=>$memberCount,
+        'paginationLinks' => $paginationLinks
+    ]);
+
+   }
+   elseif (optional(auth()->user())->Role == 'manager') {
+    $user = auth()->user();
+    $cityName = DB::table('cities')
+        ->where('id', $user->city_id)
+        ->value('Name');
+    
+    $members = Member::where('City', $cityName)->where('status','غير فعال')->orderBy('FirstName', 'Asc')->paginate(50);
+    $memberCount = Member::where('City', $cityName)->where('status','غير فعال')->count();
     $paginationLinks = $members->withQueryString()->links('pagination::bootstrap-4');
     
     return view('manager.member.show', [
@@ -1359,7 +1430,7 @@ public function Advancedsearch(Request $request)
     $occupations = Occupation::orderBy('created_at','Asc')->get();
 
     $members = Member::orderBy('IDTeam', 'Asc')->select('id','IDTeam','FirstName','LastName',
-    'City')->paginate(50);
+    'City','status')->paginate(50);
     $memberCount = Member::count();
     $paginationLinks = $members->withQueryString()->links('pagination::bootstrap-4');
 

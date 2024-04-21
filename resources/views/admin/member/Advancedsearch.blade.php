@@ -154,6 +154,8 @@ integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEw
 								<th class="wd-15p border-bottom-0">الاسم</th>
 								<th class="wd-15p border-bottom-0"> النسبة</th>
 								<th class="wd-15p border-bottom-0">المحافظة</th>
+								<th class="wd-15p border-bottom-0">الحالة</th>
+
 								<th class="wd-15p border-bottom-0">التفاصيل</th>
 								<th class="wd-15p border-bottom-0">سجل التعديل</th>
 								<th class="wd-15p border-bottom-0">تعديل</th>
@@ -170,6 +172,8 @@ integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEw
 								<td>{{$member->FirstName}}</td>
 								<td>{{$member->LastName}}</td>
 								<td>{{$member->City}}</td>
+								<td>{{$member->status}}</td>
+
 								<td>
 									<a class="btn btn-sm btn-success" href="{{ route('member.details', $member->id)}}" title="التفاصيل"><i class="las la-user"></i></a>
 								</td>

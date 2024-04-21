@@ -87,6 +87,9 @@ Route::middleware(['auth', 'verified', 'admin'])-> prefix('admin')->group(functi
 
 
         // search
+
+        Route::post('active', [MemberController::class, 'searchForActiveMember'])->name('search-ActiveMember');
+        Route::post('dis-active', [MemberController::class, 'searchForDisActiveMember'])->name('search-disActiveMember');
         Route::post('phone', [MemberController::class, 'searchByPhoneNull'])->name('search-phone');
 
         Route::post('team', [MemberController::class, 'searchByIDTeam'])->name('search-team');

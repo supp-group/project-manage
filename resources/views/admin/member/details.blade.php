@@ -249,6 +249,23 @@
 										</div>
 									</div><br>
 
+
+									<div class="row">
+										<div class="col">
+											@if($member->status =='فعال')
+									<div class="custom-control custom-switch">
+										<input type="checkbox"  name="status" value="{{ $member->status }}" class="custom-control-input" checked id="customSwitch1" >
+										<label class="custom-control-label" for="customSwitch1">  حالة العضو  : {{ $member->status }} </label>
+									  </div>
+									  @else
+									  <div class="custom-control custom-switch">
+										<input type="checkbox"  name="status" value="{{ $member->status }}" class="custom-control-input" id="customSwitch1" >
+										<label class="custom-control-label" for="customSwitch1">  حالة العضو  : {{ $member->status }} </label>
+									  </div>
+									  @endif
+									</div>
+								</div><br>
+
 									<div class="row">
 										<div class="col">
 											<label for="exampleTextarea">صورة العضو المنتسب</label> <br>
