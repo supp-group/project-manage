@@ -8,6 +8,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\QualificationController;
 use App\Http\Controllers\TemporaryController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\StatusController;
 use App\Models\Member;
 use Illuminate\Support\Facades\Route;
 
@@ -200,6 +201,21 @@ Route::middleware(['auth', 'verified', 'admin'])-> prefix('admin')->group(functi
     Route::delete('delete/{id}', [OccupationController::class, 'destroy'])->name('occupation.delete');
   });
 
+
+
+   //status
+   Route:: prefix('status')->group(function () {
+
+    Route::get('show', [StatusController::class, 'index']);
+    Route::get('add', [StatusController::class, 'create']);
+    Route::post('save', [StatusController::class, 'store'])->name('status.save');
+
+    Route::get('edit/{id}', [StatusController::class, 'edit'])->name('status.edit');
+    Route::post('update/{id}', [StatusController::class, 'update'])->name('status.update');
+
+    Route::delete('delete/{id}', [StatusController::class, 'destroy'])->name('status.delete');
+  });
+
   //   /qualification
   Route:: prefix('qualification')->group(function () {
 
@@ -285,6 +301,7 @@ Route::middleware(['auth', 'verified', 'manager'])-> prefix('manager')->group(fu
 
         // search
         Route::post('phone', [MemberController::class, 'searchByPhoneNull'])->name('search-m-phone');
+        Route::post('active', [MemberController::class, 'searchForActiveMember'])->name('search-m-ActiveMember');
 
         Route::post('team', [MemberController::class, 'searchByIDTeam'])->name('search-m-team');
         Route::post('name', [MemberController::class, 'searchByName'])->name('search-m-name');

@@ -237,6 +237,15 @@
 											value="{{ $member->DateOfJoin }}" readonly>
 										</div>
 									</div><br>
+
+									<div class="row">
+										<div class="col">
+											<label for="inputName" class="control-label">حالة العضو</label>
+											<input type="hidden" name="status" value="{{ $member->status }}">
+											<input type="text" class="form-control" id="inputName" name="status"
+											value="{{ $member->status }}" readonly>
+										</div>
+									</div><br>
                                     
 									<div class="row">
 										<div class="col">
@@ -454,6 +463,15 @@
 											value="{{ $memb->DateOfJoin }}" readonly>
 										</div>
 									</div><br>
+
+									<div class="row">
+										<div class="col">
+											<label for="inputName" class="control-label">حالة العضو</label>
+											<input type="hidden" name="status" value="{{ $memb->status }}">
+											<input type="text" class="form-control" id="inputName" name="status"
+											value="{{ $memb->status }}" readonly>
+										</div>
+									</div><br>
                                     
 									<div class="row">
 										<div class="col">
@@ -552,6 +570,9 @@
 												<input type="hidden" name="DateOfJoin" value="{{ $memb->DateOfJoin }}">
 												<input type="hidden" class="form-control" id="inputName" name="DateOfJoin"
 												value="{{ $memb->DateOfJoin }}" readonly>
+												<input type="hidden" name="status" value="{{ $memb->status }}">
+												<input type="hidden" class="form-control" id="inputName" name="status"
+												value="{{ $memb->status }}" readonly>
 												<input type="hidden" name="Image" value="{{ $memb->Image }}">
 
 					<div class="center" style="text-align: center;">

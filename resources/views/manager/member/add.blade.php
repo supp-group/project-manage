@@ -337,12 +337,28 @@
 										  </div>
 										</div>
 									  </div><br>
+
+									  <div class="form-group">
+										<label>حالة العضو</label>
+										<select name="status" class="form-control select @error('status') is-invalid @enderror" id="status"> 
+											<option value="لايوجد">اختر الحالة</option>
+											
+											@foreach($status as $stat)
+											<option value="{{$stat->name}}">{{$stat->name}}</option>
+											@endforeach 
+
+										</select>
+
+										@error('status')
+											<div class="alert alert-danger">{{ $message }}</div>
+										@enderror
+									</div><br>
 					
 									  <div class="row">
 										<div class="col">
 											<label for="inputName" class="control-label">ملاحظات</label>
-											<textarea type="text" class="form-control @error('NotPad') is-invalid @enderror" 
-											id="inputName" name="NotPad" rows="3" cols="30" required></textarea>
+											<input type="text" class="form-control @error('NotPad') is-invalid @enderror" 
+											id="inputName" name="NotPad"  required></input>
 
 											@error('NotPad')
 												<div class="alert alert-danger">{{ $message }}</div>
@@ -350,7 +366,7 @@
 										</div>
 									</div><br>
 
-									<div class="form-group">
+									{{-- <div class="form-group">
 										<label class="display-block"> حالة العضو</label> <br>
 										<div class="form-check form-check-inline">
 											<input class="form-check-input" 
@@ -368,7 +384,7 @@
 												&nbsp; غير فعال
 											</label>
 										</div>
-									</div><br>
+									</div><br> --}}
 
 									  <div class="row">
 										<div class="col">

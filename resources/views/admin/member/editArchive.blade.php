@@ -245,14 +245,23 @@
 
                                 <div class="row">
                                     <div class="col">
+                                        <label for="inputName" class="control-label">حالة العضو</label>
+                                        <input type="hidden" name="status" value="{{ $member->status }}">
+                                        <input type="text" class="form-control" id="inputName" name="status"
+                                        value="{{ $member->status }}" readonly>
+                                    </div>
+                                </div><br>
+
+                                <div class="row">
+                                    <div class="col">
                                         <label for="inputName" class="control-label">ملاحظات</label>
                                         <input type="hidden" name="NotPad" value="{{ $member->NotPad }}">
-                                        <textarea type="text" class="form-control" id="inputName" name="NotPad" rows="3" cols="30"
-                                        value="{{ $member->NotPad }}" readonly></textarea>
+                                        <input type="text" class="form-control" id="inputName" name="NotPad"
+                                        value="{{ $member->NotPad }}" readonly></input>
                                     </div>
                                 </div><br>
                                 
-                                <div class="form-group">
+                                {{-- <div class="form-group">
 									<label class="display-block"></label> <br>
 
 									@if ($member->status == 'فعال')
@@ -291,7 +300,7 @@
 										</label>
 									</div>
 									@endif
-								</div><br>
+								</div><br> --}}
 
 
                                 <div class="row">

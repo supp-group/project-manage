@@ -234,6 +234,15 @@
                                         value="{{ $member->DateOfJoin }}" readonly>
                                     </div>
                                 </div><br>
+
+                                <div class="row">
+                                    <div class="col">
+                                        <label for="inputName" class="control-label">حالة العضو</label>
+                                        <input type="hidden" name="status" value="{{ $member->status }}">
+                                        <input type="text" class="form-control" id="inputName" name="status"
+                                        value="{{ $member->status }}" readonly>
+                                    </div>
+                                </div><br>
                                 
                                 <div class="row">
                                     <div class="col">

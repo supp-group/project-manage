@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Temporary;
 use App\Models\Qualification;
+use App\Models\Status;
+
 use App\Models\Member;
 use Illuminate\Http\Request;
 use DateTime;
@@ -13,7 +15,7 @@ class TemporaryController extends Controller
 {
   public function getDeletedMember()
   {
-    $members = Temporary::where('operation', '0')->select('id', 'FullName', 'IDTeam', 'managerEmail')
+    $members = Temporary::where('operation', '0')->select('id', 'FirstName','LastName','FatherName', 'IDTeam', 'managerEmail')
       ->orderBy('updated_at', 'desc')->paginate(4);
 
     $paginationLinks = $members->withQueryString()->links('pagination::bootstrap-4');
@@ -26,7 +28,7 @@ class TemporaryController extends Controller
   
   public function getEtidedMember()
   {
-    $members = Temporary::where('operation', '1')->where('AdminAgree', 0)->select('id', 'FullName', 'IDTeam', 'managerEmail')
+    $members = Temporary::where('operation', '1')->where('AdminAgree', 0)->select('id', 'FirstName','LastName','FatherName', 'IDTeam', 'managerEmail')
       ->orderBy('updated_at', 'desc')->paginate(4);
 
     $paginationLinks = $members->withQueryString()->links('pagination::bootstrap-4');
@@ -63,12 +65,27 @@ class TemporaryController extends Controller
       // إذا كانت القيمة هي اسم
       $specializationName = $specialization;
     }
+
+    
+  $statusId = $request->status;
+
+  if (is_numeric($statusId)) {
+      // إذا كانت القيمة هي id
+      $statusName = Status::where('id', $statusId)->value('name');
+  } else {
+      // إذا كانت القيمة هي اسم
+      $statusName = $statusId;
+  }
+
+
     $user = auth()->user();
 
     $member = new Temporary();
     $member->NotPad = $request->NotPad;
     $member->IDTeam  = $request->IDTeam;
-    $member->FullName = $request->FullName;
+    $member->FirstName = $request->FirstName;
+    $member->LastName = $request->LastName;
+    $member->FatherName = $request->FatherName;
     $member->MotherName = $request->MotherName;
     $member->PlaceOfBirth = $request->PlaceOfBirth;
     $member->BirthDate = $birthDateFormatted;
@@ -85,12 +102,16 @@ class TemporaryController extends Controller
     $member->HomePhone  = $request->HomePhone;
     $member->WorkPhone  = $request->WorkPhone;
     $member->DateOfJoin  = $request->DateOfJoin;
+    $member->status  = $statusName;
+
     $member->operation = '1';
     $member->managerEmail = $user->email;
  
-
+    // if (optional(auth()->user())->Role == 'admin') 
+    // {
+    //   $member->AdminAgree ='1';
+    // }
    
-  
     if(Temporary::where('IDTeam', $member->IDTeam)->where('operation', '1')->where('AdminAgree', 0)->exists())
     {
   
@@ -129,7 +150,9 @@ class TemporaryController extends Controller
     $member = new Temporary();
     $member->NotPad = $Oldmember->NotPad;
     $member->IDTeam  = $Oldmember->IDTeam;
-    $member->FullName = $Oldmember->FullName;
+    $member->FirstName = $Oldmember->FirstName;
+    $member->LastName = $Oldmember->LastName;
+    $member->FatherName = $Oldmember->FatherName;
     $member->MotherName = $Oldmember->MotherName;
     $member->PlaceOfBirth = $Oldmember->PlaceOfBirth;
     $member->BirthDate = $Oldmember->BirthDate;
@@ -146,9 +169,15 @@ class TemporaryController extends Controller
     $member->HomePhone  = $Oldmember->HomePhone;
     $member->WorkPhone  = $Oldmember->WorkPhone;
     $member->DateOfJoin  = $Oldmember->DateOfJoin;
+    $member->status  = $Oldmember->status;
     $member->Image  = $Oldmember->Image;
     $member->operation = '0';
     $member->managerEmail = $user->email;
+
+    // if (optional(auth()->user())->Role == 'admin') 
+    // {
+    //   $member->AdminAgree ='1';
+    // }
 
     if(Temporary::where('IDTeam', $member->IDTeam)->where('operation', '0')->exists())
     {

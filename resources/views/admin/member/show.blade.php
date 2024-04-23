@@ -65,7 +65,7 @@ integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEw
 							</div>
 						</form> 
 
-						<form action="{{ route('search-disActiveMember') }}" method="post">
+						{{-- <form action="{{ route('search-disActiveMember') }}" method="post">
 							@csrf
 							<div class="input-group">
 								<div class="input-group-append">
@@ -73,7 +73,7 @@ integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEw
 									<button name="search-phone" type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
 								</div>
 							</div>
-						</form> 
+						</form>  --}}
 
 						<form action="{{ route('AdvancedIndex') }}" method="GET">
 							@csrf

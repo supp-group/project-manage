@@ -9,6 +9,8 @@ use App\Models\Member;
 use App\Models\Temporary;
 use App\Models\Occupation;
 use App\Models\Qualification;
+use App\Models\Status;
+
 use App\Models\User;
 use Auth;
 use DateTime;
@@ -36,6 +38,7 @@ public function index()
         $qualifications = Qualification::whereNotNull('Name')->orderBy('created_at','Asc')->get();
         $specializations = Qualification::whereNotNull('specialization')->orderBy('created_at','Asc')->get();
         $occupations = Occupation::orderBy('created_at','Asc')->get();
+        $status = Status::orderBy('created_at','Asc')->get();
 
 
         $members = Member::orderBy('IDTeam', 'Asc')->select('id','IDTeam','FirstName','LastName',
@@ -50,7 +53,7 @@ public function index()
             'qualifications' => $qualifications,
             'specializations' => $specializations,
             'occupations' => $occupations,
-
+            'status'=>$status,
             'members' => $members,
             'memberCount'=>$memberCount,
             'paginationLinks' => $paginationLinks
@@ -245,14 +248,15 @@ public function create()
         $qualifications = Qualification::whereNotNull('Name')->orderBy('created_at','Asc')->get();
         $specializations = Qualification::whereNotNull('specialization')->orderBy('created_at','Asc')->get();
         $occupations = Occupation::orderBy('created_at','Asc')->get();
+        $status = Status::orderBy('created_at','Asc')->get();
 
         if ( auth()->user()->Role == 'admin')
         {
-            return view('admin.member.add', compact('cityName', 'qualifications', 'occupations', 'areas', 'streets'));
+            return view('admin.member.add', compact('cityName', 'qualifications', 'occupations', 'areas', 'streets','status'));
         }
         else if ( auth()->user()->Role == 'manager')
         {
-            return view('manager.member.add', compact('cityName', 'qualifications', 'occupations', 'areas', 'streets'));
+            return view('manager.member.add', compact('cityName', 'qualifications', 'occupations', 'areas', 'streets','status'));
         }
 }
 
@@ -377,6 +381,16 @@ public function store(Request $request): RedirectResponse
       $streetName = $streetId;
   }
 
+
+  $statusId = $request->status;
+
+  if (is_numeric($statusId)) {
+      // إذا كانت القيمة هي id
+      $statusName = Status::where('id', $statusId)->value('name');
+  } else {
+      // إذا كانت القيمة هي اسم
+      $statusName = $statusId;
+  }
   //   $cityId = $request->City;
   //   $cityName = City::where('id', $cityId)->first()->Name;
 
@@ -415,7 +429,7 @@ public function store(Request $request): RedirectResponse
     $member->HomePhone  = $request->HomePhone;
     $member->WorkPhone  = $request->WorkPhone;
     $member->DateOfJoin  = $dateJoinFormatted;
-    $member->status  = $request->status;
+    $member->status  = $statusName;
 
     // $member->DateOfJoin  = $request->DateOfJoin;
     $member->save();
@@ -464,14 +478,15 @@ public function edit($id)
      $qualifications = Qualification::whereNotNull('Name')->orderBy('created_at','Asc')->get();
      $specializations = Qualification::whereNotNull('specialization')->orderBy('created_at','Asc')->get();
      $occupations = Occupation::orderBy('created_at','Asc')->get();
+     $status = Status::orderBy('created_at','Asc')->get();
 
      if ( auth()->user()->Role == 'admin')
      {
-      return view('admin.member.edit',compact('member', 'cityName', 'qualifications', 'specializations', 'occupations', 'areas', 'streets'));
+      return view('admin.member.edit',compact('member', 'cityName', 'qualifications', 'specializations', 'occupations', 'areas', 'streets','status'));
      }
     else if ( auth()->user()->Role == 'manager')
      {
-      return view('manager.member.edit',compact('member', 'cityName', 'qualifications', 'specializations', 'occupations'));
+      return view('manager.member.edit',compact('member', 'cityName', 'qualifications', 'specializations', 'occupations','status'));
      }
 }
 
@@ -542,6 +557,15 @@ public function updateForNotice(Request $request, $IDTeam)
       $streetName = $street;
   }
 
+  $statusId = $request->status;
+
+  if (is_numeric($statusId)) {
+      // إذا كانت القيمة هي id
+      $statusName = Status::where('id', $statusId)->value('name');
+  } else {
+      // إذا كانت القيمة هي اسم
+      $statusName = $statusId;
+  }
 
 
   $member = Member::where('IDTeam',$IDTeam)->first();
@@ -571,7 +595,7 @@ public function updateForNotice(Request $request, $IDTeam)
   $member->HomePhone  = $request->HomePhone;
   $member->WorkPhone  = $request->WorkPhone;
   $member->DateOfJoin  = $dateJoinFormatted;
-  $member->status  = $request->status;
+  $member->status  = $statusName;
 
   $member->update();
 
@@ -596,6 +620,7 @@ public function updateForNotice(Request $request, $IDTeam)
 
     //Temporary::where($request->IDTeam)->get('AdminAgree')->set('1');
     Temporary::where('IDTeam', $request->IDTeam)->update(['AdminAgree' => 1]);
+
 
     session()->flash('Add', 'تم تعديل العضو بنجاح');
     return redirect()->route('edit');
@@ -664,6 +689,17 @@ public function update(Request $request, $id)
       $streetName = $street;
   }
 
+  $statusId = $request->status;
+
+  if (is_numeric($statusId)) {
+      // إذا كانت القيمة هي id
+      $statusName = Status::where('id', $statusId)->value('name');
+  } else {
+      // إذا كانت القيمة هي اسم
+      $statusName = $statusId;
+  }
+
+
   $member = Member::findOrFail($id);
   $oldImageName=$member->Image;
   $member->NotPad = $request->NotPad;
@@ -688,7 +724,7 @@ public function update(Request $request, $id)
   $member->HomePhone  = $request->HomePhone;
   $member->WorkPhone  = $request->WorkPhone;
   $member->DateOfJoin  = $dateJoinFormatted;
-  $member->status  = $request->status;
+  $member->status  = $statusName;
 
  //   $member->update();
 
@@ -709,6 +745,56 @@ public function update(Request $request, $id)
     $member->Image = $newImageName;
   }
     $member->update();
+
+    
+    if (optional(auth()->user())->Role == 'admin') 
+    {
+      
+    $user = auth()->user();
+    $member = new Temporary();
+    $member->NotPad = $request->NotPad;
+    $member->IDTeam  = $request->IDTeam;
+    $member->FirstName = $request->FirstName;
+    $member->LastName = $request->LastName;
+    $member->FatherName = $request->FatherName;
+    $member->MotherName = $request->MotherName;
+    $member->PlaceOfBirth = $request->PlaceOfBirth;
+    $member->BirthDate = $birthDateFormatted;
+    $member->Constraint = $request->Constraint;
+    $member->City = $request->City;
+    $member->IDNumber  = $request->IDNumber;
+    $member->Gender  = $request->Gender == 'ذكر' ? 'ذكر' : 'أنثى';
+    $member->Qualification = $qualificationName;
+    $member->Specialization  = $specializationName;
+    $member->Occupation  = $request->Occupation;
+    $member->MobilePhone  = $request->MobilePhone;
+    $member->HomeAddress  = $request->HomeAddress;
+    $member->WorkAddress  = $request->WorkAddress;
+    $member->HomePhone  = $request->HomePhone;
+    $member->WorkPhone  = $request->WorkPhone;
+    $member->DateOfJoin  = $request->DateOfJoin;
+    $member->status  = $statusName;
+
+    $member->operation = '1';
+    $member->AdminAgree ='1';
+    $member->managerEmail = $user->email;
+
+      $member->save();
+
+      // return dd($request->all());
+    // store image
+    if ($request->hasfile('Image')) {
+      $img = $request->file('Image');
+      $img_name = $img->getClientOriginalName();
+      $img->move('assets/img/media/', $img_name);
+
+      Temporary::find($member->id)->update([
+        'Image' => $img_name,
+      ]);
+
+       }
+      }
+  
 
     session()->flash('Edit', 'تم تعديل العضو بنجاح');
     return back(); 

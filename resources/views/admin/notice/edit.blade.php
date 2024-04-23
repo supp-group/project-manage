@@ -66,7 +66,7 @@
 						<div class="dash-widget">
 							<div class="dash-widget-info text-right">
 								<h5 style="color: black;">قام &nbsp; <span style="color: #0162e8">{{$member->managerEmail}} </span> &nbsp;
-									بتعديل العضو: &nbsp; <span style="color: #0162e8">{{$member->FirstName}}{{$member->LastName}}</span>
+									بتعديل العضو: &nbsp; <span style="color: #0162e8">{{$member->FirstName}} {{$member->LastName}}</span>
 									&nbsp;	ذو الرقم الحزبي: &nbsp; <span style="color: #0162e8">{{$member->IDTeam}}</span> &nbsp; </h5>
 							</div>
 

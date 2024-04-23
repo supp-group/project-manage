@@ -344,13 +344,29 @@
 											id="inputName" name="DateOfJoin" value="{{ $member->DateOfJoin }}" readonly>
 										</div>
 									</div><br>
+
+									<div class="form-group">
+										<label>حالة العضو</label>
+										<input type="hidden" name="status" value="{{ $member->status }}">
+										<select name="status" class="form-control select @error('status') is-invalid @enderror">
+											<option value="{{ $member->status }}">اختر الحالة</option>
+											
+											@foreach($status as $stat)
+											<option value="{{ $stat->id }}" {{ old('stat') == $stat->id ? 'selected' : '' }}>{{ $stat->name }}</option>
+											@endforeach 
+										</select>
+
+										@error('status')
+											<div class="alert alert-danger">{{ $message }}</div>
+										@enderror
+									</div>
 					
 									<div class="row">
 										<div class="col">
 											<label for="inputName" class="control-label">ملاحظات</label>
 											<input type="hidden" name="NotPad" value="{{ $member->NotPad }}">
-											<textarea type="text" class="form-control @error('NotPad') is-invalid @enderror" 
-											id="inputName" name="NotPad" rows="3" cols="30" value="{{ $member->NotPad }}"></textarea>
+											<input type="text" class="form-control @error('NotPad') is-invalid @enderror" 
+											id="inputName" name="NotPad"  value="{{ $member->NotPad }}"></input>
 
 											@error('NotPad')
 												<div class="alert alert-danger">{{ $message }}</div>
@@ -359,7 +375,7 @@
 									</div><br>
 
 
-									<div class="form-group">
+									{{-- <div class="form-group">
 										<label class="display-block"></label> <br>
 	
 										@if ($member->status == 'فعال')
@@ -398,7 +414,7 @@
 											</label>
 										</div>
 										@endif
-									</div><br>
+									</div><br> --}}
 	
 
 									  <div class="row">
