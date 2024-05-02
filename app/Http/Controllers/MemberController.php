@@ -1517,10 +1517,8 @@ public function Advancedsearch(Request $request)
 
     $members = Member::orderBy('IDTeam', 'Asc')->select('id','IDTeam','FirstName','LastName',
     'City','status')->paginate(50);
-    $memberCount = Member::count();
-    $paginationLinks = $members->withQueryString()->links('pagination::bootstrap-4');
-
-
+    // $memberCount = Member::count();
+    // $paginationLinks = $members->withQueryString()->links('pagination::bootstrap-4');
 
     if ($request->City != 0) {
         $cityId = $request->City;
@@ -1556,8 +1554,11 @@ public function Advancedsearch(Request $request)
         $results->where('Occupation', $request->Occupation);
     }
 
-    $members = $results->get();
-
+    $members = $results->orderBy('IDTeam', 'Asc')->select('id','IDTeam','FirstName','LastName',
+    'City','status')->paginate(50);
+    $memberCount = Member::count();
+    $paginationLinks = $members->withQueryString()->links('pagination::bootstrap-4');
+    
     return view('admin.member.Advancedsearch', [
         'members' => $members,
         'memberCount'=>$memberCount,
@@ -1568,7 +1569,6 @@ public function Advancedsearch(Request $request)
         'specializations'=>$specializations,
         'occupations'=>$occupations,
         'paginationLinks' => $paginationLinks
-        // 'paginationLinks' => $paginationLinks
     ]);
 }
 
