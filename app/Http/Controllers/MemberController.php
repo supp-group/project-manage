@@ -264,25 +264,25 @@ public function store(Request $request): RedirectResponse
 {
         $validated = $request->validate([
            // 'NotPad' => 'required|max:255',
-            'IDTeam' => 'required|unique:members|max:255',
-            'FirstName' => 'required',
-            'LastName' => 'required',
-            'FatherName' => 'required',
-            'MotherName' => 'required',
-            'PlaceOfBirth' => 'required',
-            'BirthDate' => 'required|date|before:today',
-            'Constraint' => 'required',
-            'City' => 'required',
-            'IDNumber' => 'required|unique:members|min:10|max:11',
-            'Gender' => 'required',
+            // 'IDTeam' => 'required|unique:members|max:255',
+            // 'FirstName' => 'required',
+            // 'LastName' => 'required',
+            // 'FatherName' => 'required',
+            // 'MotherName' => 'required',
+            // 'PlaceOfBirth' => 'required',
+            // 'BirthDate' => 'required|date|before:today',
+            // 'Constraint' => 'required',
+            // 'City' => 'required',
+            // 'IDNumber' => 'required|unique:members|min:10|max:11',
+            // 'Gender' => 'required',
           //  'Qualification' =>'required',
             // 'Occupation' => 'required',
-            'MobilePhone' => 'required|max:10|min:9',
+            // 'MobilePhone' => 'required|max:10|min:9',
             // 'HomeAddress' => 'required',
             // 'WorkAddress' => 'required',
             // 'HomePhone' => 'required|max:10|min:9',
             // 'WorkPhone' => 'required|max:10|min:9',
-            'DateOfJoin' => 'required|numeric|digits:4|before_or_equal:' . date('Y'),
+            // 'DateOfJoin' => 'required|numeric|digits:4|before_or_equal:' . date('Y'),
             // 'Specialization' => 'required',
             // 'area' => 'required',
             // 'street' => 'required',
@@ -1517,10 +1517,8 @@ public function Advancedsearch(Request $request)
 
     $members = Member::orderBy('IDTeam', 'Asc')->select('id','IDTeam','FirstName','LastName',
     'City','status')->paginate(50);
-    $memberCount = Member::count();
-    $paginationLinks = $members->withQueryString()->links('pagination::bootstrap-4');
-
-
+    // $memberCount = Member::count();
+    // $paginationLinks = $members->withQueryString()->links('pagination::bootstrap-4');
 
     if ($request->City != 0) {
         $cityId = $request->City;
@@ -1556,8 +1554,11 @@ public function Advancedsearch(Request $request)
         $results->where('Occupation', $request->Occupation);
     }
 
-    $members = $results->get();
-
+    $members = $results->orderBy('IDTeam', 'Asc')->select('id','IDTeam','FirstName','LastName',
+    'City','status')->paginate(50);
+    $memberCount = Member::count();
+    $paginationLinks = $members->withQueryString()->links('pagination::bootstrap-4');
+    
     return view('admin.member.Advancedsearch', [
         'members' => $members,
         'memberCount'=>$memberCount,
@@ -1568,7 +1569,6 @@ public function Advancedsearch(Request $request)
         'specializations'=>$specializations,
         'occupations'=>$occupations,
         'paginationLinks' => $paginationLinks
-        // 'paginationLinks' => $paginationLinks
     ]);
 }
 
