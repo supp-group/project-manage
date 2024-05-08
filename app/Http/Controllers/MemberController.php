@@ -1059,7 +1059,12 @@ public function searchForDisActiveMember()
     ]);
    }
  }
-
+ elseif ( auth()->user()->Role == 'admin'){
+    return view('admin.member.show');
+ }
+ elseif ( auth()->user()->Role == 'manager'){
+    return view('manager.member.show');
+ }
 
 }
 
