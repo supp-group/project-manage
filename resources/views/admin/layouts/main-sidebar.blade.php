@@ -128,7 +128,6 @@
 						</ul>
 					</li>
 
-
 					<li class="slide">
 						<a class="side-menu__item" data-toggle="slide" href="{{ route('logout') }}"
 						onclick="event.preventDefault();document.getElementById('logout-form').submit();"><i

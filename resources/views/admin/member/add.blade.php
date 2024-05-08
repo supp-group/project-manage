@@ -64,24 +64,24 @@
 									<div class="row">
 										<div class="col">
 											<label for="inputName" class="control-label">الرقم الحزبي </label>
-											<input type="text" class="form-control @error('IDTeam') is-invalid @enderror" 
-											id="inputName" name="IDTeam" required>
+											<input type="text" class="form-control" 
+											id="inputName" name="IDTeam">
 										
-											@error('IDTeam')
+											{{-- @error('IDTeam')
 												<div class="alert alert-danger">{{ $message }}</div>
-											@enderror
+											@enderror --}}
 										</div>
 									</div><br>
 
 									<div class="row">
 										<div class="col">
 											<label for="inputName" class="control-label">الاسم </label>
-											<input type="text" class="form-control @error('FirstName') is-invalid @enderror" 
+											<input type="text" class="form-control" 
 											id="inputName" name="FirstName">
 										
-											@error('FirstName')
+											{{-- @error('FirstName')
 												<div class="alert alert-danger">{{ $message }}</div>
-											@enderror
+											@enderror --}}
 										</div>
 									</div><br>
 
@@ -89,12 +89,12 @@
 									<div class="row">
 										<div class="col">
 											<label for="inputName" class="control-label"> النسبة</label>
-											<input type="text" class="form-control @error('LastName') is-invalid @enderror" 
+											<input type="text" class="form-control" 
 											id="inputName" name="LastName">
 										
-											@error('LastName')
+											{{-- @error('LastName')
 												<div class="alert alert-danger">{{ $message }}</div>
-											@enderror
+											@enderror --}}
 										</div>
 									</div><br>
 
@@ -102,12 +102,12 @@
 									<div class="row">
 										<div class="col">
 											<label for="inputName" class="control-label"> اسم الأب</label>
-											<input type="text" class="form-control @error('FatherName') is-invalid @enderror" 
+											<input type="text" class="form-control" 
 											id="inputName" name="FatherName">
 										
-											@error('FatherName')
+											{{-- @error('FatherName')
 												<div class="alert alert-danger">{{ $message }}</div>
-											@enderror
+											@enderror --}}
 										</div>
 									</div><br>
 
@@ -115,24 +115,24 @@
 									<div class="row">
 										<div class="col">
 											<label for="inputName" class="control-label">اسم الأم</label>
-											<input type="text" class="form-control @error('MotherName') is-invalid @enderror" 
+											<input type="text" class="form-control" 
 											id="inputName" name="MotherName">
 
-											@error('MotherName')
+											{{-- @error('MotherName')
 												<div class="alert alert-danger">{{ $message }}</div>
-											@enderror
+											@enderror --}}
 										</div>
 									</div><br>
 
 									<div class="row">
 										<div class="col">
 											<label for="inputName" class="control-label">محل الولادة</label>
-											<input type="text" class="form-control @error('PlaceOfBirth') is-invalid @enderror" 
+											<input type="text" class="form-control" 
 											id="inputName" name="PlaceOfBirth">
 
-											@error('PlaceOfBirth')
+											{{-- @error('PlaceOfBirth')
 												<div class="alert alert-danger">{{ $message }}</div>
-											@enderror
+											@enderror --}}
 										</div>
 									</div><br>
 
@@ -140,12 +140,12 @@
 										<div class="col">
 											<div class="form-group">
 												<label>تاريخ الولادة</label>
-													<input type="datetime" class="form-control @error('BirthDate') is-invalid @enderror" 
+													<input type="datetime" class="form-control" 
 													name="BirthDate">
 
-													@error('BirthDate')
+													{{-- @error('BirthDate')
 														<div class="alert alert-danger">{{ $message }}</div>
-													@enderror
+													@enderror --}}
 											</div>
 										</div>
 									</div><br>
@@ -153,12 +153,12 @@
 									<div class="row">
 										<div class="col">
 											<label for="inputName" class="control-label">محل ورقم القيد</label>
-											<input type="text" class="form-control @error('Constraint') is-invalid @enderror" 
+											<input type="text" class="form-control" 
 											id="inputName" name="Constraint">
 
-											@error('Constraint')
+											{{-- @error('Constraint')
 												<div class="alert alert-danger">{{ $message }}</div>
-											@enderror
+											@enderror --}}
 										</div>
 									</div><br>
 
@@ -166,7 +166,7 @@
 									<div class="form-group">
 										<label>المحافظة</label>
 										<select name="City" id="city" 
-										class="form-control @error('City') is-invalid @enderror">
+										class="form-control">
 											<option value="0">اختر المحافظة</option>
 											
 											@foreach($cityName as $city)
@@ -175,15 +175,15 @@
 
 										</select>
 
-										@error('City')
+										{{-- @error('City')
 										<div class="alert alert-danger">{{ $message }}</div>
-										@enderror
+										@enderror --}}
 									</div><br>
 
 									<div class="form-group">
 										<label>المنطقة</label>
 										<select name="area" id="area" 
-										class="form-control select @error('area') is-invalid @enderror">
+										class="form-control select">
 
 										{{-- @foreach($areas as $area)
 											<option value="{{$area->id}}">{{$area->area}}</option>
@@ -191,15 +191,15 @@
 
 										</select>
 
-										@error('area')
+										{{-- @error('area')
 											<div class="alert alert-danger">{{ $message }}</div>
-										@enderror
+										@enderror --}}
 									</div><br>
 
 									<div class="form-group">
 										<label>الحي</label>
 										<select name="street" id="street"
-										class="form-control select @error('street') is-invalid @enderror">
+										class="form-control select">
 
 										{{-- @foreach($streets as $street)
 											<option value="{{$street->id}}">{{$street->street}}</option>
@@ -207,20 +207,20 @@
 											
 										</select>
 
-										@error('street')
+										{{-- @error('street')
 											<div class="alert alert-danger">{{ $message }}</div>
-										@enderror
+										@enderror --}}
 									</div><br>
 
 									<div class="row">
 										<div class="col">
 											<label for="inputName" class="control-label">الرقم الوطني</label>
-											<input type="text" class="form-control @error('IDNumber') is-invalid @enderror" 
+											<input type="text" class="form-control" 
 											id="inputName" name="IDNumber">
 
-											@error('IDNumber')
+											{{-- @error('IDNumber')
     											<div class="alert alert-danger">{{ $message }}</div>
-											@enderror
+											@enderror --}}
 										</div>
 									</div><br>
 
@@ -246,7 +246,7 @@
 
 									<div class="form-group">
 										<label>المهنة</label>
-										<select name="Occupation" class="form-control select @error('Occupation') is-invalid @enderror" id="Occupation"> 
+										<select name="Occupation" class="form-control select" id="Occupation"> 
 											<option value="لايوجد">اختر المهنة</option>
 											
 											@foreach($occupations as $occupation)
@@ -254,10 +254,10 @@
 											@endforeach 
 
 										</select>
-
+{{-- 
 										@error('Occupation')
 											<div class="alert alert-danger">{{ $message }}</div>
-										@enderror
+										@enderror --}}
 									</div><br>
 
 									<div class="form-group">
@@ -281,60 +281,57 @@
 									 <div class="row">
 										<div class="col">
 										  <label for="inputName" class="control-label">رقم الموبايل</label>
-										  <input type="text" class="form-control @error('MobilePhone') is-invalid @enderror" 
+										  <input type="text" class="form-control" 
 										  id="inputName" name="MobilePhone">
 
-										@error('MobilePhone')
+										{{-- @error('MobilePhone')
 											<div class="alert alert-danger">{{ $message }}</div>
-										@enderror
+										@enderror --}}
 										</div>
 									  </div><br>
 					
 									  <div class="row">
 										<div class="col">
 										  <label for="inputName" class="control-label">عنوان المنزل</label>
-										  <input type="text" class="form-control @error('HomeAddress') is-invalid @enderror" 
+										  <input type="text" class="form-control" 
 										  id="inputName" name="HomeAddress">
 
-										    @error('HomeAddress')
+										    {{-- @error('HomeAddress')
 										  		<div class="alert alert-danger">{{ $message }}</div>
-									  		@enderror
+									  		@enderror --}}
 										</div>
 									  </div><br>
 					
 									  <div class="row">
 										<div class="col">
 										  <label for="inputName" class="control-label">عنوان العمل</label>
-										  <input type="text" class="form-control @error('WorkAddress') is-invalid @enderror" 
+										  <input type="text" class="form-control" 
 										  id="inputName" name="WorkAddress">
 										
-										    @error('WorkAddress')
-										  		<div class="alert alert-danger">{{ $message }}</div>
-									  		@enderror
 										</div>
 									  </div><br>
 					
 									  <div class="row">
 										<div class="col">
 										  <label for="inputName" class="control-label">هاتف المنزل</label>
-										  <input type="text" class="form-control @error('HomePhone') is-invalid @enderror" 
+										  <input type="text" class="form-control" 
 										  id="inputName" name="HomePhone">
 										
-										  	@error('HomePhone')
+										  	{{-- @error('HomePhone')
 										  		<div class="alert alert-danger">{{ $message }}</div>
-									  		@enderror
+									  		@enderror --}}
 										</div>
 									  </div><br>
 					
 									  <div class="row">
 										<div class="col">
 										  <label for="inputName" class="control-label">هاتف العمل</label>
-										  <input type="text" class="form-control @error('WorkPhone') is-invalid @enderror" 
+										  <input type="text" class="form-control" 
 										  id="inputName" name="WorkPhone">
 
-										  	@error('WorkPhone')
+										  	{{-- @error('WorkPhone')
 										  		<div class="alert alert-danger">{{ $message }}</div>
-									  		@enderror
+									  		@enderror --}}
 										</div>
 									  </div><br>
 					
@@ -346,9 +343,9 @@
 											  name="DateOfJoin" required> --}}
 											  <select class="form-control select" name="DateOfJoin" id="year"></select>
 
-											@error('DateOfJoin')
+											{{-- @error('DateOfJoin')
 										  		<div class="alert alert-danger">{{ $message }}</div>
-									  		@enderror
+									  		@enderror --}}
 												
 										  </div>
 										</div>
@@ -356,7 +353,7 @@
 
 									  <div class="form-group">
 										<label>حالة العضو</label>
-										<select name="status" class="form-control select @error('status') is-invalid @enderror" id="status"> 
+										<select name="status" class="form-control select" id="status"> 
 											<option value="لايوجد">اختر الحالة</option>
 											
 											@foreach($status as $stat)
@@ -365,20 +362,20 @@
 
 										</select>
 
-										@error('status')
+										{{-- @error('status')
 											<div class="alert alert-danger">{{ $message }}</div>
-										@enderror
+										@enderror --}}
 									</div><br>
 
 									  <div class="row">
 										<div class="col">
 											<label for="inputName" class="control-label">ملاحظات</label>
-											<input type="text" class="form-control @error('NotPad') is-invalid @enderror" 
+											<input type="text" class="form-control" 
 											id="inputName" name="NotPad" ></input>
 
-											@error('NotPad')
+											{{-- @error('NotPad')
 												<div class="alert alert-danger">{{ $message }}</div>
-											@enderror
+											@enderror --}}
 										</div>
 									</div><br>
 
