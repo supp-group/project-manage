@@ -822,8 +822,8 @@ public function searchByName(Request $request)
 {
         $searchTerm = $request->input('search_FirstName');
         $request->session()->put('search_FirstName', $searchTerm);
-   if ( auth()->user()->Role == 'admin')
-   {
+      if ( auth()->user()->Role == 'admin')
+     {
     $members =  Member::where('FirstName', 'like', '%'.$searchTerm.'%')->orderBy('FirstName', 'Asc')->paginate(50);
     $memberCount =  Member::where('FirstName', 'like', '%'.$searchTerm.'%')->count();
     $paginationLinks = $members->withQueryString()->links('pagination::bootstrap-4');
@@ -848,7 +848,9 @@ public function searchByName(Request $request)
         'memberCount'=>$memberCount,
         'paginationLinks' => $paginationLinks
     ]);
-   }
+ 
+ }
+
 }
 
 
@@ -1025,6 +1027,8 @@ public function searchForDisActiveMember()
     public function searchByIDTeam(Request $request)
 {
     $searchTerm = $request->input('search_IDTeam');
+    if( $searchTerm)
+    {
     $request->session()->put('search_IDTeam', $searchTerm);
 
    if ( auth()->user()->Role == 'admin')
@@ -1054,6 +1058,11 @@ public function searchForDisActiveMember()
         'paginationLinks' => $paginationLinks
     ]);
    }
+ }
+ else{
+    return back();
+ }
+
 }
 
  public function searchByQualification(Request $request)
