@@ -1059,9 +1059,7 @@ public function searchForDisActiveMember()
     ]);
    }
  }
- else{
-    return back();
- }
+
 
 }
 
