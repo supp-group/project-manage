@@ -265,7 +265,7 @@
 											<option value="{{ $member->Occupation }}">اختر المهنة</option>
 											
 											@foreach($occupations as $occupation)
-											<option value="{{ $occupation->id }}" {{ old('Occupation') == $occupation->id ? 'selected' : '' }}>{{ $occupation->Name }}</option>
+											<option value="{{ $occupation->Name }}" {{ old('Occupation') == $occupation->Name ? 'selected' : '' }}>{{ $occupation->Name }}</option>
 											@endforeach 
 										</select>
 
