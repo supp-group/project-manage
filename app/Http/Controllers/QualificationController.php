@@ -109,7 +109,6 @@ class QualificationController extends Controller
       
       //'parentId'=>'required',
       'specialization' => 'required|unique:qualifications|max:255',
-     
     ]);
 
     $specialization = Qualification::findOrFail($id);
