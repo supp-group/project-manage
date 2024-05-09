@@ -108,8 +108,7 @@ class QualificationController extends Controller
     $validated = $request->validate([
       'parentId'=>'required',
       'specialization' => 'required|unique:qualifications|max:255',
-        'parentId'=>'required',
-        'specialization' => 'required|unique:occupations|max:255',
+     
     ]);
 
     $specialization = Qualification::findOrFail($id);
