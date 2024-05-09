@@ -264,7 +264,7 @@ public function store(Request $request): RedirectResponse
 {
         $validated = $request->validate([
            // 'NotPad' => 'required|max:255',
-            // 'IDTeam' => 'required|unique:members|max:255',
+            'IDTeam' => 'required|unique:members|max:255',
             // 'FirstName' => 'required',
             // 'LastName' => 'required',
             // 'FatherName' => 'required',

@@ -64,12 +64,12 @@
 									<div class="row">
 										<div class="col">
 											<label for="inputName" class="control-label">الرقم الحزبي </label>
-											<input type="text" class="form-control" 
-											id="inputName" name="IDTeam">
+											<input type="text" class="form-control @error('IDTeam') is-invalid @enderror" 
+											id="inputName" name="IDTeam" required>
 										
-											{{-- @error('IDTeam')
-												<div class="alert alert-danger">{{ $message }}</div>
-											@enderror --}}
+											@error('IDTeam')
+												<div class="alert alert-danger">الرقم الحزبي مطلوب</div>
+											@enderror
 										</div>
 									</div><br>
 
