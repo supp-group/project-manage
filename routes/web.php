@@ -80,6 +80,12 @@ Route::middleware(['auth', 'verified', 'admin'])-> prefix('admin')->group(functi
         Route::get('print/{id}', [MemberController::class, 'print'])->name('print');
 
 
+        Route::post('avilable', [MemberController::class, 'avilable_idteam'])->name('avilable');
+        Route::get('avilable_add/{avilable}', [MemberController::class, 'avilable_create'])->name('avilable_add');
+
+        // Route::post('avilable_add', [MemberController::class, 'avilable_store'])->name('avilable.add');
+
+
         // for code js
         Route::get('/get-specializations/{qualificationId}',[MemberController::class, 'getSpecializations']);
         
@@ -328,9 +334,10 @@ Route::middleware(['auth', 'verified', 'manager'])-> prefix('manager')->group(fu
 
 // Place all other routes above this one
 // Catch-all route
-Route::get('/{any}', function() {
-  return redirect('/');
-})->where('any', '.*');
+
+// Route::get('/{any}', function() {
+//   return redirect('/');
+// })->where('any', '.*');
 
 
 require __DIR__.'/auth.php';
