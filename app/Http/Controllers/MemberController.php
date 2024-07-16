@@ -1691,7 +1691,9 @@ public function all_members()
         $status = Status::orderBy('created_at','Asc')->get();
 
         $members = Member::orderBy('IDTeam', 'Asc')->select('id','IDTeam','FirstName','LastName',
-        'City','status')->get();
+        'City','status')->paginate(4000);
+        $memberCount = Member::count();
+        $paginationLinks = $members->withQueryString()->links('pagination::bootstrap-4');
 
         return view('admin.member.all_members', [
             'city' => $city,
@@ -1702,6 +1704,8 @@ public function all_members()
             'occupations' => $occupations,
             'status'=>$status,
             'members' => $members,
+            'memberCount'=>$memberCount,
+            'paginationLinks' => $paginationLinks
         ]);
     }
 
@@ -1711,10 +1715,14 @@ public function all_members()
             ->where('id', $user->city_id)
             ->value('Name');
         
-        $members = Member::where('City', $cityName)->orderBy('IDTeam', 'Asc')->get();
+        $members = Member::where('City', $cityName)->orderBy('IDTeam', 'Asc')->paginate(4000);
+        $memberCount = Member::count();
+        $paginationLinks = $members->withQueryString()->links('pagination::bootstrap-4');
 
         return view('manager.member.show', [
             'members' => $members,
+            'memberCount'=>$memberCount,
+            'paginationLinks' => $paginationLinks
         ]);
     }
 }
