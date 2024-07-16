@@ -51,7 +51,7 @@ class UserController extends Controller
     
   public function edit($id)
   {
-    $cities = City::orderBy('created_at','Asc')->get();
+    $cities = City::whereNotNull('Name')->orderBy('created_at','Asc')->get();
     $user = User::findOrFail($id);
     return view('admin.user.edit',compact('user', 'cities'));
   }
