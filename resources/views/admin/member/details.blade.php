@@ -56,7 +56,7 @@
 											<input type="text" class="form-control" id="inputName" name="FirstName"
 											value="{{ $member->FirstName }}" readonly>
 										</div>
-									</div><br><br>
+									</div><br>
 
 									
 									<div class="row">
@@ -66,7 +66,7 @@
 											<input type="text" class="form-control" id="inputName" name="LastName"
 											value="{{ $member->LastName }}" readonly>
 										</div>
-									</div><br><br>
+									</div><br>
 
 									
 									<div class="row">
@@ -76,7 +76,7 @@
 											<input type="text" class="form-control" id="inputName" name="FatherName"
 											value="{{ $member->FatherName }}" readonly>
 										</div>
-									</div><br><br>
+									</div><br>
                                     
 									<div class="row">
 										<div class="col">
