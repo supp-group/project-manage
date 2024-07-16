@@ -76,18 +76,18 @@ class UserController extends Controller
       ]);
 
 
-      // if($user->Role == 'admin'){
+      if($user->Role == 'admin'){
 
-      //   $user->update([
-      //     'city_id'=> null,
-      //   ]);
+        $user->update([
+          'city_id'=> null,
+        ]);
 
-      // } else if($user->Role == 'manager'){
+      } else if($user->Role == 'manager'){
 
-      //   $user->update([
-      //     'city_id'=> $request->city_id,
-      //   ]);
-      // }
+        $user->update([
+          'city_id'=> $request->city_id,
+        ]);
+      }
 
 
       session()->flash('Edit', 'تم تعديل المدير بنجاح');

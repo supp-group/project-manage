@@ -2,11 +2,13 @@ $(function(e) {
 	//file export datatable
 	var table = $('#example').DataTable({
 		lengthChange: false,
+		// paging: false,
+		// ordering:  false,
 		buttons: [ 'copy', 'excel', 'pdf', 'colvis' ],
-		responsive: true,
+		responsive: false,
 		language: {
-			searchPlaceholder: 'Search...',
-			sSearch: '',
+		searchPlaceholder: 'بحث...',
+			sSearch: 'بحث',
 			lengthMenu: '_MENU_ ',
 		}
 	});
@@ -53,6 +55,7 @@ $(function(e) {
 	//Details display datatable
 	$('#example-1').DataTable( {
 		responsive: true,
+	
 		language: {
 			searchPlaceholder: 'Search...',
 			sSearch: '',
