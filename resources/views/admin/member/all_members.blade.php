@@ -65,7 +65,7 @@ integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEw
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table text-md-nowrap" id="example1">
+                        <table class="table text-md-nowrap" id="example">
                             <thead>
                                 <tr>
                                     <th class="wd-15p border-bottom-0">#</th>
