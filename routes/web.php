@@ -114,7 +114,7 @@ Route::middleware(['auth', 'verified', 'admin'])-> prefix('admin')->group(functi
         Route::post('occupation', [MemberController::class, 'searchByOccupation'])->name('search-occupation');
 
 
-        
+
         //Advanced search
         Route::get('Advancedsearch', [MemberController::class, 'Advancedsearch'])->name('Advancedsearch');
         Route::get('AdvancedIndex', [MemberController::class, 'AdvancedIndex'])->name('AdvancedIndex');
@@ -341,9 +341,9 @@ Route::middleware(['auth', 'verified', 'manager'])-> prefix('manager')->group(fu
 // Place all other routes above this one
 // Catch-all route
 
-// Route::get('/{any}', function() {
-//   return redirect('/');
-// })->where('any', '.*');
+Route::get('/{any}', function() {
+  return redirect('/');
+})->where('any', '.*');
 
 
 require __DIR__.'/auth.php';
