@@ -1643,8 +1643,6 @@ public function print($id) {
 
 
 
-
-
 public function avilable_idteam()
 {
     $IDTeam = Member::get()->pluck('IDTeam')->toArray();
@@ -1678,6 +1676,49 @@ public function avilable_idteam()
 
     // return $avilableID;
 }
+
+
+
+public function all_members()
+{ 
+    if (optional(auth()->user())->Role == 'admin') {
+        $city = City::whereNotNull('Name')->orderBy('created_at','Asc')->get();
+        $areas = City::whereNotNull('area')->orderBy('created_at','Asc')->get();
+        $streets = City::whereNotNull('street')->orderBy('created_at','Asc')->get();
+        $qualifications = Qualification::whereNotNull('Name')->orderBy('created_at','Asc')->get();
+        $specializations = Qualification::whereNotNull('specialization')->orderBy('created_at','Asc')->get();
+        $occupations = Occupation::orderBy('created_at','Asc')->get();
+        $status = Status::orderBy('created_at','Asc')->get();
+
+        $members = Member::orderBy('IDTeam', 'Asc')->select('id','IDTeam','FirstName','LastName',
+        'City','status')->get();
+
+        return view('admin.member.all_members', [
+            'city' => $city,
+            'areas' => $areas,
+            'streets' => $streets,
+            'qualifications' => $qualifications,
+            'specializations' => $specializations,
+            'occupations' => $occupations,
+            'status'=>$status,
+            'members' => $members,
+        ]);
+    }
+
+    elseif (optional(auth()->user())->Role == 'manager') {
+        $user = auth()->user();
+        $cityName = DB::table('cities')
+            ->where('id', $user->city_id)
+            ->value('Name');
+        
+        $members = Member::where('City', $cityName)->orderBy('IDTeam', 'Asc')->get();
+
+        return view('manager.member.show', [
+            'members' => $members,
+        ]);
+    }
+}
+
 
 
 
