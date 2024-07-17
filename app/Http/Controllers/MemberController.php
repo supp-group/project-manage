@@ -26,6 +26,12 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Session;
+
+
+use Illuminate\Pagination\LengthAwarePaginator;
+
+use Illuminate\Support\paginate;
+
 class MemberController extends Controller
 {
 
@@ -224,6 +230,47 @@ public function orderBy_DateOfJoin()
         }
 }
 
+public function avilable_create($avilable)
+{
+        $user = auth()->user();
+        $city = DB::table('cities')
+            ->where('id', $user->city_id)
+            ->value('Name');
+            if($city)
+            {
+               $cityName = $city;
+             //  $branch = City::where('branch', 'like', '%' . $cityName . '%')->pluck('branch')->first();
+               $areas = City::where('parentId', $user->city_id)->whereNotNull('area')->orderBy('created_at','Asc')->get();
+               $streets = City::where('grandId', $user->city_id)->whereNotNull('street')->orderBy('created_at','Asc')->get();
+            }
+            else
+            {
+                $cityName =City::whereNotNull('Name')->orderBy('created_at','Asc')->get();
+                $areas = City::whereNotNull('area')->orderBy('created_at','Asc')->get();
+                $streets = City::whereNotNull('street')->orderBy('created_at','Asc')->get();
+
+            }
+      
+        $qualifications = Qualification::whereNotNull('Name')->orderBy('created_at','Asc')->get();
+        $specializations = Qualification::whereNotNull('specialization')->orderBy('created_at','Asc')->get();
+        $occupations = Occupation::orderBy('created_at','Asc')->get();
+        $status = Status::orderBy('created_at','Asc')->get();
+
+        if ( auth()->user()->Role == 'admin')
+        {
+            return view('admin.member.avilable_add', compact('avilable', 'cityName', 'qualifications', 'occupations', 'areas', 'streets','status'));
+        }
+        // else if ( auth()->user()->Role == 'manager')
+        // {
+        //     return view('manager.member.add', compact('avilable', 'cityName', 'qualifications', 'occupations', 'areas', 'streets','status'));
+        // }
+}
+
+
+
+
+
+
 public function create()
 {
         $user = auth()->user();
@@ -259,6 +306,12 @@ public function create()
             return view('manager.member.add', compact('cityName', 'qualifications', 'occupations', 'areas', 'streets','status'));
         }
 }
+
+
+
+
+
+
 
 public function store(Request $request): RedirectResponse
 {
@@ -1587,6 +1640,94 @@ public function print($id) {
     $member = Member::where('id', $id)->first();
     return view('admin.member.print', compact('member'));
 }
+
+
+
+public function avilable_idteam()
+{
+    $IDTeam = Member::get()->pluck('IDTeam')->toArray();
+
+    // $memberCount = Member::count();
+    // $pagination = $IDTeam->withQueryString()->links('pagination::bootstrap-4');
+
+    $avilableID = [];
+    $maxID = max($IDTeam);
+
+    for ($i = 1; $i <= $maxID; $i++) {
+        if (!in_array($i, $IDTeam)) {
+            $avilableID[] = $i;
+        }
+    }
+
+    // $avilableID = collect($avilableID);
+    // dd($avilableID);
+
+    // $paginationLinks = $avilableID->withQueryString()->links('pagination::bootstrap-4');
+
+    // $avilableID = collect($avilableID);
+    // $avilableID = $avilableID->toArray()->paginate(50);
+
+    return view('admin.member.show', [
+        'avilableID' => $avilableID,
+        // 'IDTeam' => $IDTeam,
+        // 'memberCount'=>$memberCount,
+        // 'paginationLinks' => $paginationLinks
+    ]);
+
+    // return $avilableID;
+}
+
+
+
+public function all_members()
+{ 
+    if (optional(auth()->user())->Role == 'admin') {
+        $city = City::whereNotNull('Name')->orderBy('created_at','Asc')->get();
+        $areas = City::whereNotNull('area')->orderBy('created_at','Asc')->get();
+        $streets = City::whereNotNull('street')->orderBy('created_at','Asc')->get();
+        $qualifications = Qualification::whereNotNull('Name')->orderBy('created_at','Asc')->get();
+        $specializations = Qualification::whereNotNull('specialization')->orderBy('created_at','Asc')->get();
+        $occupations = Occupation::orderBy('created_at','Asc')->get();
+        $status = Status::orderBy('created_at','Asc')->get();
+
+        $members = Member::orderBy('IDTeam', 'Asc')->select('id','IDTeam','FirstName','LastName',
+        'City','status')->paginate(4000);
+        $memberCount = Member::count();
+        $paginationLinks = $members->withQueryString()->links('pagination::bootstrap-4');
+
+        return view('admin.member.all_members', [
+            'city' => $city,
+            'areas' => $areas,
+            'streets' => $streets,
+            'qualifications' => $qualifications,
+            'specializations' => $specializations,
+            'occupations' => $occupations,
+            'status'=>$status,
+            'members' => $members,
+            'memberCount'=>$memberCount,
+            'paginationLinks' => $paginationLinks
+        ]);
+    }
+
+    elseif (optional(auth()->user())->Role == 'manager') {
+        $user = auth()->user();
+        $cityName = DB::table('cities')
+            ->where('id', $user->city_id)
+            ->value('Name');
+        
+        $members = Member::where('City', $cityName)->orderBy('IDTeam', 'Asc')->paginate(4000);
+        $memberCount = Member::count();
+        $paginationLinks = $members->withQueryString()->links('pagination::bootstrap-4');
+
+        return view('manager.member.show', [
+            'members' => $members,
+            'memberCount'=>$memberCount,
+            'paginationLinks' => $paginationLinks
+        ]);
+    }
+}
+
+
 
 
 }

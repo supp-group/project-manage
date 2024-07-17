@@ -13,6 +13,18 @@
 <!--Internal  TelephoneInput css-->
 <link rel="stylesheet" href="{{URL::asset('assets/plugins/telephoneinput/telephoneinput-rtl.css')}}">
 
+
+
+<style>
+	select[name="city_id"] {
+		display: none;
+	}
+
+	select[name="Role"][value="manager"] ~ select[name="city_id"] {
+		display: block;
+	}
+</style>
+
 @endsection
 
 @section('page-header')
@@ -81,7 +93,7 @@
 									</div><br>
 
 									<div class="form-group">
-										<label>المحافظة</label>
+										{{-- <label>المحافظة</label> --}}
 										<select name="city_id" class="form-control select @error('city_id') is-invalid @enderror">
 											<option value="{{ $user->city_id }}">اختر المحافظة</option>
 											
@@ -112,6 +124,23 @@
 @endsection
 
 @section('js')
+
+<script>
+	document.addEventListener('DOMContentLoaded', function() {
+    const roleSelect = document.querySelector('select[name="Role"]');
+    const citySelect = document.querySelector('select[name="city_id"]');
+
+    roleSelect.addEventListener('change', function() {
+        if (roleSelect.value === 'manager') {
+            citySelect.style.display = 'block';
+        } else {
+            citySelect.style.display = 'none';
+        }
+    });
+});
+</script>
+
+
 
 <!--Internal  Datepicker js -->
 <script src="{{URL::asset('assets/plugins/jquery-ui/ui/widgets/datepicker.js')}}"></script>

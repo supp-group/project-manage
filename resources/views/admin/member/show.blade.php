@@ -45,6 +45,19 @@ integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEw
 						<button type="submit" class="btn btn-primary" style="color: white">&nbsp; استيراد &nbsp;<i class="fas fa-file-download"></i></button>
 					</form> --}}
 					
+					{{-- <div class="col-6"> --}}
+						<form action="{{ route('avilable') }}" method="POST">
+							@csrf
+							<div class="input-group">
+								<div class="input-group-append">
+									<span style="font-size: 16px; padding-top: 8px; background-color: #fff;">الأرقام الحزبية المتاحة</span> &nbsp;
+									<button name="search-phone" type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
+								</div>
+							</div>
+						</form> 
+					{{-- </div>&nbsp; --}}
+
+
 						<form action="{{ route('search-phone') }}" method="post">
 							@csrf
 							<div class="input-group">
@@ -242,40 +255,40 @@ integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEw
 					</div>
 					
 
-				{{-- <div class="col-12">
-						<form action="{{ route('search-qualification') }}" method="post">
+					{{-- <div class="col-12">
+							<form action="{{ route('search-qualification') }}" method="post">
+								@csrf
+								<div class="input-group">
+									<input class="form-control" placeholder="المؤهل العلمي" type="search" name="search_Qualification">
+									<div class="input-group-append">
+										<button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
+									</div>
+								</div>
+							</form>
+						</div>&nbsp;
+						<div class="col-12">
+							<form action="{{ route('search-specialization') }}" method="post">
+								@csrf
+								<div class="input-group">
+									<input class="form-control" placeholder="الاختصاص" type="search" name="search_Specialization">
+									<div class="input-group-append">
+										<button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
+									</div>
+								</div>
+							</form>
+					</div>&nbsp; --}}
+
+					<div class="col-12">
+						<form action="{{ route('search-city') }}" method="post">
 							@csrf
 							<div class="input-group">
-								<input class="form-control" placeholder="المؤهل العلمي" type="search" name="search_Qualification">
+								<input class="form-control" placeholder="المحافظة" type="search" name="search_City">
 								<div class="input-group-append">
 									<button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
 								</div>
 							</div>
 						</form>
 					</div>&nbsp;
-					<div class="col-12">
-						<form action="{{ route('search-specialization') }}" method="post">
-							@csrf
-							<div class="input-group">
-								<input class="form-control" placeholder="الاختصاص" type="search" name="search_Specialization">
-								<div class="input-group-append">
-									<button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
-								</div>
-							</div>
-						</form>
-				</div>&nbsp; --}}
-
-				<div class="col-12">
-					<form action="{{ route('search-city') }}" method="post">
-						@csrf
-						<div class="input-group">
-							<input class="form-control" placeholder="المحافظة" type="search" name="search_City">
-							<div class="input-group-append">
-								<button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
-							</div>
-						</div>
-					</form>
-				</div>&nbsp;
 					<div class="col-12">
 						<form action="{{ route('search-Area') }}" method="post">
 								@csrf
@@ -312,6 +325,7 @@ integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEw
 							</div>
 						</form>
 					</div>&nbsp;
+
 
 					<div class="col-12">
 						<form action="{{ route('search-occupation') }}" method="post">
@@ -396,6 +410,39 @@ integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEw
             </div>
             <div class="card-body">
                 <div class="table-responsive">
+
+					@if(isset($avilableID) && !is_null($avilableID)) 
+					
+                    <table class="table text-md-nowrap" id="">
+						<thead>
+							<tr>
+								<th class="wd-15p border-bottom-0">#</th>
+								<th class="wd-15p border-bottom-0">الأرقام الحزبية المتاحة</th>
+							</tr>
+						</thead>
+						<tbody>
+							<?php $i = 1 ?>
+
+							@foreach($avilableID as $avilable)
+							<tr>
+								<td>{{$i++}}</td>
+
+								{{-- <td><a href="{{ route('') }}">{{ $avilable }}</a></td> --}}
+
+								<td>
+									<a href="{{ route('avilable_add', ['avilable' => $avilable]) }}">{{ $avilable }}</a>
+								</td>
+
+							</tr>
+					
+							@endforeach
+						</tbody>
+					</table>
+
+					{{-- {!! $paginationLinks !!} --}}
+
+				@else
+
                     <table class="table text-md-nowrap" id="">
                         <thead>
                             <tr>
@@ -413,8 +460,8 @@ integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEw
 								<th class="wd-15p border-bottom-0">حذف</th>
 							</tr>
                         </thead>
-                    	<tbody>
-						
+                    	<tbody>	
+							
 							<?php $i = $members->firstItem(); ?>
 
 							@if(isset($members) && !$members->isEmpty()) 
@@ -567,14 +614,16 @@ integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEw
 							<td colspan="20">لم يتم العثور على نتائج</td>
 						</tr>
 						@endif
+
 						</tbody>
                     </table>
 					{{-- {!! $members->withQueryString()->links('pagination::bootstrap-4') !!} --}}
+					
 					{!! $paginationLinks !!}
 
                 </div>
+				@endif
             
-
             </div>
         </div>
     </div>

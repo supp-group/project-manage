@@ -80,6 +80,14 @@ Route::middleware(['auth', 'verified', 'admin'])-> prefix('admin')->group(functi
         Route::get('print/{id}', [MemberController::class, 'print'])->name('print');
 
 
+        Route::post('avilable', [MemberController::class, 'avilable_idteam'])->name('avilable');
+        Route::get('avilable_add/{avilable}', [MemberController::class, 'avilable_create'])->name('avilable_add');
+
+
+        Route::get('all_members', [MemberController::class, 'all_members']);
+
+
+
         // for code js
         Route::get('/get-specializations/{qualificationId}',[MemberController::class, 'getSpecializations']);
         
@@ -87,8 +95,8 @@ Route::middleware(['auth', 'verified', 'admin'])-> prefix('admin')->group(functi
         Route::get('/get-streets/{areaId}', [CityController::class, 'getStreetForArea']);
 
 
-        // search
 
+        // search
         Route::post('active', [MemberController::class, 'searchForActiveMember'])->name('search-ActiveMember');
         Route::post('dis-active', [MemberController::class, 'searchForDisActiveMember'])->name('search-disActiveMember');
         Route::post('phone', [MemberController::class, 'searchByPhoneNull'])->name('search-phone');
@@ -105,9 +113,13 @@ Route::middleware(['auth', 'verified', 'admin'])-> prefix('admin')->group(functi
         Route::post('specialization', [MemberController::class, 'searchBySpecialization'])->name('search-specialization');
         Route::post('occupation', [MemberController::class, 'searchByOccupation'])->name('search-occupation');
 
+
+
         //Advanced search
         Route::get('Advancedsearch', [MemberController::class, 'Advancedsearch'])->name('Advancedsearch');
         Route::get('AdvancedIndex', [MemberController::class, 'AdvancedIndex'])->name('AdvancedIndex');
+
+
 
         //order
         Route::get('last', [MemberController::class, 'orderBy_Last'])->name('order-last');
@@ -328,6 +340,7 @@ Route::middleware(['auth', 'verified', 'manager'])-> prefix('manager')->group(fu
 
 // Place all other routes above this one
 // Catch-all route
+
 Route::get('/{any}', function() {
   return redirect('/');
 })->where('any', '.*');

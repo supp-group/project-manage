@@ -35,6 +35,7 @@
 						<ul class="slide-menu">
 							<li><a class="slide-item" href="{{ url('/admin/member/show') }}">جميع الأعضاء</a></li>
 							<li><a class="slide-item" href="{{ url('/admin/member/add') }}">إضافة عضو</a></li>
+							<li><a class="slide-item" href="{{ url('/admin/member/all_members') }}">تصدير الأعضاء</a></li>
 						</ul>
 					</li>
 					 

@@ -33,7 +33,7 @@ class UserController extends Controller
         'email' => 'required|unique:users|max:255',
         'password'=>'required',
         'Role'=>'required',
-        'city_id'=>'required',
+        // 'city_id'=>'required',
       ]);
 
         User::create([
@@ -49,9 +49,9 @@ class UserController extends Controller
     }
 
     
-  public function edit( $id)
+  public function edit($id)
   {
-    $cities = City::orderBy('created_at','Asc')->get();
+    $cities = City::whereNotNull('Name')->orderBy('created_at','Asc')->get();
     $user = User::findOrFail($id);
     return view('admin.user.edit',compact('user', 'cities'));
   }
@@ -63,7 +63,7 @@ class UserController extends Controller
       'email' => 'required|max:255',
        'password'=>'required',
        'Role'=>'required',
-       'city_id'=>'required',
+      //  'city_id'=>'required',
   ]);
 
       $user = User::findOrFail($id);
@@ -72,12 +72,28 @@ class UserController extends Controller
         'email'=>$request->email,
         'password'=>$request->password,
         'Role'=>$request->Role,
-        'city_id'=>$request->city_id,
+        // 'city_id'=>$request->city_id,
       ]);
+
+
+      if($user->Role == 'admin'){
+
+        $user->update([
+          'city_id'=> null,
+        ]);
+
+      } else if($user->Role == 'manager'){
+
+        $user->update([
+          'city_id'=> $request->city_id,
+        ]);
+      }
+
 
       session()->flash('Edit', 'تم تعديل المدير بنجاح');
       return back();
     }
+
 
     public function destroy($id)
     {
