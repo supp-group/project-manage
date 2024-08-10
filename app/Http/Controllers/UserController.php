@@ -20,7 +20,6 @@ class UserController extends Controller
       return view('admin.user.show',compact('users'));
     }
 
-    
     public function create()
     {
       $cities = City::whereNotNull('Name')->orderBy('created_at','Asc')->get();
@@ -38,8 +37,7 @@ class UserController extends Controller
 
         User::create([
             'email'=>$request->email,
-            'password'=>$request->password,
-            // 'password' => Crypt::decryptString($request->password),
+            'password' => bcrypt($request->password),
             'Role'=>$request->Role,
             'city_id'=>$request->city_id,
         ]);
